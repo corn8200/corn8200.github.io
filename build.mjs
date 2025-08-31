@@ -85,10 +85,10 @@ function buildVariant(v){
   const doc = JSON.parse(fs.readFileSync(jsonPath,'utf8'));
   const model = normalizeModel(doc);
   const html = render(tpl, model);
-  const outDir = path.join('docs','resume',slug, 'v'+model.version);
+  const outDir = path.join('resume',slug, 'v'+model.version);
   writeFile(path.join(outDir,'index.html'), html);
   // latest pointer
-  writeFile(path.join('docs','resume',slug,'index.html'),
+  writeFile(path.join('resume',slug,'index.html'),
     '<!doctype html><meta http-equiv="refresh" content="0; url=./v'+model.version+'/">');
 }
 
@@ -110,7 +110,7 @@ function findJsonFor(slug, version){
 function main(){
   for (const v of registry.variants){ buildVariant(v); }
   // Root index redirect to default
-  writeFile('docs/index.html',
+  writeFile('index.html',
     '<!doctype html><meta http-equiv="refresh" content="0; url=/resume/'+registry.default+'/">');
   console.log('Built', registry.variants.length, 'variant(s). Default:', registry.default);
 }

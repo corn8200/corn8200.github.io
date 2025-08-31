@@ -1,141 +1,72 @@
-# Portfolio/CV GitHub Pages Setup Instructions
+# Resume links on **jcornelius.net**
 
-To set up your portfolio/CV site using GitHub Pages, follow these steps:
+JSON‑driven resumes, built locally and served by GitHub Pages. One stable URL per job slug.
 
-- **Repository Structure:**
-  - Your project repository should have the following structure:
-    ```
-    / (root)
-    ├── index.html       # Main HTML file for your portfolio/CV
-    ├── css/             # Folder containing your CSS files
-    ├── js/              # Folder containing your JavaScript files
-    ├── images/          # Folder for images used in your portfolio
-    └── README.md        # Optional project description
-    ```
-  
-- **Required Files:**
-  - `index.html`: The entry point of your site.
-  - CSS files: Stylesheets to style your portfolio.
-  - JavaScript files (optional): For any interactive features.
-  - Images: Photos, logos, or any graphics used on your site.
-  
-- **Deployment Steps:**
-  1. Push your project to a GitHub repository.
-  2. Go to the repository on GitHub.
-  3. Click on the **Settings** tab.
-  4. Scroll down to the **Pages** section.
-  5. Under **Source**, select the branch you want to publish (usually `main` or `master`) and the folder (root `/` or `/docs`).
-  6. Click **Save**.
-  7. Your site will be published at `https://<your-username>.github.io/<repository-name>/`.
-  8. Wait a few minutes for GitHub Pages to build and deploy your site.
+## How it works
+- You keep each resume as JSON in `data/resumes/`.
+- `data/index.json` maps each **slug** to its current **version**.
+- `build.mjs` renders static HTML to the **repo root** under `resume/<slug>/v<version>/` and creates a latest pointer at `resume/<slug>/`.
+- Custom domain: `jcornelius.net` on the repo `corn8200/corn8200.github.io` (user site → publishes from **root**, not `/docs`).
 
-- **Tips:**
-  - Use relative links for assets to ensure they work correctly on GitHub Pages.
-  - Test your site locally before pushing changes.
-  - Customize your `index.html` to reflect your personal information and portfolio items.
-
-# Resume Versioning System
-
-A JSON-driven resume website powered by GitHub Pages. Store multiple resume versions as JSON files, and share individual versions via unique URLs.
-
-## Folder Structure
+## Repo layout
 ```
-/ (root)
-├── index.html         # Main site entry
-├── resume/            # Folder for JSON resume files
-├── css/               # Stylesheets
-├── js/                # JavaScript logic
-├── images/            # Optional images
-└── readme.md          # This file
-```
-
-## Adding or Updating Resume JSON
-- Place new resume versions in the `resume/` folder as JSON files (e.g., `resume/my-latest.json`).
-- To update a version, edit the corresponding JSON file.
-- Each JSON file should follow the required schema (see sample in `resume/` folder).
-
-## Building Locally
-1. Clone the repository.
-2. Open `index.html` in your browser.
-3. For advanced testing, use a local server (e.g., `npx serve` or Python’s `http.server`) to avoid CORS issues.
-
-## Sharing Resume Links
-- Each resume JSON is accessible via a **slug** URL:  
-  `https://<your-username>.github.io/<repo>/#/<slug>`
-  - Example: `.../#/my-latest`
-- Optionally, create an **alias** (short link) by mapping a custom name to a resume file in the configuration.
-
-## GitHub Pages Deployment
-- Push changes to your repository.
-- In GitHub, go to **Settings > Pages** and set the source branch/folder (usually `main` and `/`).
-- Your site will be live at:  
-  `https://<your-username>.github.io/<repo>/`
-- Changes may take a few minutes to deploy.
-# Resume Links on GitHub Pages
-
-Purpose: host multiple **job-specific resume versions** and share a stable link per job. All data lives in JSON. The site builds static HTML into `docs/` for GitHub Pages.
-
-## Repo Layout
-```
-/ (website root)
+/  (repo root for user site)
 ├─ data/
-│  ├─ index.json            # registry of variants (slug → current version)
-│  └─ resumes/              # your JSON files from iCloud “versions”
+│  ├─ index.json            # registry: [{slug, version, title, aliases}]
+│  └─ resumes/              # your JSON files
 ├─ templates/
 │  └─ template_print.html   # single HTML template
-├─ build.mjs                # builds static pages from JSON + template
-├─ docs/                    # Pages output (served by GitHub Pages)
-└─ .github/workflows/       # optional CI (not required)
+├─ build.mjs                # builds static pages to /resume/* and root index
+├─ resume/                  # generated output (tracked)
+├─ index.html               # autoredirects to default slug
+├─ 404.html                 # optional
+└─ CNAME                    # contains `jcornelius.net`
 ```
 
-## Add or Update a Resume
-1) Put your JSON file(s) in `data/resumes/`.  
-   - File name can be anything (`snc-pm@1.2.0.json` recommended).  
-   - Each file should have `meta.slug` and `meta.version` (the tools can derive them if missing).
+## Add or update a resume
+1) Drop or update a JSON file in `data/resumes/`.
+2) Ensure its `meta.slug` and `meta.version` are set (the tools can derive them if missing).
+3) Update `data/index.json` to point the slug to the intended version.
 
-2) Update `data/index.json` to point each `slug` to its current `"version"`.
-
-3) Build pages:
-```
+## Build and publish
+```bash
+# from repo root
 node build.mjs
+git add resume index.html data readme.md
+git commit -m "resume: rebuild"
+git push
 ```
-Outputs to: `docs/resume/<slug>/v<version>/index.html` and a redirect at `docs/resume/<slug>/index.html` pointing to latest.
+GitHub Pages serves from root because this repo is a **user site**. Your custom domain must point here (see Troubleshooting).
 
-## Share Links
-Give recruiters this URL format:
+## Share links
+Use this pattern:
 ```
-https://<username>.github.io/<repo>/resume/<slug>/
+https://jcornelius.net/resume/<slug>/
 ```
 Example:
 ```
-https://jcornelius.github.io/My_website/resume/director-of-customer-support/
+https://jcornelius.net/resume/director-of-customer-support/
 ```
-That URL always shows the latest version for that slug after you rebuild and push.
+This always shows the latest version for that slug.
 
-## Minimal Workflow (manual)
-```
-# from website repo root
-# 1) copy JSONs into data/resumes/
-# 2) adjust data/index.json
-node build.mjs
-git add data docs
-git commit -m "resume: update"
-git push
-```
-
-## Optional: Sync from iCloud “versions”
+## Optional: pull JSONs from iCloud
 Source folder on macOS:
 ```
 $HOME/Library/Mobile Documents/com~apple~CloudDocs/Resume/report/versions
 ```
 Manual sync then build:
-```
+```bash
 rsync -av --delete "$HOME/Library/Mobile Documents/com~apple~CloudDocs/Resume/report/versions/" data/resumes/
 node build.mjs
-git add data docs
+git add data resume index.html
 git commit -m "resume: sync/build"
 git push
 ```
 
-## GitHub Pages Settings
-Set **Settings → Pages** to serve from branch `main`, folder **/docs**. If you remove `/docs`, Pages won’t build.
+## Troubleshooting custom domain
+- Repo: `corn8200/corn8200.github.io` (user site). Pages publishes from **root**.
+- `CNAME` file content: `jcornelius.net`.
+- DNS records:
+  - Apex `jcornelius.net` → **A**: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+  - `www.jcornelius.net` → **CNAME** → `corn8200.github.io`
+- GitHub → **Settings → Pages**: Custom domain `jcornelius.net`, **Enforce HTTPS** on.
