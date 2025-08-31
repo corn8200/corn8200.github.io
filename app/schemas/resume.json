@@ -1,0 +1,128 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Resume Schema",
+  "description": "Schema for a resume data file",
+  "type": "object",
+  "required": [
+    "name",
+    "title",
+    "summary",
+    "experience"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Full name of the person"
+    },
+    "title": {
+      "type": "string",
+      "description": "Job title or role"
+    },
+    "contact": {
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "format": "email"
+        },
+        "linkedin": {
+          "type": "string",
+          "format": "uri"
+        },
+        "location": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "summary": {
+      "type": "string",
+      "description": "Summary of qualifications"
+    },
+    "skills": {
+      "description": "Skills can be an object (key-value pairs) or an array of strings",
+      "oneOf": [
+        {
+          "type": "object",
+          "patternProperties": {
+            "^[a-zA-Z0-9_\s]+$": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "experience": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["title", "company", "dates", "duties"],
+        "properties": {
+          "title": { "type": "string" },
+          "company": { "type": "string" },
+          "location": { "type": "string" },
+          "dates": { "type": "string" },
+          "duties": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "achievements": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "education": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["degree", "school"],
+        "properties": {
+          "degree": { "type": "string" },
+          "school": { "type": "string" },
+          "year": { "type": "integer" },
+          "gpa": { "type": "string" },
+          "details": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "certifications": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "issuer"],
+        "properties": {
+          "name": { "type": "string" },
+          "issuer": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "slug": { "type": "string" },
+        "version": { "type": "string" },
+        "kpis": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

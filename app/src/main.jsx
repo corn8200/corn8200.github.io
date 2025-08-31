@@ -8,23 +8,12 @@ import './index.css'
 function View() {
   const { slug } = useParams()
   const [state, setState] = useState({ loading:true, error:null, model:null })
+  const [theme, setTheme] = useState(getInitialTheme())
+
+  useEffect(()=>{ document.documentElement.setAttribute('data-theme', theme) }, [theme])
   const [expandedSections, setExpandedSections] = useState({ summary: true })
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const reg = await loadRegistry()
-        const targetSlug = slug || reg.default
-        const meta = reg.variants.find(v => v.slug === targetSlug)
-        if (!meta) throw new Error('Slug not found in index.json')
-        const json = await loadResumeJson(meta.slug, meta.version)
-        const m = normalize(json)
-        setState({ loading:false, error:null, model:m })
-      } catch (e) {
-        setState({ loading:false, error:String(e), model:null })
-      }
-    })()
-  }, [slug])
+  useEffect(()=>{ document.documentElement.setAttribute('data-theme', theme) }, [theme])
 
   const toggleSection = (section) => {
     setExpandedSections(prev => ({ ...prev, [section]: !prev[section] }))
@@ -34,19 +23,30 @@ function View() {
   if (state.error) return <div style={{padding:24,color:'#b00'}}>Error: {state.error}</div>
 
   const m = state.model
+  const { kpis, staticUrl, mail, li } = m; // Destructure kpis, staticUrl, mail, li from the model
   const experienceItems = m.experience.map(e => ({
-    title: e.dates,
-    cardTitle: e.title,
-    cardSubtitle: e.company,
-    cardDetailedText: e.duties.join('\n')
-  }));
 
   return (
     <div className="page">
       <header className="hdr">
-        <h1>{m.name}</h1>
+        <div className="hdr-top">
+          <h1>{m.name}</h1>
+          <div className="actions">
+            <a className="btn" href={staticUrl} target="_blank" rel="noreferrer">Static Resume</a>
+            {mail && <a className="btn" href={mail}>Email</a>}
+            {li && <a className="btn" href={li} target="_blank" rel="noreferrer">LinkedIn</a>}
+            <button className="btn" onClick={()=>setTheme(theme==='dark'?'light':'dark')}>
+              {theme==='dark'?'Light':'Dark'}
+            </button>
+          </div>
+        </div>
         <div className="role">{m.role} • {m.location}</div>
         <div className="meta">v{m.version}</div>
+        {kpis?.length>0 && (
+          <div className="kpis">
+            {kpis.map((t,i)=><span key={i} className="kpi">{t}</span>)}
+          </div>
+        )}
       </header>
 
       {m.summary && (
@@ -60,9 +60,16 @@ function View() {
         <h2 onClick={() => toggleSection('skills')}>Skills {expandedSections.skills ? '-' : '+'}</h2>
         {expandedSections.skills && 
           <div>
-            {m.skills_kv?.map(({k,v}) => {
-              return <div key={k} className="kv"><div className="k">{k}</div><div className="v">{v}</div></div>
-            })}
+            <div className="skills-chips">
+              {m.skills_kv?.map(({k,v}) => {
+                const skillCount = Array.isArray(v) ? v.length : v.split('; ').length; // Assuming '; ' is the separator if not array
+                return (
+                  <span key={k} className="skill-chip" title={Array.isArray(v) ? v.join(', ') : v}>
+                    {k} ({skillCount})
+                  </span>
+                )
+              })}
+            </div>
             {m.skills_list && <p>{m.skills_list}</p>}
           </div>
         }
@@ -107,7 +114,7 @@ function normalize(doc){
   } else if (Array.isArray(doc.skills)) {
     skills_list = doc.skills.join(', ')
   }
-  const exp = Array.isArray(doc.experience) ? doc.experience.map(e=>({
+  const exp = Array.isArray(doc.experience) ? doc.experience.map(e=> ({
     title: e.title || '',
     company: e.company || '',
     location_sep: e.location ? '— '+e.location : '',
@@ -117,7 +124,11 @@ function normalize(doc){
   })) : []
   const edu = Array.isArray(doc.education) ? doc.education.map(e=>({ ...e, details: e.details || '' })) : []
   const certs = Array.isArray(doc.certifications) ? doc.certifications : []
-  return { name, role, location, summary: doc.summary || '', skills_kv, skills_list, experience: exp, education: edu, certifications: certs, slug:m.slug, version:m.version }
+  const kpis = Array.isArray(m.kpis) ? m.kpis : []; // Extract kpis from meta
+  const staticUrl = m.slug ? `/resume/${m.slug}/` : null;
+  const mail = doc.contact?.email ? `mailto:${doc.contact.email}` : null;
+  const li = doc.contact?.linkedin || null;
+  return { name, role, location, summary: doc.summary || '', skills_kv, skills_list, experience: exp, education: edu, certifications: certs, kpis, staticUrl, mail, li, slug:m.slug, version:m.version }
 }
 
 function App(){

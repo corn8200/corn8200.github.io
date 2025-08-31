@@ -281,6 +281,12 @@ cd app && npm run build
 cd .. && git add beta && git commit -m "beta: update" && git push
 ```
 
+**Final beta build & publish snippet:**
+```
+cd app && npm run build
+cd .. && git add beta && git commit -m "beta: update" && git push
+```
+
 Notes:
 - GitHub Pages still serves only static files from repo root; `app/` is just source.
 - Keep `index.html` at root pointing to `/beta/#/view` (or a landing page).
