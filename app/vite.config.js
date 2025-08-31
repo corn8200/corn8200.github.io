@@ -9,7 +9,7 @@ function serveRootDataPlugin() {
   return {
     name: 'serve-root-data',
     configureServer(server) {
-      server.middlewares.use('/data', (req, res, next) => {
+      const handler = (req, res) => {
         const url = req.url || ''
         const rel = url.replace(/^\/?data\/?/, '')
         const filePath = path.resolve(__dirname, '../data', rel)
@@ -19,7 +19,23 @@ function serveRootDataPlugin() {
             res.end('Not found')
             return
           }
-          // naive content type handling; JSON is sufficient for our use
+          res.setHeader('Content-Type', 'application/json')
+          res.end(data)
+        })
+      }
+      server.middlewares.use('/data', handler)
+    },
+    configurePreviewServer(server) {
+      server.middlewares.use('/data', (req, res) => {
+        const url = req.url || ''
+        const rel = url.replace(/^\/?data\/?/, '')
+        const filePath = path.resolve(__dirname, '../data', rel)
+        fs.readFile(filePath, (err, data) => {
+          if (err) {
+            res.statusCode = 404
+            res.end('Not found')
+            return
+          }
           res.setHeader('Content-Type', 'application/json')
           res.end(data)
         })
