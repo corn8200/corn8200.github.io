@@ -1,5 +1,4 @@
 {
-  "default": "factory-director-operations-continuous-improvement",
   "variants": [
     {
       "slug": "director-of-customer-support",
@@ -12,6 +11,13 @@
       "version": "1.0.0",
       "title": "Factory Director • Operations & Continuous Improvement",
       "aliases": []
+    },
+    {
+      "slug": "project-manager-infrastructure-supply-chain-operations",
+      "version": "1.0.0",
+      "title": "Project Manager – Infrastructure, Supply Chain & Operations",
+      "aliases": []
     }
-  ]
+  ],
+  "default": "project-manager-infrastructure-supply-chain-operations"
 }
