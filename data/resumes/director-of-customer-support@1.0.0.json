@@ -74,9 +74,11 @@
     }
   ],
   "education": [
-          "degree": "Master of Science (M.S.), Unmanned Systems – Human Factors",
+    {
+      "degree": "Master of Science (M.S.), Unmanned Systems – Human Factors",
       "school": "Embry-Riddle Aeronautical University",
-      "details": null,
+      "details": null
+    },
     {
       "degree": "Bachelor of Science (B.S.), Aeronautics",
       "school": "Embry-Riddle Aeronautical University",
