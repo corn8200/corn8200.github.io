@@ -194,10 +194,17 @@ function normalize(doc) {
   const role = doc.title || m.role || 'Program Manager';
   const location = (doc.contact && doc.contact.location) || m.location || '';
   let skills_kv = null, skills_list = null;
+  // Normalize skills: split on common separators so every item shows individually
   if (doc.skills && !Array.isArray(doc.skills) && typeof doc.skills === 'object') {
+    const split = (str) => String(str)
+      .split(/\n|;\s*|,\s*|\s•\s|•|\|/)
+      .map(s => s.trim())
+      .filter(Boolean);
     skills_kv = Object.entries(doc.skills).map(([k, arr]) => ({
       k,
-      v: Array.isArray(arr) ? arr : String(arr).split(/;\s*|,\s*|\s•\s|\|/).filter(Boolean)
+      v: Array.isArray(arr)
+        ? arr.flatMap(x => split(x))
+        : split(arr)
     }));
   } else if (Array.isArray(doc.skills)) {
     skills_list = doc.skills.join(', ');
