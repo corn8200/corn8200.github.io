@@ -9,46 +9,53 @@
     "linkedin": "https://linkedin.com/in/johncornelius",
     "github": "https://github.com/corn8200"
   },
-  "summary": "Operations and project leader delivering complex infrastructure and supply chain initiatives on time and within budget. Drives cross‑functional execution, vendor alignment, and risk mitigation across manufacturing, logistics, and technology programs.",
+  "summary": "Operations and project leader with 15+ years delivering multi‑site infrastructure, supply chain, and manufacturing programs up to $48M. Aligns stakeholders, vendors, and operators to improve safety, throughput, and DIFOT while reducing cost and cycle time. Hands‑on with SAP/ERP, SCADA, and analytics (Power BI/SQL); Lean Six Sigma and TPM driven.",
   "skills": {
-    "Program & Project Management": [
-      "Roadmapping • Scope • Budget • Risks",
-      "Stakeholder Management • Vendor Oversight",
-      "SOWs • RFPs • Contracting • Compliance"
+    "Operations Leadership": [
+      "Multi‑site 24/7 operations • Workforce readiness",
+      "Safety programs (OSHA/PSM) • Compliance",
+      "Conflict resolution • Coaching • Change management"
     ],
-    "Infrastructure & Supply Chain": [
-      "Facilities Upgrades • Utilities • SCADA",
-      "S&OP • Inventory • Logistics • Procurement",
-      "Supplier Performance • Cost Optimization"
+    "Supply Chain & Delivery": [
+      "3PL • S&OP • Inventory • Procurement",
+      "Logistics • Supplier performance • DIFOT optimization",
+      "Cost reduction • Contract negotiation"
     ],
-    "Operations & Analytics": [
-      "KPI Design • OEE • Throughput",
+    "Systems & Analytics": [
+      "SAP/ERP • SCADA • Digital twins",
       "Power BI • SQL • Python",
-      "Lean Six Sigma • TPM • 5S"
+      "Lean • TPM • 5S • Kaizen"
     ]
   },
   "experience": [
     {
-      "title": "Sr. Project Manager",
+      "title": "Sr. Operations & Data Analytics Manager",
       "company": "Allmine Paving (A Tamko Company)",
       "location": "WV",
       "dates": "2022 – Present",
       "duties": [
-        "Lead end‑to‑end delivery of multi‑site infrastructure upgrades, coordinating construction, electrical, and controls vendors.",
-        "Own budgets, timelines, and risk registers; drive issue resolution and cross‑functional communications.",
-        "Implement KPI dashboards and cadence to track progress, spend, and change requests."
+        "Lead multi‑site plant modernization and operations programs across construction, electrical, controls, and logistics.",
+        "Own scope, schedule, and budgets; manage risk registers and vendor performance with structured cadences.",
+        "Deploy SCADA/BI dashboards for throughput, downtime, and safety metrics; drive root‑cause improvements."
       ],
       "achievements": [
-        "Delivered plant modernization phases under budget while improving throughput and reliability.",
-        "Consolidated vendor base and negotiated terms to reduce costs and lead times."
+        "Raised plant throughput by 12% while reducing overtime costs 22% via Lean/TPM programs.",
+        "Improved DIFOT by 15% and sustained >99.5% inventory accuracy through S&OP and logistics optimization.",
+        "Achieved 600+ days lost‑time injury‑free; zero OSHA PSM findings in external audits.",
+        "Negotiated supplier/freight terms yielding $2.3M+ savings while increasing delivery reliability."
       ]
     }
+  ],
+  "certifications": [
+    { "name": "Project Management Professional (PMP)", "issuer": "PMI", "year": "2021" },
+    { "name": "Agile Scrum Master (ASM)", "issuer": "Scrum Alliance", "year": "2021" },
+    { "name": "Lean Six Sigma (Bronze, Green Belt)", "issuer": "Lean Methods Group & Simplilearn", "year": "2023" }
   ],
   "education": [
     {
       "degree": "Master of Science (M.S.), Unmanned Systems – Human Factors",
       "school": "Embry-Riddle Aeronautical University",
-      "details": "4.0 GPA, with distinction",
+      "details": null,
       "year": "2020"
     },
     {
@@ -58,11 +65,39 @@
       "year": "2012"
     }
   ],
-  "certifications": [
+  "experience": [
     {
-      "name": "Lean Six Sigma (Bronze, Green Belt)",
-      "issuer": "Lean Methods Group & Simplilearn",
-      "year": "2023"
+      "title": "Sr. Operations & Data Analytics Manager",
+      "company": "Allmine Paving (A Tamko Company)",
+      "location": "WV",
+      "dates": "2022 – Present",
+      "duties": [
+        "Lead multi‑site plant modernization and operations programs across construction, electrical, controls, and logistics.",
+        "Own scope, schedule, and budgets; manage risk registers and vendor performance with structured cadences.",
+        "Deploy SCADA/BI dashboards for throughput, downtime, and safety metrics; drive root‑cause improvements."
+      ],
+      "achievements": [
+        "Raised plant throughput by 12% while reducing overtime costs 22% via Lean/TPM programs.",
+        "Improved DIFOT by 15% and sustained >99.5% inventory accuracy through S&OP and logistics optimization.",
+        "Achieved 600+ days lost‑time injury‑free; zero OSHA PSM findings in external audits.",
+        "Negotiated supplier/freight terms yielding $2.3M+ savings while increasing delivery reliability."
+      ]
+    },
+    {
+      "title": "Senior Program Manager – Aviation & Advanced Systems",
+      "company": "U.S. Army",
+      "location": "",
+      "dates": "2009 – 2021",
+      "duties": [
+        "Directed $48M+ aviation programs and asset management; led cross‑functional teams across training, operations, and maintenance.",
+        "Implemented predictive analytics and SCADA‑informed dashboards to improve readiness and maintenance planning.",
+        "Standardized evaluation, SOPs, and safety protocols; coached leaders and operators across multiple units."
+      ],
+      "achievements": [
+        "Increased qualification pass rates to 97% through standardized curricula and performance management.",
+        "Maintained zero Class A/B incidents via rigorous safety culture and risk management.",
+        "Delivered complex multi‑stakeholder initiatives on time while improving readiness and reducing costs."
+      ]
     }
   ],
   "affiliations": [
