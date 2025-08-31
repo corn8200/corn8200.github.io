@@ -9,7 +9,7 @@
     "linkedin": "https://www.linkedin.com/in/john-w-cornelius",
     "github": "https://github.com/corn8200"
   },
-  "summary": "Operations and program leader with 15+ years delivering multi‑site infrastructure, supply chain, and manufacturing initiatives up to $48M. Aligns stakeholders, vendors, and operators to improve safety, throughput, and DIFOT while reducing cost and cycle time. Hands‑on with SAP/ERP, SCADA, and analytics (Power BI/SQL); Lean Six Sigma and TPM driven.",
+  "summary": "Senior Program & Operations Manager with 15+ years leading multimillion-dollar infrastructure, supply chain, and manufacturing initiatives in both defense and industry. Proven record delivering complex programs on time and within budget while sustaining >95% on-time delivery and >99% asset readiness. Skilled in Lean Six Sigma, ERP/SAP integration, and cross-functional leadership, with experience managing $20M–$48M portfolios and global logistics networks.",
   "skills": {
     "Operations Leadership": [
       "Multi‑site 24/7 operations • Workforce readiness",
@@ -79,7 +79,9 @@
   "certifications": [
     { "name": "Project Management Professional (PMP)", "issuer": "PMI", "year": "2021" },
     { "name": "Agile Scrum Master (ASM)", "issuer": "Scrum Alliance", "year": "2021" },
-    { "name": "Lean Six Sigma (Bronze, Green Belt)", "issuer": "Lean Methods Group & Simplilearn", "year": "2023" }
+    { "name": "Lean Six Sigma (Bronze, Green Belt)", "issuer": "Lean Methods Group & Simplilearn", "year": "2023" },
+    { "name": "CS50’s Artificial Intelligence with Python (in progress)", "issuer": "Harvard University", "year": "in progress" },
+    { "name": "CS50’s Computer Science & Programming Series", "issuer": "Harvard University" }
   ],
   "affiliations": [
     "Civil Air Patrol — sUAS Training & Community Programs",
