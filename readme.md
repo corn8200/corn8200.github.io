@@ -1,4 +1,12 @@
-# Resume links on **jcornelius.net**
+# Project Overview
+
+This repository hosts a personal website primarily serving as a resume portal. It features a traditional static site for stable resume links and a new, modernized React-based beta application for an enhanced user experience.
+
+---
+
+# Static Resume Site
+
+JSON‑driven resumes, built locally and served by GitHub Pages. One stable URL per job slug.
 
 JSON‑driven resumes, built locally and served by GitHub Pages. One stable URL per job slug.
 
@@ -70,3 +78,29 @@ git push
   - Apex `jcornelius.net` → **A**: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
   - `www.jcornelius.net` → **CNAME** → `corn8200.github.io`
 - GitHub → **Settings → Pages**: Custom domain `jcornelius.net`, **Enforce HTTPS** on.
+# Modernized Resume Application (Beta)
+
+**A new React (Vite) app is being developed as a modernized beta version of the resume site.**
+
+- The React (Vite) app is developed in a separate repository (`../My_website_react`).
+- It builds into `My_website/beta/` within this repository, ensuring it does not affect the live static site.
+- The React app reads the existing `data/` JSON files from this repository.
+
+**Current beta URLs:**
+  - https://jcornelius.net/beta/#/view
+  - https://jcornelius.net/beta/#/view/director-of-customer-support
+
+**Features so far:**
+- Modern styling
+- Expandable/collapsible sections
+- Education section restored
+- Certifications added
+- Summary expanded by default
+
+**Known work in progress:**
+- Timeline for experience (not yet functional)
+- Adding visual skills
+- Project portfolio
+- Contact form
+
+Feedback and suggestions are welcome!
