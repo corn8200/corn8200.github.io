@@ -9,6 +9,7 @@ function View() {
   const { slug } = useParams();
   const [state, setState] = useState({ loading: true, error: null, model: null });
   const [expandedSections, setExpandedSections] = useState({ summary: true });
+  const [activeSkill, setActiveSkill] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -86,19 +87,36 @@ function View() {
         <h2 onClick={() => toggleSection('skills')}>Skills {expandedSections.skills ? '-' : '+'}</h2>
         {expandedSections.skills && (
           <div>
-            {m.skills_kv && <div className="hint">Hover a category for details.</div>}
+            {m.skills_kv && <div className="hint">Hover or click a category for details.</div>}
             {m.skills_kv && (
               <div className="chip-grid">
                 {m.skills_kv.map(({ k, v }) => {
-                  const list = Array.isArray(v) ? v : String(v);
-                  const count = Array.isArray(v) ? v.length : list.split('; ').filter(Boolean).length;
-                  const tooltip = Array.isArray(v) ? v.join(', ') : list;
+                  const items = Array.isArray(v) ? v : String(v).split(/;\s*|,\s*|\s•\s|\|/).filter(Boolean);
+                  const count = items.length;
+                  const tooltip = items.join(', ');
                   return (
-                    <span key={k} className="chip" title={tooltip} data-tip={tooltip}>
+                    <span
+                      key={k}
+                      className="chip"
+                      title={tooltip}
+                      data-tip={tooltip}
+                      onClick={() => setActiveSkill({ title: k, items })}
+                    >
                       {k} ({count})
                     </span>
                   );
                 })}
+              </div>
+            )}
+            {activeSkill && (
+              <div className="skill-panel">
+                <div className="skill-panel-h">
+                  <strong>{activeSkill.title}</strong>
+                  <button className="btn btn-sm" onClick={() => setActiveSkill(null)}>Close</button>
+                </div>
+                <ul className="skill-list">
+                  {activeSkill.items.map((s, i) => <li key={i}>{s}</li>)}
+                </ul>
               </div>
             )}
             {!m.skills_kv && m.skills_list && <p>{m.skills_list}</p>}
@@ -177,7 +195,10 @@ function normalize(doc) {
   const location = (doc.contact && doc.contact.location) || m.location || '';
   let skills_kv = null, skills_list = null;
   if (doc.skills && !Array.isArray(doc.skills) && typeof doc.skills === 'object') {
-    skills_kv = Object.entries(doc.skills).map(([k, arr]) => ({ k, v: Array.isArray(arr) ? arr.join('; ') : String(arr) }));
+    skills_kv = Object.entries(doc.skills).map(([k, arr]) => ({
+      k,
+      v: Array.isArray(arr) ? arr : String(arr).split(/;\s*|,\s*|\s•\s|\|/).filter(Boolean)
+    }));
   } else if (Array.isArray(doc.skills)) {
     skills_list = doc.skills.join(', ');
   }
