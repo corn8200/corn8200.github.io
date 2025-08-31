@@ -10,6 +10,7 @@
     "experience"
   ],
   "properties": {
+    "format_scale": { "type": ["string", "number"] },
     "name": {
       "type": "string",
       "description": "Full name of the person"
@@ -29,6 +30,13 @@
           "type": "string",
           "format": "uri"
         },
+        "github": {
+          "type": "string",
+          "format": "uri"
+        },
+        "phone": {
+          "type": ["string", "number"]
+        },
         "location": {
           "type": "string"
         }
@@ -44,15 +52,10 @@
       "oneOf": [
         {
           "type": "object",
-          "patternProperties": {
-            "^[a-zA-Z0-9_ ]+$": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          "additionalProperties": false
+          "additionalProperties": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
         },
         {
           "type": "array",
@@ -70,7 +73,7 @@
         "properties": {
           "title": { "type": "string" },
           "company": { "type": "string" },
-          "location": { "type": "string" },
+          "location": { "type": ["string", "null"] },
           "dates": { "type": "string" },
           "duties": {
             "type": "array",
@@ -92,9 +95,9 @@
         "properties": {
           "degree": { "type": "string" },
           "school": { "type": "string" },
-          "year": { "type": "integer" },
-          "gpa": { "type": "string" },
-          "details": { "type": "string" }
+          "year": { "type": ["integer", "string"] },
+          "gpa": { "type": ["string", "number"] },
+          "details": { "type": ["string", "null"] }
         },
         "additionalProperties": false
       }
@@ -106,16 +109,59 @@
         "required": ["name", "issuer"],
         "properties": {
           "name": { "type": "string" },
-          "issuer": { "type": "string" }
+          "issuer": { "type": "string" },
+          "year": { "type": ["string", "integer" ] }
         },
         "additionalProperties": false
       }
+    },
+    "training": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "awards": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "affiliations": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "cover_letter": {
+      "type": "object",
+      "properties": {
+        "hiring_manager": { "type": "string" },
+        "company_name": { "type": "string" },
+        "recipient": {
+          "type": "object",
+          "properties": {
+            "name": { "type": "string" },
+            "title": { "type": "string" },
+            "company": { "type": "string" },
+            "address": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "salutation": { "type": "string" },
+        "body": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "closing": { "type": "string" },
+        "signature_name": { "type": "string" }
+      },
+      "additionalProperties": true
     },
     "meta": {
       "type": "object",
       "properties": {
         "slug": { "type": "string" },
         "version": { "type": "string" },
+        "title": { "type": "string" },
+        "aliases": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
         "kpis": {
           "type": "array",
           "items": { "type": "string" }
@@ -126,4 +172,3 @@
   },
   "additionalProperties": false
 }
-
