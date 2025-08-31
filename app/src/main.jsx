@@ -14,12 +14,19 @@ function View() {
     (async () => {
       try {
         const reg = await loadRegistry();
-        const targetSlug = slug || reg.default;
-        // Try to resolve by slug or alias; fall back to default or first variant
         const bySlugOrAlias = (s) => (v) => v.slug === s || (Array.isArray(v.aliases) && v.aliases.includes(s));
-        let meta = Array.isArray(reg.variants) ? reg.variants.find(bySlugOrAlias(targetSlug)) : null;
-        if (!meta && reg.default) meta = reg.variants.find(bySlugOrAlias(reg.default));
-        if (!meta && Array.isArray(reg.variants) && reg.variants.length > 0) meta = reg.variants[0];
+        const newest = (variants = []) => {
+          const parse = (v) => (String(v||'0.0.0').split('.').map(n=>parseInt(n,10)));
+          return [...variants].sort((a,b)=>{
+            const [a1=0,a2=0,a3=0]=parse(a.version); const [b1=0,b2=0,b3=0]=parse(b.version);
+            if (b1!==a1) return b1-a1; if (b2!==a2) return b2-a2; return b3-a3;
+          })[0] || null;
+        };
+
+        let meta = null;
+        if (slug) meta = reg.variants?.find(bySlugOrAlias(slug)) || null;
+        if (!meta && reg.default) meta = reg.variants?.find(bySlugOrAlias(reg.default)) || null;
+        if (!meta) meta = newest(reg.variants);
         if (!meta) throw new Error('No variants defined in index.json');
         const json = await loadResumeJson(meta.slug, meta.version);
         const m = normalize(json);

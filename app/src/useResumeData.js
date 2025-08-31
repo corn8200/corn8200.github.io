@@ -1,3 +1,6 @@
+// Data base path:
+// - Default to site root so production fetches `/data/...` from domain root
+// - Allow override via VITE_DATA_BASE for custom hosts
 const BASE = (import.meta.env.VITE_DATA_BASE || '').replace(/\/$/, '');
 
 export async function loadRegistry() {
