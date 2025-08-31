@@ -36,6 +36,12 @@ To run the application locally:
     During local development, the app will serve JSON from the root-level `data/` folder so that
     requests to `/data/index.json` and `/data/resumes/*.json` work without changing production URLs.
 
+    To load JSON from another host (e.g., your resume API), set `VITE_DATA_BASE`:
+    ```bash
+    VITE_DATA_BASE=https://example.com npm run dev
+    ```
+    The app will fetch `index.json` and resume files from that base URL.
+
 ## Building for Production
 
 To create a production build of the application:
@@ -54,9 +60,9 @@ To create a production build of the application:
 
 *   Modern styling
 *   Expandable/collapsible sections
-*   Education section
-*   Certifications
-*   Summary
+*   KPI badges from `meta.kpis`
+*   Interactive timeline with achievements
+*   Subtle micro-interactions on buttons and skill chips
 
 ## Deployment
 

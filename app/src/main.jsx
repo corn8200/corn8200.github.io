@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { HashRouter, Routes, Route, useParams, Navigate } from 'react-router-dom';
+import { Chrono } from 'react-chrono';
 import { loadRegistry, loadResumeJson } from './useResumeData.js';
 import './index.css';
 
@@ -34,6 +35,15 @@ function View() {
 
   const m = state.model;
   const { kpis, mail, li } = m;
+  const experienceItems = m.experience.map(e => ({
+    title: e.dates,
+    cardTitle: `${e.title}`,
+    cardSubtitle: [e.company, e.location].filter(Boolean).join(' • '),
+    cardDetailedText: [
+      ...(e.duties?.length ? ['Duties:', ...e.duties] : []),
+      ...(e.achievements?.length ? ['Achievements:', ...e.achievements] : [])
+    ]
+  }));
 
   return (
     <div className="page">
@@ -65,6 +75,7 @@ function View() {
         <h2 onClick={() => toggleSection('skills')}>Skills {expandedSections.skills ? '-' : '+'}</h2>
         {expandedSections.skills && (
           <div>
+            {m.skills_kv && <div className="hint">Hover a category for details.</div>}
             {m.skills_kv && (
               <div className="chip-grid">
                 {m.skills_kv.map(({ k, v }) => {
@@ -88,29 +99,7 @@ function View() {
         <section className="sec">
           <h2 onClick={() => toggleSection('experience')}>Experience {expandedSections.experience ? '-' : '+'}</h2>
           {expandedSections.experience && (
-            <div>
-              {m.experience.map((e, i) => (
-                <div key={i} className="exp-card">
-                  <h3 className="exp-head">
-                    <strong>{e.title}</strong>, {e.company}
-                  </h3>
-                  <div className="exp-date">{[e.location, e.dates].filter(Boolean).join(' • ')}</div>
-                  {e.duties?.length > 0 && (
-                    <ul className="duties">
-                      {e.duties.map((d, j) => <li key={j}>{d}</li>)}
-                    </ul>
-                  )}
-                  {e.achievements?.length > 0 && (
-                    <div className="ach">
-                      <div className="ach-h">Achievements</div>
-                      <ul className="ach-list">
-                        {e.achievements.map((a, j) => <li key={j}>{a}</li>)}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
+            <Chrono items={experienceItems} mode="VERTICAL_ALTERNATING" />
           )}
         </section>
       )}
@@ -157,7 +146,18 @@ function normalize(doc) {
   })) : [];
   const edu = Array.isArray(doc.education) ? doc.education.map(e => ({ ...e, details: e.details || '' })) : [];
   const certs = Array.isArray(doc.certifications) ? doc.certifications : [];
-  const kpis = Array.isArray(m.kpis) ? m.kpis : [];
+  const kpis = Array.isArray(m.kpis)
+    ? m.kpis.map(k => {
+        if (typeof k === 'string') return k;
+        if (k && typeof k === 'object') {
+          const label = k.label || k.name || '';
+          const value = k.value !== undefined ? k.value : '';
+          const text = [label, value].filter(Boolean).join(': ');
+          return text || JSON.stringify(k);
+        }
+        return String(k);
+      })
+    : [];
   const mail = doc.contact?.email ? `mailto:${doc.contact.email}` : null;
   const li = doc.contact?.linkedin || null;
   return { name, role, location, summary: doc.summary || '', skills_kv, skills_list, experience: exp, education: edu, certifications: certs, kpis, mail, li, slug: m.slug, version: m.version };
