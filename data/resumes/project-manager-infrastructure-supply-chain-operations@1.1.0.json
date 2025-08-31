@@ -47,8 +47,8 @@
     }
   ],
   "certifications": [
-    { "name": "Project Management Professional (PMP)", "issuer": "PMI", "year": "2021" },
-    { "name": "Agile Scrum Master (ASM)", "issuer": "Scrum Alliance", "year": "2021" },
+    { "name": "Project Management Professional (PMP)", "issuer": "Simplilearn", "year": "2021" },
+    { "name": "Agile Scrum Master (ASM)", "issuer": "Simplilearn", "year": "2021" },
     { "name": "Lean Six Sigma (Bronze, Green Belt)", "issuer": "Lean Methods Group & Simplilearn", "year": "2023" }
   ],
   "education": [

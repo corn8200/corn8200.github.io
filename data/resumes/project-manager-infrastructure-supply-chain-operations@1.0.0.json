@@ -1,0 +1,117 @@
+{
+  "format_scale": "100%",
+  "name": "John Cornelius",
+  "title": "Project Manager – Infrastructure, Supply Chain & Operations",
+  "contact": {
+    "location": "Harpers Ferry, WV",
+    "email": "corn82@icloud.com",
+    "phone": "(304) 268-4985",
+    "linkedin": "https://www.linkedin.com/in/john-w-cornelius",
+    "github": "https://github.com/corn8200"
+  },
+  "summary": "Project manager and operations leader with 15+ years’ experience directing multi-site infrastructure, supply chain, and manufacturing operations with budgets up to $48M. Proven record delivering complex capital and operational projects on time, within budget, and to specification, while ensuring safety, quality, and stakeholder satisfaction. Skilled in resolving scheduling conflicts, coordinating contractors and municipalities, and sustaining >95% on-time delivery performance with >99.5% inventory accuracy. Expert in Lean Six Sigma, 3PL management, SAP/ERP integration, and cross‑functional leadership.",
+  "skills": {
+    "Operations Leadership": [
+      "Multi-Site Project & Operations Leadership",
+      "Contractor & Municipality Coordination",
+      "Safety Program Leadership – Zero OSHA Recordables",
+      "Change Management & Project Start-Up Execution"
+    ],
+    "Supply Chain & Project Delivery": [
+      "3PL Partnership & KPI Performance Management",
+      "S&OP / Demand, Supply & Resource Planning",
+      "Scheduling Conflict Resolution & Critical Path Management",
+      "Delivery in Full On Time (DIFOT >95%) Optimization"
+    ],
+    "Systems & Analytics": [
+      "SAP / ERP / MES Integration (SAP, Oracle, MS Dynamics)",
+      "Scheduling & Workflow Automation Solutions",
+      "Lean Six Sigma (Green Belt, Bronze) | Kaizen, Continuous Improvement",
+      "TPM Implementation & 5S Culture"
+    ],
+    "Budget & Stakeholder Management": [
+      "Budget Management – $20M–$48M Portfolios",
+      "Cross-Functional Team Development & Stakeholder Engagement"
+    ]
+  },
+  "experience": [
+    {
+      "title": "Sr. Operations & Data Analytics Manager",
+      "company": "Allmine Paving (A Tamko Company)",
+      "location": "WV",
+      "dates": "Jan 2022 – Present",
+      "duties": [
+        "Lead multi-site logistics, manufacturing, and capital projects for 24/7 asphalt production facilities, ensuring safe, on-time, and within-budget delivery of operational and infrastructure initiatives.",
+        "Resolve scheduling conflicts and coordinate contractors, municipalities, and cross-functional teams to sustain >95% DIFOT and >99.5% inventory accuracy.",
+        "Oversee 3PL relationships with defined KPIs, optimizing cost-per-unit delivered and ensuring adherence to performance metrics.",
+        "Integrate demand forecasts, maintenance schedules, and supplier lead times into monthly S&OP to improve service levels and operational efficiency.",
+        "Implement Lean Six Sigma, Kaizen, TPM, and 5S to drive safety, efficiency, workforce engagement, and continuous improvement.",
+        "Manage capital project lifecycles across multiple sites, meeting compliance, safety, budget, and timeline requirements."
+      ],
+      "achievements": [
+        "Increased regional throughput by 12% while reducing overtime costs through Lean scheduling and predictive maintenance.",
+        "Improved DIFOT by 15% via GPS-enabled fleet tracking, automated reporting workflows, and statistical modeling.",
+        "Enhanced delivery quality scores by 18% by deploying predictive quality management tools and improving supplier performance.",
+        "Achieved >99.5% inventory accuracy across all sites, reducing stockouts and excess inventory costs.",
+        "Sustained zero OSHA recordables over 3 years through rigorous safety programs and compliance management.",
+        "Delivered $2.3M in cost savings through 3PL contract optimization, freight routing improvements, and supplier performance initiatives."
+      ]
+    },
+    {
+      "title": "Sr. Program Manager – Aviation & Advanced Systems",
+      "company": "U.S. Army (160th SOAR)",
+      "location": null,
+      "dates": "2009 – 2021",
+      "duties": [
+        "Directed lifecycle of multimillion-dollar aviation and infrastructure support programs across multiple sites, ensuring on‑time, within-budget delivery.",
+        "Coordinated contractors, municipalities, and cross-functional teams to execute complex project schedules, mitigate risks, and maintain compliance.",
+        "Led engineering, R&D, logistics, and IT teams using program governance, risk management, and Lean/Agile methodologies.",
+        "Managed global logistics networks, supplier contracts, and maintenance programs for $48M+ in assets, sustaining >98% operational readiness.",
+        "Oversaw 3PL partnerships supporting deployment and sustainment operations, establishing KPIs, monitoring compliance, and optimizing routes."
+      ],
+      "achievements": [
+        "Reduced part shortages by 22% and improved mission readiness through predictive analytics and supplier collaboration.",
+        "Executed $4.6M test and evaluation program and supported 200+ global missions with zero safety incidents while sustaining >98% readiness.",
+        "Streamlined project planning cycles by 30% using digital twin simulations, improving resource allocation efficiency.",
+        "Delivered gains in operational efficiency and asset utilization through Lean Six Sigma initiatives.",
+        "Increased 3PL on-time performance by 14% via KPI-driven performance management and contract optimization."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Master of Science (M.S.), Unmanned Systems – Human Factors",
+      "school": "Embry-Riddle Aeronautical University",
+      "year": "2020",
+      "details": "4.0 GPA, with distinction"
+    },
+    {
+      "degree": "Bachelor of Science (B.S.), Aeronautics",
+      "school": "Embry-Riddle Aeronautical University",
+      "year": "2012"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Project Management Professional (PMP)",
+      "issuer": "Simplilearn",
+      "year": "2021"
+    },
+    {
+      "name": "Lean Six Sigma (Bronze, Green Belt)",
+      "issuer": "Lean Methods Group & Simplilearn",
+      "year": "2023"
+    },
+    {
+      "name": "Agile Scrum Master",
+      "issuer": "Simplilearn",
+      "year": "2021"
+    }
+  ],
+  "meta": {
+    "slug": "project-manager-infrastructure-supply-chain-operations",
+    "version": "1.0.0",
+    "title": "Project Manager – Infrastructure, Supply Chain & Operations",
+    "aliases": []
+  }
+}
