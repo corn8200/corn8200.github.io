@@ -18,35 +18,49 @@ function sanitize(s) {
     .replace(/Â /g, ' ');
 }
 
-function render(t, ctx) {
-  // Render sections
-  t = t.replace(/\{\{#(\w+)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (_, key, inner) => {
-    const val = ctx[key];
-    if (Array.isArray(val) && val.length > 0) {
-      return val.map(item => {
-        if (typeof item === 'object' && item !== null) {
-          let block = inner;
-          // Render nested objects
-          block = block.replace(/\{\{(\w+)\}\}/g, (_m, k) => sanitize(item[k] || ''));
-          // Render nested arrays (like duties/achievements)
-          block = block.replace(/\{\{#(\w+)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (m2, k2, inner2) => {
-            const arr = item[k2];
-            return Array.isArray(arr) ? arr.map(v => inner2.replace(/\{\{\.\}\}/g, sanitize(v))).join('') : '';
-          });
-          return block;
-        }
-        return inner.replace(/\{\{\.\}\}/g, sanitize(item));
-      }).join('');
-    } else if (val) {
-      // Render non-array truthy value as a single block
-      return inner.replace(/\{\{(\w+)\}\}/g, (_m, k) => sanitize(ctx[k] || ''));
-    }
-    return ''; // Hide section if data is missing or empty
-  });
+function render(template, context) {
+  function renderRecursive(tpl, ctx) {
+    let output = tpl;
 
-  // Render simple top-level variables
-  t = t.replace(/\{\{(\w+)\}\}/g, (_m, k) => sanitize(ctx[k] || ''));
-  return t;
+    // Handle sections and lists
+    output = output.replace(/\{\{#(\w+)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (match, key, inner) => {
+      const value = ctx[key];
+      if (!value || (Array.isArray(value) && value.length === 0)) {
+        return ''; // Remove section if key is falsy or empty array
+      }
+
+      if (Array.isArray(value)) {
+        return value.map(item => {
+          let block = inner;
+          if (typeof item === 'object' && item !== null) {
+            return renderRecursive(inner, { ...ctx, ...item });
+          } else {
+            return inner.replace(/\{\{\.\}\}/g, sanitize(item));
+          }
+        }).join('');
+      } else if (typeof value === 'object' && value !== null) {
+        return renderRecursive(inner, { ...ctx, ...value });
+      } else if (value) {
+        return renderRecursive(inner, ctx);
+      }
+      return '';
+    });
+
+    // Handle simple placeholders
+    output = output.replace(/\{\{([\w\.]+)\}\}/g, (match, key) => {
+      const keys = key.split('.');
+      let val = ctx;
+      for (const k of keys) {
+        val = val[k];
+        if (val === undefined) return '';
+      }
+      return sanitize(val);
+    });
+
+    return output;
+  }
+
+  return renderRecursive(template, context);
 }
 
 function normalizeModel(doc) {
