@@ -10,7 +10,9 @@ const __dirname = path.dirname(__filename);
 const ajv = new Ajv({ allErrors: true });
 addFormats(ajv);
 
-import resumeSchema from '../schemas/resume.json' assert { type: 'json' };
+// Load JSON schema in a Node-compatible way across Node versions
+const schemaPath = path.join(__dirname, '../schemas/resume.json');
+const resumeSchema = JSON.parse(fs.readFileSync(schemaPath, 'utf8'));
 const validate = ajv.compile(resumeSchema);
 
 async function validateJsonFiles() {

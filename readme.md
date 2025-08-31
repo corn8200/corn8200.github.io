@@ -33,6 +33,8 @@ To run the application locally:
     npm run dev
     ```
     The application should now be running at `http://localhost:5173` (or another port if 5173 is in use).
+    During local development, the app will serve JSON from the root-level `data/` folder so that
+    requests to `/data/index.json` and `/data/resumes/*.json` work without changing production URLs.
 
 ## Building for Production
 
