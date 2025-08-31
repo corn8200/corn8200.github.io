@@ -175,12 +175,17 @@ function View() {
         <section className="sec">
           <h2 onClick={() => toggleSection('certifications')}>Certifications {expandedSections.certifications ? '-' : '+'}</h2>
           {expandedSections.certifications && m.certifications.map((c, i) => {
-            const cs50 = /CS50/i.test(c.name || '');
+            const name = c.name || '';
+            const isCS50AI = /CS50/i.test(name) && /Artificial\s+Intelligence\s+with\s+Python/i.test(name);
+            const isCS50Series = /CS50/i.test(name) && /(Computer\s+Science).*Programming|Series/i.test(name);
             return (
               <div key={i} className="cert-row">
                 <strong>{c.name}</strong> – {c.issuer}
-                {cs50 && (
-                  <div className="cert-desc">Harvard’s CS50 (Python & AI): search/graph algorithms, ML basics (classification, optimization), and problem‑solving in Python.</div>
+                {isCS50AI && (
+                  <div className="cert-desc">Harvard’s CS50 AI with Python: search/graph algorithms, machine learning (classification, optimization), probability, and hands‑on Python with scikit‑learn.</div>
+                )}
+                {isCS50Series && (
+                  <div className="cert-desc">Harvard’s CS50 Computer Science & Programming Series: core CS (C, memory, data structures, algorithms), Python, web (Flask/JS), and SQL fundamentals.</div>
                 )}
               </div>
             );
