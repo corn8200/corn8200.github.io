@@ -5,6 +5,14 @@ import { Chrono } from 'react-chrono';
 import { loadRegistry, loadResumeJson } from './useResumeData.js';
 import './index.css';
 
+function safeUrl(url) {
+  if (!url || typeof url !== 'string') return '#';
+  const s = url.trim();
+  if (/^mailto:/i.test(s)) return s;
+  if (/^https?:\/\//i.test(s)) return s;
+  return '#';
+}
+
 function View() {
   const { slug } = useParams();
   const [state, setState] = useState({ loading: true, error: null, model: null });
@@ -63,8 +71,8 @@ function View() {
         <div className="hdr-top">
           <h1>{m.name}</h1>
           <div className="actions">
-            {mail && <a className="btn" href={mail}>Email</a>}
-            {li && <a className="btn" href={li} target="_blank" rel="noreferrer">LinkedIn</a>}
+            {mail && <a className="btn" href={safeUrl(mail)} rel="noopener noreferrer">Email</a>}
+            {li && <a className="btn" href={safeUrl(li)} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
           </div>
         </div>
         <div className="role">{m.role} • {m.location}</div>
@@ -164,7 +172,7 @@ function View() {
             return (
               <div key={i} className="edu-row">
                 <strong>{e.degree}</strong>, {e.school}{e.year ? ` (${e.year})` : ''}{e.gpa ? ` – GPA: ${e.gpa}` : ''}{e.details ? ` — ${e.details}` : ''}
-                <a className="edu-link" href={searchUrl} target="_blank" rel="noreferrer" title="Search this program">🔎</a>
+                <a className="edu-link" href={searchUrl} target="_blank" rel="noopener noreferrer" title="Search this program">🔎</a>
               </div>
             );
           })}
