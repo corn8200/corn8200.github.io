@@ -1,0 +1,93 @@
+{
+  "format_scale": "100%",
+  "name": "John Cornelius",
+  "title": "Project Manager – Infrastructure, Supply Chain & Operations",
+  "contact": {
+    "location": "Harpers Ferry, WV",
+    "email": "corn82@icloud.com",
+    "phone": "(304) 268-4985",
+    "linkedin": "https://linkedin.com/in/johncornelius",
+    "github": "https://github.com/corn8200"
+  },
+  "summary": "Operations and project leader delivering complex infrastructure and supply chain initiatives on time and within budget. Drives cross‑functional execution, vendor alignment, and risk mitigation across manufacturing, logistics, and technology programs.",
+  "skills": {
+    "Program & Project Management": [
+      "Roadmapping • Scope • Budget • Risks",
+      "Stakeholder Management • Vendor Oversight",
+      "SOWs • RFPs • Contracting • Compliance"
+    ],
+    "Infrastructure & Supply Chain": [
+      "Facilities Upgrades • Utilities • SCADA",
+      "S&OP • Inventory • Logistics • Procurement",
+      "Supplier Performance • Cost Optimization"
+    ],
+    "Operations & Analytics": [
+      "KPI Design • OEE • Throughput",
+      "Power BI • SQL • Python",
+      "Lean Six Sigma • TPM • 5S"
+    ]
+  },
+  "experience": [
+    {
+      "title": "Sr. Project Manager",
+      "company": "Allmine Paving (A Tamko Company)",
+      "location": "WV",
+      "dates": "2022 – Present",
+      "duties": [
+        "Lead end‑to‑end delivery of multi‑site infrastructure upgrades, coordinating construction, electrical, and controls vendors.",
+        "Own budgets, timelines, and risk registers; drive issue resolution and cross‑functional communications.",
+        "Implement KPI dashboards and cadence to track progress, spend, and change requests."
+      ],
+      "achievements": [
+        "Delivered plant modernization phases under budget while improving throughput and reliability.",
+        "Consolidated vendor base and negotiated terms to reduce costs and lead times."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Master of Science (M.S.), Unmanned Systems – Human Factors",
+      "school": "Embry-Riddle Aeronautical University",
+      "details": "4.0 GPA, with distinction",
+      "year": "2020"
+    },
+    {
+      "degree": "Bachelor of Science (B.S.), Aeronautics",
+      "school": "Embry-Riddle Aeronautical University",
+      "details": null,
+      "year": "2012"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Lean Six Sigma (Bronze, Green Belt)",
+      "issuer": "Lean Methods Group & Simplilearn",
+      "year": "2023"
+    }
+  ],
+  "affiliations": [
+    "Civil Air Patrol — sUAS Training & Community Programs",
+    "Community Volunteer Leadership — Local civic and service involvement"
+  ],
+  "cover_letter": {
+    "recipient": {
+      "name": "Hiring Manager",
+      "title": "",
+      "company": "",
+      "address": ""
+    },
+    "salutation": "Dear Hiring Team,",
+    "body": [
+      "I am excited to apply my background in infrastructure, supply chain, and operations program delivery to your organization.",
+      "I consistently align stakeholders, vendors, and operators to deliver safe, compliant, and cost‑effective outcomes."
+    ],
+    "closing": "Sincerely,",
+    "signature_name": "John Cornelius"
+  },
+  "meta": {
+    "slug": "project-manager-infrastructure-supply-chain-operations",
+    "version": "1.1.0",
+    "title": "Project Manager – Infrastructure, Supply Chain & Operations",
+    "aliases": []
+  }
+}
