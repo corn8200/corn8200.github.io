@@ -54,7 +54,7 @@ To create a production build of the application:
     ```bash
     npm run build
     ```
-    This will generate optimized static assets in the `dist/` directory (or `beta/` if configured in `vite.config.js`).
+    This will generate optimized static assets in the `cv/` directory (default).
 
 ## Features
 
@@ -66,7 +66,7 @@ To create a production build of the application:
 
 ## Deployment
 
-This application is designed to be deployed as a static site. The `npm run build` command generates the necessary files.
+This application is deployed as a static site under `/cv`. Running `npm run build` outputs to the repo’s `cv/` folder with the correct base path so assets resolve without redirects.
 
 ---
 
