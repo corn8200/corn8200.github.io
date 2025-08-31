@@ -145,6 +145,14 @@ h1 {
 
 .chip:hover{ filter:brightness(0.95); }
 
+.chip{ cursor:help; }
+
+.hint{
+  font-size:12px;
+  color:var(--muted);
+  margin-bottom:8px;
+}
+
 ul {
   margin:6px 0 0 20px;
   padding:0;
@@ -160,13 +168,6 @@ li {
   color:#333; /* This might need to be a variable too */
 }
 
-/* Timeline card polish */
-.exp-card { font-size:14px; }
-.exp-head { margin:0 0 4px 0; }
-.exp-date { color:#666; font-size:12px; margin-bottom:6px; }
-.duties li { margin:3px 0; }
-.ach { margin-top:6px; }
-.ach-h { font-size:12px; font-weight:600; text-transform:uppercase; color:#374151; margin:6px 0 2px; }
 
 /* Dark mode */
 [data-theme="dark"] body { background:#0b0f15; }
