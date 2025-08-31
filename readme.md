@@ -103,4 +103,119 @@ git push
 - Project portfolio
 - Contact form
 
-Feedback and suggestions are welcome!
+Feedback and suggestions are welcome!.
+
+---
+## Update Workflow (exact steps)
+
+### Fast path (manual, 3 steps)
+1. **Save** a new JSON in your resume app (iCloud path below).
+2. **Update site** from the website repo root:
+   ```bash
+   # 1) Copy newest JSON from iCloud into the site
+   SRC_DIR="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Resume/report/versions"
+   NEWEST="$(ls -t "$SRC_DIR"/*.json | head -n 1)"
+   mkdir -p data/resumes
+   cp -f "$NEWEST" data/resumes/
+   echo "Copied: $NEWEST"
+
+   # 2) Normalize + register + build
+   node - <<'NODE'
+   const fs=require('fs'),path=require('path');
+   const idxPath='data/index.json', dir='data/resumes';
+   const files=fs.readdirSync(dir).filter(f=>f.endsWith('.json')).map(f=>path.join(dir,f))
+                 .sort((a,b)=>fs.statSync(b).mtime-fs.statSync(a).mtime);
+   const newest=files[0]; const idx=JSON.parse(fs.readFileSync(idxPath,'utf8'));
+   const kebab=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').replace(/-+/g,'-');
+   const bump=v=>{const [a,b,c]=(v||'0.0.0').split('.').map(n=>+n||0);return [a,b,c+1].join('.')};
+   let doc=JSON.parse(fs.readFileSync(newest,'utf8')); doc.meta=doc.meta||{};
+   let slug=doc.meta.slug||kebab(doc.title||doc.name||path.basename(newest,'.json'));
+   let ver =doc.meta.version; const existing=idx.variants.find(v=>v.slug===slug);
+   if(!ver) ver= existing? bump(existing.version): '1.0.0';
+   doc.meta.slug=slug; doc.meta.version=ver;
+   doc.meta.title=doc.meta.title||doc.title||'Resume'; doc.meta.aliases=Array.isArray(doc.meta.aliases)?doc.meta.aliases:[];
+   const newName=path.join(dir, `${slug}@${ver}.json`);
+   fs.writeFileSync(newName, JSON.stringify(doc,null,2)); if(newest!==newName){try{fs.unlinkSync(newest)}catch{}}
+   if(!existing) idx.variants.push({slug,version:ver,title:doc.meta.title,aliases:doc.meta.aliases}); else existing.version=ver;
+   if(!idx.default) idx.default=slug;
+   fs.writeFileSync(idxPath, JSON.stringify(idx,null,2));
+   console.log('Registered', slug, 'v'+ver);
+   NODE
+
+   node build.mjs
+
+   # 3) Publish
+   git add data resume index.html
+   git commit -m "resume: rebuild"
+   git push
+   ```
+
+3. **Send link**  
+   - Static: `https://jcornelius.net/resume/<slug>/`  
+   - Beta:   `https://jcornelius.net/beta/#/view/<slug>`
+
+### Automate (recommended): pre-commit hook
+Run once in repo root to make updates automatic whenever you commit.
+```bash
+mkdir -p scripts .git/hooks
+
+# sync from iCloud → data/resumes
+cat > scripts/sync-versions.sh <<'SH'
+#!/usr/bin/env bash
+set -euo pipefail
+SRC="$HOME/Library/Mobile Documents/com~apple~CloudDocs/Resume/report/versions"
+DEST="data/resumes"
+mkdir -p "$DEST"
+rsync -av --include="*.json" --exclude="*" "$SRC"/ "$DEST"/
+SH
+chmod +x scripts/sync-versions.sh
+
+# normalize registry
+cat > scripts/normalize-index.mjs <<'NODE'
+import fs from 'fs'; import path from 'path';
+const dir='data/resumes'; const files=fs.existsSync(dir)?fs.readdirSync(dir).filter(f=>f.endsWith('.json')):[];
+const idxPath='data/index.json'; const idx=JSON.parse(fs.readFileSync(idxPath,'utf8'));
+const kebab=s=>s.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'').replace(/-+/g,'-');
+const semverCmp=(a,b)=>{const pa=a.split('.').map(n=>+n||0),pb=b.split('.').map(n=>+n||0);for(let i=0;i<3;i++){const d=(pa[i]||0)-(pb[i]||0);if(d)return d}return 0};
+for(const f of files){
+  const p=path.join(dir,f); let d; try{ d=JSON.parse(fs.readFileSync(p,'utf8')); }catch{ continue; }
+  d.meta=d.meta||{}; d.meta.slug=d.meta.slug||kebab(d.title||d.name||path.basename(f,'.json'));
+  d.meta.version=d.meta.version||'1.0.0';
+  d.meta.title=d.meta.title||d.title||'Resume'; d.meta.aliases=Array.isArray(d.meta.aliases)?d.meta.aliases:[];
+  fs.writeFileSync(path.join(dir,`${d.meta.slug}@${d.meta.version}.json`), JSON.stringify(d,null,2));
+}
+const grouped={}; for(const f of fs.readdirSync(dir).filter(f=>f.endsWith('.json'))){
+  const d=JSON.parse(fs.readFileSync(path.join(dir,f),'utf8')); const s=d.meta.slug, v=d.meta.version;
+  if(!grouped[s] || semverCmp(v,grouped[s].version)>0) grouped[s]={slug:s,version:v,title:d.meta.title,aliases:d.meta.aliases};
+}
+const variants=Object.values(grouped).sort((a,b)=>a.slug.localeCompare(b.slug));
+if(!idx.default && variants[0]) idx.default=variants[0].slug;
+idx.variants=variants;
+fs.writeFileSync(idxPath, JSON.stringify(idx,null,2));
+console.log('index.json updated with', variants.length, 'variant(s)');
+NODE
+
+# pre-commit: sync → normalize → build → stage
+cat > .git/hooks/pre-commit <<'HOOK'
+#!/usr/bin/env bash
+set -euo pipefail
+scripts/sync-versions.sh
+node scripts/normalize-index.mjs
+node build.mjs
+git add data resume index.html || true
+echo "pre-commit: synced, normalized, built, and staged."
+HOOK
+chmod +x .git/hooks/pre-commit
+```
+Usage afterwards:
+```bash
+git commit -m "resume update"
+git push
+```
+
+### Notes
+- Repo is a **user site**; Pages serves from root. Keep `CNAME` = `jcornelius.net`.
+- If a JSON is invalid you’ll see a build error; fix the JSON and re-run.
+- CDN cache ~5–10 min. `curl -I <url>` shows fresh `age: 0` when updated.
+
+---
