@@ -1,0 +1,123 @@
+{
+  "format_scale": "100%",
+  "name": "John Cornelius",
+  "title": "Director of Customer Support & Field Services",
+  "contact": {
+    "location": "Harpers Ferry, WV",
+    "email": "corn82@icloud.com",
+    "phone": "(304) 268-4985",
+    "linkedin": "https://linkedin.com/in/johncornelius",
+    "github": "https://github.com/corn8200"
+  },
+  "summary": "Service operations leader with 15+ years building and leading customer support, field service, and technical support organizations in high‑reliability environments. Expert in post‑shipment support across Field Service, Technical Support, Service Coordination, Parts, and Training; drives CSAT/NPS, first‑time fix rate (FTFR), MTTR, and SLA attainment. Proven in KPI design, escalation management, aftermarket programs (spares, retrofits, remote support), forecasting/budgeting, and ERP/CRM utilization; Lean Six Sigma–driven with deep operations and aviation background.",
+  "skills": {
+    "Customer Support & Field Services": [
+      "Customer Experience (CSAT/NPS) • Escalation Management",
+      "Field Service Operations • Service Coordination",
+      "Aftermarket Programs • Spare Parts • Retrofit • Remote Support",
+      "ERP/CRM (SAP or Dynamics) • Microsoft Office"
+    ],
+    "Operations & Process Improvement": [
+      "Standard Operating Procedures (SOPs) • Compliance Documentation",
+      "Operational Excellence • Lean Six Sigma Methods",
+      "Workflow Optimization • Continuous Improvement",
+      "KPI Development (SLA, MTTR, FTFR) • Service Metrics"
+    ],
+    "Training & Team Development": [
+      "Onboarding & Upskilling Programs",
+      "Curriculum Design • Instructional Systems Design",
+      "Facilitation • Coaching • Leadership Pipeline Building",
+      "Learning Management Systems (LMS) • Canvas • Digital Training"
+    ],
+    "Data Analytics & Tools": [
+      "Business Intelligence (Power BI, Excel/Google Sheets)",
+      "Predictive Analytics • Training & Service Outcomes",
+      "SCADA‑Integrated Dashboards • Real‑time Reporting",
+      "Google Workspace • Jira • Confluence"
+    ]
+  },
+  "experience": [
+    {
+      "title": "Sr. Operations, Data Analytics & Customer Support Leader",
+      "company": "Allmine Paving (A Tamko Company)",
+      "location": "WV",
+      "dates": "Jan 2022 – Present",
+      "duties": [
+        "Lead multi‑functional support organization across Field Service, Technical Support, Service Coordination, Parts, and Training.",
+        "Develop and execute scalable service strategy aligned to growth, quality, and customer satisfaction objectives.",
+        "Standardize SOPs, escalation protocols, and KPIs to drive SLA attainment, FTFR, MTTR reduction, and technician efficiency.",
+        "Leverage Python automation, SCADA dashboards, and BI tools to improve service tracking, compliance, and workforce readiness."
+      ],
+      "achievements": [
+        "Improved CSAT by 20% and cut response time 30% via standardized workflows, clear SLAs, and KPI dashboards.",
+        "Boosted technician qualification rates 25% and reduced onboarding time 30 days with Toyota Way–based programs and LMS enhancements.",
+        "Raised compliance from 82% to 96% using BI‑driven feedback loops and automated document control for 150+ SOPs.",
+        "Expanded aftermarket revenue through structured parts/retrofit offerings and built a leadership pipeline through supervisor coaching."
+      ]
+    },
+    {
+      "title": "Aviation Officer / Standardization Pilot – U.S. Army Aviation",
+      "company": "U.S. Army",
+      "location": null,
+      "dates": "2000 – 2022",
+      "duties": [
+        "Directed training, evaluation, and operational readiness for 400+ aviators across multiple aviation units in mission-critical environments.",
+        "Implemented one of the Army’s first LMS/KMS systems and standardized evaluation rubrics, closing training gaps and improving compliance.",
+        "Served as Standardization Pilot enforcing SOPs, CRM, and safety protocols to ensure consistent performance across units.",
+        "Led cross-functional coordination with engineering, maintenance, and operations staff to improve serviceability, safety, and readiness."
+      ],
+      "achievements": [
+        "Implemented LMS/KMS system, increasing training tracking coverage from 0% to 95% across assigned units.",
+        "Achieved 97% qualification pass rate across aviators by standardizing evaluation protocols and closing training gaps.",
+        "Maintained zero Class A/B incidents through rigorous standardization-driven safety training."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Master of Science (M.S.), Unmanned Systems – Human Factors",
+      "school": "Embry-Riddle Aeronautical University",
+      "details": null
+    },
+    {
+      "degree": "Bachelor of Science (B.S.), Aeronautics",
+      "school": "Embry-Riddle Aeronautical University",
+      "details": null
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Lean Six Sigma Bronze Belt (2023)",
+      "issuer": "Lean Methods Group"
+    },
+    {
+      "name": "CS50’s Python & Artificial Intelligence (in progress)",
+      "issuer": "Harvard University"
+    }
+  ],
+  "training": [
+    "Army Advanced Training & Certifications (2006–2019, details on request)"
+  ],
+  "awards": [
+    "Air Medal (3)",
+    "Army Commendation Medal (6)",
+    "Senior Army Aviator Badge (2015)"
+  ],
+  "cover_letter": {
+    "hiring_manager": "Ana A.",
+    "company_name": "STULZ USA",
+    "body": [
+      "Dear Ana A. and STULZ Hiring Team,",
+      "I am excited to apply for the Director of Customer Support and Field Services position at STULZ USA. With over 15 years of experience leading multi-functional service organizations in high-reliability industries, I bring a proven ability to deliver world-class post-shipment support across Field Service, Technical Support, Service Coordination, Parts, and Training.",
+      "In my current role as Sr. Operations, Data Analytics & Customer Support Leader, I have directed service strategy, standardized SOPs and escalation protocols, and implemented KPI-driven dashboards that improved CSAT by 20% and cut response times by 30%. I also expanded aftermarket revenue through spare parts and retrofit offerings while building a leadership pipeline to support future scale. These outcomes reflect a balance of operational rigor and customer-first focus that aligns directly with STULZ’s mission of responsiveness and reliability.",
+      "As a former Army Aviation Officer and Standardization Pilot, I managed training and readiness for 400+ aviators, enforced operational standards across units, and implemented one of the Army’s earliest LMS/KMS systems. This experience honed my ability to lead under mission-critical conditions, build scalable systems, and ensure compliance and safety—all directly transferable to leading national field service and technical support operations at STULZ.",
+      "I look forward to the opportunity to bring my background in service operations, customer support, and cross-functional leadership to STULZ USA. Thank you for your time and consideration."
+    ]
+  },
+  "meta": {
+    "slug": "director-of-customer-support",
+    "version": "1.0.0",
+    "title": "Director Of Customer Support",
+    "aliases": []
+  }
+}

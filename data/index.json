@@ -1,0 +1,11 @@
+{
+  "default": "director-of-customer-support",
+  "variants": [
+    {
+      "slug": "director-of-customer-support",
+      "version": "1.0.0",
+      "title": "Director Of Customer Support",
+      "aliases": []
+    }
+  ]
+}

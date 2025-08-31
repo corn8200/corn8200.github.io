@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>{{name}} — {{role}}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  body{font:14px/1.45 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial;margin:24px;color:#111}
+  .hdr{border-bottom:2px solid #222;margin-bottom:12px;padding-bottom:6px}
+  .name{font-size:24px;font-weight:700}
+  .role{font-size:16px;color:#444}
+  .meta{font-size:12px;color:#666;margin-top:6px}
+  h2{font-size:13px;text-transform:uppercase;letter-spacing:.5px;margin:16px 0 6px}
+  ul{margin:6px 0 0 18px;padding:0}
+  .row{display:flex;gap:12px;flex-wrap:wrap}
+  .col{flex:1 1 260px}
+  .section{margin-top:12px}
+</style>
+</head>
+<body>
+  <div class="hdr">
+    <div class="name">{{name}}</div>
+    <div class="role">{{role}} • {{location}}</div>
+    <div class="meta">Slug {{slug}} · v{{version}}</div>
+  </div>
+
+  <div class="section">
+    <h2>Summary</h2>
+    <p>{{summary}}</p>
+  </div>
+
+  <div class="section">
+    <h2>Skills</h2>
+    {{#skills_kv}}
+      <div class="row">
+        <div class="col"><strong>{{k}}</strong></div>
+        <div class="col">{{v}}</div>
+      </div>
+    {{/skills_kv}}
+    {{#skills_list}}
+      <p>{{skills_list}}</p>
+    {{/skills_list}}
+  </div>
+
+  <div class="section">
+    <h2>Experience</h2>
+    {{#experience}}
+      <div><strong>{{title}}</strong>, {{company}} {{location_sep}} {{dates}}</div>
+      <ul>{{#duties}}<li>{{.}}</li>{{/duties}}{{#bullets}}<li>{{.}}</li>{{/bullets}}</ul>
+      {{#achievements}}<div><em>Achievements</em></div><ul>{{#achievements}}<li>{{.}}</li>{{/achievements}}</ul>{{/achievements}}
+    {{/experience}}
+  </div>
+
+  {{#education}}
+  <div class="section">
+    <h2>Education</h2>
+    {{#education}}
+      <div><strong>{{degree}}</strong>, {{school}} {{details}}</div>
+    {{/education}}
+  </div>
+  {{/education}}
+</body></html>
