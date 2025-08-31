@@ -158,7 +158,7 @@ h1 {
   position:absolute;
   left:0;
   top: calc(100% + 8px);
-  z-index: 20;
+  z-index: 9999;
   max-width: 520px;
   white-space: normal;
   padding:10px 12px;
@@ -178,10 +178,11 @@ h1 {
   background: var(--card);
   border-left:1px solid var(--rule);
   border-top:1px solid var(--rule);
+  z-index: 10000;
 }
 
 /* Click-to-expand skill details */
-.skill-panel{ margin-top:10px; border:1px solid var(--rule); border-radius:10px; padding:10px 12px; background:var(--card); box-shadow: 0 10px 24px rgba(0,0,0,.08); }
+.skill-panel{ position:sticky; top:8px; z-index:2000; margin-top:10px; border:1px solid var(--rule); border-radius:10px; padding:10px 12px; background:var(--card); box-shadow: 0 10px 24px rgba(0,0,0,.08); }
 .skill-panel-h{ display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
 .btn.btn-sm{ padding:4px 8px; font-size:12px; }
 .skill-list{ margin:6px 0 0 18px; }
@@ -242,7 +243,7 @@ li {
   .btn, .kpis { display:none !important; }
   a[href]:after{content:none;}
 }
-.timeline{ position:relative; }
+.timeline{ position:relative; z-index:0; }
 .timeline::before{ content:''; position:absolute; left:10px; top:0; bottom:0; width:2px; background:linear-gradient(to bottom, rgba(37,99,235,.4), rgba(37,99,235,.08)); }
-.exp-card{ position:relative; margin-left:24px; }
+.exp-card{ position:relative; margin-left:24px; z-index:0; }
 .exp-card::before{ content:''; position:absolute; left:-14px; top:8px; width:10px; height:10px; background:var(--accent); border-radius:50%; box-shadow:0 0 0 3px rgba(37,99,235,.12); }
