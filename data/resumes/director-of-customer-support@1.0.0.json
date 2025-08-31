@@ -82,6 +82,8 @@
     {
       "degree": "Bachelor of Science (B.S.), Aeronautics",
       "school": "Embry-Riddle Aeronautical University",
+      "year": 2020,
+      "gpa": 3.8,
       "details": null
     }
   ],
