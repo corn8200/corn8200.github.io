@@ -1,117 +1,137 @@
-import fs from 'fs'; import path from 'path';
 
-const tpl = fs.readFileSync('templates/template_print.html','utf8');
-const registry = JSON.parse(fs.readFileSync('data/index.json','utf8'));
+import fs from 'fs';
+import path from 'path';
 
-function sanitize(s){
+const tpl = fs.readFileSync('templates/template_print.html', 'utf8');
+const registry = JSON.parse(fs.readFileSync('data/index.json', 'utf8'));
+
+function sanitize(s) {
   if (s == null) return '';
-  // Fix common mojibake
   return String(s)
-    .replace(/â€“/g,'–')
-    .replace(/â€”/g,'—')
-    .replace(/â€™/g,"’")
-    .replace(/â€œ/g,'“')
-    .replace(/â€/g,'”')
-    .replace(/â€¢/g,'•')
-    .replace(/Â·/g,'·')
-    .replace(/Â /g,' ');
+    .replace(/â€“|--/g, '–')
+    .replace(/â€”/g, '—')
+    .replace(/â€™/g, "’")
+    .replace(/â€œ/g, '“')
+    .replace(/â€/g, '”')
+    .replace(/â€¢/g, '•')
+    .replace(/Â·/g, '·')
+    .replace(/Â /g, ' ');
 }
 
-function render(t, ctx){
-  // Sections for arrays
-  t = t.replace(/\{\{#(\w+)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (_, key, inner)=>{
+function render(t, ctx) {
+  // Render sections
+  t = t.replace(/\{\{#(\w+)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (_, key, inner) => {
     const val = ctx[key];
-    if (Array.isArray(val)) {
-      return val.map(item=>{
-        if (item && typeof item === 'object') {
+    if (Array.isArray(val) && val.length > 0) {
+      return val.map(item => {
+        if (typeof item === 'object' && item !== null) {
           let block = inner;
-          block = block.replace(/\{\{(\w+)\}\}/g, (_m,k)=> sanitize(item[k] ?? ''));
-          // Handle nested simple arrays like bullets/duties
-          block = block.replace(/\{\{#(\w+)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (m2,k2,inner2)=>{
+          // Render nested objects
+          block = block.replace(/\{\{(\w+)\}\}/g, (_m, k) => sanitize(item[k] || ''));
+          // Render nested arrays (like duties/achievements)
+          block = block.replace(/\{\{#(\w+)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (m2, k2, inner2) => {
             const arr = item[k2];
-            return Array.isArray(arr) ? arr.map(v=> inner2.replace(/\{\{\.\}\}/g, sanitize(v))).join('') : '';
+            return Array.isArray(arr) ? arr.map(v => inner2.replace(/\{\{\.\}\}/g, sanitize(v))).join('') : '';
           });
           return block;
         }
         return inner.replace(/\{\{\.\}\}/g, sanitize(item));
       }).join('');
+    } else if (val) {
+      // Render non-array truthy value as a single block
+      return inner.replace(/\{\{(\w+)\}\}/g, (_m, k) => sanitize(ctx[k] || ''));
     }
-    // For truthy non-arr, include once
-    if (val) return inner;
-    return '';
+    return ''; // Hide section if data is missing or empty
   });
 
-  // Simple vars
-  t = t.replace(/\{\{(\w+)\}\}/g, (_m,k)=> sanitize(ctx[k] ?? ''));
+  // Render simple top-level variables
+  t = t.replace(/\{\{(\w+)\}\}/g, (_m, k) => sanitize(ctx[k] || ''));
   return t;
 }
 
-function normalizeModel(doc){
+function normalizeModel(doc) {
   const m = doc.meta || {};
   const name = doc.name || m.name || 'John Cornelius';
   const role = doc.title || m.role || 'Program Manager';
   const location = (doc.contact && doc.contact.location) || m.location || '';
-  const summary = doc.summary || '';
-  // Skills: accept either key-value object or string/array
+  const summary = doc.summary || null;
+
   let skills_kv = null, skills_list = null;
-  if (doc.skills && !Array.isArray(doc.skills) && typeof doc.skills === 'object'){
-    skills_kv = Object.entries(doc.skills).map(([k,arr])=>({k, v: Array.isArray(arr)? arr.join('; ') : String(arr)}));
+  if (doc.skills && typeof doc.skills === 'object' && !Array.isArray(doc.skills)) {
+    skills_kv = Object.entries(doc.skills).map(([k, arr]) => ({ k, v: Array.isArray(arr) ? arr.join('; ') : String(arr) }));
   } else if (Array.isArray(doc.skills)) {
     skills_list = doc.skills.join(', ');
   }
-  // Experience unify
-  const exp = Array.isArray(doc.experience) ? doc.experience.map(e=>({    title: e.title || '',
-    company: e.company || '',
-    location_sep: e.location ? '— ' + e.location : '',
-    dates: e.dates || [e.start, e.end].filter(Boolean).join(' — '),
-    duties: Array.isArray(e.duties)? e.duties : Array.isArray(e.bullets)? e.bullets : [],
-    achievements: Array.isArray(e.achievements)? e.achievements : null
-  })) : [];
 
-  const education = Array.isArray(doc.education)? doc.education : null;
+  const experience = (Array.isArray(doc.experience) && doc.experience.length > 0) ? doc.experience.map(e => ({
+    title: e.title || '',
+    company: e.company || '',
+    location_sep: e.location ? `– ${e.location}` : '',
+    dates: e.dates || [e.start, e.end].filter(Boolean).join(' – '),
+    duties: [].concat(e.duties || [], e.bullets || []),
+    achievements: (Array.isArray(e.achievements) && e.achievements.length > 0) ? e.achievements : null
+  })) : null;
+
+  const education = (Array.isArray(doc.education) && doc.education.length > 0) ? doc.education.map(e => ({
+    ...e,
+    details: e.details || ''
+  })) : null;
 
   return {
     name, role, location, summary, skills_kv, skills_list,
-    experience: exp, education,
+    experience, education,
     slug: m.slug, version: m.version
   };
 }
 
-function writeFile(p, s){ fs.mkdirSync(path.dirname(p), {recursive:true}); fs.writeFileSync(p, s); }
+function writeFile(p, s) {
+  fs.mkdirSync(path.dirname(p), { recursive: true });
+  fs.writeFileSync(p, s);
+}
 
-function buildVariant(v){
+function buildVariant(v) {
   const slug = v.slug;
   const jsonPath = findJsonFor(slug, v.version);
-  const doc = JSON.parse(fs.readFileSync(jsonPath,'utf8'));
+  if (!jsonPath) {
+    console.error(`Could not find JSON for slug: ${slug} v${v.version}`);
+    return;
+  }
+  const doc = JSON.parse(fs.readFileSync(jsonPath, 'utf8'));
   const model = normalizeModel(doc);
   const html = render(tpl, model);
-  const outDir = path.join('resume',slug, 'v'+model.version);
-  writeFile(path.join(outDir,'index.html'), html);
-  // latest pointer
-  writeFile(path.join('resume',slug,'index.html'),
-    '<!doctype html><meta http-equiv="refresh" content="0; url=./v'+model.version+'/">');
+  const outDir = path.join('resume', slug, 'v' + model.version);
+  writeFile(path.join(outDir, 'index.html'), html);
+  writeFile(path.join('resume', slug, 'index.html'),
+    `<!doctype html><meta http-equiv="refresh" content="0; url=./v${model.version}/">`);
 }
 
-function findJsonFor(slug, version){
-  // Prefer filename slug@version.json; else scan for meta.slug match
-  const p1 = path.join('data','resumes',`${slug}@${version}.json`);
+function findJsonFor(slug, version) {
+  const p1 = path.join('data', 'resumes', `${slug}@${version}.json`);
   if (fs.existsSync(p1)) return p1;
-  const files = fs.readdirSync('data/resumes').filter(f=>f.endsWith('.json'));
-  for (const f of files){
-    const full = path.join('data','resumes',f);
-    try{
-      const doc = JSON.parse(fs.readFileSync(full,'utf8'));
+  const files = fs.readdirSync(path.join('data', 'resumes'));
+  for (const f of files) {
+    if (!f.endsWith('.json')) continue;
+    const full = path.join('data', 'resumes', f);
+    try {
+      const doc = JSON.parse(fs.readFileSync(full, 'utf8'));
       if (doc?.meta?.slug === slug && doc?.meta?.version === version) return full;
-    }catch{}
+    } catch (e) {
+      console.error(`Skipping invalid JSON: ${f}`, e);
+    }
   }
-  throw new Error(`JSON not found for ${slug} v${version}`);
+  return null;
 }
 
-function main(){
-  for (const v of registry.variants){ buildVariant(v); }
-  // Root index redirect to default
-  writeFile('index.html',
-    '<!doctype html><meta http-equiv="refresh" content="0; url=/resume/'+registry.default+'/">');
-  console.log('Built', registry.variants.length, 'variant(s). Default:', registry.default);
+function main() {
+  const variants = registry.variants || [];
+  for (const v of variants) {
+    buildVariant(v);
+  }
+  if (registry.default) {
+    writeFile('index.html',
+      `<!doctype html><meta http-equiv="refresh" content="0; url=/resume/${registry.default}/">`);
+  }
+  console.log('Built', variants.length, 'variant(s). Default:', registry.default);
 }
+
 main();

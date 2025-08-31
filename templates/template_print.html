@@ -1,61 +1,198 @@
+
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8">
-<title>{{name}} — {{role}}</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  body{font:14px/1.45 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial;margin:24px;color:#111}
-  .hdr{border-bottom:2px solid #222;margin-bottom:12px;padding-bottom:6px}
-  .name{font-size:24px;font-weight:700}
-  .role{font-size:16px;color:#444}
-  .meta{font-size:12px;color:#666;margin-top:6px}
-  h2{font-size:13px;text-transform:uppercase;letter-spacing:.5px;margin:16px 0 6px}
-  ul{margin:6px 0 0 18px;padding:0}
-  .row{display:flex;gap:12px;flex-wrap:wrap}
-  .col{flex:1 1 260px}
-  .section{margin-top:12px}
-</style>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>{{name}} — {{role}}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --text-color: #111;
+      --muted-color: #666;
+      --accent-color: #D0D5DD;
+      --page-width: 820px;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--text-color);
+      background-color: #fff;
+      margin: 0 auto;
+      max-width: var(--page-width);
+      padding: 40px 20px;
+    }
+    .header {
+      border-bottom: 1px solid var(--accent-color);
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+    }
+    h1 {
+      font-size: 36px;
+      font-weight: 700;
+      margin: 0;
+    }
+    .role {
+      font-size: 18px;
+      color: var(--muted-color);
+      margin-top: 4px;
+    }
+    .meta {
+      font-size: 12px;
+      color: var(--muted-color);
+      margin-top: 8px;
+    }
+    .section {
+      margin-top: 24px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0 0 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--accent-color);
+    }
+    p, ul {
+      margin: 0;
+      padding: 0;
+    }
+    ul {
+      list-style: none;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 8px 12px;
+    }
+    .skills-grid strong {
+      font-weight: 600;
+    }
+    .experience-item {
+      margin-bottom: 16px;
+    }
+    .experience-header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .experience-header strong {
+      font-weight: 600;
+    }
+    .experience-item ul {
+      margin-top: 8px;
+      padding-left: 18px;
+      list-style-type: disc;
+    }
+    .achievements {
+      margin-top: 8px;
+    }
+    .achievements em {
+      font-style: italic;
+      font-weight: 600;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media print {
+      @page {
+        size: 8.5in 11in;
+        margin: 0.5in;
+      }
+      body {
+        max-width: none;
+        padding: 0;
+        font-size: 13px;
+      }
+      h1 { font-size: 28px; }
+      .role { font-size: 16px; }
+      .experience-item {
+        page-break-inside: avoid;
+      }
+      a[href]:after {
+        content: none !important;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="hdr">
-    <div class="name">{{name}}</div>
+  <header class="header">
+    <h1>{{name}}</h1>
     <div class="role">{{role}} • {{location}}</div>
-    <div class="meta">Slug {{slug}} · v{{version}}</div>
-  </div>
+    <div class="meta">Slug: {{slug}} · v{{version}}</div>
+  </header>
 
-  <div class="section">
+  {{#summary}}
+  <section class="section">
     <h2>Summary</h2>
     <p>{{summary}}</p>
-  </div>
+  </section>
+  {{/summary}}
 
-  <div class="section">
+  {{#skills_kv}}
+  <section class="section">
     <h2>Skills</h2>
+    <div class="skills-grid">
     {{#skills_kv}}
-      <div class="row">
-        <div class="col"><strong>{{k}}</strong></div>
-        <div class="col">{{v}}</div>
-      </div>
+      <strong>{{k}}</strong>
+      <span>{{v}}</span>
     {{/skills_kv}}
-    {{#skills_list}}
+    </div>
+  </section>
+  {{/skills_kv}}
+  {{#skills_list}}
+    <section class="section">
+      <h2>Skills</h2>
       <p>{{skills_list}}</p>
-    {{/skills_list}}
-  </div>
+    </section>
+  {{/skills_list}}
 
-  <div class="section">
+  {{#experience}}
+  <section class="section">
     <h2>Experience</h2>
     {{#experience}}
-      <div><strong>{{title}}</strong>, {{company}} {{location_sep}} {{dates}}</div>
-      <ul>{{#duties}}<li>{{.}}</li>{{/duties}}{{#bullets}}<li>{{.}}</li>{{/bullets}}</ul>
-      {{#achievements}}<div><em>Achievements</em></div><ul>{{#achievements}}<li>{{.}}</li>{{/achievements}}</ul>{{/achievements}}
+    <div class="experience-item">
+      <div class="experience-header">
+        <div><strong>{{title}}</strong>, {{company}} {{location_sep}}</div>
+        <div>{{dates}}</div>
+      </div>
+      <ul>
+        {{#duties}}
+        <li>{{.}}</li>
+        {{/duties}}
+      </ul>
+      {{#achievements}}
+      <div class="achievements">
+        <em>Achievements</em>
+        <ul>
+          {{#achievements}}
+          <li>{{.}}</li>
+          {{/achievements}}
+        </ul>
+      </div>
+      {{/achievements}}
+    </div>
     {{/experience}}
-  </div>
+  </section>
+  {{/experience}}
 
   {{#education}}
-  <div class="section">
+  <section class="section">
     <h2>Education</h2>
     {{#education}}
       <div><strong>{{degree}}</strong>, {{school}} {{details}}</div>
     {{/education}}
-  </div>
+  </section>
   {{/education}}
-</body></html>
+
+</body>
+</html>

@@ -1,83 +1,286 @@
+
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8">
-<title>John Cornelius — Director of Customer Support & Field Services</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  body{font:14px/1.45 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial;margin:24px;color:#111}
-  .hdr{border-bottom:2px solid #222;margin-bottom:12px;padding-bottom:6px}
-  .name{font-size:24px;font-weight:700}
-  .role{font-size:16px;color:#444}
-  .meta{font-size:12px;color:#666;margin-top:6px}
-  h2{font-size:13px;text-transform:uppercase;letter-spacing:.5px;margin:16px 0 6px}
-  ul{margin:6px 0 0 18px;padding:0}
-  .row{display:flex;gap:12px;flex-wrap:wrap}
-  .col{flex:1 1 260px}
-  .section{margin-top:12px}
-</style>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>John Cornelius — Director of Customer Support & Field Services</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --text-color: #111;
+      --muted-color: #666;
+      --accent-color: #D0D5DD;
+      --page-width: 820px;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--text-color);
+      background-color: #fff;
+      margin: 0 auto;
+      max-width: var(--page-width);
+      padding: 40px 20px;
+    }
+    .header {
+      border-bottom: 1px solid var(--accent-color);
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+    }
+    h1 {
+      font-size: 36px;
+      font-weight: 700;
+      margin: 0;
+    }
+    .role {
+      font-size: 18px;
+      color: var(--muted-color);
+      margin-top: 4px;
+    }
+    .meta {
+      font-size: 12px;
+      color: var(--muted-color);
+      margin-top: 8px;
+    }
+    .section {
+      margin-top: 24px;
+    }
+    h2 {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin: 0 0 8px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--accent-color);
+    }
+    p, ul {
+      margin: 0;
+      padding: 0;
+    }
+    ul {
+      list-style: none;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 8px 12px;
+    }
+    .skills-grid strong {
+      font-weight: 600;
+    }
+    .experience-item {
+      margin-bottom: 16px;
+    }
+    .experience-header {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+    .experience-header strong {
+      font-weight: 600;
+    }
+    .experience-item ul {
+      margin-top: 8px;
+      padding-left: 18px;
+      list-style-type: disc;
+    }
+    .achievements {
+      margin-top: 8px;
+    }
+    .achievements em {
+      font-style: italic;
+      font-weight: 600;
+    }
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media print {
+      @page {
+        size: 8.5in 11in;
+        margin: 0.5in;
+      }
+      body {
+        max-width: none;
+        padding: 0;
+        font-size: 13px;
+      }
+      h1 { font-size: 28px; }
+      .role { font-size: 16px; }
+      .experience-item {
+        page-break-inside: avoid;
+      }
+      a[href]:after {
+        content: none !important;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="hdr">
-    <div class="name">John Cornelius</div>
+  <header class="header">
+    <h1>John Cornelius</h1>
     <div class="role">Director of Customer Support & Field Services • Harpers Ferry, WV</div>
-    <div class="meta">Slug director-of-customer-support · v1.0.0</div>
-  </div>
-
-  <div class="section">
-    <h2>Summary</h2>
-    <p>Service operations leader with 15+ years building and leading customer support, field service, and technical support organizations in high‑reliability environments. Expert in post‑shipment support across Field Service, Technical Support, Service Coordination, Parts, and Training; drives CSAT/NPS, first‑time fix rate (FTFR), MTTR, and SLA attainment. Proven in KPI design, escalation management, aftermarket programs (spares, retrofits, remote support), forecasting/budgeting, and ERP/CRM utilization; Lean Six Sigma–driven with deep operations and aviation background.</p>
-  </div>
-
-  <div class="section">
-    <h2>Skills</h2>
-    
-      <div class="row">
-        <div class="col"><strong>Customer Support & Field Services</strong></div>
-        <div class="col">Customer Experience (CSAT/NPS) • Escalation Management; Field Service Operations • Service Coordination; Aftermarket Programs • Spare Parts • Retrofit • Remote Support; ERP/CRM (SAP or Dynamics) • Microsoft Office</div>
-      </div>
-    
-      <div class="row">
-        <div class="col"><strong>Operations & Process Improvement</strong></div>
-        <div class="col">Standard Operating Procedures (SOPs) • Compliance Documentation; Operational Excellence • Lean Six Sigma Methods; Workflow Optimization • Continuous Improvement; KPI Development (SLA, MTTR, FTFR) • Service Metrics</div>
-      </div>
-    
-      <div class="row">
-        <div class="col"><strong>Training & Team Development</strong></div>
-        <div class="col">Onboarding & Upskilling Programs; Curriculum Design • Instructional Systems Design; Facilitation • Coaching • Leadership Pipeline Building; Learning Management Systems (LMS) • Canvas • Digital Training</div>
-      </div>
-    
-      <div class="row">
-        <div class="col"><strong>Data Analytics & Tools</strong></div>
-        <div class="col">Business Intelligence (Power BI, Excel/Google Sheets); Predictive Analytics • Training & Service Outcomes; SCADA‑Integrated Dashboards • Real‑time Reporting; Google Workspace • Jira • Confluence</div>
-      </div>
-    
-    
-  </div>
-
-  <div class="section">
-    <h2>Experience</h2>
-    
-      <div><strong>Sr. Operations, Data Analytics & Customer Support Leader</strong>, Allmine Paving (A Tamko Company) — WV Jan 2022 – Present</div>
-      <ul><li>Lead multi‑functional support organization across Field Service, Technical Support, Service Coordination, Parts, and Training.</li><li>Develop and execute scalable service strategy aligned to growth, quality, and customer satisfaction objectives.</li><li>Standardize SOPs, escalation protocols, and KPIs to drive SLA attainment, FTFR, MTTR reduction, and technician efficiency.</li><li>Leverage Python automation, SCADA dashboards, and BI tools to improve service tracking, compliance, and workforce readiness.</li></ul>
-      <div><em>Achievements</em></div><ul>{{#achievements}}<li>Improved CSAT by 20% and cut response time 30% via standardized workflows, clear SLAs, and KPI dashboards.</li><div><em>Achievements</em></div><ul>{{#achievements}}<li>Boosted technician qualification rates 25% and reduced onboarding time 30 days with Toyota Way–based programs and LMS enhancements.</li><div><em>Achievements</em></div><ul>{{#achievements}}<li>Raised compliance from 82% to 96% using BI‑driven feedback loops and automated document control for 150+ SOPs.</li><div><em>Achievements</em></div><ul>{{#achievements}}<li>Expanded aftermarket revenue through structured parts/retrofit offerings and built a leadership pipeline through supervisor coaching.</li></ul>{{/achievements}}
-    
-      <div><strong>Aviation Officer / Standardization Pilot – U.S. Army Aviation</strong>, U.S. Army  2000 – 2022</div>
-      <ul><li>Directed training, evaluation, and operational readiness for 400+ aviators across multiple aviation units in mission-critical environments.</li><li>Implemented one of the Army’s first LMS/KMS systems and standardized evaluation rubrics, closing training gaps and improving compliance.</li><li>Served as Standardization Pilot enforcing SOPs, CRM, and safety protocols to ensure consistent performance across units.</li><li>Led cross-functional coordination with engineering, maintenance, and operations staff to improve serviceability, safety, and readiness.</li></ul>
-      <div><em>Achievements</em></div><ul>{{#achievements}}<li>Implemented LMS/KMS system, increasing training tracking coverage from 0% to 95% across assigned units.</li><div><em>Achievements</em></div><ul>{{#achievements}}<li>Achieved 97% qualification pass rate across aviators by standardizing evaluation protocols and closing training gaps.</li><div><em>Achievements</em></div><ul>{{#achievements}}<li>Maintained zero Class A/B incidents through rigorous standardization-driven safety training.</li></ul>{{/achievements}}
-    
-  </div>
+    <div class="meta">Slug: director-of-customer-support · v1.0.0</div>
+  </header>
 
   
-  <div class="section">
+  <section class="section">
+    <h2>Summary</h2>
+    <p>Service operations leader with 15+ years building and leading customer support, field service, and technical support organizations in high‑reliability environments. Expert in post‑shipment support across Field Service, Technical Support, Service Coordination, Parts, and Training; drives CSAT/NPS, first‑time fix rate (FTFR), MTTR, and SLA attainment. Proven in KPI design, escalation management, aftermarket programs (spares, retrofits, remote support), forecasting/budgeting, and ERP/CRM utilization; Lean Six Sigma–driven with deep operations and aviation background.</p>
+  </section>
+  
+
+  
+  <section class="section">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+    {{#skills_kv}}
+      <strong>Customer Support & Field Services</strong>
+      <span>Customer Experience (CSAT/NPS) • Escalation Management; Field Service Operations • Service Coordination; Aftermarket Programs • Spare Parts • Retrofit • Remote Support; ERP/CRM (SAP or Dynamics) • Microsoft Office</span>
+    
+  <section class="section">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+    {{#skills_kv}}
+      <strong>Operations & Process Improvement</strong>
+      <span>Standard Operating Procedures (SOPs) • Compliance Documentation; Operational Excellence • Lean Six Sigma Methods; Workflow Optimization • Continuous Improvement; KPI Development (SLA, MTTR, FTFR) • Service Metrics</span>
+    
+  <section class="section">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+    {{#skills_kv}}
+      <strong>Training & Team Development</strong>
+      <span>Onboarding & Upskilling Programs; Curriculum Design • Instructional Systems Design; Facilitation • Coaching • Leadership Pipeline Building; Learning Management Systems (LMS) • Canvas • Digital Training</span>
+    
+  <section class="section">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+    {{#skills_kv}}
+      <strong>Data Analytics & Tools</strong>
+      <span>Business Intelligence (Power BI, Excel/Google Sheets); Predictive Analytics • Training & Service Outcomes; SCADA‑Integrated Dashboards • Real‑time Reporting; Google Workspace • Jira • Confluence</span>
+    
+    </div>
+  </section>
+  {{/skills_kv}}
+  
+
+  
+  <section class="section">
+    <h2>Experience</h2>
+    {{#experience}}
+    <div class="experience-item">
+      <div class="experience-header">
+        <div><strong>Sr. Operations, Data Analytics & Customer Support Leader</strong>, Allmine Paving (A Tamko Company) – WV</div>
+        <div>Jan 2022 – Present</div>
+      </div>
+      <ul>
+        
+        <li>Lead multi‑functional support organization across Field Service, Technical Support, Service Coordination, Parts, and Training.</li>
+        
+        <li>Develop and execute scalable service strategy aligned to growth, quality, and customer satisfaction objectives.</li>
+        
+        <li>Standardize SOPs, escalation protocols, and KPIs to drive SLA attainment, FTFR, MTTR reduction, and technician efficiency.</li>
+        
+        <li>Leverage Python automation, SCADA dashboards, and BI tools to improve service tracking, compliance, and workforce readiness.</li>
+        
+      </ul>
+      
+      <div class="achievements">
+        <em>Achievements</em>
+        <ul>
+          {{#achievements}}
+          <li>Improved CSAT by 20% and cut response time 30% via standardized workflows, clear SLAs, and KPI dashboards.</li>
+          
+      <div class="achievements">
+        <em>Achievements</em>
+        <ul>
+          {{#achievements}}
+          <li>Boosted technician qualification rates 25% and reduced onboarding time 30 days with Toyota Way–based programs and LMS enhancements.</li>
+          
+      <div class="achievements">
+        <em>Achievements</em>
+        <ul>
+          {{#achievements}}
+          <li>Raised compliance from 82% to 96% using BI‑driven feedback loops and automated document control for 150+ SOPs.</li>
+          
+      <div class="achievements">
+        <em>Achievements</em>
+        <ul>
+          {{#achievements}}
+          <li>Expanded aftermarket revenue through structured parts/retrofit offerings and built a leadership pipeline through supervisor coaching.</li>
+          
+        </ul>
+      </div>
+      {{/achievements}}
+    </div>
+    
+  <section class="section">
+    <h2>Experience</h2>
+    {{#experience}}
+    <div class="experience-item">
+      <div class="experience-header">
+        <div><strong>Aviation Officer / Standardization Pilot – U.S. Army Aviation</strong>, U.S. Army </div>
+        <div>2000 – 2022</div>
+      </div>
+      <ul>
+        
+        <li>Directed training, evaluation, and operational readiness for 400+ aviators across multiple aviation units in mission-critical environments.</li>
+        
+        <li>Implemented one of the Army’s first LMS/KMS systems and standardized evaluation rubrics, closing training gaps and improving compliance.</li>
+        
+        <li>Served as Standardization Pilot enforcing SOPs, CRM, and safety protocols to ensure consistent performance across units.</li>
+        
+        <li>Led cross-functional coordination with engineering, maintenance, and operations staff to improve serviceability, safety, and readiness.</li>
+        
+      </ul>
+      
+      <div class="achievements">
+        <em>Achievements</em>
+        <ul>
+          {{#achievements}}
+          <li>Implemented LMS/KMS system, increasing training tracking coverage from 0% to 95% across assigned units.</li>
+          
+      <div class="achievements">
+        <em>Achievements</em>
+        <ul>
+          {{#achievements}}
+          <li>Achieved 97% qualification pass rate across aviators by standardizing evaluation protocols and closing training gaps.</li>
+          
+      <div class="achievements">
+        <em>Achievements</em>
+        <ul>
+          {{#achievements}}
+          <li>Maintained zero Class A/B incidents through rigorous standardization-driven safety training.</li>
+          
+        </ul>
+      </div>
+      {{/achievements}}
+    </div>
+    
+  </section>
+  {{/experience}}
+
+  
+  <section class="section">
     <h2>Education</h2>
     {{#education}}
       <div><strong>Master of Science (M.S.), Unmanned Systems – Human Factors</strong>, Embry-Riddle Aeronautical University </div>
     
-  <div class="section">
+  <section class="section">
     <h2>Education</h2>
     {{#education}}
       <div><strong>Bachelor of Science (B.S.), Aeronautics</strong>, Embry-Riddle Aeronautical University </div>
     
-  </div>
+  </section>
   {{/education}}
-</body></html>
+
+</body>
+</html>
