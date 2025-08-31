@@ -1,0 +1,109 @@
+{
+  "format_scale": "100%",
+  "name": "John Cornelius",
+  "title": "Senior Program & Operations Manager",
+  "contact": {
+    "location": "Harpers Ferry, WV",
+    "email": "corn82@icloud.com",
+    "phone": "(304) 268-4985",
+    "linkedin": "https://www.linkedin.com/in/john-w-cornelius",
+    "github": "https://github.com/corn8200"
+  },
+  "summary": "Operations and program leader with 15+ years delivering multi‑site infrastructure, supply chain, and manufacturing initiatives up to $48M. Aligns stakeholders, vendors, and operators to improve safety, throughput, and DIFOT while reducing cost and cycle time. Hands‑on with SAP/ERP, SCADA, and analytics (Power BI/SQL); Lean Six Sigma and TPM driven.",
+  "skills": {
+    "Operations Leadership": [
+      "Multi‑site 24/7 operations • Workforce readiness",
+      "Safety programs (OSHA/PSM) • Compliance",
+      "Conflict resolution • Coaching • Change management"
+    ],
+    "Supply Chain & Delivery": [
+      "3PL • S&OP • Inventory • Procurement",
+      "Logistics • Supplier performance • DIFOT optimization",
+      "Cost reduction • Contract negotiation"
+    ],
+    "Systems & Analytics": [
+      "SAP/ERP • SCADA • Digital twins",
+      "Power BI • SQL • Python",
+      "Lean • TPM • 5S • Kaizen"
+    ]
+  },
+  "experience": [
+    {
+      "title": "Sr. Operations & Data Analytics Manager",
+      "company": "Allmine Paving (A Tamko Company)",
+      "location": "WV",
+      "dates": "2022 – Present",
+      "duties": [
+        "Lead multi‑site plant modernization and operations programs across construction, electrical, controls, and logistics.",
+        "Own scope, schedule, and budgets; manage risk registers and vendor performance with structured cadences.",
+        "Deploy SCADA/BI dashboards for throughput, downtime, and safety metrics; drive root‑cause improvements."
+      ],
+      "achievements": [
+        "Raised plant throughput by 12% while reducing overtime costs 22% via Lean/TPM programs.",
+        "Improved DIFOT by 15% and sustained >99.5% inventory accuracy through S&OP and logistics optimization.",
+        "Achieved 600+ days lost‑time injury‑free; zero OSHA PSM findings in external audits.",
+        "Negotiated supplier/freight terms yielding $2.3M+ savings while increasing delivery reliability."
+      ]
+    },
+    {
+      "title": "Senior Program Manager – Aviation & Advanced Systems",
+      "company": "U.S. Army",
+      "location": "",
+      "dates": "2009 – 2021",
+      "duties": [
+        "Directed $48M+ aviation programs and asset management; led cross‑functional teams across training, operations, and maintenance.",
+        "Implemented predictive analytics and SCADA‑informed dashboards to improve readiness and maintenance planning.",
+        "Standardized evaluation, SOPs, and safety protocols; coached leaders and operators across multiple units."
+      ],
+      "achievements": [
+        "Increased qualification pass rates to 97% through standardized curricula and performance management.",
+        "Maintained zero Class A/B incidents via rigorous safety culture and risk management.",
+        "Delivered complex multi‑stakeholder initiatives on time while improving readiness and reducing costs."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Master of Science (M.S.), Unmanned Systems – Human Factors",
+      "school": "Embry-Riddle Aeronautical University",
+      "details": null,
+      "year": "2020"
+    },
+    {
+      "degree": "Bachelor of Science (B.S.), Aeronautics",
+      "school": "Embry-Riddle Aeronautical University",
+      "details": null,
+      "year": "2012"
+    }
+  ],
+  "certifications": [
+    { "name": "Project Management Professional (PMP)", "issuer": "PMI", "year": "2021" },
+    { "name": "Agile Scrum Master (ASM)", "issuer": "Scrum Alliance", "year": "2021" },
+    { "name": "Lean Six Sigma (Bronze, Green Belt)", "issuer": "Lean Methods Group & Simplilearn", "year": "2023" }
+  ],
+  "affiliations": [
+    "Civil Air Patrol — sUAS Training & Community Programs",
+    "Community Volunteer Leadership — Local civic and service involvement"
+  ],
+  "cover_letter": {
+    "recipient": {
+      "name": "Hiring Manager",
+      "title": "",
+      "company": "",
+      "address": ""
+    },
+    "salutation": "Dear Hiring Team,",
+    "body": [
+      "I am excited to apply my background in infrastructure, supply chain, and operations program delivery to your organization.",
+      "I consistently align stakeholders, vendors, and operators to deliver safe, compliant, and cost‑effective outcomes."
+    ],
+    "closing": "Sincerely,",
+    "signature_name": "John Cornelius"
+  },
+  "meta": {
+    "slug": "senior-program-operations-manager",
+    "version": "1.0.0",
+    "title": "Senior Program & Operations Manager",
+    "aliases": []
+  }
+}

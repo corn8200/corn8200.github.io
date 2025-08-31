@@ -17,7 +17,13 @@
       "version": "1.1.0",
       "title": "Project Manager – Infrastructure, Supply Chain & Operations",
       "aliases": []
+    },
+    {
+      "slug": "senior-program-operations-manager",
+      "version": "1.0.0",
+      "title": "Senior Program & Operations Manager",
+      "aliases": []
     }
   ],
-  "default": "project-manager-infrastructure-supply-chain-operations"
+  "default": "senior-program-operations-manager"
 }
