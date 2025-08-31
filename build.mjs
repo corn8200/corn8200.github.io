@@ -19,48 +19,82 @@ function sanitize(s) {
 }
 
 function render(template, context) {
-  function renderRecursive(tpl, ctx) {
-    let output = tpl;
+  let output = template;
 
-    // Handle sections and lists
-    output = output.replace(/\{\{#(\w+)\}\}([\s\S]*?)\{\{\/\1\}\}/g, (match, key, inner) => {
-      const value = ctx[key];
-      if (!value || (Array.isArray(value) && value.length === 0)) {
-        return ''; // Remove section if key is falsy or empty array
-      }
+  // Simple replacements
+  output = output.replace(/\{\{name\}\}/g, sanitize(context.name));
+  output = output.replace(/\{\{role\}\}/g, sanitize(context.role));
+  output = output.replace(/\{\{location\}\}/g, sanitize(context.location));
+  output = output.replace(/\{\{version\}\}/g, sanitize(context.version));
 
-      if (Array.isArray(value)) {
-        return value.map(item => {
-          let block = inner;
-          if (typeof item === 'object' && item !== null) {
-            return renderRecursive(inner, { ...ctx, ...item });
-          } else {
-            return inner.replace(/\{\{\.\}\}/g, sanitize(item));
-          }
-        }).join('');
-      } else if (typeof value === 'object' && value !== null) {
-        return renderRecursive(inner, { ...ctx, ...value });
-      } else if (value) {
-        return renderRecursive(inner, ctx);
-      }
-      return '';
-    });
-
-    // Handle simple placeholders
-    output = output.replace(/\{\{([\w\.]+)\}\}/g, (match, key) => {
-      const keys = key.split('.');
-      let val = ctx;
-      for (const k of keys) {
-        val = val[k];
-        if (val === undefined) return '';
-      }
-      return sanitize(val);
-    });
-
-    return output;
+  // Summary
+  if (context.summary) {
+    output = output.replace(/\{\{#summary\}\}([\s\S]*?)\{\{\/summary\}\}/g, `
+    <div class="section">
+      <h2>Summary</h2>
+      <p>${sanitize(context.summary)}</p>
+    </div>
+`);
+  } else {
+    output = output.replace(/\{\{#summary\}\}([\s\S]*?)\{\{\/summary\}\}/g, '');
   }
 
-  return renderRecursive(template, context);
+  // Skills
+  let skillsHtml = '';
+  if (context.skills_kv) {
+    for (const skill of context.skills_kv) {
+      skillsHtml += `<div class="kv"><div class="k">${sanitize(skill.k)}</div><div class="v">${sanitize(skill.v)}</div></div>`;
+    }
+  }
+  if (context.skills_list) {
+    skillsHtml += `<p>${sanitize(context.skills_list)}</p>`;
+  }
+  output = output.replace(/\{\{#skills_kv\}\}([\s\S]*?)\{\{\/skills_kv\}\}/g, skillsHtml);
+  output = output.replace(/\{\{#skills_list\}\}([\s\S]*?)\{\{\/skills_list\}\}/g, '');
+
+  // Experience
+  let expHtml = '';
+  if (context.experience) {
+    for (const job of context.experience) {
+      let dutiesHtml = '';
+      if (job.duties) {
+        dutiesHtml = '<ul>';
+        for (const duty of job.duties) {
+          dutiesHtml += `<li>${sanitize(duty)}</li>`;
+        }
+        dutiesHtml += '</ul>';
+      }
+
+      let achievementsHtml = '';
+      if (job.achievements) {
+        achievementsHtml = '<div class="ach"><h4>Achievements</h4><ul>';
+        for (const achievement of job.achievements) {
+          achievementsHtml += `<li>${sanitize(achievement)}</li>`;
+        }
+        achievementsHtml += '</ul></div>';
+      }
+
+      expHtml += `
+        <div class="job">
+          <div class="head">${sanitize(job.title)}, ${sanitize(job.company)} ${sanitize(job.location_sep)} ${sanitize(job.dates)}</div>
+          ${dutiesHtml}
+          ${achievementsHtml}
+        </div>
+      `;
+    }
+  }
+  output = output.replace(/\{\{#experience\}\}([\s\S]*?)\{\{\/experience\}\}/g, expHtml);
+
+  // Education
+  let eduHtml = '';
+  if (context.education) {
+    for (const edu of context.education) {
+      eduHtml += `<div><strong>${sanitize(edu.degree)}</strong>, ${sanitize(edu.school)}${edu.details ? ` — ${sanitize(edu.details)}` : ''}</div>`;
+    }
+  }
+  output = output.replace(/\{\{#education\}\}([\s\S]*?)\{\{\/education\}\}/g, eduHtml);
+
+  return output;
 }
 
 function normalizeModel(doc) {
