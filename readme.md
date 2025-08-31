@@ -219,3 +219,69 @@ git push
 - CDN cache ~5–10 min. `curl -I <url>` shows fresh `age: 0` when updated.
 
 ---
+## Repo layout options
+
+### Current (two siblings)
+- **My_website** → published repo (user site). Contains `/data`, `/resume`, `/beta` (built), `index.html`.
+- **My_website_react** → React source. `npm run build` writes into `../My_website/beta/`.
+
+Pros: clear separation; Pages only sees static files. Cons: two folders to juggle.
+
+### Single‑repo (recommended colocation)
+Keep **one repo** but place the React source inside it. Only `/beta` is published.
+
+```
+My_website/              # GitHub Pages user site (serves from ROOT)
+├─ data/                 # JSON resumes
+├─ resume/               # built static pages
+├─ beta/                 # React build output (what Pages serves at /beta)
+├─ app/                  # React source (NOT served)
+│  ├─ package.json
+│  ├─ vite.config.js     # base:'/beta/',  build.outDir:'../beta'
+│  └─ src/ ...
+├─ index.html            # can redirect to /beta/#/view or a landing page
+└─ readme.md
+```
+
+**How to migrate to single‑repo now**
+
+> Run from the current `My_website` repo root.
+
+```bash
+# 1) Move React source into this repo under app/
+mkdir -p app
+rsync -av --exclude=node_modules --exclude=dist --exclude=.git \
+  ../My_website_react/ app/
+
+# 2) Adjust Vite to emit to ../beta (already used). Ensure config:
+cat > app/vite.config.js <<'EOF'
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+export default defineConfig({
+  plugins: [react()],
+  base: '/beta/',
+  build: { outDir: '../beta', emptyOutDir: true }
+})
+EOF
+
+# 3) Install deps inside app/ and build into ../beta
+cd app && npm i && npm run build && cd ..
+
+# 4) Commit the colocated source and the fresh beta output
+git add app beta
+git commit -m "app: colocate React source; build to /beta"
+git push
+```
+
+**Daily workflow after colocation**
+```
+# Edit React in app/
+cd app && npm run build
+# Publish the new /beta
+cd .. && git add beta && git commit -m "beta: update" && git push
+```
+
+Notes:
+- GitHub Pages still serves only static files from repo root; `app/` is just source.
+- Keep `index.html` at root pointing to `/beta/#/view` (or a landing page).
+- JSON updates flow stays the same (copy → normalize → build → push).
