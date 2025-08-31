@@ -44,8 +44,11 @@ function serveRootDataPlugin() {
   }
 }
 
+const BASE = process.env.BUILD_BASE || '/beta/'
+const OUT_DIR = process.env.BUILD_OUT || '../beta'
+
 export default defineConfig({
   plugins: [react(), serveRootDataPlugin()],
-  base: '/beta/',
-  build: { outDir: '../beta', emptyOutDir: true }
+  base: BASE,
+  build: { outDir: OUT_DIR, emptyOutDir: true }
 })
