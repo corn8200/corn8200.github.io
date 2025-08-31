@@ -15,8 +15,12 @@ function View() {
       try {
         const reg = await loadRegistry();
         const targetSlug = slug || reg.default;
-        const meta = reg.variants.find(v => v.slug === targetSlug);
-        if (!meta) throw new Error('Slug not found in index.json');
+        // Try to resolve by slug or alias; fall back to default or first variant
+        const bySlugOrAlias = (s) => (v) => v.slug === s || (Array.isArray(v.aliases) && v.aliases.includes(s));
+        let meta = Array.isArray(reg.variants) ? reg.variants.find(bySlugOrAlias(targetSlug)) : null;
+        if (!meta && reg.default) meta = reg.variants.find(bySlugOrAlias(reg.default));
+        if (!meta && Array.isArray(reg.variants) && reg.variants.length > 0) meta = reg.variants[0];
+        if (!meta) throw new Error('No variants defined in index.json');
         const json = await loadResumeJson(meta.slug, meta.version);
         const m = normalize(json);
         setState({ loading: false, error: null, model: m });
