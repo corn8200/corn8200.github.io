@@ -1,23 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { HashRouter, Routes, Route, useParams, Navigate } from 'react-router-dom';
-import { Chrono } from 'react-chrono';
 import { loadRegistry, loadResumeJson } from './useResumeData.js';
 import './index.css';
-
-function getInitialTheme() {
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-}
 
 function View() {
   const { slug } = useParams();
   const [state, setState] = useState({ loading: true, error: null, model: null });
-  const [theme, setTheme] = useState(getInitialTheme());
   const [expandedSections, setExpandedSections] = useState({ summary: true });
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
 
   useEffect(() => {
     (async () => {
@@ -43,14 +33,7 @@ function View() {
   if (state.error) return <div style={{ padding: 24, color: '#b00' }}>Error: {state.error}</div>;
 
   const m = state.model;
-  const { kpis, staticUrl, mail, li } = m;
-
-  const experienceItems = m.experience.map(e => ({
-    title: e.dates,
-    cardTitle: `${e.title}, ${e.company}`,
-    cardSubtitle: e.location_sep.replace(/^—\s*/, ''),
-    cardDetailedText: [...e.duties, ...e.achievements]
-  }));
+  const { kpis, mail, li } = m;
 
   return (
     <div className="page">
@@ -58,12 +41,8 @@ function View() {
         <div className="hdr-top">
           <h1>{m.name}</h1>
           <div className="actions">
-            <a className="btn" href={staticUrl} target="_blank" rel="noreferrer">Static Resume</a>
             {mail && <a className="btn" href={mail}>Email</a>}
             {li && <a className="btn" href={li} target="_blank" rel="noreferrer">LinkedIn</a>}
-            <button className="btn" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-              {theme === 'dark' ? 'Light' : 'Dark'}
-            </button>
           </div>
         </div>
         <div className="role">{m.role} • {m.location}</div>
@@ -86,17 +65,21 @@ function View() {
         <h2 onClick={() => toggleSection('skills')}>Skills {expandedSections.skills ? '-' : '+'}</h2>
         {expandedSections.skills && (
           <div>
-            <div className="skills-chips">
-              {m.skills_kv?.map(({ k, v }) => {
-                const skillCount = Array.isArray(v) ? v.length : v.split('; ').length;
-                return (
-                  <span key={k} className="skill-chip" title={Array.isArray(v) ? v.join(', ') : v}>
-                    {k} ({skillCount})
-                  </span>
-                );
-              })}
-            </div>
-            {m.skills_list && <p>{m.skills_list}</p>}
+            {m.skills_kv && (
+              <div className="chip-grid">
+                {m.skills_kv.map(({ k, v }) => {
+                  const list = Array.isArray(v) ? v : String(v);
+                  const count = Array.isArray(v) ? v.length : list.split('; ').filter(Boolean).length;
+                  const tooltip = Array.isArray(v) ? v.join(', ') : list;
+                  return (
+                    <span key={k} className="chip" title={tooltip}>
+                      {k} ({count})
+                    </span>
+                  );
+                })}
+              </div>
+            )}
+            {!m.skills_kv && m.skills_list && <p>{m.skills_list}</p>}
           </div>
         )}
       </section>
@@ -104,7 +87,31 @@ function View() {
       {m.experience?.length > 0 && (
         <section className="sec">
           <h2 onClick={() => toggleSection('experience')}>Experience {expandedSections.experience ? '-' : '+'}</h2>
-          {expandedSections.experience && <Chrono items={experienceItems} mode="VERTICAL_ALTERNATING" />}
+          {expandedSections.experience && (
+            <div>
+              {m.experience.map((e, i) => (
+                <div key={i} className="exp-card">
+                  <h3 className="exp-head">
+                    <strong>{e.title}</strong>, {e.company}
+                  </h3>
+                  <div className="exp-date">{[e.location, e.dates].filter(Boolean).join(' • ')}</div>
+                  {e.duties?.length > 0 && (
+                    <ul className="duties">
+                      {e.duties.map((d, j) => <li key={j}>{d}</li>)}
+                    </ul>
+                  )}
+                  {e.achievements?.length > 0 && (
+                    <div className="ach">
+                      <div className="ach-h">Achievements</div>
+                      <ul className="ach-list">
+                        {e.achievements.map((a, j) => <li key={j}>{a}</li>)}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </section>
       )}
 
@@ -143,7 +150,7 @@ function normalize(doc) {
   const exp = Array.isArray(doc.experience) ? doc.experience.map(e => ({
     title: e.title || '',
     company: e.company || '',
-    location_sep: e.location ? '— ' + e.location : '',
+    location: e.location || '',
     dates: e.dates || [e.start, e.end].filter(Boolean).join(' — '),
     duties: Array.isArray(e.duties) ? e.duties : Array.isArray(e.bullets) ? e.bullets : [],
     achievements: Array.isArray(e.achievements) ? e.achievements : []
@@ -151,10 +158,9 @@ function normalize(doc) {
   const edu = Array.isArray(doc.education) ? doc.education.map(e => ({ ...e, details: e.details || '' })) : [];
   const certs = Array.isArray(doc.certifications) ? doc.certifications : [];
   const kpis = Array.isArray(m.kpis) ? m.kpis : [];
-  const staticUrl = m.slug ? `/resume/${m.slug}/` : null;
   const mail = doc.contact?.email ? `mailto:${doc.contact.email}` : null;
   const li = doc.contact?.linkedin || null;
-  return { name, role, location, summary: doc.summary || '', skills_kv, skills_list, experience: exp, education: edu, certifications: certs, kpis, staticUrl, mail, li, slug: m.slug, version: m.version };
+  return { name, role, location, summary: doc.summary || '', skills_kv, skills_list, experience: exp, education: edu, certifications: certs, kpis, mail, li, slug: m.slug, version: m.version };
 }
 
 function App() {
@@ -170,4 +176,3 @@ function App() {
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);
-

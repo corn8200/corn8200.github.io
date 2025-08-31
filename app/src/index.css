@@ -131,16 +131,19 @@ h1 {
 
 .chip-grid {
   display:flex;
-  gap:8px;
+  gap:10px;
   flex-wrap:wrap;
 }
 
 .chip {
-  padding:4px 8px;
-  border:1px solid var(--rule);
+  padding:6px 10px;
   border-radius:999px;
-  background:#f8fafc; /* This might need to be a variable too */
+  background:#2563eb;
+  color:#fff;
+  font-size:13px;
 }
+
+.chip:hover{ filter:brightness(0.95); }
 
 ul {
   margin:6px 0 0 20px;
