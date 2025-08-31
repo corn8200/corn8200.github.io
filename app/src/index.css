@@ -28,7 +28,7 @@ body {
   padding:40px 44px;
   border:1px solid var(--rule);
   border-radius:8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Keep original box-shadow */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
 }
 
 .hdr {
@@ -102,13 +102,13 @@ h1 {
 }
 
 .sec h2 {
-  font-size:12.5px;
+  font-size:13px;
   letter-spacing:.6px;
   text-transform:uppercase;
   margin:0 0 8px 0;
-  color:var(--text); /* Use --text for h2 color */
-  border-bottom:1px solid var(--rule);
-  padding-bottom:4px;
+  color:var(--text);
+  border-bottom:2px solid var(--rule);
+  padding-bottom:6px;
 }
 
 .skills-chips {
@@ -141,11 +141,40 @@ h1 {
   background:#2563eb;
   color:#fff;
   font-size:13px;
+  position:relative;
 }
 
 .chip:hover{ filter:brightness(0.95); }
 
 .chip{ cursor:help; }
+
+/* Bigger tooltip for skill chips */
+.chip[data-tip]:hover::after{
+  content: attr(data-tip);
+  position:absolute;
+  left:0;
+  top: calc(100% + 8px);
+  z-index: 20;
+  max-width: 520px;
+  white-space: normal;
+  padding:10px 12px;
+  border:1px solid var(--rule);
+  border-radius:8px;
+  background: var(--card);
+  color: var(--text);
+  box-shadow: 0 12px 30px rgba(0,0,0,.14);
+}
+.chip[data-tip]:hover::before{
+  content: '';
+  position:absolute;
+  left:10px;
+  top: calc(100% + 4px);
+  width:10px; height:10px;
+  transform: rotate(45deg);
+  background: var(--card);
+  border-left:1px solid var(--rule);
+  border-top:1px solid var(--rule);
+}
 
 .hint{
   font-size:12px;
@@ -168,6 +197,22 @@ li {
   color:#333; /* This might need to be a variable too */
 }
 
+
+/* Experience cards */
+.exp-card { font-size:14px; border:1px solid var(--rule); border-radius:8px; padding:12px 14px; margin:12px 0; background:var(--card); box-shadow: 0 6px 16px rgba(0,0,0,.06); }
+.exp-head { margin:0 0 4px 0; }
+.exp-date { color:#666; font-size:12px; margin-bottom:6px; }
+.duties li { margin:3px 0; }
+.ach { margin-top:6px; }
+.subhead { font-size:12px; font-weight:700; text-transform:uppercase; color:#1e3a8a; margin:8px 0 4px; letter-spacing:.4px; }
+.ach-h { font-size:12px; font-weight:800; text-transform:uppercase; color:#1e3a8a; margin:10px 0 4px; letter-spacing:.5px; }
+
+/* Education & cert extras */
+.edu-row { margin:4px 0; }
+.edu-link { margin-left:8px; text-decoration:none; font-size:12px; }
+.edu-link:hover { text-decoration:underline; }
+.cert-row { margin:6px 0; }
+.cert-desc { font-size:12px; color:#475569; margin-top:2px; }
 
 /* Dark mode */
 [data-theme="dark"] body { background:#0b0f15; }

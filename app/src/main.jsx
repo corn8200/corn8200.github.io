@@ -94,7 +94,7 @@ function View() {
                   const count = Array.isArray(v) ? v.length : list.split('; ').filter(Boolean).length;
                   const tooltip = Array.isArray(v) ? v.join(', ') : list;
                   return (
-                    <span key={k} className="chip" title={tooltip}>
+                    <span key={k} className="chip" title={tooltip} data-tip={tooltip}>
                       {k} ({count})
                     </span>
                   );
@@ -110,7 +110,26 @@ function View() {
         <section className="sec">
           <h2 onClick={() => toggleSection('experience')}>Experience {expandedSections.experience ? '-' : '+'}</h2>
           {expandedSections.experience && (
-            <Chrono items={experienceItems} mode="VERTICAL_ALTERNATING" />
+            <div>
+              {m.experience.map((e, i) => (
+                <div key={i} className="exp-card">
+                  <h3 className="exp-head"><strong>{e.title}</strong>, {e.company}</h3>
+                  <div className="exp-date">{[e.location, e.dates].filter(Boolean).join(' • ')}</div>
+                  {e.duties?.length > 0 && (
+                    <>
+                      <div className="subhead">Duties</div>
+                      <ul className="duties">{e.duties.map((d, j) => <li key={j}>{d}</li>)}</ul>
+                    </>
+                  )}
+                  {e.achievements?.length > 0 && (
+                    <div className="ach">
+                      <div className="ach-h">Achievements</div>
+                      <ul className="ach-list">{e.achievements.map((a, j) => <li key={j}>{a}</li>)}</ul>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
           )}
         </section>
       )}
@@ -118,18 +137,33 @@ function View() {
       {m.education?.length > 0 && (
         <section className="sec">
           <h2 onClick={() => toggleSection('education')}>Education {expandedSections.education ? '-' : '+'}</h2>
-          {expandedSections.education && m.education.map((e, i) => (
-            <div key={i}><strong>{e.degree}</strong>, {e.school}{e.year ? ` (${e.year})` : ''}{e.gpa ? ` – GPA: ${e.gpa}` : ''}{e.details ? ` — ${e.details}` : ''}</div>
-          ))}
+          {expandedSections.education && m.education.map((e, i) => {
+            const query = encodeURIComponent(`${e.degree} ${e.school}`);
+            const searchUrl = `https://www.google.com/search?q=${query}`;
+            return (
+              <div key={i} className="edu-row">
+                <strong>{e.degree}</strong>, {e.school}{e.year ? ` (${e.year})` : ''}{e.gpa ? ` – GPA: ${e.gpa}` : ''}{e.details ? ` — ${e.details}` : ''}
+                <a className="edu-link" href={searchUrl} target="_blank" rel="noreferrer" title="Search this program">🔎</a>
+              </div>
+            );
+          })}
         </section>
       )}
 
       {m.certifications?.length > 0 && (
         <section className="sec">
           <h2 onClick={() => toggleSection('certifications')}>Certifications {expandedSections.certifications ? '-' : '+'}</h2>
-          {expandedSections.certifications && m.certifications.map((c, i) => (
-            <div key={i}><strong>{c.name}</strong> – {c.issuer}</div>
-          ))}
+          {expandedSections.certifications && m.certifications.map((c, i) => {
+            const cs50 = /CS50/i.test(c.name || '');
+            return (
+              <div key={i} className="cert-row">
+                <strong>{c.name}</strong> – {c.issuer}
+                {cs50 && (
+                  <div className="cert-desc">Harvard’s CS50 (Python & AI): search/graph algorithms, ML basics (classification, optimization), and problem‑solving in Python.</div>
+                )}
+              </div>
+            );
+          })}
         </section>
       )}
     </div>
