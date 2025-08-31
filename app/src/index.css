@@ -153,37 +153,12 @@ h1 {
 .chip{ cursor:help; }
 
 /* Bigger tooltip for skill chips */
-.chip[data-tip]:hover::after{
-  content: attr(data-tip);
-  position:absolute;
-  left:0;
-  top: calc(100% + 8px);
-  z-index: 9999;
-  max-width: 520px;
-  white-space: normal;
-  padding:10px 12px;
-  border:1px solid var(--rule);
-  border-radius:8px;
-  background: var(--card);
-  color: var(--text);
-  box-shadow: 0 12px 30px rgba(0,0,0,.14);
-}
-.chip[data-tip]:hover::before{
-  content: '';
-  position:absolute;
-  left:10px;
-  top: calc(100% + 4px);
-  width:10px; height:10px;
-  transform: rotate(45deg);
-  background: var(--card);
-  border-left:1px solid var(--rule);
-  border-top:1px solid var(--rule);
-  z-index: 10000;
-}
+/* Removed hover tooltip; using modal overlay instead */
 
 /* Click-to-expand skill details */
-.skill-panel{ position:sticky; top:8px; z-index:2000; margin-top:10px; border:1px solid var(--rule); border-radius:10px; padding:10px 12px; background:var(--card); box-shadow: 0 10px 24px rgba(0,0,0,.08); }
-.skill-panel-h{ display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
+.modal-backdrop{ position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:10000; }
+.modal{ position:fixed; top:8vh; left:50%; transform:translateX(-50%); z-index:10001; max-width:720px; width:calc(100% - 32px); border:1px solid var(--rule); border-radius:12px; background:var(--card); box-shadow:0 24px 64px rgba(0,0,0,.22); padding:14px 16px; max-height:80vh; overflow:auto; }
+.modal-h{ display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
 .btn.btn-sm{ padding:4px 8px; font-size:12px; }
 .skill-list{ margin:6px 0 0 18px; }
 .skill-list li{ margin:3px 0; }

@@ -87,20 +87,20 @@ function View() {
         <h2 onClick={() => toggleSection('skills')}>Skills {expandedSections.skills ? '-' : '+'}</h2>
         {expandedSections.skills && (
           <div>
-            {m.skills_kv && <div className="hint">Hover or click a category for details.</div>}
+            {m.skills_kv && <div className="hint">Click a category to view details.</div>}
             {m.skills_kv && (
               <div className="chip-grid">
                 {m.skills_kv.map(({ k, v }) => {
                   const items = Array.isArray(v) ? v : String(v).split(/;\s*|,\s*|\s•\s|\|/).filter(Boolean);
                   const count = items.length;
-                  const tooltip = items.join(', ');
                   return (
                     <span
                       key={k}
                       className="chip"
-                      title={tooltip}
-                      data-tip={tooltip}
                       onClick={() => setActiveSkill({ title: k, items })}
+                      role="button"
+                      tabIndex={0}
+                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setActiveSkill({ title: k, items }); }}
                     >
                       {k} ({count})
                     </span>
@@ -109,15 +109,18 @@ function View() {
               </div>
             )}
             {activeSkill && (
-              <div className="skill-panel">
-                <div className="skill-panel-h">
-                  <strong>{activeSkill.title}</strong>
-                  <button className="btn btn-sm" onClick={() => setActiveSkill(null)}>Close</button>
+              <>
+                <div className="modal-backdrop" onClick={() => setActiveSkill(null)} />
+                <div className="modal" role="dialog" aria-modal="true">
+                  <div className="modal-h">
+                    <strong>{activeSkill.title}</strong>
+                    <button className="btn btn-sm" onClick={() => setActiveSkill(null)}>Close</button>
+                  </div>
+                  <ul className="skill-list">
+                    {activeSkill.items.map((s, i) => <li key={i}>{s}</li>)}
+                  </ul>
                 </div>
-                <ul className="skill-list">
-                  {activeSkill.items.map((s, i) => <li key={i}>{s}</li>)}
-                </ul>
-              </div>
+              </>
             )}
             {!m.skills_kv && m.skills_list && <p>{m.skills_list}</p>}
           </div>
