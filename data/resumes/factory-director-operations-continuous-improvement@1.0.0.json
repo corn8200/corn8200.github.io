@@ -1,0 +1,131 @@
+{
+  "format_scale": "100%",
+  "name": "John Cornelius",
+  "title": "Factory Director • Operations & Continuous Improvement",
+  "contact": {
+    "location": "Harpers Ferry, WV",
+    "email": "corn82@icloud.com",
+    "phone": "(304) 268-4985",
+    "linkedin": "https://linkedin.com/in/johncornelius",
+    "github": "https://github.com/corn8200"
+  },
+  "summary": "Operations and manufacturing leader with 20+ years of experience directing large-scale industrial facilities and military aviation programs. Proven record of delivering production, cost, quality, and delivery targets while sustaining zero OSHA recordables and >95% on-time performance. Skilled in Lean Six Sigma, TPM, and digital transformation to drive safety, throughput, and cost reduction. Adept at building strong community, stakeholder, and workforce relationships to align operations with corporate values.",
+  "skills": {
+    "Operations & Production Leadership": [
+      "24/7 multi-site plant and logistics management",
+      "P&L oversight and budget leadership ($20M–$48M)",
+      "S&OP and demand/supply planning",
+      "Throughput, OEE, and cost optimization"
+    ],
+    "Safety, Compliance & Continuous Improvement": [
+      "OSHA/ISO compliance and PSM audit leadership",
+      "Zero OSHA recordables across multi-year operations",
+      "Lean Six Sigma (Bronze, Green Belt) • Kaizen • 5S",
+      "TPM programs driving workforce safety and efficiency"
+    ],
+    "Digital Transformation & Analytics": [
+      "SCADA integration and plant digital twins",
+      "Predictive analytics for maintenance and yield",
+      "Power BI and SQL for KPI dashboards",
+      "Automation tools reducing cost and cycle time"
+    ],
+    "Leadership, Workforce & Community": [
+      "Workforce development and frontline mentorship",
+      "Cross-functional stakeholder alignment",
+      "Culture of accountability and continuous improvement",
+      "Community volunteer and Civil Air Patrol leadership"
+    ]
+  },
+  "experience": [
+    {
+      "title": "Sr. Operations & Data Analytics Manager",
+      "company": "Allmine Paving (A Tamko Company)",
+      "location": "WV",
+      "dates": "Jan 2022 – Present",
+      "duties": [
+        "Directed 24/7 asphalt plant and logistics operations across multi-site facilities with $40M+ annual revenue.",
+        "Oversaw production planning, scheduling, and cost controls to sustain >95% on-time delivery and >99.5% inventory accuracy.",
+        "Championed safety, compliance, and workforce readiness by implementing OSHA/ISO standards and TPM culture.",
+        "Engaged with community stakeholders to improve workforce pipeline, local partnerships, and corporate reputation."
+      ],
+      "achievements": [
+        "Raised plant throughput by 12% while reducing overtime costs 22% through Lean Six Sigma and TPM programs.",
+        "Achieved 600+ days lost-time injury free and zero OSHA PSM findings in external audits.",
+        "Negotiated supplier and freight contracts, securing $2.3M+ cost savings while improving DIFOT by 15%.",
+        "Implemented digital twin and SCADA-driven analytics, reducing downtime 35% and enabling predictive maintenance."
+      ]
+    },
+    {
+      "title": "Senior Program Manager – Aviation & Advanced Systems",
+      "company": "U.S. Army",
+      "location": null,
+      "dates": "2000 – 2022",
+      "duties": [
+        "Implemented one of the Army’s first LMS/KMS systems and standardized evaluation rubrics, closing training gaps across multiple aviation units.",
+        "Served as Standardization Pilot, responsible for training, evaluating, and enforcing operational standards across multiple aviation units.",
+        "Delivered no-notice evaluations and scenario-based training to 70+ aviators annually, ensuring consistent standards and readiness.",
+        "Facilitated blended instruction (classroom, simulator, live flight) combining CRM, risk management, and regulatory compliance.",
+        "Managed training and development for 400+ students at the U.S. Army Aviation Center of Excellence (USAACE) Flight Training Center."
+      ],
+      "achievements": [
+        "Implemented LMS/KMS system, increasing training tracking coverage from 0% to 95% across assigned units.",
+        "Achieved 97% qualification pass rate across aviators by standardizing evaluation protocols and closing training gaps.",
+        "Maintained zero Class A/B incidents through rigorous standardization-driven safety training."
+      ]
+    }
+  ],
+  "education": [
+    {
+      "degree": "Master of Science (M.S.), Unmanned Systems – Human Factors",
+      "school": "Embry-Riddle Aeronautical University",
+      "details": "4.0 GPA, with distinction",
+      "year": "2020"
+    },
+    {
+      "degree": "Bachelor of Science (B.S.), Aeronautics",
+      "school": "Embry-Riddle Aeronautical University",
+      "details": null,
+      "year": "2012"
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Lean Six Sigma (Bronze, Green Belt)",
+      "issuer": "Lean Methods Group & Simplilearn",
+      "year": "2023"
+    },
+    {
+      "name": "CS50’s Python & Artificial Intelligence (in progress)",
+      "issuer": "Harvard University",
+      "year": "2024"
+    }
+  ],
+  "affiliations": [
+    "Civil Air Patrol — sUAS Training & Community Programs",
+    "Community Volunteer Leadership — Local civic and service involvement"
+  ],
+  "cover_letter": {
+    "recipient": {
+      "name": "Hiring Manager",
+      "title": "",
+      "company": "Rockwool",
+      "address": "459 Industrial Blvd, Ranson, WV 25438"
+    },
+    "salutation": "Dear Hiring Manager,",
+    "body": [
+      "I am writing to apply for the Factory Director position at Rockwool. With more than 20 years of experience directing large-scale industrial facilities and aviation programs, I have consistently delivered production, cost, quality, and delivery targets while building safe, engaged, and high-performing teams.",
+      "As Sr. Operations & Data Analytics Manager at Allmine Paving, I lead 24/7 multi-site operations with $40M+ annual revenue. I increased plant throughput by 12%, reduced overtime costs by 22%, and achieved over 600 days without a lost-time injury while sustaining zero OSHA PSM findings. By implementing SCADA-driven analytics and digital twin technology, I cut downtime by 35% and built predictive maintenance capabilities that drove efficiency and reliability.",
+      "My leadership style emphasizes safety, compliance, and continuous improvement. I hold Lean Six Sigma Green Belt certifications and have embedded TPM culture to enhance workforce readiness and efficiency. I have negotiated supplier and freight contracts yielding $2.3M in savings while improving DIFOT by 15%, demonstrating my ability to align operational excellence with financial stewardship.",
+      "Earlier in my career, as a Senior Program Manager in the U.S. Army, I directed training and development for 400+ aviators, achieving a 97% qualification pass rate while maintaining zero major incidents. This experience taught me to manage complex operations under pressure, build scalable systems, and cultivate accountability across diverse teams.",
+      "Rockwool’s mission to deliver sustainable building solutions while investing in community aligns closely with my values. I am eager to bring my background in operations leadership, digital transformation, and continuous improvement to ensure Rockwool’s Ranson facility delivers excellence in safety, quality, and performance."
+    ],
+    "closing": "Sincerely,",
+    "signature_name": "John Cornelius"
+  },
+  "meta": {
+    "slug": "factory-director-operations-continuous-improvement",
+    "version": "1.0.0",
+    "title": "Factory Director • Operations & Continuous Improvement",
+    "aliases": []
+  }
+}
