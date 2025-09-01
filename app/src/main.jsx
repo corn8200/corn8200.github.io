@@ -76,7 +76,6 @@ function View() {
           </div>
         </div>
         <div className="role">{m.role} • {m.location}</div>
-        <div className="meta">v{m.version}</div>
         {kpis?.length > 0 && (
           <div className="kpis">
             {kpis.map((t, i) => <span key={i} className="kpi">{t}</span>)}
@@ -166,16 +165,12 @@ function View() {
       {m.education?.length > 0 && (
         <section className="sec">
           <h2 onClick={() => toggleSection('education')}>Education {expandedSections.education ? '-' : '+'}</h2>
-          {expandedSections.education && m.education.map((e, i) => {
-            const query = encodeURIComponent(`${e.degree} ${e.school}`);
-            const searchUrl = `https://www.google.com/search?q=${query}`;
-            return (
-              <div key={i} className="edu-row">
-                <strong>{e.degree}</strong>, {e.school}{e.year ? ` (${e.year})` : ''}{e.gpa ? ` – GPA: ${e.gpa}` : ''}{e.details ? ` — ${e.details}` : ''}
-                <a className="edu-link" href={searchUrl} target="_blank" rel="noopener noreferrer" title="Search this program">🔎</a>
-              </div>
-            );
-          })}
+          {expandedSections.education && m.education.map((e, i) => (
+            <div key={i} className="edu-row" data-note={e.details || ''}>
+              <strong>{e.degree}</strong>, {e.school}{e.year ? ` (${e.year})` : ''}{e.gpa ? ` – GPA: ${e.gpa}` : ''}
+              {e.details ? <span className="edu-info" aria-hidden>i</span> : null}
+            </div>
+          ))}
         </section>
       )}
 
@@ -200,6 +195,9 @@ function View() {
           })}
         </section>
       )}
+      <footer className="ftr">
+        <div className="meta">v{m.version}</div>
+      </footer>
     </div>
   );
 }
