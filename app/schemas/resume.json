@@ -45,7 +45,7 @@
         {
           "type": "object",
           "patternProperties": {
-            "^[a-zA-Z0-9_\s]+$": {
+            "^[a-zA-Z0-9_ ]+$": {
               "type": "array",
               "items": {
                 "type": "string"
@@ -126,3 +126,4 @@
   },
   "additionalProperties": false
 }
+
