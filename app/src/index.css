@@ -2,7 +2,7 @@
   --text:#111;
   --muted:#666;
   --rule:#D0D5DD;
-  background:#fafafa;
+  --background-color:#fafafa;
   --accent:#2563eb; /* unified highlight color */
   --card:#ffffff;
 }
@@ -12,6 +12,7 @@
   --card:#0f172a;
   --text:#e5e7eb;
   --rule:#1f2937;
+  --background-color:#0b0f15;
 }
 
 body {
@@ -235,7 +236,6 @@ li {
 .cert-desc { font-size:12px; color:#475569; margin-top:2px; }
 
 /* Dark mode */
-[data-theme="dark"] body { background:#0b0f15; }
 [data-theme="dark"] .page { background:#0f172a; border-color:#1f2937; color:#e5e7eb; }
 [data-theme="dark"] .role, [data-theme="dark"] .meta { color:#9ca3af; }
 [data-theme="dark"] .btn { background:#111827; color:#e5e7eb; border-color:#374151; }
