@@ -3,10 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <!-- Security headers via meta for static hosting -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; font-src 'self' data:; base-uri 'self'; frame-ancestors 'none'; form-action 'none'; object-src 'none'" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; img-src 'self' data:; connect-src 'self'; font-src 'self' data: https://fonts.gstatic.com; base-uri 'self'; frame-ancestors 'none'; form-action 'none'; object-src 'none'" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <meta name="description" content="John Cornelius — program and operations manager. Twenty years in defense, manufacturing, and logistics." />
+    <meta name="theme-color" content="#0E2A25" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" />
+    <title>John Cornelius — CV</title>
   </head>
   <body>
     <div id="root"></div>

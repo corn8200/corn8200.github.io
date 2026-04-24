@@ -1,23 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import { HashRouter, Routes, Route, useParams, Navigate } from 'react-router-dom';
-import { Chrono } from 'react-chrono';
 import { loadRegistry, loadResumeJson } from './useResumeData.js';
 import './index.css';
 
 function safeUrl(url) {
   if (!url || typeof url !== 'string') return '#';
   const s = url.trim();
-  if (/^mailto:/i.test(s)) return s;
+  if (/^mailto:|^tel:/i.test(s)) return s;
   if (/^https?:\/\//i.test(s)) return s;
   return '#';
+}
+
+function prettyPhone(raw) {
+  if (!raw) return null;
+  const digits = String(raw).replace(/\D/g, '');
+  if (digits.length === 10) return `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+  if (digits.length === 11 && digits.startsWith('1')) return `(${digits.slice(1,4)}) ${digits.slice(4,7)}-${digits.slice(7)}`;
+  return raw;
+}
+
+function hostFromUrl(url) {
+  try {
+    return new URL(url).hostname.replace(/^www\./, '');
+  } catch { return url; }
+}
+
+function splitSkill(v) {
+  if (Array.isArray(v)) return v.flatMap(splitSkill).map(s => s.trim()).filter(Boolean);
+  return String(v).split(/\n|;\s*|\s•\s|•|\s\|\s|,\s*/).map(s => s.trim()).filter(Boolean);
 }
 
 function View() {
   const { slug } = useParams();
   const [state, setState] = useState({ loading: true, error: null, model: null });
-  const [expandedSections, setExpandedSections] = useState({ summary: true });
-  const [activeSkill, setActiveSkill] = useState(null);
 
   useEffect(() => {
     (async () => {
@@ -38,44 +54,52 @@ function View() {
         if (!meta) meta = newest(reg.variants);
         if (!meta) throw new Error('No variants defined in index.json');
         const json = await loadResumeJson(meta.slug, meta.version);
-        const m = normalize(json);
-        setState({ loading: false, error: null, model: m });
+        setState({ loading: false, error: null, model: normalize(json) });
       } catch (e) {
         setState({ loading: false, error: String(e), model: null });
       }
     })();
   }, [slug]);
 
-  const toggleSection = section => {
-    setExpandedSections(prev => ({ ...prev, [section]: !prev[section] }));
-  };
-
-  if (state.loading) return <div style={{ padding: 24 }}>Loading…</div>;
-  if (state.error) return <div style={{ padding: 24, color: '#b00' }}>Error: {state.error}</div>;
+  if (state.loading) return <div className="load">Loading.</div>;
+  if (state.error) return <div className="err">Couldn't load resume. {state.error}</div>;
 
   const m = state.model;
-  const { kpis, mail, li } = m;
-  const experienceItems = m.experience.map(e => ({
-    title: e.dates,
-    cardTitle: `${e.title}`,
-    cardSubtitle: [e.company, e.location].filter(Boolean).join(' • '),
-    cardDetailedText: [
-      ...(e.duties?.length ? ['Duties:', ...e.duties] : []),
-      ...(e.achievements?.length ? ['Achievements:', ...e.achievements] : [])
-    ]
-  }));
+  const { kpis, mail, tel, li, gh, location, phonePretty } = m;
 
   return (
-    <div className="page">
+    <article className="page" aria-label={`Resume of ${m.name}`}>
       <header className="hdr">
+        <div className="eyebrow">Curriculum vitae</div>
         <div className="hdr-top">
-          <h1>{m.name}</h1>
-          <div className="actions">
-            {mail && <a className="btn" href={safeUrl(mail)} rel="noopener noreferrer">Email</a>}
-            {li && <a className="btn" href={safeUrl(li)} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
+          <div>
+            <h1>{m.name}</h1>
+            {(m.role || location) && (
+              <div className="role">
+                {m.role}
+                {m.role && location && <span className="sep">·</span>}
+                {location && <span className="loc">{location}</span>}
+              </div>
+            )}
           </div>
+          <nav className="actions" aria-label="Primary">
+            {mail && <a className="btn" href={safeUrl(mail)} rel="noopener noreferrer">Email</a>}
+            {tel && <a className="btn" href={safeUrl(tel)}>Call</a>}
+            {li && <a className="btn" href={safeUrl(li)} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
+            {gh && <a className="btn" href={safeUrl(gh)} target="_blank" rel="noopener noreferrer">GitHub</a>}
+          </nav>
         </div>
-        <div className="role">{m.role} • {m.location}</div>
+
+        <div className="contact-row">
+          {phonePretty && <span>{phonePretty}</span>}
+          {phonePretty && mail && <span className="dot" aria-hidden />}
+          {m.email && <a href={safeUrl(mail)}>{m.email}</a>}
+          {m.email && li && <span className="dot" aria-hidden />}
+          {li && <a href={safeUrl(li)} target="_blank" rel="noopener noreferrer">{hostFromUrl(li)}</a>}
+          {li && gh && <span className="dot" aria-hidden />}
+          {gh && <a href={safeUrl(gh)} target="_blank" rel="noopener noreferrer">{hostFromUrl(gh)}</a>}
+        </div>
+
         {kpis?.length > 0 && (
           <div className="kpis">
             {kpis.map((t, i) => <span key={i} className="kpi">{t}</span>)}
@@ -85,90 +109,71 @@ function View() {
 
       {m.summary && (
         <section className="sec">
-          <h2 onClick={() => toggleSection('summary')}>Summary {expandedSections.summary ? '-' : '+'}</h2>
-          {expandedSections.summary && <p>{m.summary}</p>}
+          <h2>Summary</h2>
+          <p className="summary">{m.summary}</p>
         </section>
       )}
 
-      <section className="sec">
-        <h2 onClick={() => toggleSection('skills')}>Skills {expandedSections.skills ? '-' : '+'}</h2>
-        {expandedSections.skills && (
-          <div>
-            {m.skills_kv && <div className="hint">Click a category to view details.</div>}
-            {m.skills_kv && (
-              <div className="chip-grid">
-                {m.skills_kv.map(({ k, v }) => {
-                  const items = Array.isArray(v) ? v : String(v).split(/;\s*|,\s*|\s•\s|\|/).filter(Boolean);
-                  const count = items.length;
-                  return (
-                    <span
-                      key={k}
-                      className="chip"
-                      onClick={() => setActiveSkill({ title: k, items })}
-                      role="button"
-                      tabIndex={0}
-                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setActiveSkill({ title: k, items }); }}
-                    >
-                      {k} ({count})
-                    </span>
-                  );
-                })}
+      {m.skills_groups?.length > 0 && (
+        <section className="sec">
+          <h2>Core skills</h2>
+          <div className="skills-groups">
+            {m.skills_groups.map(({ category, items }) => (
+              <div key={category} className="skill-group">
+                <div className="cat">{category}</div>
+                <ul>
+                  {items.map((s, i) => <li key={i}>{s}</li>)}
+                </ul>
               </div>
-            )}
-            {activeSkill && (
-              <>
-                <div className="modal-backdrop" onClick={() => setActiveSkill(null)} />
-                <div className="modal" role="dialog" aria-modal="true">
-                  <div className="modal-h">
-                    <strong>{activeSkill.title}</strong>
-                    <button className="btn btn-sm" onClick={() => setActiveSkill(null)}>Close</button>
-                  </div>
-                  <ul className="skill-list">
-                    {activeSkill.items.map((s, i) => <li key={i}>{s}</li>)}
-                  </ul>
-                </div>
-              </>
-            )}
-            {!m.skills_kv && m.skills_list && <p>{m.skills_list}</p>}
+            ))}
           </div>
-        )}
-      </section>
+        </section>
+      )}
 
       {m.experience?.length > 0 && (
         <section className="sec">
-          <h2 onClick={() => toggleSection('experience')}>Experience {expandedSections.experience ? '-' : '+'}</h2>
-          {expandedSections.experience && (
-            <div>
-              {m.experience.map((e, i) => (
-                <div key={i} className="exp-card">
-                  <h3 className="exp-head"><strong>{e.title}</strong>, {e.company}</h3>
-                  <div className="exp-date">{[e.location, e.dates].filter(Boolean).join(' • ')}</div>
-                  {e.duties?.length > 0 && (
-                    <>
-                      <div className="subhead">Duties</div>
-                      <ul className="duties">{e.duties.map((d, j) => <li key={j}>{d}</li>)}</ul>
-                    </>
-                  )}
-                  {e.achievements?.length > 0 && (
-                    <div className="ach">
-                      <div className="ach-h">Achievements</div>
-                      <ul className="ach-list">{e.achievements.map((a, j) => <li key={j}>{a}</li>)}</ul>
-                    </div>
-                  )}
+          <h2>Experience</h2>
+          <div className="xp">
+            {m.experience.map((e, i) => (
+              <div key={i} className="exp-card">
+                <h3 className="exp-head">
+                  {e.title}
+                  {e.company && <span className="at"> · {e.company}</span>}
+                </h3>
+                <div className="exp-meta">
+                  {e.dates && <span className="dates">{e.dates}</span>}
+                  {e.location && <span>{e.location}</span>}
                 </div>
-              ))}
-            </div>
-          )}
+                {e.duties?.length > 0 && (
+                  <>
+                    <div className="subhead">Responsibilities</div>
+                    <ul>{e.duties.map((d, j) => <li key={j}>{d}</li>)}</ul>
+                  </>
+                )}
+                {e.achievements?.length > 0 && (
+                  <>
+                    <div className="subhead">Impact</div>
+                    <ul className="ach">{e.achievements.map((a, j) => <li key={j}>{a}</li>)}</ul>
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
         </section>
       )}
 
       {m.education?.length > 0 && (
         <section className="sec">
-          <h2 onClick={() => toggleSection('education')}>Education {expandedSections.education ? '-' : '+'}</h2>
-          {expandedSections.education && m.education.map((e, i) => (
-            <div key={i} className="edu-row" data-note={e.details || ''}>
-              <strong>{e.degree}</strong>, {e.school}{e.year ? ` (${e.year})` : ''}{e.gpa ? ` – GPA: ${e.gpa}` : ''}
-              {e.details ? <span className="edu-info" aria-hidden>i</span> : null}
+          <h2>Education</h2>
+          {m.education.map((e, i) => (
+            <div key={i} className="edu-row">
+              <div className="degree">{e.degree}</div>
+              <div className="school">
+                {e.school}
+                {e.year && <span className="year">{e.year}</span>}
+                {e.gpa && <span className="year">GPA {e.gpa}</span>}
+              </div>
+              {e.details && <div className="detail">{e.details}</div>}
             </div>
           ))}
         </section>
@@ -176,67 +181,120 @@ function View() {
 
       {m.certifications?.length > 0 && (
         <section className="sec">
-          <h2 onClick={() => toggleSection('certifications')}>Certifications {expandedSections.certifications ? '-' : '+'}</h2>
-          {expandedSections.certifications && m.certifications.map((c, i) => {
+          <h2>Certifications</h2>
+          {m.certifications.map((c, i) => {
             const name = c.name || '';
             const isCS50AI = /CS50/i.test(name) && /Artificial\s+Intelligence\s+with\s+Python/i.test(name);
             const isCS50Series = /CS50/i.test(name) && /(Computer\s+Science).*Programming|Series/i.test(name);
             return (
               <div key={i} className="cert-row">
-                <strong>{c.name}</strong> – {c.issuer}
+                <div className="name">{c.name}</div>
+                <div className="issuer">
+                  {c.issuer}
+                  {c.year && <span className="year">{c.year}</span>}
+                </div>
                 {isCS50AI && (
-                  <div className="cert-desc">Harvard’s CS50 AI with Python: search/graph algorithms, machine learning (classification, optimization), probability, and hands‑on Python with scikit‑learn.</div>
+                  <div className="cert-desc">Search and graph algorithms, machine learning (classification, optimization), probability, and hands-on Python with scikit-learn.</div>
                 )}
                 {isCS50Series && (
-                  <div className="cert-desc">Harvard’s CS50 Computer Science & Programming Series: core CS (C, memory, data structures, algorithms), Python, web (Flask/JS), and SQL fundamentals.</div>
+                  <div className="cert-desc">Core CS (C, memory, data structures, algorithms), Python, web (Flask, JS), and SQL fundamentals.</div>
                 )}
               </div>
             );
           })}
         </section>
       )}
+
+      {m.training?.length > 0 && (
+        <section className="sec">
+          <h2>Training</h2>
+          {m.training.map((t, i) => (
+            <div key={i} className="cert-row">
+              <div className="name">{t.name || t.title || t}</div>
+              {(t.issuer || t.year) && (
+                <div className="issuer">
+                  {t.issuer}
+                  {t.year && <span className="year">{t.year}</span>}
+                </div>
+              )}
+            </div>
+          ))}
+        </section>
+      )}
+
+      {m.awards?.length > 0 && (
+        <section className="sec">
+          <h2>Awards</h2>
+          <div className="affil">
+            <ul>{m.awards.map((a, i) => <li key={i}>{typeof a === 'string' ? a : (a.name || a.title)}</li>)}</ul>
+          </div>
+        </section>
+      )}
+
+      {m.affiliations?.length > 0 && (
+        <section className="sec affil">
+          <h2>Affiliations</h2>
+          <ul>{m.affiliations.map((a, i) => <li key={i}>{a}</li>)}</ul>
+        </section>
+      )}
+
       <footer className="ftr">
-        <div className="meta">v{m.version}</div>
+        <span className="mark">John Cornelius</span>
+        <span>{m.slug} · v{m.version}</span>
       </footer>
-    </div>
+    </article>
   );
 }
 
 function normalize(doc) {
-  const m = doc.meta || {};
-  const name = doc.name || m.name || 'John Cornelius';
-  const role = doc.title || m.role || 'Program Manager';
-  const location = (doc.contact && doc.contact.location) || m.location || '';
-  let skills_kv = null, skills_list = null;
-  // Normalize skills: split on common separators so every item shows individually
+  const meta = doc.meta || {};
+  const name = doc.name || meta.name || 'John Cornelius';
+  const role = doc.title || meta.role || '';
+  const location = doc.contact?.location || meta.location || '';
+
+  let skills_groups = null;
   if (doc.skills && !Array.isArray(doc.skills) && typeof doc.skills === 'object') {
-    const split = (str) => String(str)
-      .split(/\n|;\s*|,\s*|\s•\s|•|\|/)
-      .map(s => s.trim())
-      .filter(Boolean);
-    skills_kv = Object.entries(doc.skills).map(([k, arr]) => ({
-      k,
-      v: Array.isArray(arr)
-        ? arr.flatMap(x => split(x))
-        : split(arr)
+    skills_groups = Object.entries(doc.skills).map(([category, v]) => ({
+      category,
+      items: splitSkill(v),
     }));
   } else if (Array.isArray(doc.skills)) {
-    skills_list = doc.skills.join(', ');
+    skills_groups = [{ category: 'Skills', items: doc.skills.flatMap(splitSkill) }];
   }
-  const exp = Array.isArray(doc.experience) ? doc.experience.map(e => ({
+
+  const experience = Array.isArray(doc.experience) ? doc.experience.map(e => ({
     title: e.title || '',
     company: e.company || '',
     location: e.location || '',
     dates: e.dates || [e.start, e.end].filter(Boolean).join(' — '),
     duties: Array.isArray(e.duties) ? e.duties : Array.isArray(e.bullets) ? e.bullets : [],
-    achievements: Array.isArray(e.achievements) ? e.achievements : []
+    achievements: Array.isArray(e.achievements) ? e.achievements : [],
   })) : [];
-  const edu = Array.isArray(doc.education) ? doc.education.map(e => ({ ...e, details: e.details || '' })) : [];
-  const certs = Array.isArray(doc.certifications) ? doc.certifications : [];
-  const kpis = Array.isArray(m.kpis) ? m.kpis : [];
-  const mail = doc.contact?.email ? `mailto:${doc.contact.email}` : null;
+
+  const education = Array.isArray(doc.education) ? doc.education.map(e => ({ ...e, details: e.details || '' })) : [];
+  const certifications = Array.isArray(doc.certifications) ? doc.certifications : [];
+  const training = Array.isArray(doc.training) ? doc.training : [];
+  const awards = Array.isArray(doc.awards) ? doc.awards : [];
+  const affiliations = Array.isArray(doc.affiliations) ? doc.affiliations : [];
+  const kpis = Array.isArray(meta.kpis) ? meta.kpis : [];
+
+  const email = doc.contact?.email || null;
+  const phone = doc.contact?.phone || null;
+  const mail = email ? `mailto:${email}` : null;
+  const tel = phone ? `tel:${String(phone).replace(/[^\d+]/g, '')}` : null;
+  const phonePretty = prettyPhone(phone);
   const li = doc.contact?.linkedin || null;
-  return { name, role, location, summary: doc.summary || '', skills_kv, skills_list, experience: exp, education: edu, certifications: certs, kpis, mail, li, slug: m.slug, version: m.version };
+  const gh = doc.contact?.github || null;
+
+  return {
+    name, role, location,
+    summary: doc.summary || '',
+    skills_groups,
+    experience, education, certifications, training, awards, affiliations,
+    kpis,
+    email, phone, phonePretty, mail, tel, li, gh,
+    slug: meta.slug, version: meta.version,
+  };
 }
 
 function App() {
