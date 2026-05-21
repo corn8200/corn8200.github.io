@@ -33,7 +33,13 @@ function splitSkill(v) {
 
 function View() {
   const { slug } = useParams();
-  const [state, setState] = useState({ loading: true, error: null, model: null });
+  const [state, setState] = useState({
+    loading: true,
+    error: null,
+    model: null,
+    variants: [],
+    activeSlug: null,
+  });
 
   useEffect(() => {
     (async () => {
@@ -54,18 +60,26 @@ function View() {
         if (!meta) meta = newest(reg.variants);
         if (!meta) throw new Error('No variants defined in index.json');
         const json = await loadResumeJson(meta.slug, meta.version);
-        setState({ loading: false, error: null, model: normalize(json) });
+        setState({
+          loading: false,
+          error: null,
+          model: normalize(json),
+          variants: Array.isArray(reg.variants) ? reg.variants : [],
+          activeSlug: meta.slug,
+        });
       } catch (e) {
-        setState({ loading: false, error: String(e), model: null });
+        setState({ loading: false, error: String(e), model: null, variants: [], activeSlug: null });
       }
     })();
   }, [slug]);
 
   if (state.loading) return <div className="load">Loading.</div>;
-  if (state.error) return <div className="err">Couldn't load resume. {state.error}</div>;
+  if (state.error) return <div className="err">Could not load resume. {state.error}</div>;
 
   const m = state.model;
   const { kpis, mail, tel, li, gh, location, phonePretty } = m;
+  const variants = state.variants;
+  const activeSlug = state.activeSlug || m.slug;
 
   return (
     <article className="page" aria-label={`Resume of ${m.name}`}>
@@ -77,7 +91,7 @@ function View() {
             {(m.role || location) && (
               <div className="role">
                 {m.role}
-                {m.role && location && <span className="sep">·</span>}
+                {m.role && location && <span className="sep"> · </span>}
                 {location && <span className="loc">{location}</span>}
               </div>
             )}
@@ -87,6 +101,7 @@ function View() {
             {tel && <a className="btn" href={safeUrl(tel)}>Call</a>}
             {li && <a className="btn" href={safeUrl(li)} target="_blank" rel="noopener noreferrer">LinkedIn</a>}
             {gh && <a className="btn" href={safeUrl(gh)} target="_blank" rel="noopener noreferrer">GitHub</a>}
+            <button className="btn" type="button" onClick={() => window.print()}>Print</button>
           </nav>
         </div>
 
@@ -104,6 +119,25 @@ function View() {
           <div className="kpis">
             {kpis.map((t, i) => <span key={i} className="kpi">{t}</span>)}
           </div>
+        )}
+
+        {variants.length > 1 && (
+          <nav className="profile-nav" aria-label="Resume focus">
+            {variants.map((v) => {
+              const active = v.slug === activeSlug;
+              return (
+                <a
+                  key={`${v.slug}@${v.version}`}
+                  className={`profile-link${active ? ' is-active' : ''}`}
+                  href={`#/view/${v.slug}`}
+                  aria-current={active ? 'page' : undefined}
+                  title={v.title}
+                >
+                  {v.label || v.title}
+                </a>
+              );
+            })}
+          </nav>
         )}
       </header>
 
@@ -307,6 +341,10 @@ function App() {
       </Routes>
     </HashRouter>
   );
+}
+
+if (window.location.pathname === '/' && !window.location.hash) {
+  window.location.replace('/cv/#/view/senior-program-operations-manager');
 }
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />);

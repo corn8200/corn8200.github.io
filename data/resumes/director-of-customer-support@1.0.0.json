@@ -1,125 +1,126 @@
 {
   "format_scale": "100%",
   "name": "John Cornelius",
-  "title": "Director of Customer Support & Field Services",
+  "title": "Training, Standardization & Service Enablement Leader",
   "contact": {
     "location": "Harpers Ferry, WV",
     "email": "corn82@icloud.com",
     "phone": "(304) 268-4985",
-    "linkedin": "https://linkedin.com/in/johncornelius",
+    "linkedin": "https://www.linkedin.com/in/john-w-cornelius",
     "github": "https://github.com/corn8200"
   },
-  "summary": "Service operations leader with 15+ years building and leading customer support, field service, and technical support organizations in high‑reliability environments. Expert in post‑shipment support across Field Service, Technical Support, Service Coordination, Parts, and Training; drives CSAT/NPS, first‑time fix rate (FTFR), MTTR, and SLA attainment. Proven in KPI design, escalation management, aftermarket programs (spares, retrofits, remote support), forecasting/budgeting, and ERP/CRM utilization; Lean Six Sigma–driven with deep operations and aviation background.",
+  "summary": "Operations and training leader with a manufacturing improvement base and a 20-year Army aviation standardization background. Builds SOP-linked training, evaluation routines, readiness systems, and practical analytics that help teams work safely, consistently, and with less rework. Best positioned for roles where service quality, technical enablement, field readiness, and process discipline matter more than generic customer-service metrics.",
   "skills": {
-    "Customer Support & Field Services": [
-      "Customer Experience (CSAT/NPS) • Escalation Management",
-      "Field Service Operations • Service Coordination",
-      "Aftermarket Programs • Spare Parts • Retrofit • Remote Support",
-      "ERP/CRM (SAP or Dynamics) • Microsoft Office"
+    "Training & Standardization": [
+      "SOP-linked micro-modules and practical exercises",
+      "Competency evaluations and qualification routines",
+      "Train-the-trainer methods",
+      "Aircrew and frontline readiness systems",
+      "Standards, accountability, and coaching"
     ],
-    "Operations & Process Improvement": [
-      "Standard Operating Procedures (SOPs) • Compliance Documentation",
-      "Operational Excellence • Lean Six Sigma Methods",
-      "Workflow Optimization • Continuous Improvement",
-      "KPI Development (SLA, MTTR, FTFR) • Service Metrics"
+    "Operations Enablement": [
+      "Daily execution cadence",
+      "Safety, quality, production, and logistics coordination",
+      "Cross-functional stakeholder communication",
+      "Service and field-readiness workflows",
+      "Change adoption with operators and supervisors"
     ],
-    "Training & Team Development": [
-      "Onboarding & Upskilling Programs",
-      "Curriculum Design • Instructional Systems Design",
-      "Facilitation • Coaching • Leadership Pipeline Building",
-      "Learning Management Systems (LMS) • Canvas • Digital Training"
+    "Analytics & Tools": [
+      "Power BI, Python, SQL, MES, ERP, and SCADA data",
+      "Power Apps workflow automation",
+      "Training and compliance dashboards",
+      "AI-assisted document review",
+      "Knowledge-transfer systems"
     ],
-    "Data Analytics & Tools": [
-      "Business Intelligence (Power BI, Excel/Google Sheets)",
-      "Predictive Analytics • Training & Service Outcomes",
-      "SCADA‑Integrated Dashboards • Real‑time Reporting",
-      "Google Workspace • Jira • Confluence"
+    "Continuous Improvement": [
+      "Lean and Six Sigma methods",
+      "Root-cause analysis and standard work",
+      "Rapid Improvement Events",
+      "Benefits tracking",
+      "Green Belt and analyst coaching"
     ]
   },
   "experience": [
     {
-      "title": "Sr. Operations, Data Analytics & Customer Support Leader",
-      "company": "Allmine Paving (A Tamko Company)",
-      "location": "WV",
-      "dates": "Jan 2022 – Present",
+      "title": "AI & Six Sigma Lead / Operations & Quality Leader",
+      "company": "Major Building Products Manufacturer",
+      "location": "Multi-site manufacturing",
+      "dates": "Sep 2022 - Present",
       "duties": [
-        "Lead multi‑functional support organization across Field Service, Technical Support, Service Coordination, Parts, and Training.",
-        "Develop and execute scalable service strategy aligned to growth, quality, and customer satisfaction objectives.",
-        "Standardize SOPs, escalation protocols, and KPIs to drive SLA attainment, FTFR, MTTR reduction, and technician efficiency.",
-        "Leverage Python automation, SCADA dashboards, and BI tools to improve service tracking, compliance, and workforce readiness."
+        "Developed courses, SOP-linked micro-modules, practical exercises, and competency evaluations for production, safety, quality, and logistics training.",
+        "Built Level 1-3 evaluation instruments and used training data to revise content and improve time-to-qualification.",
+        "Train and coach 60+ Green Belts and analysts on structured problem solving, data analysis, practical AI tools, and business-case communication.",
+        "Build Power BI and Python analytics workflows for loss analysis, SPC, project tracking, and operational decision support.",
+        "Translate technical and analytical work into clear business language for plant managers, functional leaders, and senior stakeholders."
       ],
       "achievements": [
-        "Improved CSAT by 20% and cut response time 30% via standardized workflows, clear SLAs, and KPI dashboards.",
-        "Boosted technician qualification rates 25% and reduced onboarding time 30 days with Toyota Way–based programs and LMS enhancements.",
-        "Raised compliance from 82% to 96% using BI‑driven feedback loops and automated document control for 150+ SOPs.",
-        "Expanded aftermarket revenue through structured parts/retrofit offerings and built a leadership pipeline through supervisor coaching."
+        "Eliminated 15-minute pre-shift handovers by building an automated Power Apps shift brief system, saving $16.8K per year.",
+        "Cut JHA review time by 75% using a ChatGPT API workflow with company-specific vector retrieval.",
+        "Manage a 40+ project DMAIC and continuous-improvement portfolio tied to $4.2M+ in annualized savings.",
+        "Lead and support 30+ Rapid Improvement Events annually, helping teams define problems, test countermeasures, document results, and present business impact."
       ]
     },
     {
-      "title": "Aviation Officer / Standardization Pilot – U.S. Army Aviation",
-      "company": "U.S. Army",
-      "location": null,
-      "dates": "2000 – 2022",
+      "title": "Army Aviation Standardization & Training Leader (Retired CW3)",
+      "company": "U.S. Army Aviation",
+      "location": "Multiple locations",
+      "dates": "2002 - 2022",
       "duties": [
-        "Directed training, evaluation, and operational readiness for 400+ aviators across multiple aviation units in mission-critical environments.",
-        "Implemented one of the Army’s first LMS/KMS systems and standardized evaluation rubrics, closing training gaps and improving compliance.",
-        "Served as Standardization Pilot enforcing SOPs, CRM, and safety protocols to ensure consistent performance across units.",
-        "Led cross-functional coordination with engineering, maintenance, and operations staff to improve serviceability, safety, and readiness."
+        "Managed aircrew training and Electronic Flight Bag programs, maintaining current DoD flight information and digital procedures.",
+        "Built training, evaluation, standards, and risk-management systems that improved readiness, accountability, and disciplined execution.",
+        "Led standardization and operational excellence across multiple organizations through structured evaluation and training programs.",
+        "Used post-mission debriefs, root-cause analysis, and standards reviews to improve training throughput, cycle adherence, and operational learning."
       ],
       "achievements": [
-        "Implemented LMS/KMS system, increasing training tracking coverage from 0% to 95% across assigned units.",
-        "Achieved 97% qualification pass rate across aviators by standardizing evaluation protocols and closing training gaps.",
-        "Maintained zero Class A/B incidents through rigorous standardization-driven safety training."
+        "Designed and executed learning and development programs that progressed 55 pilots to mission-qualified status.",
+        "Mentored 25 pilots to pilot-in-command status while conducting standardization evaluations.",
+        "Led revision of USAACE Regulation 350-3, consolidating two regulations and streamlining aircraft scheduling.",
+        "Completed a 20-year Army career with UH-60/MH-60 aviation, instructor pilot, and operations leadership experience."
       ]
     }
   ],
   "education": [
     {
-      "degree": "Master of Science (M.S.), Unmanned Systems – Human Factors",
+      "degree": "M.S. - Unmanned Systems, Human Factors Engineering",
       "school": "Embry-Riddle Aeronautical University",
-      "details": null
+      "details": "GPA 4.0",
+      "year": "2020"
     },
     {
-      "degree": "Bachelor of Science (B.S.), Aeronautics",
+      "degree": "B.S. - Aeronautics",
       "school": "Embry-Riddle Aeronautical University",
-      "year": 2020,
-      "gpa": 3.8,
-      "details": null
+      "year": "2012"
     }
   ],
   "certifications": [
-    {
-      "name": "Lean Six Sigma Bronze Belt (2023)",
-      "issuer": "Lean Methods Group"
-    },
-    {
-      "name": "CS50’s Python & Artificial Intelligence (in progress)",
-      "issuer": "Harvard University"
-    }
+    { "name": "Lean Six Sigma Green Belt", "issuer": "Lean Methods Group & Simplilearn", "year": "2024" },
+    { "name": "Lean Six Sigma Bronze Belt", "issuer": "Lean Methods Group", "year": "2023" },
+    { "name": "CS50AI: Artificial Intelligence with Python", "issuer": "Harvard University (edX)", "year": "2025" },
+    { "name": "FAA Remote Pilot (Part 107)", "issuer": "Federal Aviation Administration", "year": "2018" },
+    { "name": "U.S. Army Instructor Pilot", "issuer": "U.S. Army Aviation", "year": "verified service credential" }
   ],
   "training": [
-    "Army Advanced Training & Certifications (2006–2019, details on request)"
+    "U.S. Army aviation standardization, instructor-pilot, and readiness training"
   ],
-  "awards": [
-    "Air Medal (3)",
-    "Army Commendation Medal (6)",
-    "Senior Army Aviator Badge (2015)"
+  "affiliations": [
+    "Civil Air Patrol - sUAS training and community programs",
+    "U.S. Army veteran; community volunteer leadership in Eastern Panhandle, WV"
   ],
-  "cover_letter": {
-    "hiring_manager": "Ana A.",
-    "company_name": "STULZ USA",
-    "body": [
-      "Dear Ana A. and STULZ Hiring Team,",
-      "I am excited to apply for the Director of Customer Support and Field Services position at STULZ USA. With over 15 years of experience leading multi-functional service organizations in high-reliability industries, I bring a proven ability to deliver world-class post-shipment support across Field Service, Technical Support, Service Coordination, Parts, and Training.",
-      "In my current role as Sr. Operations, Data Analytics & Customer Support Leader, I have directed service strategy, standardized SOPs and escalation protocols, and implemented KPI-driven dashboards that improved CSAT by 20% and cut response times by 30%. I also expanded aftermarket revenue through spare parts and retrofit offerings while building a leadership pipeline to support future scale. These outcomes reflect a balance of operational rigor and customer-first focus that aligns directly with STULZ’s mission of responsiveness and reliability.",
-      "As a former Army Aviation Officer and Standardization Pilot, I managed training and readiness for 400+ aviators, enforced operational standards across units, and implemented one of the Army’s earliest LMS/KMS systems. This experience honed my ability to lead under mission-critical conditions, build scalable systems, and ensure compliance and safety—all directly transferable to leading national field service and technical support operations at STULZ.",
-      "I look forward to the opportunity to bring my background in service operations, customer support, and cross-functional leadership to STULZ USA. Thank you for your time and consideration."
-    ]
-  },
   "meta": {
     "slug": "director-of-customer-support",
     "version": "1.0.0",
-    "title": "Director Of Customer Support",
-    "aliases": []
+    "title": "Training, Standardization & Service Enablement Leader",
+    "aliases": [
+      "training-enablement",
+      "service-enablement",
+      "standardization"
+    ],
+    "kpis": [
+      "55 pilots progressed to mission-qualified status",
+      "25 pilots mentored to pilot-in-command",
+      "75% JHA review-time reduction",
+      "$16.8K workflow savings",
+      "60+ Green Belts and analysts coached"
+    ]
   }
 }

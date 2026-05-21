@@ -124,7 +124,7 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
   background: var(--bg-raised);
   padding: 72px 80px 64px;
   border: 1px solid var(--border-1);
-  border-radius: 14px;
+  border-radius: 8px;
   box-shadow: var(--shadow-lg);
 }
 
@@ -154,9 +154,9 @@ a:hover { color: var(--accent-hover); text-decoration: underline; }
 h1 {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(48px, 6vw, 68px);
+  font-size: 68px;
   line-height: 1.02;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
   margin: 0;
   color: var(--fg-1);
 }
@@ -168,13 +168,13 @@ h1 {
   font-size: 24px;
   line-height: 1.3;
   color: var(--pine-700);
-  letter-spacing: -0.005em;
+  letter-spacing: 0;
 }
 
 .role .sep {
   color: var(--fg-4);
   font-style: normal;
-  margin: 0 10px;
+  margin: 0 6px;
   font-family: var(--font-body);
 }
 
@@ -192,6 +192,7 @@ h1 {
 }
 
 .btn {
+  appearance: none;
   font-family: var(--font-body);
   font-size: 13px;
   font-weight: 500;
@@ -204,12 +205,18 @@ h1 {
   text-decoration: none;
   transition: all var(--dur-base) var(--ease-out);
   display: inline-flex; align-items: center; gap: 6px;
+  cursor: pointer;
 }
 .btn:hover {
   background: var(--pine-900);
   color: var(--bone-050);
   border-color: var(--pine-900);
   text-decoration: none;
+}
+.btn:focus-visible,
+.profile-link:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
 }
 
 .kpis {
@@ -230,6 +237,38 @@ h1 {
   border: 1px solid var(--pine-200);
   padding: 4px 10px;
   border-radius: 999px;
+}
+
+.profile-nav {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.profile-link {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 10px;
+  border: 1px solid var(--border-1);
+  border-radius: 8px;
+  background: var(--bg-sunken);
+  color: var(--fg-2);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+}
+
+.profile-link:hover,
+.profile-link.is-active {
+  border-color: var(--pine-700);
+  background: var(--pine-900);
+  color: var(--bone-050);
+  text-decoration: none;
 }
 
 /* ---------- contact row ---------- */
@@ -360,7 +399,7 @@ h1 {
   font-family: var(--font-body);
   font-size: 18px;
   font-weight: 600;
-  letter-spacing: -0.005em;
+  letter-spacing: 0;
   margin: 0 0 3px;
   color: var(--fg-1);
 }
@@ -437,7 +476,7 @@ h1 {
   font-size: 16px;
   font-weight: 500;
   color: var(--fg-1);
-  letter-spacing: -0.005em;
+  letter-spacing: 0;
 }
 .edu-row .school, .cert-row .issuer {
   font-size: 14px;
@@ -500,7 +539,7 @@ h1 {
   font-style: italic;
   font-size: 14px;
   color: var(--pine-700);
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 /* ---------- loading / error ---------- */
@@ -510,7 +549,7 @@ h1 {
   padding: 40px 48px;
   background: var(--bg-raised);
   border: 1px solid var(--border-1);
-  border-radius: 14px;
+  border-radius: 8px;
   box-shadow: var(--shadow-md);
   font-family: var(--font-body);
 }
@@ -531,7 +570,7 @@ h1 {
   .page {
     margin: 24px auto 48px;
     padding: 40px 28px 40px;
-    border-radius: 10px;
+    border-radius: 8px;
   }
   h1 { font-size: 42px; }
   .role { font-size: 20px; }
@@ -542,6 +581,8 @@ h1 {
   .exp-card::before { left: -20px; }
   .hdr-top { flex-direction: column; align-items: flex-start; }
   .actions { margin-top: 4px; }
+  .profile-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .profile-link { justify-content: flex-start; text-align: left; }
 }
 
 /* ---------- print ---------- */
@@ -556,7 +597,7 @@ h1 {
   }
   h1 { font-size: 30pt; }
   .role { font-size: 14pt; }
-  .btn, .actions, .ftr { display: none !important; }
+  .btn, .actions, .profile-nav, .ftr { display: none !important; }
   .sec { margin-top: 18px; page-break-inside: avoid; }
   .exp-card { page-break-inside: avoid; }
   .summary::first-letter { color: #000; }

@@ -1,7 +1,7 @@
 {
   "format_scale": "100%",
   "name": "John Cornelius",
-  "title": "Project Manager – Infrastructure, Supply Chain & Operations",
+  "title": "Operations Project & Program Delivery Leader",
   "contact": {
     "location": "Harpers Ferry, WV",
     "email": "corn82@icloud.com",
@@ -9,109 +9,98 @@
     "linkedin": "https://www.linkedin.com/in/john-w-cornelius",
     "github": "https://github.com/corn8200"
   },
-  "summary": "Project manager and operations leader with 15+ years’ experience directing multi-site infrastructure, supply chain, and manufacturing operations with budgets up to $48M. Proven record delivering complex capital and operational projects on time, within budget, and to specification, while ensuring safety, quality, and stakeholder satisfaction. Skilled in resolving scheduling conflicts, coordinating contractors and municipalities, and sustaining >95% on-time delivery performance with >99.5% inventory accuracy. Expert in Lean Six Sigma, 3PL management, SAP/ERP integration, and cross‑functional leadership.",
+  "summary": "Operations and project leader with 20+ years across manufacturing and Army aviation, combining operating cadence, project governance, cross-functional execution, and practical analytics. Leads improvement and automation work from problem definition through adoption, with verified line-item savings, clear stakeholder reporting, and disciplined risk control.",
   "skills": {
-    "Operations Leadership": [
-      "Multi-Site Project & Operations Leadership",
-      "Contractor & Municipality Coordination",
-      "Safety Program Leadership – Zero OSHA Recordables",
-      "Change Management & Project Start-Up Execution"
+    "Project Delivery": [
+      "Scope, schedule, risk, and resource coordination",
+      "CAPEX and asset-reliability project support",
+      "Milestone reviews and stakeholder reporting",
+      "Vendor and cross-functional coordination"
     ],
-    "Supply Chain & Project Delivery": [
-      "3PL Partnership & KPI Performance Management",
-      "S&OP / Demand, Supply & Resource Planning",
-      "Scheduling Conflict Resolution & Critical Path Management",
-      "Delivery in Full On Time (DIFOT >95%) Optimization"
+    "Operations": [
+      "24/7 continuous-process manufacturing",
+      "Production, maintenance, material flow, quality, and safety cadence",
+      "KPI reviews and balanced scorecards",
+      "Plant operating routines"
     ],
-    "Systems & Analytics": [
-      "SAP / ERP / MES Integration (SAP, Oracle, MS Dynamics)",
-      "Scheduling & Workflow Automation Solutions",
-      "Lean Six Sigma (Green Belt, Bronze) | Kaizen, Continuous Improvement",
-      "TPM Implementation & 5S Culture"
+    "Analytics & Automation": [
+      "Power BI, Python, SQL, MES, ERP, and SCADA data",
+      "BrainCube analytics",
+      "Power Apps workflow automation",
+      "AI-assisted document review"
     ],
-    "Budget & Stakeholder Management": [
-      "Budget Management – $20M–$48M Portfolios",
-      "Cross-Functional Team Development & Stakeholder Engagement"
+    "Leadership": [
+      "Cross-functional communication",
+      "Green Belt and analyst coaching",
+      "Army aviation standards and risk management",
+      "Training and evaluation systems"
     ]
   },
   "experience": [
     {
-      "title": "Sr. Operations & Data Analytics Manager",
-      "company": "Allmine Paving (A Tamko Company)",
-      "location": "WV",
-      "dates": "Jan 2022 – Present",
+      "title": "AI & Six Sigma Lead / Operations & Quality Leader",
+      "company": "Major Building Products Manufacturer",
+      "location": "Multi-site manufacturing",
+      "dates": "Sep 2022 - Present",
       "duties": [
-        "Lead multi-site logistics, manufacturing, and capital projects for 24/7 asphalt production facilities, ensuring safe, on-time, and within-budget delivery of operational and infrastructure initiatives.",
-        "Resolve scheduling conflicts and coordinate contractors, municipalities, and cross-functional teams to sustain >95% DIFOT and >99.5% inventory accuracy.",
-        "Oversee 3PL relationships with defined KPIs, optimizing cost-per-unit delivered and ensuring adherence to performance metrics.",
-        "Integrate demand forecasts, maintenance schedules, and supplier lead times into monthly S&OP to improve service levels and operational efficiency.",
-        "Implement Lean Six Sigma, Kaizen, TPM, and 5S to drive safety, efficiency, workforce engagement, and continuous improvement.",
-        "Manage capital project lifecycles across multiple sites, meeting compliance, safety, budget, and timeline requirements."
+        "Lead or support cross-functional projects across operations, quality, maintenance, IT, controls, finance, and plant leadership.",
+        "Manage project cadence for a 40+ project DMAIC and continuous-improvement portfolio tied to $4.2M+ in annualized savings.",
+        "Build Power BI and Python analytics workflows for loss analysis, SPC, project tracking, and operational decision support."
       ],
       "achievements": [
-        "Increased regional throughput by 12% while reducing overtime costs through Lean scheduling and predictive maintenance.",
-        "Improved DIFOT by 15% via GPS-enabled fleet tracking, automated reporting workflows, and statistical modeling.",
-        "Enhanced delivery quality scores by 18% by deploying predictive quality management tools and improving supplier performance.",
-        "Achieved >99.5% inventory accuracy across all sites, reducing stockouts and excess inventory costs.",
-        "Sustained zero OSHA recordables over 3 years through rigorous safety programs and compliance management.",
-        "Delivered $2.3M in cost savings through 3PL contract optimization, freight routing improvements, and supplier performance initiatives."
+        "Reduced blowdown oil waste by 70.8% using BrainCube analytics and airflow optimization, delivering $189K in verified annual savings.",
+        "Delivered $37K in verified annual savings through AI-based PID auto-tuning deployed in Python/Jupyter Notebook.",
+        "Eliminated 15-minute pre-shift handovers by building an automated Power Apps shift brief system, saving $16.8K per year.",
+        "Cut JHA review time by 75% using a ChatGPT API workflow with company-specific vector retrieval."
       ]
     },
     {
-      "title": "Sr. Program Manager – Aviation & Advanced Systems",
-      "company": "U.S. Army (160th SOAR)",
-      "location": null,
-      "dates": "2009 – 2021",
+      "title": "Army Aviation Operations & Standardization Leader (Retired CW3)",
+      "company": "U.S. Army Aviation",
+      "location": "Multiple locations",
+      "dates": "2002 - 2022",
       "duties": [
-        "Directed lifecycle of multimillion-dollar aviation and infrastructure support programs across multiple sites, ensuring on‑time, within-budget delivery.",
-        "Coordinated contractors, municipalities, and cross-functional teams to execute complex project schedules, mitigate risks, and maintain compliance.",
-        "Led engineering, R&D, logistics, and IT teams using program governance, risk management, and Lean/Agile methodologies.",
-        "Managed global logistics networks, supplier contracts, and maintenance programs for $48M+ in assets, sustaining >98% operational readiness.",
-        "Oversaw 3PL partnerships supporting deployment and sustainment operations, establishing KPIs, monitoring compliance, and optimizing routes."
+        "Led aviation operations and readiness programs involving 30-250+ personnel, equipment accountability, logistics, maintenance coordination, and safety-critical execution.",
+        "Built training, evaluation, standards, and risk-management systems that improved readiness, accountability, and disciplined execution."
       ],
       "achievements": [
-        "Reduced part shortages by 22% and improved mission readiness through predictive analytics and supplier collaboration.",
-        "Executed $4.6M test and evaluation program and supported 200+ global missions with zero safety incidents while sustaining >98% readiness.",
-        "Streamlined project planning cycles by 30% using digital twin simulations, improving resource allocation efficiency.",
-        "Delivered gains in operational efficiency and asset utilization through Lean Six Sigma initiatives.",
-        "Increased 3PL on-time performance by 14% via KPI-driven performance management and contract optimization."
+        "Managed aircrew training and Electronic Flight Bag programs, maintaining current DoD flight information and digital procedures.",
+        "Mentored 25 pilots to pilot-in-command status while conducting standardization evaluations."
       ]
     }
   ],
   "education": [
     {
-      "degree": "Master of Science (M.S.), Unmanned Systems – Human Factors",
+      "degree": "M.S. - Unmanned Systems, Human Factors Engineering",
       "school": "Embry-Riddle Aeronautical University",
-      "year": "2020",
-      "details": "4.0 GPA, with distinction"
+      "details": "GPA 4.0",
+      "year": "2020"
     },
     {
-      "degree": "Bachelor of Science (B.S.), Aeronautics",
+      "degree": "B.S. - Aeronautics",
       "school": "Embry-Riddle Aeronautical University",
       "year": "2012"
     }
   ],
   "certifications": [
-    {
-      "name": "Project Management Professional (PMP)",
-      "issuer": "Simplilearn",
-      "year": "2021"
-    },
-    {
-      "name": "Lean Six Sigma (Bronze, Green Belt)",
-      "issuer": "Lean Methods Group & Simplilearn",
-      "year": "2023"
-    },
-    {
-      "name": "Agile Scrum Master",
-      "issuer": "Simplilearn",
-      "year": "2021"
-    }
+    { "name": "Lean Six Sigma Green Belt", "issuer": "Lean Methods Group & Simplilearn", "year": "2024" },
+    { "name": "Lean Six Sigma Bronze Belt", "issuer": "Lean Methods Group", "year": "2023" },
+    { "name": "CS50x: Computer Science", "issuer": "Harvard University (edX)", "year": "2025" }
   ],
   "meta": {
     "slug": "project-manager-infrastructure-supply-chain-operations",
     "version": "1.0.0",
-    "title": "Project Manager – Infrastructure, Supply Chain & Operations",
-    "aliases": []
+    "title": "Operations Project & Program Delivery Leader",
+    "aliases": [
+      "project-manager",
+      "program-manager",
+      "operations-projects"
+    ],
+    "kpis": [
+      "$189K verified savings",
+      "$37K PID auto-tuning savings",
+      "$16.8K workflow savings",
+      "75% JHA review-time reduction"
+    ]
   }
 }

@@ -1,7 +1,7 @@
 {
   "format_scale": "100%",
   "name": "John Cornelius",
-  "title": "Senior Program & Operations Leader",
+  "title": "Operations & Continuous Improvement Leader",
   "contact": {
     "location": "Harpers Ferry, WV",
     "email": "corn82@icloud.com",
@@ -9,148 +9,129 @@
     "linkedin": "https://www.linkedin.com/in/john-w-cornelius",
     "github": "https://github.com/corn8200"
   },
-  "summary": "Program and operations leader with 20+ years delivering multimillion-dollar initiatives across defense, manufacturing, and logistics. Known for turning complex, multi-stakeholder programs into steady, on-time execution while building teams that stay. Fluent in Lean Six Sigma, ERP and analytics tooling, and the quiet work of safety, readiness, and cost discipline. Comfortable in the field, the boardroom, and the data.",
+  "summary": "Operations and continuous improvement leader with manufacturing progression across quality/materials, operations management, and enterprise AI/Six Sigma work. Supports 9 facilities, manages a 40+ project improvement portfolio tied to $4.2M+ in annualized savings, and turns plant priorities into daily management routines, coached problem solving, and measurable safety, quality, delivery, and cost results. Retired Army aviation officer background adds disciplined standards, risk management, and leader development.",
   "skills": {
-    "Program & Operations Leadership": [
-      "Multi-site operations and portfolio management",
-      "Budget ownership across $20M–$48M programs",
-      "Risk, schedule, and vendor governance",
-      "Cross-functional stakeholder alignment",
-      "Change management and workforce readiness"
+    "Operations Management": [
+      "24/7 continuous-process manufacturing",
+      "Plant operating cadence and KPI reviews",
+      "Production, maintenance, material flow, quality, and safety coordination",
+      "CAPEX and asset-reliability project support",
+      "Cross-functional stakeholder alignment"
     ],
-    "Supply Chain, Logistics & Delivery": [
-      "S&OP and demand/supply planning",
-      "Procurement, 3PL, and contract negotiation",
-      "Inventory accuracy and DIFOT optimization",
-      "Supplier performance and cost reduction",
-      "End-to-end logistics for distributed operations"
+    "Continuous Improvement": [
+      "DMAIC and Lean methods",
+      "TPM, Hoshin Kanri, standard work, and root-cause analysis",
+      "Rapid Improvement Events and benefits tracking",
+      "OEE, scrap, downtime, safety, and cost improvement",
+      "Green Belt and analyst coaching"
     ],
-    "Data, Systems & Continuous Improvement": [
-      "ERP/SAP, SCADA, and digital-twin integration",
-      "Power BI, SQL, and Python for analytics",
-      "KPI dashboards and predictive models",
-      "Lean Six Sigma, TPM, 5S, Kaizen",
-      "Automation that removes manual work"
+    "Analytics & Practical AI": [
+      "Power BI, Python, SQL, MES, ERP, and SCADA data",
+      "BrainCube analytics and process optimization",
+      "Power Apps workflow automation",
+      "AI-assisted document review and vector retrieval",
+      "Operational decision support for plant leaders"
     ],
-    "Safety, Compliance & Leadership": [
-      "OSHA and PSM programs; audit-ready operations",
-      "Safety culture building across shifts and sites",
-      "Coaching, mentorship, and frontline development",
+    "Program Execution": [
+      "Portfolio governance and project cadence",
+      "Risk, schedule, and resource discipline",
+      "Business-case communication",
+      "Change adoption with operators and supervisors",
+      "Senior-stakeholder reporting"
+    ],
+    "Leadership": [
+      "Frontline coaching and leader development",
+      "Army aviation standards and risk management",
+      "Training, evaluation, and readiness systems",
       "Clear written and verbal communication",
-      "Decisions under pressure, at pace"
+      "Decisions under pressure"
     ]
   },
   "experience": [
     {
-      "title": "Senior Operations & Analytics Manager",
-      "company": "Industrial Manufacturing — Building Materials",
-      "location": "West Virginia",
-      "dates": "2022 – Present",
+      "title": "AI & Six Sigma Lead / Operations & Quality Leader",
+      "company": "Major Building Products Manufacturer",
+      "location": "Multi-site manufacturing",
+      "dates": "Sep 2022 - Present",
       "duties": [
-        "Lead modernization and operations programs across multi-site production, maintenance, logistics, and controls.",
-        "Own scope, schedule, and budgets for capital and continuous-improvement initiatives; manage risk registers and vendor performance with structured cadences.",
-        "Build SCADA- and BI-driven dashboards for throughput, downtime, quality, and safety; translate the numbers into decisions the line can act on.",
-        "Coach plant leaders and frontline teams; partner with HR, EHS, and finance to turn priorities into day-to-day behavior."
+        "Progressed through Quality & Raw Materials Manager, Operations Manager, and AI & Six Sigma Lead roles, expanding from plant quality/materials execution into operations cadence and multi-site CI/analytics support.",
+        "Ran or supported daily management routines across production priorities, maintenance constraints, material flow, quality, safety, staffing coverage, and shift-level execution.",
+        "Support process optimization, CI governance, and analytics-enabled improvement across 9 manufacturing facilities.",
+        "Build Power BI and Python analytics workflows for loss analysis, SPC, project tracking, and operational decision support.",
+        "Translate technical and analytical work into clear business language for plant managers, functional leaders, and senior stakeholders."
       ],
       "achievements": [
-        "Raised throughput by 12% while cutting overtime cost 22% through paired Lean and TPM programs.",
-        "Sustained 600+ days lost-time injury free with zero PSM findings across external audits.",
-        "Improved DIFOT by 15% and held inventory accuracy above 99.5% through S&OP and logistics rework.",
-        "Negotiated supplier and freight terms to deliver $2.3M+ in validated savings while increasing delivery reliability."
+        "Manage a 40+ project DMAIC and continuous-improvement portfolio tied to $4.2M+ in annualized savings.",
+        "Reduced blowdown oil waste by 70.8% using BrainCube analytics and airflow optimization, delivering $189K in verified annual savings.",
+        "Delivered $37K in verified annual savings through AI-based PID auto-tuning deployed in Python/Jupyter Notebook.",
+        "Eliminated 15-minute pre-shift handovers by building an automated Power Apps shift brief system, saving $16.8K per year.",
+        "Cut JHA review time by 75% using a ChatGPT API workflow with company-specific vector retrieval.",
+        "Train and coach 60+ Green Belts and analysts on structured problem solving, data analysis, practical AI tools, and business-case communication."
       ]
     },
     {
-      "title": "Senior Program Manager — Aviation & Advanced Systems",
-      "company": "United States Army",
+      "title": "Army Aviation Operations & Standardization Leader (Retired CW3)",
+      "company": "U.S. Army Aviation",
       "location": "Multiple locations",
-      "dates": "2009 – 2021",
+      "dates": "2002 - 2022",
       "duties": [
-        "Directed $48M+ aviation and asset-management programs across training, operations, and maintenance organizations.",
-        "Stood up predictive analytics and dashboards to raise readiness and sharpen maintenance planning.",
-        "Wrote and standardized evaluation criteria, SOPs, and safety protocols adopted across multiple units.",
-        "Advised senior leaders and coached mid-level managers and operators through complex, high-stakes decisions."
+        "Completed a 20-year Army career with UH-60/MH-60 aviation, instructor pilot, and operations leadership experience.",
+        "Led aviation operations and readiness programs involving 30-250+ personnel, equipment accountability, logistics, maintenance coordination, and safety-critical execution.",
+        "Managed operating requirements involving $10M+ budgets, aircraft readiness, training resources, scheduling constraints, and risk controls.",
+        "Built training, evaluation, standards, and risk-management systems that improved readiness, accountability, and disciplined execution."
       ],
       "achievements": [
-        "Raised qualification pass rates to 97% through standardized curricula and performance management.",
-        "Maintained zero Class A or Class B safety incidents across a decade of high-tempo operations.",
-        "Delivered complex, multi-stakeholder programs on schedule and under budget in expeditionary environments.",
-        "Built and retained high-performing teams across duty stations, cultures, and operational tempos."
-      ]
-    },
-    {
-      "title": "Aviation Officer & Instructor Pilot",
-      "company": "United States Army",
-      "location": "Multiple locations",
-      "dates": "2002 – 2009",
-      "duties": [
-        "Led small-unit operations, aircrew training, and aviation safety programs.",
-        "Planned and executed missions under time-constrained conditions with high accountability for people and equipment.",
-        "Built the operational foundation for later program-management work: risk, logistics, safety, and team leadership."
-      ],
-      "achievements": [
-        "Recognized for operational performance and instructor ratings across multiple assignments.",
-        "Trained and mentored dozens of junior leaders and operators who went on to senior roles."
+        "Designed and executed learning and development programs that progressed 55 pilots to mission-qualified status.",
+        "Mentored 25 pilots to pilot-in-command status while conducting standardization evaluations.",
+        "Managed aircrew training and Electronic Flight Bag programs, maintaining current DoD flight information and digital procedures.",
+        "Led revision of USAACE Regulation 350-3, consolidating two regulations and streamlining aircraft scheduling."
       ]
     }
   ],
   "education": [
     {
-      "degree": "Master of Science — Unmanned Systems (Human Factors)",
+      "degree": "M.S. - Unmanned Systems, Human Factors Engineering",
       "school": "Embry-Riddle Aeronautical University",
-      "details": "Human–machine integration, decision-making, and safety for unmanned systems.",
+      "details": "GPA 4.0; human-machine integration, decision-making, and safety for unmanned systems.",
       "year": "2020"
     },
     {
-      "degree": "Bachelor of Science — Aeronautics",
+      "degree": "B.S. - Aeronautics",
       "school": "Embry-Riddle Aeronautical University",
       "details": "Technical foundation in systems, safety, and logistics for aviation program oversight.",
       "year": "2012"
     }
   ],
   "certifications": [
-    { "name": "Project Management Professional (PMP)", "issuer": "Simplilearn", "year": "2021" },
-    { "name": "Agile Scrum Master (ASM)", "issuer": "Simplilearn", "year": "2021" },
-    { "name": "Lean Six Sigma — Green Belt", "issuer": "Lean Methods Group", "year": "2023" },
-    { "name": "Lean Six Sigma — Bronze", "issuer": "Simplilearn", "year": "2023" },
-    { "name": "FAA Part 107 Remote Pilot", "issuer": "Federal Aviation Administration", "year": "2022" },
-    { "name": "CS50's Computer Science & Programming Series", "issuer": "Harvard University", "year": "2024" },
-    { "name": "CS50's Artificial Intelligence with Python (in progress)", "issuer": "Harvard University", "year": "in progress" }
+    { "name": "Lean Six Sigma Green Belt", "issuer": "Lean Methods Group & Simplilearn", "year": "2024" },
+    { "name": "Lean Six Sigma Bronze Belt", "issuer": "Lean Methods Group", "year": "2023" },
+    { "name": "CS50AI: Artificial Intelligence with Python", "issuer": "Harvard University (edX)", "year": "2025" },
+    { "name": "CS50x: Computer Science", "issuer": "Harvard University (edX)", "year": "2025" },
+    { "name": "FAA Remote Pilot (Part 107)", "issuer": "Federal Aviation Administration", "year": "2018" },
+    { "name": "U.S. Army Instructor Pilot", "issuer": "U.S. Army Aviation", "year": "verified service credential" }
   ],
   "affiliations": [
-    "Civil Air Patrol — sUAS training and community programs",
-    "Veteran; community volunteer leadership in Eastern Panhandle, WV"
+    "Civil Air Patrol - sUAS training and community programs",
+    "U.S. Army veteran; community volunteer leadership in Eastern Panhandle, WV"
   ],
-  "cover_letter": {
-    "recipient": {
-      "name": "Hiring Manager",
-      "title": "",
-      "company": "",
-      "address": ""
-    },
-    "salutation": "Dear Hiring Team,",
-    "body": [
-      "I'd like to bring twenty years of program, operations, and data leadership to your team. I've run multimillion-dollar portfolios in defense and industry, and I build the kind of quiet, dependable operations leaders trust.",
-      "I pair classical program discipline with real data fluency — Lean Six Sigma, SAP/ERP, Power BI, SQL, Python — and I do the hands-on coaching that makes a program actually stick on the floor."
-    ],
-    "closing": "Sincerely,",
-    "signature_name": "John Cornelius"
-  },
   "meta": {
     "slug": "senior-program-operations-manager",
     "version": "1.0.0",
-    "title": "Senior Program & Operations Leader",
+    "title": "Operations & Continuous Improvement Leader",
     "aliases": [
+      "operations-leader",
+      "continuous-improvement-leader",
+      "manufacturing-operations",
       "senior-program-manager",
       "program-manager",
-      "senior-operations-manager",
-      "director-of-operations"
+      "senior-operations-manager"
     ],
     "kpis": [
-      "20+ years leading programs",
-      "$48M+ portfolio ownership",
-      "9 multi-site operations",
-      "600+ days LTI-free",
-      ">99.5% inventory accuracy"
+      "9 manufacturing facilities",
+      "40+ CI projects",
+      "$4.2M+ annualized savings",
+      "60+ Green Belts and analysts coached",
+      "20-year Army aviation career"
     ]
   }
 }

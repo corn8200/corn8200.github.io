@@ -1,27 +1,31 @@
 {
   "variants": [
     {
-      "slug": "director-of-customer-support",
+      "slug": "senior-program-operations-manager",
       "version": "1.0.0",
-      "title": "Director Of Customer Support",
+      "title": "Operations & Continuous Improvement Leader",
+      "label": "Operations & CI",
       "aliases": []
     },
     {
       "slug": "factory-director-operations-continuous-improvement",
       "version": "1.0.0",
-      "title": "Factory Director • Operations & Continuous Improvement",
+      "title": "Manufacturing Operations & Continuous Improvement Leader",
+      "label": "Manufacturing ops",
       "aliases": []
     },
     {
       "slug": "project-manager-infrastructure-supply-chain-operations",
       "version": "1.1.0",
-      "title": "Project Manager – Infrastructure, Supply Chain & Operations",
+      "title": "Operations Project & Program Delivery Leader",
+      "label": "Project delivery",
       "aliases": []
     },
     {
-      "slug": "senior-program-operations-manager",
+      "slug": "director-of-customer-support",
       "version": "1.0.0",
-      "title": "Senior Program & Operations Manager",
+      "title": "Training, Standardization & Service Enablement Leader",
+      "label": "Training & enablement",
       "aliases": []
     }
   ],

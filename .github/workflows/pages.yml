@@ -43,6 +43,8 @@ jobs:
         run: |
           mkdir -p dist
           cp -R ../data dist/data
+          mkdir -p dist/cv
+          cp dist/index.html dist/cv/index.html
 
       - name: Add CNAME
         run: echo "jcornelius.net" > dist/CNAME
@@ -62,4 +64,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
