@@ -7,490 +7,650 @@
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#235A3A" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#10160F" media="(prefers-color-scheme: dark)">
-<title>Zoo Trip — Wed July 8</title>
+<title>The Zoo Day — Wed July 8</title>
 <style>
   :root {
-    --ground: #F2F4EC;
-    --surface: #FCFDFA;
-    --surface-2: #EFF2E9;
-    --ink: #17231C;
-    --ink-soft: #4C5B51;
-    --ink-faint: #7C8A80;
-    --line: #DBE2D4;
-    --pine: #235A3A;
-    --pine-deep: #163B27;
-    --amber: #B4700C;
-    --amber-bg: #FBEFD7;
-    --amber-line: #E9C889;
-    --spine: #C3D2BC;
-    --shadow: 0 1px 2px rgba(22,45,29,.05), 0 6px 20px rgba(22,45,29,.06);
-    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --ground:#F2F4EC; --surface:#FCFDFA; --surface-2:#EFF2E9; --ink:#17231C;
+    --ink-soft:#4C5B51; --ink-faint:#7C8A80; --line:#DBE2D4; --pine:#235A3A;
+    --pine-deep:#163B27; --amber:#B4700C; --amber-bg:#FBEFD7; --amber-line:#E9C889;
+    --spine:#C3D2BC; --river:#2E7CB8;
+    --shadow:0 1px 2px rgba(22,45,29,.05), 0 6px 20px rgba(22,45,29,.06);
+    --mono:ui-monospace,"SF Mono","SFMono-Regular",Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
   }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --ground: #10160F;
-      --surface: #182019;
-      --surface-2: #1E271F;
-      --ink: #E9EEE6;
-      --ink-soft: #A6B4A6;
-      --ink-faint: #74836F;
-      --line: #2A362B;
-      --pine: #6FC08D;
-      --pine-deep: #8FD3A8;
-      --amber: #E7B15A;
-      --amber-bg: #2C2314;
-      --amber-line: #5A4423;
-      --spine: #33422F;
-      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.28);
-    }
-  }
-  :root[data-theme="light"] {
-    --ground: #F2F4EC; --surface: #FCFDFA; --surface-2: #EFF2E9; --ink: #17231C;
-    --ink-soft: #4C5B51; --ink-faint: #7C8A80; --line: #DBE2D4; --pine: #235A3A;
-    --pine-deep: #163B27; --amber: #B4700C; --amber-bg: #FBEFD7; --amber-line: #E9C889;
-    --spine: #C3D2BC; --shadow: 0 1px 2px rgba(22,45,29,.05), 0 6px 20px rgba(22,45,29,.06);
-  }
-  :root[data-theme="dark"] {
-    --ground: #10160F; --surface: #182019; --surface-2: #1E271F; --ink: #E9EEE6;
-    --ink-soft: #A6B4A6; --ink-faint: #74836F; --line: #2A362B; --pine: #6FC08D;
-    --pine-deep: #8FD3A8; --amber: #E7B15A; --amber-bg: #2C2314; --amber-line: #5A4423;
-    --spine: #33422F; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.28);
-  }
+  @media (prefers-color-scheme:dark){:root{
+    --ground:#10160F; --surface:#182019; --surface-2:#1E271F; --ink:#E9EEE6;
+    --ink-soft:#A6B4A6; --ink-faint:#74836F; --line:#2A362B; --pine:#6FC08D;
+    --pine-deep:#8FD3A8; --amber:#E7B15A; --amber-bg:#2C2314; --amber-line:#5A4423;
+    --spine:#33422F; --river:#5AA6DB;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.28);
+  }}
+  :root[data-theme="light"]{--ground:#F2F4EC;--surface:#FCFDFA;--surface-2:#EFF2E9;--ink:#17231C;--ink-soft:#4C5B51;--ink-faint:#7C8A80;--line:#DBE2D4;--pine:#235A3A;--pine-deep:#163B27;--amber:#B4700C;--amber-bg:#FBEFD7;--amber-line:#E9C889;--spine:#C3D2BC;--river:#2E7CB8;--shadow:0 1px 2px rgba(22,45,29,.05),0 6px 20px rgba(22,45,29,.06);}
+  :root[data-theme="dark"]{--ground:#10160F;--surface:#182019;--surface-2:#1E271F;--ink:#E9EEE6;--ink-soft:#A6B4A6;--ink-faint:#74836F;--line:#2A362B;--pine:#6FC08D;--pine-deep:#8FD3A8;--amber:#E7B15A;--amber-bg:#2C2314;--amber-line:#5A4423;--spine:#33422F;--river:#5AA6DB;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.28);}
 
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; background: var(--ground); color: var(--ink);
-    font-family: var(--sans); line-height: 1.5;
-    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
-  }
-  .wrap { max-width: 620px; margin: 0 auto; padding: 22px 18px 64px; }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--ground);color:var(--ink);font-family:var(--sans);line-height:1.5;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  .wrap{max-width:640px;margin:0 auto;padding:0 16px 72px;}
 
-  /* ---- Header ---- */
-  .masthead { text-align: center; padding: 12px 0 6px; }
-  .eyebrow {
-    font-family: var(--mono); font-size: 12px; letter-spacing: .16em;
-    text-transform: uppercase; color: var(--amber); font-weight: 600;
-  }
-  h1 {
-    font-size: clamp(30px, 8vw, 42px); line-height: 1.02; margin: 8px 0 6px;
-    letter-spacing: -.02em; font-weight: 800; text-wrap: balance;
-  }
-  .date-line { font-size: 15px; color: var(--ink-soft); font-weight: 600; }
+  /* Masthead */
+  .masthead{text-align:center;padding:20px 0 10px;}
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);font-weight:600;}
+  h1{font-size:clamp(28px,7.5vw,38px);line-height:1.02;margin:6px 0 4px;letter-spacing:-.02em;font-weight:800;text-wrap:balance;}
+  .date-line{font-size:14px;color:var(--ink-soft);font-weight:600;}
 
-  .weather {
-    display: flex; gap: 10px; align-items: flex-start; margin: 16px auto 0;
-    max-width: 480px; background: var(--surface); border: 1px solid var(--line);
-    border-radius: 12px; padding: 11px 14px; box-shadow: var(--shadow); text-align: left;
-  }
-  .weather svg { flex: none; width: 22px; height: 22px; color: var(--amber); margin-top: 1px; }
-  .weather b { font-weight: 700; }
-  .weather .sub { color: var(--ink-soft); font-size: 13.5px; }
+  /* Tab bar */
+  .tabs{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--ground) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);margin:8px -16px 0;padding:8px 10px;border-bottom:1px solid var(--line);}
+  .tabs-inner{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none;padding:1px 6px;}
+  .tabs-inner::-webkit-scrollbar{display:none;}
+  .tab{flex:none;display:inline-flex;align-items:center;gap:6px;padding:8px 13px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink-soft);font-size:13.5px;font-weight:650;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s,border-color .15s;}
+  .tab .ic{font-size:15px;line-height:1;}
+  .tab[aria-selected="true"]{background:var(--pine);border-color:var(--pine);color:#fff;}
+  :root[data-theme="dark"] .tab[aria-selected="true"]{color:#0c130d;}
+  @media (prefers-color-scheme:dark){.tab[aria-selected="true"]{color:#0c130d;}}
+  .tab:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
 
-  /* ---- Boarding-pass anchors ---- */
-  .anchors { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 6px; }
-  .pass {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
-    padding: 14px 15px 15px; box-shadow: var(--shadow); position: relative; overflow: hidden;
-  }
-  .pass::before {
-    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--pine);
-  }
-  .pass.back::before { background: var(--amber); }
-  .pass .tag {
-    font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
-    color: var(--ink-faint); font-weight: 600;
-  }
-  .pass .time {
-    font-family: var(--mono); font-size: 30px; font-weight: 700; letter-spacing: -.01em;
-    margin: 3px 0 2px; font-variant-numeric: tabular-nums;
-  }
-  .pass .train { font-size: 13px; font-weight: 700; color: var(--pine); }
-  .pass.back .train { color: var(--amber); }
-  .pass .route { font-size: 12.5px; color: var(--ink-soft); margin-top: 3px; line-height: 1.35; }
+  /* Panels */
+  .panel{padding-top:20px;}
+  .panel[hidden]{display:none;}
+  @media (prefers-reduced-motion:no-preference){.panel:not([hidden]){animation:fade .25s ease;}}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
 
-  /* ---- Section ---- */
-  section { margin-top: 28px; }
-  .sec-head {
-    display: flex; align-items: center; gap: 9px; margin-bottom: 13px;
-  }
-  .sec-head h2 {
-    font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
-    margin: 0; font-weight: 700; color: var(--ink-soft);
-  }
-  .sec-head .rule { flex: 1; height: 1px; background: var(--line); }
+  .lede{font-size:15px;color:var(--ink-soft);margin:0 0 18px;text-wrap:pretty;}
+  section.blk{margin-top:26px;}
+  .sec-head{display:flex;align-items:center;gap:9px;margin-bottom:13px;}
+  .sec-head h2{font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;margin:0;font-weight:700;color:var(--ink-soft);}
+  .sec-head .rule{flex:1;height:1px;background:var(--line);}
+  h3.blkt{font-size:20px;letter-spacing:-.01em;margin:2px 0 10px;font-weight:750;text-wrap:balance;}
 
-  /* ---- Timeline ---- */
-  .timeline { position: relative; padding-left: 4px; }
-  .step {
-    display: grid; grid-template-columns: 62px 30px 1fr; align-items: start;
-    column-gap: 10px; padding: 3px 0;
-  }
-  .step .t {
-    font-family: var(--mono); font-size: 14px; font-weight: 600; text-align: right;
-    color: var(--ink); padding-top: 4px; font-variant-numeric: tabular-nums; white-space: nowrap;
-  }
-  .step .t .approx { color: var(--ink-faint); font-weight: 400; }
-  .rail { position: relative; display: flex; justify-content: center; }
-  .rail::before {
-    content: ""; position: absolute; top: 0; bottom: -6px; width: 2px; background: var(--spine); left: 50%; transform: translateX(-50%);
-  }
-  .step:last-child .rail::before { display: none; }
-  .dot {
-    position: relative; z-index: 1; width: 30px; height: 30px; border-radius: 50%;
-    background: var(--surface); border: 1.5px solid var(--line); color: var(--pine);
-    display: flex; align-items: center; justify-content: center; margin-top: 2px;
-    box-shadow: var(--shadow);
-  }
-  .dot.key { background: var(--pine); border-color: var(--pine); color: #fff; }
-  .dot.key.amber { background: var(--amber); border-color: var(--amber); }
-  :root[data-theme="dark"] .dot.key, @media (prefers-color-scheme: dark) { }
-  .dot svg { width: 16px; height: 16px; }
-  .body { padding: 2px 0 10px; }
-  .body .what { font-weight: 650; font-size: 15.5px; letter-spacing: -.01em; }
-  .body .note { font-size: 13.5px; color: var(--ink-soft); margin-top: 2px; }
-  .body .note .mono { font-family: var(--mono); font-size: 12.5px; }
-  .step.major .body .what { color: var(--pine-deep); }
-  @media (prefers-color-scheme: dark) { .step.major .body .what { color: var(--pine); } }
-  :root[data-theme="dark"] .step.major .body .what { color: var(--pine); }
-  :root[data-theme="light"] .step.major .body .what { color: var(--pine-deep); }
+  /* Weather */
+  .weather{display:flex;gap:10px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:11px 14px;box-shadow:var(--shadow);}
+  .weather .em{font-size:22px;line-height:1.1;}
+  .weather b{font-weight:700;} .weather .sub{color:var(--ink-soft);font-size:13.5px;}
 
-  /* ---- Checklist card ---- */
-  .card {
-    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
-    padding: 6px 16px; box-shadow: var(--shadow);
-  }
-  .check {
-    display: grid; grid-template-columns: 26px 1fr; gap: 11px; align-items: start;
-    padding: 13px 0; border-bottom: 1px solid var(--line);
-  }
-  .check:last-child { border-bottom: none; }
-  .box {
-    width: 21px; height: 21px; border-radius: 6px; border: 1.5px solid var(--pine);
-    margin-top: 2px; flex: none;
-  }
-  .check .txt { font-size: 15px; }
-  .check .txt b { font-weight: 700; }
-  .check .txt .sub { display: block; font-size: 13px; color: var(--ink-soft); margin-top: 3px; line-height: 1.45; }
-  .link { color: var(--pine); font-family: var(--mono); font-size: 13px; font-weight: 600; word-break: break-word; }
-  @media (prefers-color-scheme: dark) { .link { color: var(--pine-deep); } }
-  :root[data-theme="dark"] .link { color: var(--pine-deep); }
+  /* Anchors */
+  .anchors{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0 6px;}
+  .pass{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 15px 15px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+  .pass::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--pine);}
+  .pass.back::before{background:var(--amber);}
+  .pass .tag{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;}
+  .pass .time{font-family:var(--mono);font-size:29px;font-weight:700;letter-spacing:-.01em;margin:3px 0 2px;font-variant-numeric:tabular-nums;}
+  .pass .train{font-size:12.5px;font-weight:700;color:var(--pine);} .pass.back .train{color:var(--amber);}
+  .pass .route{font-size:12px;color:var(--ink-soft);margin-top:3px;line-height:1.35;}
 
-  /* ---- Callout ---- */
-  .callout {
-    display: grid; grid-template-columns: 24px 1fr; gap: 11px; align-items: start;
-    background: var(--amber-bg); border: 1px solid var(--amber-line); border-radius: 12px;
-    padding: 13px 15px; margin-top: 12px;
-  }
-  .callout svg { width: 20px; height: 20px; color: var(--amber); margin-top: 1px; }
-  .callout .txt { font-size: 14px; }
-  .callout .txt b { color: var(--amber); font-weight: 750; }
-  .callout.hero { padding: 16px; }
-  .callout.hero .txt { font-size: 15px; }
+  /* Cards & checklist */
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);}
+  .card.pad{padding:6px 16px;}
+  .check{display:grid;grid-template-columns:24px 1fr;gap:11px;align-items:start;padding:13px 0;border-bottom:1px solid var(--line);}
+  .check:last-child{border-bottom:none;}
+  .cbox{width:21px;height:21px;border-radius:6px;border:1.5px solid var(--pine);margin-top:2px;flex:none;background:var(--surface);cursor:pointer;position:relative;appearance:none;-webkit-appearance:none;}
+  .cbox:checked{background:var(--pine);border-color:var(--pine);}
+  .cbox:checked::after{content:"";position:absolute;left:6px;top:2px;width:5px;height:10px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg);}
+  :root[data-theme="dark"] .cbox:checked::after{border-color:#0c130d;}
+  @media (prefers-color-scheme:dark){.cbox:checked::after{border-color:#0c130d;}}
+  .cbox:focus-visible{outline:2px solid var(--amber);outline-offset:2px;}
+  .check .txt{font-size:15px;} .check .txt b{font-weight:700;}
+  .check .txt .sub{display:block;font-size:13px;color:var(--ink-soft);margin-top:3px;line-height:1.45;}
+  .check input:checked ~ .txt{opacity:.5;text-decoration:line-through;text-decoration-color:var(--ink-faint);}
+  .link{color:var(--pine);font-family:var(--mono);font-size:13px;font-weight:600;word-break:break-word;}
+  :root[data-theme="dark"] .link{color:var(--pine-deep);}
+  @media (prefers-color-scheme:dark){.link{color:var(--pine-deep);}}
+  .howto{margin:10px 0 9px;padding-left:20px;font-size:13.5px;color:var(--ink-soft);}
+  .howto li{margin:5px 0;padding-left:4px;} .howto li::marker{color:var(--amber);font-weight:700;} .howto b{color:var(--ink);font-weight:700;}
 
-  /* zoo facts */
-  .facts { display: flex; flex-direction: column; gap: 9px; }
-  .fact { display: grid; grid-template-columns: 22px 1fr; gap: 11px; align-items: start; font-size: 14.5px; }
-  .fact svg { width: 18px; height: 18px; color: var(--pine); margin-top: 2px; }
-  @media (prefers-color-scheme: dark) { .fact svg { color: var(--pine); } }
-  .fact b { font-weight: 700; }
-  .fact .sub { color: var(--ink-soft); font-size: 13px; }
+  /* Timeline */
+  .timeline{position:relative;}
+  .step{display:grid;grid-template-columns:60px 30px 1fr;align-items:start;column-gap:10px;padding:3px 0;}
+  .step .t{font-family:var(--mono);font-size:13.5px;font-weight:600;text-align:right;color:var(--ink);padding-top:4px;font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .step .t .approx{color:var(--ink-faint);font-weight:400;}
+  .rail{position:relative;display:flex;justify-content:center;}
+  .rail::before{content:"";position:absolute;top:0;bottom:-6px;width:2px;background:var(--spine);left:50%;transform:translateX(-50%);}
+  .step:last-child .rail::before{display:none;}
+  .dot{position:relative;z-index:1;width:30px;height:30px;border-radius:50%;background:var(--surface);border:1.5px solid var(--line);color:var(--pine);display:flex;align-items:center;justify-content:center;margin-top:2px;box-shadow:var(--shadow);font-size:15px;}
+  .dot.key{background:var(--pine);border-color:var(--pine);color:#fff;} .dot.key.amber{background:var(--amber);border-color:var(--amber);}
+  .bd{padding:2px 0 10px;} .bd .what{font-weight:650;font-size:15px;letter-spacing:-.01em;} .bd .note{font-size:13.5px;color:var(--ink-soft);margin-top:2px;}
+  .bd .note .mono{font-family:var(--mono);font-size:12.5px;}
+  .step.major .bd .what{color:var(--pine-deep);}
+  :root[data-theme="dark"] .step.major .bd .what{color:var(--pine);}
+  @media (prefers-color-scheme:dark){.step.major .bd .what{color:var(--pine);}}
 
-  /* backup / footer */
-  .backup {
-    background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px;
-    font-size: 14px;
-  }
-  .backup .row { display: flex; gap: 10px; align-items: baseline; padding: 3px 0; }
-  .backup .k { font-family: var(--mono); font-size: 12.5px; color: var(--amber); font-weight: 600; white-space: nowrap; }
-  .backup .v { color: var(--ink-soft); }
-  .backup .v b { color: var(--ink); }
+  /* Callout */
+  .callout{display:grid;grid-template-columns:22px 1fr;gap:11px;align-items:start;background:var(--amber-bg);border:1px solid var(--amber-line);border-radius:12px;padding:13px 15px;margin-top:12px;}
+  .callout .em{font-size:18px;line-height:1.1;} .callout .txt{font-size:14px;} .callout .txt b{color:var(--amber);font-weight:750;}
 
-  footer {
-    margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--line);
-    font-size: 12px; color: var(--ink-faint); text-align: center; line-height: 1.6;
-  }
-  footer .verified { color: var(--pine); font-weight: 600; font-family: var(--mono); font-size: 11.5px; letter-spacing: .04em; }
-  @media (prefers-color-scheme: dark) { footer .verified { color: var(--pine); } }
+  .facts{display:flex;flex-direction:column;gap:10px;}
+  .fact{display:grid;grid-template-columns:22px 1fr;gap:11px;align-items:start;font-size:14.5px;}
+  .fact .em{font-size:17px;line-height:1.15;} .fact b{font-weight:700;} .fact .sub{color:var(--ink-soft);font-size:13px;}
 
-  @media (max-width: 380px) {
-    .anchors { grid-template-columns: 1fr; }
-    .step { grid-template-columns: 54px 28px 1fr; }
-  }
-  @media (prefers-reduced-motion: no-preference) {
-    .pass, .card, .weather { transition: none; }
-  }
+  .backup{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px;}
+  .backup .row{display:flex;gap:10px;align-items:baseline;padding:3px 0;}
+  .backup .k{font-family:var(--mono);font-size:12px;color:var(--amber);font-weight:600;white-space:nowrap;} .backup .v{color:var(--ink-soft);} .backup .v b{color:var(--ink);}
+
+  /* Map */
+  .maptools{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px;}
+  .btn{display:inline-flex;align-items:center;gap:6px;padding:9px 13px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--pine);font-size:13px;font-weight:650;text-decoration:none;box-shadow:var(--shadow);}
+  .btn.primary{background:var(--pine);border-color:var(--pine);color:#fff;}
+  :root[data-theme="dark"] .btn.primary{color:#0c130d;} @media(prefers-color-scheme:dark){.btn.primary{color:#0c130d;}}
+  .btn .em{font-size:15px;}
+  .mapframe{border:1px solid var(--line);border-radius:14px;overflow:auto;box-shadow:var(--shadow);background:var(--surface);-webkit-overflow-scrolling:touch;}
+  .mapframe img{display:block;width:100%;height:auto;min-width:520px;}
+  .maphint{font-size:12px;color:var(--ink-faint);text-align:center;margin:8px 0 0;}
+  .routelist{counter-reset:r;list-style:none;padding:0;margin:14px 0 0;display:flex;flex-direction:column;gap:0;}
+  .routelist li{counter-increment:r;display:grid;grid-template-columns:28px 1fr;gap:11px;align-items:start;padding:11px 0;border-bottom:1px solid var(--line);font-size:14.5px;}
+  .routelist li:last-child{border-bottom:none;}
+  .routelist li::before{content:counter(r);grid-row:span 2;width:26px;height:26px;border-radius:50%;background:var(--pine);color:#fff;font-family:var(--mono);font-weight:700;font-size:13px;display:flex;align-items:center;justify-content:center;margin-top:1px;}
+  :root[data-theme="dark"] .routelist li::before{color:#0c130d;} @media(prefers-color-scheme:dark){.routelist li::before{color:#0c130d;}}
+  .routelist b{font-weight:700;} .routelist .sub{display:block;color:var(--ink-soft);font-size:12.5px;margin-top:2px;}
+  .pill{display:inline-block;font-size:11px;font-family:var(--mono);letter-spacing:.03em;padding:2px 7px;border-radius:999px;background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-line);margin-left:6px;vertical-align:middle;}
+
+  /* Animal cards */
+  .agrid{display:grid;grid-template-columns:1fr;gap:12px;}
+  @media(min-width:520px){.agrid{grid-template-columns:1fr 1fr;}}
+  .acard{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 15px;box-shadow:var(--shadow);}
+  .acard .top{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+  .acard .em{font-size:30px;line-height:1;}
+  .acard .nm{font-weight:750;font-size:16px;letter-spacing:-.01em;}
+  .acard ul{margin:0;padding-left:17px;display:flex;flex-direction:column;gap:6px;}
+  .acard li{font-size:13.5px;color:var(--ink);line-height:1.4;} .acard li::marker{color:var(--pine);}
+  .acard .where{margin-top:10px;font-size:12px;color:var(--ink-soft);display:flex;gap:6px;align-items:baseline;}
+  .acard .where .em2{font-size:12px;}
+
+  /* generic list cards (games, facts) */
+  .gcard{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;box-shadow:var(--shadow);}
+  .gcard + .gcard{margin-top:10px;}
+  .gcard .gn{font-weight:700;font-size:15px;margin-bottom:3px;}
+  .gcard .gh{font-size:13.5px;color:var(--ink-soft);line-height:1.45;}
+  .grp-label{font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--amber);margin:22px 0 10px;}
+  .grp-label:first-child{margin-top:4px;}
+
+  /* history timeline */
+  .htl{position:relative;padding-left:20px;}
+  .htl::before{content:"";position:absolute;left:5px;top:6px;bottom:6px;width:2px;background:var(--spine);}
+  .hitem{position:relative;padding:0 0 16px 14px;}
+  .hitem::before{content:"";position:absolute;left:-19px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--pine);border:2px solid var(--ground);}
+  .hitem.panda::before{background:var(--amber);}
+  .hitem .hy{font-family:var(--mono);font-weight:700;font-size:13px;color:var(--amber);}
+  .hitem .he{font-size:14px;color:var(--ink);margin-top:2px;line-height:1.45;}
+
+  .plainlist{display:flex;flex-direction:column;gap:9px;}
+  .plainlist .li{display:grid;grid-template-columns:20px 1fr;gap:10px;font-size:14px;align-items:start;}
+  .plainlist .li .em{font-size:15px;line-height:1.2;}
+  .plainlist .li .sub{color:var(--ink-soft);}
+
+  .infocard{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:13px 15px;box-shadow:var(--shadow);margin-top:12px;font-size:14px;line-height:1.5;}
+  .infocard h4{margin:0 0 6px;font-size:14px;display:flex;align-items:center;gap:7px;}
+  .infocard h4 .em{font-size:16px;} .infocard .body{color:var(--ink-soft);}
+
+  footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-faint);text-align:center;line-height:1.6;}
+  footer .verified{color:var(--pine);font-weight:600;font-family:var(--mono);font-size:11px;letter-spacing:.04em;}
+  @media(prefers-color-scheme:dark){footer .verified{color:var(--pine);}}
+  a{color:var(--pine);} :root[data-theme="dark"] a{color:var(--pine-deep);} @media(prefers-color-scheme:dark){a{color:var(--pine-deep);}}
+  @media(max-width:360px){.anchors{grid-template-columns:1fr;}.step{grid-template-columns:52px 28px 1fr;}}
 </style>
 </head>
 <body>
 
-<!-- icon sprite -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M5 11l1.5-4.5A2 2 0 0 1 8.4 5h7.2a2 2 0 0 1 1.9 1.5L19 11"/><path d="M4 11h16v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1H7v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><circle cx="7.5" cy="14" r="1"/><circle cx="16.5" cy="14" r="1"/>
-  </symbol>
-  <symbol id="i-train" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="5" y="4" width="14" height="12" rx="3"/><path d="M5 10h14"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/><path d="M8 16l-2 3M16 16l2 3"/>
-  </symbol>
-  <symbol id="i-metro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="12" cy="12" r="9"/><path d="M8 16V9l4 4 4-4v7"/>
-  </symbol>
-  <symbol id="i-walk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="13" cy="4.5" r="1.6"/><path d="M11 21l1.5-6-2-2 1-5 3 3 2 1"/><path d="M10.5 13l-2 3"/>
-  </symbol>
-  <symbol id="i-panda" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-    <circle cx="12" cy="13" r="7"/><circle cx="6.5" cy="6.5" r="2.2"/><circle cx="17.5" cy="6.5" r="2.2"/><ellipse cx="9.3" cy="12" rx="1.1" ry="1.5" fill="currentColor" stroke="none"/><ellipse cx="14.7" cy="12" rx="1.1" ry="1.5" fill="currentColor" stroke="none"/><path d="M12 15v1.5"/><path d="M10.5 17.5h3"/>
-  </symbol>
-  <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M6 21V4"/><path d="M6 5h10l-1.5 3L16 11H6"/>
-  </symbol>
-  <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 4l9 15H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".6" fill="currentColor" stroke="none"/>
-  </symbol>
-  <symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M7 18a4 4 0 0 1-.5-7.97A5 5 0 0 1 16 9.5a3.5 3.5 0 0 1 .5 8H7z"/><path d="M9 20l-1 2M13 20l-1 2M17 20l-1 2"/>
-  </symbol>
-  <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M4 11l8-6 8 6"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/>
-  </symbol>
-  <symbol id="i-ticket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2 2 2 0 0 0 0 4 2 2 0 0 1-2 2H6a2 2 0 0 1-2-2 2 2 0 0 0 0-4z"/><path d="M13 6v12" stroke-dasharray="1.5 2"/>
-  </symbol>
-  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M5 12l5 5 9-11"/>
-  </symbol>
-  <symbol id="i-hill" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M3 19l6-9 4 5 3-4 5 8z"/>
-  </symbol>
-  <symbol id="i-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 3s6 6.5 6 10a6 6 0 0 1-12 0c0-3.5 6-10 6-10z"/>
-  </symbol>
-</svg>
-
 <div class="wrap">
 
-  <div class="masthead">
+  <header class="masthead">
     <div class="eyebrow">Family Day Trip · Rail + Zoo</div>
     <h1>The Zoo Day</h1>
     <div class="date-line">Wednesday · July 8, 2026 · Harpers Ferry → Washington DC</div>
-  </div>
+  </header>
 
-  <div class="weather">
-    <svg aria-hidden="true"><use href="#i-cloud"/></svg>
-    <div>
-      <b>Mild &amp; cloudy — high 83°F.</b>
-      <span class="sub"> ~30% showers (mostly before 8am). <b>No heat advisory.</b> Pack a light rain layer + a stroller rain cover, not just sunscreen.</span>
+  <nav class="tabs" aria-label="Trip sections">
+    <div class="tabs-inner" role="tablist">
+      <button class="tab" role="tab" aria-selected="true"  data-tab="plan"><span class="ic">📋</span>Plan</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="map"><span class="ic">🗺️</span>Zoo Map</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="animals"><span class="ic">🦁</span>Animals</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="train"><span class="ic">🚆</span>Train</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="history"><span class="ic">📜</span>History</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="games"><span class="ic">🎮</span>Games</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="pack"><span class="ic">🎒</span>Pack</button>
     </div>
-  </div>
+  </nav>
 
-  <!-- Two locked anchors -->
-  <div class="anchors">
-    <div class="pass out">
-      <div class="tag">▲ Train out</div>
-      <div class="time">7:45<span style="font-size:14px;font-weight:600"> AM</span></div>
-      <div class="train">MARC 880 · latest AM train</div>
-      <div class="route">Brunswick → Union Station<br>arrives <b>9:21 AM</b></div>
-    </div>
-    <div class="pass back">
-      <div class="tag">▼ Train home</div>
-      <div class="time">3:30<span style="font-size:14px;font-weight:600"> PM</span></div>
-      <div class="train">MARC 873 · earliest direct</div>
-      <div class="route">Union Station → Brunswick<br>arrives <b>4:51 PM</b></div>
-    </div>
-  </div>
+  <!-- ===================== PLAN ===================== -->
+  <section class="panel" id="plan" role="tabpanel">
 
-  <!-- BEFORE YOU LEAVE -->
-  <section>
-    <div class="sec-head"><h2>Do tonight — before you sleep</h2><div class="rule"></div></div>
-    <div class="card">
-      <div class="check">
-        <div class="box"></div>
-        <div class="txt">
-          <b>Book 4 free zoo entry passes.</b>
-          <span class="sub">Every person needs their own — <b>including James &amp; Jude</b>. It's a hard gate; don't gamble on walk-ups with two little kids. Weekday = better odds.<br><span class="link">nationalzoo.si.edu/passes</span></span>
-        </div>
-      </div>
-      <div class="check">
-        <div class="box"></div>
-        <div class="txt">
-          <b>Buy the MARC train tickets — CharmPass app.</b>
-          <span class="sub">Download <b>CharmPass</b> (MTA's official app) and buy 2 adult tickets each way — <b>$10 one-way each, $40 round-trip for two</b>. <b>Kids ride free</b> (up to 2 under age 6 per adult), so don't buy tickets for James &amp; Jude. Activate each pair <b>right before you board</b> — outbound at Brunswick, return at Union Station (activating starts the clock). Backup: card machines at both stations. Don't buy onboard — it adds a $5 surcharge.</span>
-        </div>
-      </div>
-      <div class="check">
-        <div class="box"></div>
-        <div class="txt">
-          <b>Get a real SmarTrip ready — for the DC Metro.</b>
-          <span class="sub">Separate ticket from the train: the subway needs a <b>SmarTrip card in Apple Wallet</b> (or plastic) — DC gates don't reliably take a bare credit-card tap. Jude rides free (under 5, up to 2 kids per adult); if James is 5+, he needs a fare too.</span>
-        </div>
-      </div>
-      <div class="check">
-        <div class="box"></div>
-        <div class="txt">
-          <b>Pack the bag.</b>
-          <span class="sub">Water bottles (refill stations inside the zoo), light rain jackets / stroller cover, sunscreen, snacks. Bring the stroller — wagons rent inside, wheelchairs are free.</span>
-        </div>
-      </div>
+    <div class="weather">
+      <span class="em">🌦️</span>
+      <div><b>Mild &amp; cloudy — high 83°F.</b><span class="sub"> ~30% showers (mostly before 8am). <b>No heat advisory.</b> Pack a light rain layer + a stroller rain cover, not just sunscreen.</span></div>
     </div>
+
+    <div class="anchors">
+      <div class="pass out"><div class="tag">▲ Train out</div><div class="time">7:45<span style="font-size:14px;font-weight:600"> AM</span></div><div class="train">MARC 880 · latest AM train</div><div class="route">Brunswick → Union Station<br>arrives <b>9:21 AM</b></div></div>
+      <div class="pass back"><div class="tag">▼ Train home</div><div class="time">3:30<span style="font-size:14px;font-weight:600"> PM</span></div><div class="train">MARC 873 · earliest direct</div><div class="route">Union Station → Brunswick<br>arrives <b>4:51 PM</b></div></div>
+    </div>
+
+    <section class="blk">
+      <div class="sec-head"><h2>Do tonight — before you sleep</h2><div class="rule"></div></div>
+      <div class="card pad">
+        <label class="check"><input type="checkbox" class="cbox persist" data-k="todo-tix"><span class="txt"><b>Buy the MARC train tickets — CharmPass app.</b><span class="sub">Download <b>CharmPass</b> and buy 2 adult tickets each way — <b>$10 one-way each, $40 round-trip for two</b>. Kids ride free (under 6). Activate each pair right before you board. Don't buy onboard — it adds a $5 surcharge.</span></span></label>
+        <label class="check"><input type="checkbox" class="cbox persist" data-k="todo-pass"><span class="txt"><b>Book 4 free zoo entry passes.</b><span class="sub">Every person needs one, <b>including James &amp; Jude</b>. Hard gate — don't gamble on walk-ups. <span class="link">nationalzoo.si.edu/passes</span></span></span></label>
+        <label class="check"><input type="checkbox" class="cbox persist" data-k="todo-smt"><span class="txt"><b>Add a Metro card to Apple Wallet — you &amp; Ashley each.</b><span class="sub">The subway uses <b>SmarTrip</b> (separate from the train). On <b>each</b> phone: open <b>Wallet</b> → tap <b>+</b> → <b>Transit Card</b> → <b>SmarTrip</b> → load <b>$10</b> → turn on <b>Express Mode</b> (tap without unlocking). Kids don't tap.</span></span></label>
+        <label class="check"><input type="checkbox" class="cbox persist" data-k="todo-pack"><span class="txt"><b>Pack the bag.</b><span class="sub">Rain layers, water bottles, sunscreen, snacks, diapers/wipes. Full list on the <b>Pack</b> tab. Bring the stroller (or rent a wagon inside).</span></span></label>
+      </div>
+    </section>
+
+    <section class="blk">
+      <div class="sec-head"><h2>The day, minute by minute</h2><div class="rule"></div></div>
+      <div class="timeline" id="dayline"></div>
+    </section>
+
+    <section class="blk">
+      <div class="sec-head"><h2>Inside the zoo — know before you go</h2><div class="rule"></div></div>
+      <div class="callout"><span class="em">⚠️</span><div class="txt"><b>The internal shuttle is NOT running right now.</b> There's no ride back up the hill. Pace the climb back to the entrance, or turn around before the very bottom. A rented wagon saves little legs.</div></div>
+      <div class="card pad" style="margin-top:13px;padding:14px 16px">
+        <div class="facts">
+          <div class="fact"><span class="em">🐼</span><div><b>Pandas are at the top</b> — Bao Li &amp; Qing Bao, right by the entrance. See them first at 10, no backtracking.</div></div>
+          <div class="fact"><span class="em">⛰️</span><div>The zoo is <b>built on a hill</b> (220 ft up top → 50 ft at the bottom): enter at top, walk DOWN, then back up to leave.</div></div>
+          <div class="fact"><span class="em">🕙</span><div>Open <b>8am–6pm</b> (buildings 9–6). Your 10–2:30 window has hours of margin.</div></div>
+          <div class="fact"><span class="em">🚧</span><div><b>Africa Trail (cheetahs) &amp; the Arabian Leopard are closed</b> for renovation in 2026 — don't route to them.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="blk">
+      <div class="sec-head"><h2>Morning-of + backup plan</h2><div class="rule"></div></div>
+      <div class="card pad" style="margin-bottom:12px">
+        <label class="check"><input type="checkbox" class="cbox persist" data-k="mo-marc"><span class="txt"><b>Glance at MARC service status</b><span class="sub">Confirm the 3:30 (873) is running. <span class="link">mta.maryland.gov</span></span></span></label>
+        <label class="check"><input type="checkbox" class="cbox persist" data-k="mo-elev"><span class="txt"><b>Glance at Metro elevator status</b><span class="sub">Cleveland Park, Woodley Park &amp; Union. <span class="link">wmata.com</span></span></span></label>
+        <label class="check"><input type="checkbox" class="cbox persist" data-k="mo-leave"><span class="txt"><b>Out the door by 7:25.</b><span class="sub">The 7:45 is the only morning train — no cushion behind it.</span></span></label>
+      </div>
+      <div class="backup">
+        <div class="row"><span class="k">MISS THE 3:30?</span><span class="v">Next Brunswick train is <b>MARC 875 · 4:25 PM</b> → arrives Brunswick <b>5:38 PM</b>.</span></div>
+        <div class="row"><span class="k">HEADS UP</span><span class="v">It may leave up to 5 min early — be on the platform by <b>4:20</b>.</span></div>
+        <div class="row"><span class="k">NOTHING BETWEEN</span><span class="v">Brunswick Line is rush-hour only. After 3:30, nothing until 4:25.</span></div>
+      </div>
+    </section>
   </section>
 
-  <!-- THE DAY -->
-  <section>
-    <div class="sec-head"><h2>The day, minute by minute</h2><div class="rule"></div></div>
-    <div class="timeline">
-
-      <div class="step">
-        <div class="t">7:25 <span class="approx">AM</span></div>
-        <div class="rail"><div class="dot"><svg><use href="#i-car"/></svg></div></div>
-        <div class="body">
-          <div class="what">Drive Harpers Ferry → Brunswick MARC</div>
-          <div class="note">~15 min / 8.2 mi. Park free — <span class="mono">675-space lot, 100 S. Maple Ave</span>.</div>
-        </div>
-      </div>
-
-      <div class="step major">
-        <div class="t">7:45 <span class="approx">AM</span></div>
-        <div class="rail"><div class="dot key"><svg><use href="#i-train"/></svg></div></div>
-        <div class="body">
-          <div class="what">MARC 880 departs Brunswick</div>
-          <div class="note">Be on the platform by <b>7:40</b>. This is the last morning train — miss it and there's no next one.</div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="t">9:21 <span class="approx">AM</span></div>
-        <div class="rail"><div class="dot"><svg><use href="#i-flag"/></svg></div></div>
-        <div class="body">
-          <div class="what">Arrive Washington Union Station</div>
-          <div class="note">Follow signs down to the Metro (Red Line). Use the elevators with the stroller.</div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="t"><span class="approx">~</span>9:30 <span class="approx">AM</span></div>
-        <div class="rail"><div class="dot"><svg><use href="#i-metro"/></svg></div></div>
-        <div class="body">
-          <div class="what">Red Line → <b>Shady Grove</b> direction</div>
-          <div class="note">Ride 7 stops to <b>Cleveland Park</b> (~18 min). Not Woodley Park — Cleveland Park is the downhill side.</div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="t"><span class="approx">~</span>9:50 <span class="approx">AM</span></div>
-        <div class="rail"><div class="dot"><svg><use href="#i-walk"/></svg></div></div>
-        <div class="body">
-          <div class="what">Walk downhill to the zoo entrance</div>
-          <div class="note">~12 min, gentle downhill to the Connecticut Ave gate (the lion statues).</div>
-        </div>
-      </div>
-
-      <div class="step major">
-        <div class="t">10:00 <span class="approx">AM</span></div>
-        <div class="rail"><div class="dot key"><svg><use href="#i-panda"/></svg></div></div>
-        <div class="body">
-          <div class="what">Enter the zoo — pandas first</div>
-          <div class="note"><b>Bao Li &amp; Qing Bao</b> are right at the top by the entrance and most active in the morning. See them first, then work downhill through Asia Trail.</div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="t"><span class="approx">~</span>12:30 <span class="approx">PM</span></div>
-        <div class="rail"><div class="dot"><svg><use href="#i-drop"/></svg></div></div>
-        <div class="body">
-          <div class="what">Lunch + water + a sit-down</div>
-          <div class="note">Food trucks &amp; cafés on site (own food is allowed). Refill bottles. Regroup before the walk back up.</div>
-        </div>
-      </div>
-
-      <div class="step major">
-        <div class="t">2:15 <span class="approx">PM</span></div>
-        <div class="rail"><div class="dot key amber"><svg><use href="#i-walk"/></svg></div></div>
-        <div class="body">
-          <div class="what">Start heading out — leave by 2:30</div>
-          <div class="note">Walk back <b>up</b> to the Connecticut Ave exit (no shuttle — see below), then downhill ~10 min to <b>Woodley Park</b> station.</div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="t"><span class="approx">~</span>2:50 <span class="approx">PM</span></div>
-        <div class="rail"><div class="dot"><svg><use href="#i-metro"/></svg></div></div>
-        <div class="body">
-          <div class="what">Woodley Park → <b>Glenmont</b> direction → Union</div>
-          <div class="note"><b>Take the elevator, not the escalator</b> — it's the 2nd-deepest station in the system (150 ft). ~18 min ride back to Union.</div>
-        </div>
-      </div>
-
-      <div class="step major">
-        <div class="t">3:30 <span class="approx">PM</span></div>
-        <div class="rail"><div class="dot key amber"><svg><use href="#i-train"/></svg></div></div>
-        <div class="body">
-          <div class="what">MARC 873 departs Union Station</div>
-          <div class="note">Be at the MARC platform by <b>3:15</b>. Arrives Brunswick <b>4:51 PM</b>.</div>
-        </div>
-      </div>
-
-      <div class="step">
-        <div class="t"><span class="approx">~</span>5:05 <span class="approx">PM</span></div>
-        <div class="rail"><div class="dot"><svg><use href="#i-home"/></svg></div></div>
-        <div class="body">
-          <div class="what">Drive home from Brunswick</div>
-          <div class="note">~15 min back to Harpers Ferry. Two cooked, happy kids.</div>
-        </div>
-      </div>
-
+  <!-- ===================== MAP ===================== -->
+  <section class="panel" id="map" role="tabpanel" hidden>
+    <h3 class="blkt">The official zoo map</h3>
+    <p class="lede">The real Smithsonian map (Jan 2025). Pinch to zoom, or open it full-size. Your game plan is below it — enter at the top, work downhill, ride the wagon back up.</p>
+    <div class="maptools">
+      <a class="btn primary" href="zoo-map.png" target="_blank" rel="noopener"><span class="em">🔍</span>Open full map</a>
+      <a class="btn" href="zoo-map.pdf" target="_blank" rel="noopener"><span class="em">⬇️</span>Printable PDF</a>
+      <a class="btn" href="https://nationalzoo.si.edu/visit/zoo-map" target="_blank" rel="noopener"><span class="em">🌐</span>Live zoo map</a>
     </div>
+    <div class="mapframe"><a href="zoo-map.png" target="_blank" rel="noopener"><img src="zoo-map.png" alt="Smithsonian National Zoo official visitor map" loading="lazy"></a></div>
+    <p class="maphint">Tap the map to open it full-size</p>
+
+    <section class="blk">
+      <div class="sec-head"><h2>Your route, in order (top → bottom)</h2><div class="rule"></div></div>
+      <ol class="routelist" id="routelist"></ol>
+    </section>
   </section>
 
-  <!-- ZOO KNOW-BEFORE -->
-  <section>
-    <div class="sec-head"><h2>Inside the zoo — know before you go</h2><div class="rule"></div></div>
-
-    <div class="callout hero">
-      <svg aria-hidden="true"><use href="#i-alert"/></svg>
-      <div class="txt"><b>The internal shuttle is NOT running right now.</b> There's no ride back up the hill. Either pace the climb back to the entrance, or turn around before you reach the very bottom. A rented wagon saves little legs.</div>
-    </div>
-
-    <div class="card" style="margin-top:14px;padding:16px">
-      <div class="facts">
-        <div class="fact"><svg><use href="#i-panda"/></svg><div><b>Pandas are at the top</b> by the entrance — keep left. See them first at 10, no backtracking.</div></div>
-        <div class="fact"><svg><use href="#i-hill"/></svg><div>The zoo is <b>built on a hill</b>: enter at top, walk down, then walk back up to leave. Plan the day downhill-first.</div></div>
-        <div class="fact"><svg><use href="#i-check"/></svg><div>Open <b>8am–6pm</b> (buildings 9–6). Your 10–2:30 window has hours of margin — zoo says 2–3 hrs to see it all.</div></div>
-        <div class="fact"><svg><use href="#i-drop"/></svg><div>Water refill stations throughout. Strollers/wagons rent at the Visitor Center; <b>wheelchairs are free</b>.</div></div>
-      </div>
-    </div>
+  <!-- ===================== ANIMALS ===================== -->
+  <section class="panel" id="animals" role="tabpanel" hidden>
+    <h3 class="blkt">Who you'll meet 🦁</h3>
+    <p class="lede">The stars to hunt down — with a fact or two for the kids and where to find each one. (All confirmed open for 2026.)</p>
+    <div class="agrid" id="agrid"></div>
   </section>
 
-  <!-- MORNING OF + BACKUP -->
-  <section>
-    <div class="sec-head"><h2>Morning-of + backup plan</h2><div class="rule"></div></div>
+  <!-- ===================== TRAIN ===================== -->
+  <section class="panel" id="train" role="tabpanel" hidden>
+    <h3 class="blkt">The train ride 🚆</h3>
+    <p class="lede">~1½ hours each way. Grab a window. Here's everything to spot and know — Brunswick to Washington.</p>
 
-    <div class="card" style="padding:6px 16px;margin-bottom:12px">
-      <div class="check">
-        <div class="box"></div>
-        <div class="txt"><b>Glance at MARC service status</b><span class="sub">Confirm the 3:30 (873) is running — a severe-weather "R" schedule would drop it. Forecast says unlikely. <span class="link">mta.maryland.gov</span></span></div>
-      </div>
-      <div class="check">
-        <div class="box"></div>
-        <div class="txt"><b>Glance at Metro elevator status</b><span class="sub">Cleveland Park, Woodley Park &amp; Union were all in service yesterday. <span class="link">wmata.com</span></span></div>
-      </div>
-      <div class="check">
-        <div class="box"></div>
-        <div class="txt"><b>Out the door by 7:25.</b><span class="sub">The 7:45 is the only morning train — no cushion behind it.</span></div>
-      </div>
-    </div>
+    <section class="blk">
+      <div class="sec-head"><h2>Out the window, in order</h2><div class="rule"></div></div>
+      <div class="timeline" id="trainroute"></div>
+    </section>
 
-    <div class="backup">
-      <div class="row"><span class="k">MISS THE 3:30?</span><span class="v">Next Brunswick train is <b>MARC 875 · 4:25 PM</b> → arrives Brunswick <b>5:38 PM</b>.</span></div>
-      <div class="row"><span class="k">HEADS UP</span><span class="v">It may leave up to 5 min early — be on the platform by <b>4:20</b>.</span></div>
-      <div class="row"><span class="k">NOTHING BETWEEN</span><span class="v">The Brunswick Line is rush-hour only. After 3:30 there is no train until 4:25.</span></div>
-    </div>
+    <section class="blk">
+      <div class="sec-head"><h2>Spot it out the window</h2><div class="rule"></div></div>
+      <p class="lede" style="margin-bottom:12px">Tap each one as you see it — it saves as you go.</p>
+      <div class="card pad" id="windowwatch"></div>
+    </section>
+
+    <section class="blk">
+      <div class="sec-head"><h2>Cool train facts</h2><div class="rule"></div></div>
+      <div id="trainfacts"></div>
+    </section>
+
+    <section class="blk">
+      <div class="sec-head"><h2>Railroad history</h2><div class="rule"></div></div>
+      <div class="htl" id="railhist"></div>
+    </section>
+  </section>
+
+  <!-- ===================== HISTORY ===================== -->
+  <section class="panel" id="history" role="tabpanel" hidden>
+    <h3 class="blkt">The story 📜</h3>
+    <p class="lede">How this zoo came to be — and the wild diplomatic saga of its pandas.</p>
+
+    <section class="blk">
+      <div class="sec-head"><h2>Surprising facts</h2><div class="rule"></div></div>
+      <div class="plainlist" id="zoofacts"></div>
+    </section>
+
+    <section class="blk">
+      <div class="sec-head"><h2>The zoo through time</h2><div class="rule"></div></div>
+      <div class="htl" id="zoohist"></div>
+    </section>
+
+    <section class="blk">
+      <div class="sec-head"><h2>Panda diplomacy 🐼</h2><div class="rule"></div></div>
+      <div class="htl" id="pandahist"></div>
+    </section>
+  </section>
+
+  <!-- ===================== GAMES ===================== -->
+  <section class="panel" id="games" role="tabpanel" hidden>
+    <h3 class="blkt">Keep 'em entertained 🎮</h3>
+    <p class="lede">Games for the car, the train, and the whole day — plus a zoo scavenger hunt that saves as the kids check things off.</p>
+
+    <section class="blk">
+      <div class="sec-head"><h2>Zoo scavenger hunt</h2><div class="rule"></div></div>
+      <p class="lede" style="margin-bottom:12px">Find them anywhere in the zoo. Tap to check off — progress saves.</p>
+      <div class="card pad" id="scav"></div>
+    </section>
+
+    <section class="blk">
+      <div class="sec-head"><h2>Games to play</h2><div class="rule"></div></div>
+      <div id="gamelist"></div>
+    </section>
+  </section>
+
+  <!-- ===================== PACK / KNOW-HOW ===================== -->
+  <section class="panel" id="pack" role="tabpanel" hidden>
+    <h3 class="blkt">Pack &amp; know-how 🎒</h3>
+    <p class="lede">What to bring, where to eat, restrooms &amp; nursing, and what to do if a little one wanders.</p>
+
+    <section class="blk">
+      <div class="sec-head"><h2>Pack list</h2><div class="rule"></div></div>
+      <p class="lede" style="margin-bottom:12px">Tap to check off as you load the bag — it saves.</p>
+      <div class="card pad" id="packlist"></div>
+    </section>
+
+    <section class="blk">
+      <div class="sec-head"><h2>Food on site</h2><div class="rule"></div></div>
+      <div class="plainlist" id="foodlist"></div>
+    </section>
+
+    <section class="blk">
+      <div class="sec-head"><h2>Restrooms, nursing, safety &amp; wagons</h2><div class="rule"></div></div>
+      <div id="knowcards"></div>
+    </section>
+
+    <section class="blk">
+      <div class="sec-head"><h2>Insider tips</h2><div class="rule"></div></div>
+      <div class="plainlist" id="tips"></div>
+    </section>
   </section>
 
   <footer>
-    <div class="verified">✓ EVERY TIME ON THIS CARD WAS VERIFIED · JUL 7, 2026</div>
-    Train times checked against the official Maryland MTA Brunswick Line timetable (to the minute). Zoo hours, pass policy &amp; shuttle status from nationalzoo.si.edu. Metro routing, elevators &amp; fares from wmata.com. Weather from NWS. Corrections vs. the original draft: shuttle is down, it's a mild rainy day (not a heat day), and you need a real SmarTrip.
+    <div class="verified">✓ BUILT ON VERIFIED SOURCES · JUL 7, 2026</div>
+    Train times from the official MTA Brunswick Line timetable. Map, hours, exhibits, pass &amp; shuttle status from nationalzoo.si.edu (Jan 2025 map). Metro from wmata.com. Weather from NWS. Made for James &amp; Jude. 🐼
   </footer>
 
 </div>
+
+<script>
+const DATA = {
+  day: [
+    {t:"7:25 AM",em:"🚗",what:"Drive Harpers Ferry → Brunswick MARC",note:"~15 min / 8.2 mi. Park free — 675-space lot, 100 S. Maple Ave.",major:false},
+    {t:"7:45 AM",em:"🚆",what:"MARC 880 departs Brunswick",note:"Be on the platform by 7:40. Last morning train — no next one.",major:true,dot:"key"},
+    {t:"9:21 AM",em:"📍",what:"Arrive Washington Union Station",note:"Follow signs to the Metro (Red Line). Use the elevators.",major:false},
+    {t:"~9:30 AM",em:"🚇",what:"Red Line → Shady Grove direction",note:"Ride 7 stops to Cleveland Park (~18 min). Downhill side.",major:false},
+    {t:"~9:50 AM",em:"🚶",what:"Walk downhill to the zoo entrance",note:"~12 min, gentle downhill to the Connecticut Ave gate.",major:false},
+    {t:"10:00 AM",em:"🐼",what:"Enter the zoo — pandas first",note:"Bao Li & Qing Bao are at the top, most active AM. See them first, then work downhill.",major:true,dot:"key"},
+    {t:"~12:30 PM",em:"🥪",what:"Lunch + water + a sit-down",note:"Food trucks & cafés on site (own food allowed). Refill bottles.",major:false},
+    {t:"2:15 PM",em:"🚶",what:"Start heading out — leave by 2:30",note:"Walk up to the Connecticut Ave exit, then downhill ~10 min to Woodley Park.",major:true,dot:"key amber"},
+    {t:"~2:50 PM",em:"🚇",what:"Woodley Park → Glenmont dir. → Union",note:"USE THE ELEVATOR (2nd-deepest station). ~18 min ride.",major:false},
+    {t:"3:30 PM",em:"🚆",what:"MARC 873 departs Union Station",note:"Be at the MARC platform by 3:15. Arrives Brunswick 4:51 PM.",major:true,dot:"key amber"},
+    {t:"~5:05 PM",em:"🏡",what:"Drive home from Brunswick",note:"~15 min back to Harpers Ferry. Two cooked, happy kids.",major:false}
+  ],
+  route: [
+    {n:"Giant Pandas",s:"Top, by the entrance — Bao Li & Qing Bao. Go first, before crowds.",must:true},
+    {n:"Great Cats",s:"Lions & tigers, right across from the pandas.",must:true},
+    {n:"Asia Trail",s:"Red pandas & playful otters heading downhill.",must:true},
+    {n:"Elephant Trails",s:"Asian elephants — you hear them before you see them.",must:true},
+    {n:"Small Mammal House",s:"Indoor A/C break — meerkats, naked mole-rats.",must:false},
+    {n:"Great Ape House + O-Line",s:"Gorillas & orangutans; watch overhead for the O-Line cables.",must:true},
+    {n:"Speedwell Carousel",s:"Solar carousel — a reliable toddler reset (small fee).",must:true},
+    {n:"American Trail",s:"Sea lions & seals — catch a feeding/training demo.",must:true},
+    {n:"Amazonia",s:"Indoor rainforest dome — best rain/heat bailout.",must:false},
+    {n:"Kids' Farm + Claws & Paws",s:"Bottom of the hill — goats, cows, the most toddler-y spot. Turn around here.",must:true}
+  ],
+  animals: [
+    {em:"🐼",name:"Giant Panda",facts:["A newborn panda is about the size of a stick of butter — 1/900th the size of its mom!","Pandas munch bamboo 10–16 hours a day and have a special extra 'thumb' to grip the stalks."],where:"Rubenstein Family Giant Panda Habitat (Bao Li & Qing Bao)"},
+    {em:"🐘",name:"Asian Elephant",facts:["An elephant's trunk has about 150,000 tiny muscles — strong enough to pull a branch, gentle enough to pick up one leaf.","A grown elephant can eat up to 330 pounds of plants and drink ~50 gallons of water a day."],where:"Elephant Trails"},
+    {em:"🦁",name:"Lion",facts:["A lion's roar is so loud you can hear it from up to 5 miles away.","Lions live in big families called prides — as many as 40 lions."],where:"Great Cats"},
+    {em:"🐯",name:"Tiger",facts:["Every tiger's stripes are different, like fingerprints — no two match.","Tigers are the biggest cats on Earth and LOVE water — they'll swim a lake 5 miles wide to cool off."],where:"Great Cats"},
+    {em:"🦍",name:"Western Lowland Gorilla",facts:["Every gorilla has its very own nose print — no two are exactly the same.","Every night a gorilla builds a fresh, cozy nest of leaves and branches to sleep in."],where:"Great Ape House"},
+    {em:"🦧",name:"Orangutan",facts:["The word 'orangutan' means 'person of the forest.'","Here they travel between two buildings on the O-Line — cables 50 feet up, right over your heads!"],where:"Great Ape House & Think Tank (look up for the O-Line)"},
+    {em:"🦭",name:"California Sea Lion",facts:["Sea lions can zoom through the water at 25–30 mph — as fast as a car on your street.","Sea lions have little ear flaps and can turn their back flippers around to 'walk' on land."],where:"American Trail (peek through the underwater windows)"},
+    {em:"🦥",name:"Two-Toed Sloth",facts:["Sloths rest about 15 hours a day and spend almost their whole lives hanging upside down.","Tiny algae grows in a sloth's fur and turns it slightly green — camouflage among the leaves!"],where:"Amazonia rainforest dome"},
+    {em:"🦎",name:"Komodo Dragon",facts:["The biggest lizard in the world — up to 10 feet long, longer than a grown-up is tall.","It smells with its long forked yellow tongue and can sniff out a meal from over 2 miles away."],where:"Reptile Discovery Center"},
+    {em:"🐀",name:"Naked Mole-Rat",facts:["They live underground in big families with just one queen in charge — like bees or ants!","Their front teeth are OUTSIDE their lips so they never get a mouthful of dirt — and they live up to 30 years."],where:"Small Mammal House"}
+  ],
+  trainRoute: [
+    {em:"🚉",where:"Brunswick, MD (all aboard)",see:"The Potomac River and old C&O Canal run right by the station, and next to the platform is the huge Brunswick rail yard — once ~7 miles long with 70+ tracks."},
+    {em:"🏰",where:"Point of Rocks",see:"A pointed rocky cliff over the river names the town. The station is a famous castle-like Victorian B&O depot built in 1875."},
+    {em:"🌊",where:"Monocacy River crossing",see:"The train rumbles across a bridge over the Monocacy River — look straight down for the water below you."},
+    {em:"⛰️",where:"Dickerson",see:"The tall smokestack of the Dickerson power plant stands by the river, and off to the side rises Sugarloaf Mountain — a lonely little peak above flat farmland."},
+    {em:"🚜",where:"Barnesville farmland",see:"The Agricultural Reserve: red barns, tall silos, cornfields, cows and horses. Best stretch for Sugarloaf views."},
+    {em:"🌲",where:"Rockville / Kensington",see:"The train crosses Rock Creek and rolls through leafy parkland as farms turn into busy DC suburbs."},
+    {em:"🚇",where:"Silver Spring",see:"Silver, driverless Metro trains run right beside you — no engine, powered by an electric third rail (never touch it!). Your MARC train carries its own diesel engine."},
+    {em:"🏛️",where:"Washington Union Station",see:"Rails fan out from two into dozens past parked Amtrak trains. Inside: a giant arched ceiling 96 feet high, trimmed with real gold leaf — the world's largest station when it opened in 1907."}
+  ],
+  windowWatch: [
+    "The Potomac River & C&O Canal right beside the tracks at Brunswick",
+    "Long lines of parked freight cars in the Brunswick rail yard",
+    "The castle-like stone station at Point of Rocks",
+    "Water below as the train crosses the Monocacy River bridge",
+    "Sugarloaf Mountain — one lonely peak over the farm fields",
+    "The tall smokestack of the Dickerson power plant",
+    "Cows, horses, red barns & tall silos in the farmland",
+    "A silver Metro train zipping by at Silver Spring (no engine!)",
+    "A super-long CSX freight train sharing the tracks",
+    "Rails spreading from two into dozens rolling into Union Station",
+    "The giant gold-trimmed arched ceiling inside Union Station"
+  ],
+  trainFacts: [
+    "Your MARC train is pulled by a diesel-electric locomotive: a big diesel engine spins a generator that makes electricity, and that turns motors on the wheels — no overhead wires needed.",
+    "MARC trains 'push-pull': engine on one end, a 'cab car' with controls on the other, so the train never turns around. Into DC, the engine usually pushes from the back.",
+    "The newest engines are Siemens Chargers (from 2018). A Brunswick Line train is usually 1–2 locomotives plus 4–6 passenger cars.",
+    "The DC Metro trains at Silver Spring have NO engine — they pull ~750 volts from a third rail with a metal shoe. That's why it's so dangerous to touch.",
+    "The Brunswick Line is about 74 miles long — MARC's second-longest — and runs weekdays only, mostly for DC commuters.",
+    "The tracks belong to CSX, a freight railroad, so watch for a mile-long freight train of tank cars, boxcars and containers.",
+    "Union Station was the largest train station in the world when it opened — once ~75 miles of track over ~200 acres, with a 96-foot gold-leaf ceiling."
+  ],
+  railHist: [
+    {y:"1827",e:"The Baltimore & Ohio (B&O) Railroad is chartered — the first common-carrier railroad in the U.S. Your line grew out of the B&O."},
+    {y:"1873",e:"The B&O's Metropolitan Branch opens between Washington and Point of Rocks — the very route (now CSX's Metropolitan Subdivision) the Brunswick Line still uses."},
+    {y:"1883",e:"The B&O picks little Berlin, MD (soon renamed Brunswick) for a giant freight yard and locomotive shops — steam engines could only run so far before refueling."},
+    {y:"1890",e:"Brunswick is incorporated and its big classification yard opens. Population: about 200."},
+    {y:"1907",e:"Washington Union Station opens; the first train pulls in at 6:50 a.m. on Oct 27. Designed by Daniel Burnham, it was the world's largest station."},
+    {y:"1910",e:"Brunswick has boomed to ~5,000 — a true B&O town with a roundhouse, repair shops and a 7-mile rail yard."},
+    {y:"1950s",e:"Railroads switch from steam to diesel; diesels run farther between stops, so the yard's work shrinks — but commuter trains still run the old B&O route every weekday."}
+  ],
+  zooFacts: [
+    {em:"🎟️",t:"Admission is completely free — the zoo has never charged, and draws ~2 million visitors a year."},
+    {em:"🦬",t:"It began as a rescue for the American bison: a Smithsonian taxidermist alarmed by their collapse brought a small herd to the National Mall in 1887."},
+    {em:"🌳",t:"The grounds were laid out by Frederick Law Olmsted Sr. — the same designer as New York's Central Park."},
+    {em:"🦧",t:"Orangutans commute on the 'O-Line,' cable towers up to 50 feet high, between the Great Ape House and Think Tank — over visitors' heads."},
+    {em:"🔬",t:"In 2020 a cub, Xiao Qi Ji, was born via artificial insemination with frozen sperm — mom Mei Xiang, at 22, was the oldest U.S. panda ever to give birth."},
+    {em:"🗺️",t:"It's really two campuses: the 163-acre DC park plus a ~3,200-acre research institute near Front Royal, VA — ~2,000 animals of some 400 species."}
+  ],
+  zooHist: [
+    {y:"1887",e:"Alarmed by the near-extinction of the American bison, Smithsonian taxidermist William Temple Hornaday displays live bison and deer on the National Mall — the nucleus of the future zoo."},
+    {y:"1889",e:"President Grover Cleveland signs an act of Congress creating the National Zoological Park 'for the advancement of science and the instruction and recreation of the people.'"},
+    {y:"1890",e:"The zoo is placed under the Smithsonian Institution, where it has remained ever since."},
+    {y:"1891",e:"The zoo opens to the public on its 163-acre site in Rock Creek Park. Frederick Law Olmsted Sr. shaped its park-like plan."},
+    {y:"1958",e:"Friends of the National Zoo (FONZ) is founded to support the zoo."},
+    {y:"1974",e:"Director Theodore Reed founds the Conservation & Research Center on former Army land near Front Royal, VA for endangered-species breeding."},
+    {y:"2006",e:"Asia Trail opens — a major modernization (sloth bears, red pandas, fishing cats, clouded leopards, giant pandas)."},
+    {y:"2010",e:"The research center is renamed the Smithsonian Conservation Biology Institute (SCBI)."}
+  ],
+  pandaHist: [
+    {y:"1972",e:"Ling-Ling & Hsing-Hsing, the zoo's first pandas, arrive from China after Nixon's historic visit — launching modern 'panda diplomacy.'"},
+    {y:"1992",e:"Ling-Ling dies at age 23. The pair's five cubs had not survived."},
+    {y:"1999",e:"Hsing-Hsing is euthanized at 28, ending the first panda era."},
+    {y:"2000",e:"Mei Xiang & Tian Tian arrive on a 10-year loan — the start of a far more successful chapter."},
+    {y:"2005",e:"Tai Shan is born — the first cub to survive at the National Zoo."},
+    {y:"2010",e:"Tai Shan departs for China, per the agreement returning U.S.-born cubs."},
+    {y:"2013",e:"Bao Bao, a female cub, is born to Mei Xiang & Tian Tian."},
+    {y:"2015",e:"Bei Bei, a male cub, is born."},
+    {y:"2019",e:"Bei Bei departs for China aboard a chartered 'FedEx Panda Express.'"},
+    {y:"2020",e:"Xiao Qi Ji is born; at 22, Mei Xiang becomes the oldest U.S. panda ever to give birth."},
+    {y:"2023",e:"Mei Xiang, Tian Tian & Xiao Qi Ji all leave for China — the zoo has no pandas for the first time since 2000."},
+    {y:"2024",e:"A new pair, Bao Li & Qing Bao, arrive from China (Oct 15). Bao Li is a grandson of Tai Shan!"},
+    {y:"2025",e:"Jan 24 — Bao Li & Qing Bao make their public debut at the refurbished habitat. They're who you'll see."}
+  ],
+  scav: [
+    "An animal bigger than Daddy","Something with stripes","An animal taking a nap","A really long neck","An animal splashing or swimming","A bird with bright colors","A curly or swishy tail","An animal eating a snack","A baby animal next to a grown-up","Two animals touching or cuddling","An animal with horns or antlers","A creature smaller than your hand"
+  ],
+  games: {
+    "Car games":[
+      {n:"Red Light, Green Light Cars",h:"Each kid picks a color; every matching car they spot out loud = a point. First to 10 is 'Traffic Champion' when you park."},
+      {n:"Beep Beep Boss",h:"One kid is 'Boss' and calls a silly command at each turn or stop (wiggle, honk, freeze). Everyone obeys until the next turn, then swap."},
+      {n:"Where Are We Going?",h:"Give one-word clues about the destination (stripes, tall, hay, roar) and let the kids guess which zoo animals are waiting."},
+      {n:"Rainbow Road Race",h:"Call out a color; everyone races to spot something outside that matches. First to point and name it wins the round."}
+    ],
+    "Train games":[
+      {n:"Window Bingo Zoom",h:"Before the train moves, each kid names three things they'll bet they see (cow, bridge, red roof). 'Zoom' a finger when one flies past."},
+      {n:"Fast Thing, Slow Thing",h:"Call 'FAST!' for anything blurring by close to the tracks and 'sloooow' for far-off things — quietly teaches near vs. far."},
+      {n:"Cloud Zoo",h:"Decide together what animal each cloud looks like and give it a silly name. Keep a running count of your 'sky animals.'"},
+      {n:"Blink-and-Catch",h:"Pick a target (a horse, a water tower, a yellow car); first to spot one yells 'CAUGHT IT!' and picks the next target."},
+      {n:"Tunnel Wish",h:"Whenever the train dives into shade or under a bridge, everyone closes their eyes and makes a wish, then pops them open on the other side."}
+    ],
+    "Anytime games":[
+      {n:"I Spy: Zoo Edition",h:"Classic I-Spy, animals only ('I spy something gray with big ears'). Little ones can give a sound clue instead of a color."},
+      {n:"Guess My Animal (20 Questions Jr.)",h:"One person thinks of an animal; others ask yes/no questions ('Does it have fur?'). Cap it at ten for short attention spans."},
+      {n:"Animal Charades",h:"Whisper an animal to one player who acts it out — no talking, just the best roar, waddle or slither."},
+      {n:"Copycat Critter",h:"One person makes an animal move and noise; everyone copies before the leader switches — faster and faster."},
+      {n:"One-Word Story Zoo",h:"Build a silly story one word at a time around the group ('The… lion… ate… a… pizza…'). Ends ridiculous, every time."}
+    ]
+  },
+  pack: [
+    "Refillable water bottles for everyone","Lightweight rain jackets or ponchos (×4)","Stroller/wagon rain cover","Sunscreen + sun hats for the kids","Sunglasses","Cooler with picnic lunch + snacks (no glass)","Extra diapers, wipes, change of clothes per kid","Hand sanitizer","Baby carrier as a hill/stairs backup","Portable phone charger","Cash/card for rentals & food trucks","Small towel or blanket for shade breaks"
+  ],
+  food: [
+    {em:"🥪",t:"BYO allowed — bring your own food & non-alcoholic drinks (perfect for a toddler picnic). No glass; no eating inside animal buildings."},
+    {em:"🍕",t:"Sbarro at Panda Plaza — pizza, tenders, fries. Opens 9am (earliest sit-down)."},
+    {em:"🍔",t:"Elevation Burger at Mane Grill (Lion-Tiger Hill) — burgers, chicken, veggie, hot dogs. Opens 10:30am."},
+    {em:"🥯",t:"Zoo Market Café & Deli (by Small Mammal House) — made-to-order sandwiches, salads, coffee."},
+    {em:"🥨",t:"Snack stands from 9am — pretzels, cinnamon buns, churros, ice cream at Panda Overlook."},
+    {em:"🚚",t:"Food trucks throughout — popcorn, coffee, ice cream, BBQ. Hours vary."},
+    {em:"💧",t:"Water fountains & refill stations everywhere — bring bottles and skip buying water."}
+  ],
+  know: [
+    {em:"🚻",h:"Restrooms & nursing",b:"Restrooms throughout. Family/companion restrooms at the Visitor Center (top), Elephant Outpost, and Conservation Pavilion. Best diaper-changing is behind the Conservation Pavilion by Me & the Bee Playground. Nursing: a private lactation room inside Think Tank (no water/changing there) — access via the free Mamava app, so download it first."},
+    {em:"🚑",h:"First aid & lost child",b:"First Aid + Zoo Police is on Lion-Tiger Hill (lower park), off Olmsted Walk near Mane Grill. Lost child: go straight to the Visitor Center (top) or the Information Station (bottom), or flag any staff. Save these: Guest Services 202-633-2614, Zoo Police 202-633-4134. Tip: snap a photo of each kid's outfit at the entrance. Rule: never lift kids over any rail, fence or moat."},
+    {em:"🛒",h:"Strollers & wagons",b:"First-come, first-served at the Visitor Center (top) or Information Station (bottom). Single stroller $15, wagon $17, scooter $40; manual wheelchairs FREE. Wagons sell out on warm days — grab one at opening. With no shuttle on the hill, a wagon is the smart move for two toddlers."}
+  ],
+  tips: [
+    {em:"🌅",t:"Arrive right at 8am opening — animals are most active in the cool morning, and you beat the heat, crowds, and the Panda Plaza jam (buildings open 9am)."},
+    {em:"⛰️",t:"Beat the hill: enter at the top (Connecticut Ave), walk DOWN Olmsted Walk, and save the uphill return for when the kids are riding in the wagon."},
+    {em:"🛒",t:"Grab a wagon at opening ($17) — on warm days they're gone by late morning. Rentals at both the top and bottom."},
+    {em:"🎟️",t:"Reserve free entry passes in advance (every guest, including infants) and pre-buy parking online ($30 vs $40) if driving."},
+    {em:"🌧️",t:"Rain plan: the indoor houses (Small Mammal House, Reptile Discovery Center, Amazonia) double as dry, A/C shelters — route through them if a shower hits."},
+    {em:"💧",t:"Hydrate free — fountains and refill stations are everywhere; refill rather than buy."},
+    {em:"🐐",t:"Quietest, most toddler-friendly stretch: Kids' Farm at the bottom — a great end point before the wagon ride back up."}
+  ]
+};
+
+// ---------- render helpers ----------
+const $ = s => document.querySelector(s);
+const el = (tag, cls, html) => { const n=document.createElement(tag); if(cls)n.className=cls; if(html!=null)n.innerHTML=html; return n; };
+
+// day timeline
+DATA.day.forEach(s=>{
+  const step=el('div','step'+(s.major?' major':''));
+  step.innerHTML=`<div class="t">${s.t.replace(/^~/,'<span class="approx">~</span>')}</div>
+    <div class="rail"><div class="dot ${s.dot||''}">${s.em}</div></div>
+    <div class="bd"><div class="what">${s.what}</div><div class="note">${s.note}</div></div>`;
+  $('#dayline').appendChild(step);
+});
+
+// route list
+DATA.route.forEach(r=>{
+  const li=el('li',null,`<div><b>${r.n}</b>${r.must?'<span class="pill">must-see</span>':''}<span class="sub">${r.s}</span></div>`);
+  $('#routelist').appendChild(li);
+});
+
+// animals
+DATA.animals.forEach(a=>{
+  const c=el('div','acard');
+  c.innerHTML=`<div class="top"><span class="em">${a.em}</span><span class="nm">${a.name}</span></div>
+    <ul>${a.facts.map(f=>`<li>${f}</li>`).join('')}</ul>
+    <div class="where"><span class="em2">📍</span><span>${a.where}</span></div>`;
+  $('#agrid').appendChild(c);
+});
+
+// train route timeline
+DATA.trainRoute.forEach(s=>{
+  const step=el('div','step');
+  step.innerHTML=`<div class="t" style="font-size:11px;line-height:1.3;white-space:normal;text-align:right">${s.where}</div>
+    <div class="rail"><div class="dot">${s.em}</div></div>
+    <div class="bd"><div class="note" style="font-size:14px;color:var(--ink)">${s.see}</div></div>`;
+  $('#trainroute').appendChild(step);
+});
+
+// train facts
+DATA.trainFacts.forEach(f=>{ const g=el('div','gcard'); g.innerHTML=`<div class="gh">${f}</div>`; $('#trainfacts').appendChild(g); });
+
+// railroad + zoo + panda history
+const tl=(root,items,cls)=>items.forEach(h=>{ const i=el('div','hitem'+(cls?' '+cls:'')); i.innerHTML=`<div class="hy">${h.y}</div><div class="he">${h.e}</div>`; root.appendChild(i); });
+tl($('#railhist'),DATA.railHist);
+tl($('#zoohist'),DATA.zooHist);
+tl($('#pandahist'),DATA.pandaHist,'panda');
+
+// zoo facts
+DATA.zooFacts.forEach(f=>{ const d=el('div','li',`<span class="em">${f.em}</span><span>${f.t}</span>`); $('#zoofacts').appendChild(d); });
+
+// games
+Object.entries(DATA.games).forEach(([grp,list])=>{
+  $('#gamelist').appendChild(el('div','grp-label',grp));
+  list.forEach(g=>{ const c=el('div','gcard'); c.innerHTML=`<div class="gn">${g.n}</div><div class="gh">${g.h}</div>`; $('#gamelist').appendChild(c); });
+});
+
+// food, tips
+DATA.food.forEach(f=>{ const d=el('div','li'); d.innerHTML=`<span class="em">${f.em}</span><span>${f.t}</span>`; $('#foodlist').appendChild(d); });
+DATA.tips.forEach(f=>{ const d=el('div','li'); d.innerHTML=`<span class="em">${f.em}</span><span>${f.t}</span>`; $('#tips').appendChild(d); });
+
+// know cards
+DATA.know.forEach(k=>{ const c=el('div','infocard'); c.innerHTML=`<h4><span class="em">${k.em}</span>${k.h}</h4><div class="body">${k.b}</div>`; $('#knowcards').appendChild(c); });
+
+// interactive checklists (scavenger + pack) with persistence
+function checklist(root,items,prefix){
+  items.forEach((txt,i)=>{
+    const id=prefix+'-'+i;
+    const lab=el('label','check');
+    lab.innerHTML=`<input type="checkbox" class="cbox persist" data-k="${id}"><span class="txt">${txt}</span>`;
+    root.appendChild(lab);
+  });
+}
+checklist($('#scav'),DATA.scav,'scav');
+checklist($('#packlist'),DATA.pack,'pack');
+checklist($('#windowwatch'),DATA.windowWatch,'win');
+
+// persistence
+const KEY='zootrip:';
+document.querySelectorAll('.persist').forEach(cb=>{
+  const k=KEY+cb.dataset.k;
+  try{ if(localStorage.getItem(k)==='1') cb.checked=true; }catch(e){}
+  cb.addEventListener('change',()=>{ try{ cb.checked?localStorage.setItem(k,'1'):localStorage.removeItem(k); }catch(e){} });
+});
+
+// tabs
+const tabs=[...document.querySelectorAll('.tab')];
+const panels={}; document.querySelectorAll('.panel').forEach(p=>panels[p.id]=p);
+function show(name,push){
+  tabs.forEach(t=>t.setAttribute('aria-selected',String(t.dataset.tab===name)));
+  Object.entries(panels).forEach(([id,p])=>p.hidden = id!==name);
+  const active=tabs.find(t=>t.dataset.tab===name); if(active) active.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+  if(push) history.replaceState(null,'','#'+name);
+  window.scrollTo({top:0,behavior:'instant' in window?'instant':'auto'});
+}
+tabs.forEach(t=>t.addEventListener('click',()=>show(t.dataset.tab,true)));
+const start=(location.hash||'').replace('#',''); if(panels[start]) show(start,false);
+</script>
 </body>
 </html>
