@@ -1,0 +1,489 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#235A3A" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#10160F" media="(prefers-color-scheme: dark)">
+<title>Zoo Trip — Wed July 8</title>
+<style>
+  :root {
+    --ground: #F2F4EC;
+    --surface: #FCFDFA;
+    --surface-2: #EFF2E9;
+    --ink: #17231C;
+    --ink-soft: #4C5B51;
+    --ink-faint: #7C8A80;
+    --line: #DBE2D4;
+    --pine: #235A3A;
+    --pine-deep: #163B27;
+    --amber: #B4700C;
+    --amber-bg: #FBEFD7;
+    --amber-line: #E9C889;
+    --spine: #C3D2BC;
+    --shadow: 0 1px 2px rgba(22,45,29,.05), 0 6px 20px rgba(22,45,29,.06);
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #10160F;
+      --surface: #182019;
+      --surface-2: #1E271F;
+      --ink: #E9EEE6;
+      --ink-soft: #A6B4A6;
+      --ink-faint: #74836F;
+      --line: #2A362B;
+      --pine: #6FC08D;
+      --pine-deep: #8FD3A8;
+      --amber: #E7B15A;
+      --amber-bg: #2C2314;
+      --amber-line: #5A4423;
+      --spine: #33422F;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.28);
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #F2F4EC; --surface: #FCFDFA; --surface-2: #EFF2E9; --ink: #17231C;
+    --ink-soft: #4C5B51; --ink-faint: #7C8A80; --line: #DBE2D4; --pine: #235A3A;
+    --pine-deep: #163B27; --amber: #B4700C; --amber-bg: #FBEFD7; --amber-line: #E9C889;
+    --spine: #C3D2BC; --shadow: 0 1px 2px rgba(22,45,29,.05), 0 6px 20px rgba(22,45,29,.06);
+  }
+  :root[data-theme="dark"] {
+    --ground: #10160F; --surface: #182019; --surface-2: #1E271F; --ink: #E9EEE6;
+    --ink-soft: #A6B4A6; --ink-faint: #74836F; --line: #2A362B; --pine: #6FC08D;
+    --pine-deep: #8FD3A8; --amber: #E7B15A; --amber-bg: #2C2314; --amber-line: #5A4423;
+    --spine: #33422F; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 8px 24px rgba(0,0,0,.28);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font-family: var(--sans); line-height: 1.5;
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  }
+  .wrap { max-width: 620px; margin: 0 auto; padding: 22px 18px 64px; }
+
+  /* ---- Header ---- */
+  .masthead { text-align: center; padding: 12px 0 6px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--amber); font-weight: 600;
+  }
+  h1 {
+    font-size: clamp(30px, 8vw, 42px); line-height: 1.02; margin: 8px 0 6px;
+    letter-spacing: -.02em; font-weight: 800; text-wrap: balance;
+  }
+  .date-line { font-size: 15px; color: var(--ink-soft); font-weight: 600; }
+
+  .weather {
+    display: flex; gap: 10px; align-items: flex-start; margin: 16px auto 0;
+    max-width: 480px; background: var(--surface); border: 1px solid var(--line);
+    border-radius: 12px; padding: 11px 14px; box-shadow: var(--shadow); text-align: left;
+  }
+  .weather svg { flex: none; width: 22px; height: 22px; color: var(--amber); margin-top: 1px; }
+  .weather b { font-weight: 700; }
+  .weather .sub { color: var(--ink-soft); font-size: 13.5px; }
+
+  /* ---- Boarding-pass anchors ---- */
+  .anchors { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0 6px; }
+  .pass {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 14px 15px 15px; box-shadow: var(--shadow); position: relative; overflow: hidden;
+  }
+  .pass::before {
+    content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--pine);
+  }
+  .pass.back::before { background: var(--amber); }
+  .pass .tag {
+    font-family: var(--mono); font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ink-faint); font-weight: 600;
+  }
+  .pass .time {
+    font-family: var(--mono); font-size: 30px; font-weight: 700; letter-spacing: -.01em;
+    margin: 3px 0 2px; font-variant-numeric: tabular-nums;
+  }
+  .pass .train { font-size: 13px; font-weight: 700; color: var(--pine); }
+  .pass.back .train { color: var(--amber); }
+  .pass .route { font-size: 12.5px; color: var(--ink-soft); margin-top: 3px; line-height: 1.35; }
+
+  /* ---- Section ---- */
+  section { margin-top: 28px; }
+  .sec-head {
+    display: flex; align-items: center; gap: 9px; margin-bottom: 13px;
+  }
+  .sec-head h2 {
+    font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+    margin: 0; font-weight: 700; color: var(--ink-soft);
+  }
+  .sec-head .rule { flex: 1; height: 1px; background: var(--line); }
+
+  /* ---- Timeline ---- */
+  .timeline { position: relative; padding-left: 4px; }
+  .step {
+    display: grid; grid-template-columns: 62px 30px 1fr; align-items: start;
+    column-gap: 10px; padding: 3px 0;
+  }
+  .step .t {
+    font-family: var(--mono); font-size: 14px; font-weight: 600; text-align: right;
+    color: var(--ink); padding-top: 4px; font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  .step .t .approx { color: var(--ink-faint); font-weight: 400; }
+  .rail { position: relative; display: flex; justify-content: center; }
+  .rail::before {
+    content: ""; position: absolute; top: 0; bottom: -6px; width: 2px; background: var(--spine); left: 50%; transform: translateX(-50%);
+  }
+  .step:last-child .rail::before { display: none; }
+  .dot {
+    position: relative; z-index: 1; width: 30px; height: 30px; border-radius: 50%;
+    background: var(--surface); border: 1.5px solid var(--line); color: var(--pine);
+    display: flex; align-items: center; justify-content: center; margin-top: 2px;
+    box-shadow: var(--shadow);
+  }
+  .dot.key { background: var(--pine); border-color: var(--pine); color: #fff; }
+  .dot.key.amber { background: var(--amber); border-color: var(--amber); }
+  :root[data-theme="dark"] .dot.key, @media (prefers-color-scheme: dark) { }
+  .dot svg { width: 16px; height: 16px; }
+  .body { padding: 2px 0 10px; }
+  .body .what { font-weight: 650; font-size: 15.5px; letter-spacing: -.01em; }
+  .body .note { font-size: 13.5px; color: var(--ink-soft); margin-top: 2px; }
+  .body .note .mono { font-family: var(--mono); font-size: 12.5px; }
+  .step.major .body .what { color: var(--pine-deep); }
+  @media (prefers-color-scheme: dark) { .step.major .body .what { color: var(--pine); } }
+  :root[data-theme="dark"] .step.major .body .what { color: var(--pine); }
+  :root[data-theme="light"] .step.major .body .what { color: var(--pine-deep); }
+
+  /* ---- Checklist card ---- */
+  .card {
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 6px 16px; box-shadow: var(--shadow);
+  }
+  .check {
+    display: grid; grid-template-columns: 26px 1fr; gap: 11px; align-items: start;
+    padding: 13px 0; border-bottom: 1px solid var(--line);
+  }
+  .check:last-child { border-bottom: none; }
+  .box {
+    width: 21px; height: 21px; border-radius: 6px; border: 1.5px solid var(--pine);
+    margin-top: 2px; flex: none;
+  }
+  .check .txt { font-size: 15px; }
+  .check .txt b { font-weight: 700; }
+  .check .txt .sub { display: block; font-size: 13px; color: var(--ink-soft); margin-top: 3px; line-height: 1.45; }
+  .link { color: var(--pine); font-family: var(--mono); font-size: 13px; font-weight: 600; word-break: break-word; }
+  @media (prefers-color-scheme: dark) { .link { color: var(--pine-deep); } }
+  :root[data-theme="dark"] .link { color: var(--pine-deep); }
+
+  /* ---- Callout ---- */
+  .callout {
+    display: grid; grid-template-columns: 24px 1fr; gap: 11px; align-items: start;
+    background: var(--amber-bg); border: 1px solid var(--amber-line); border-radius: 12px;
+    padding: 13px 15px; margin-top: 12px;
+  }
+  .callout svg { width: 20px; height: 20px; color: var(--amber); margin-top: 1px; }
+  .callout .txt { font-size: 14px; }
+  .callout .txt b { color: var(--amber); font-weight: 750; }
+  .callout.hero { padding: 16px; }
+  .callout.hero .txt { font-size: 15px; }
+
+  /* zoo facts */
+  .facts { display: flex; flex-direction: column; gap: 9px; }
+  .fact { display: grid; grid-template-columns: 22px 1fr; gap: 11px; align-items: start; font-size: 14.5px; }
+  .fact svg { width: 18px; height: 18px; color: var(--pine); margin-top: 2px; }
+  @media (prefers-color-scheme: dark) { .fact svg { color: var(--pine); } }
+  .fact b { font-weight: 700; }
+  .fact .sub { color: var(--ink-soft); font-size: 13px; }
+
+  /* backup / footer */
+  .backup {
+    background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px;
+    font-size: 14px;
+  }
+  .backup .row { display: flex; gap: 10px; align-items: baseline; padding: 3px 0; }
+  .backup .k { font-family: var(--mono); font-size: 12.5px; color: var(--amber); font-weight: 600; white-space: nowrap; }
+  .backup .v { color: var(--ink-soft); }
+  .backup .v b { color: var(--ink); }
+
+  footer {
+    margin-top: 30px; padding-top: 16px; border-top: 1px solid var(--line);
+    font-size: 12px; color: var(--ink-faint); text-align: center; line-height: 1.6;
+  }
+  footer .verified { color: var(--pine); font-weight: 600; font-family: var(--mono); font-size: 11.5px; letter-spacing: .04em; }
+  @media (prefers-color-scheme: dark) { footer .verified { color: var(--pine); } }
+
+  @media (max-width: 380px) {
+    .anchors { grid-template-columns: 1fr; }
+    .step { grid-template-columns: 54px 28px 1fr; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .pass, .card, .weather { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-car" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 11l1.5-4.5A2 2 0 0 1 8.4 5h7.2a2 2 0 0 1 1.9 1.5L19 11"/><path d="M4 11h16v5a1 1 0 0 1-1 1h-1a1 1 0 0 1-1-1v-1H7v1a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1z"/><circle cx="7.5" cy="14" r="1"/><circle cx="16.5" cy="14" r="1"/>
+  </symbol>
+  <symbol id="i-train" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="5" y="4" width="14" height="12" rx="3"/><path d="M5 10h14"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/><path d="M8 16l-2 3M16 16l2 3"/>
+  </symbol>
+  <symbol id="i-metro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="9"/><path d="M8 16V9l4 4 4-4v7"/>
+  </symbol>
+  <symbol id="i-walk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="13" cy="4.5" r="1.6"/><path d="M11 21l1.5-6-2-2 1-5 3 3 2 1"/><path d="M10.5 13l-2 3"/>
+  </symbol>
+  <symbol id="i-panda" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="13" r="7"/><circle cx="6.5" cy="6.5" r="2.2"/><circle cx="17.5" cy="6.5" r="2.2"/><ellipse cx="9.3" cy="12" rx="1.1" ry="1.5" fill="currentColor" stroke="none"/><ellipse cx="14.7" cy="12" rx="1.1" ry="1.5" fill="currentColor" stroke="none"/><path d="M12 15v1.5"/><path d="M10.5 17.5h3"/>
+  </symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 21V4"/><path d="M6 5h10l-1.5 3L16 11H6"/>
+  </symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 4l9 15H3z"/><path d="M12 10v4"/><circle cx="12" cy="17" r=".6" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="i-cloud" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7 18a4 4 0 0 1-.5-7.97A5 5 0 0 1 16 9.5a3.5 3.5 0 0 1 .5 8H7z"/><path d="M9 20l-1 2M13 20l-1 2M17 20l-1 2"/>
+  </symbol>
+  <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 11l8-6 8 6"/><path d="M6 10v9h12v-9"/><path d="M10 19v-5h4v5"/>
+  </symbol>
+  <symbol id="i-ticket" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2 2 2 0 0 0 0 4 2 2 0 0 1-2 2H6a2 2 0 0 1-2-2 2 2 0 0 0 0-4z"/><path d="M13 6v12" stroke-dasharray="1.5 2"/>
+  </symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 12l5 5 9-11"/>
+  </symbol>
+  <symbol id="i-hill" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 19l6-9 4 5 3-4 5 8z"/>
+  </symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3s6 6.5 6 10a6 6 0 0 1-12 0c0-3.5 6-10 6-10z"/>
+  </symbol>
+</svg>
+
+<div class="wrap">
+
+  <div class="masthead">
+    <div class="eyebrow">Family Day Trip · Rail + Zoo</div>
+    <h1>The Zoo Day</h1>
+    <div class="date-line">Wednesday · July 8, 2026 · Harpers Ferry → Washington DC</div>
+  </div>
+
+  <div class="weather">
+    <svg aria-hidden="true"><use href="#i-cloud"/></svg>
+    <div>
+      <b>Mild &amp; cloudy — high 83°F.</b>
+      <span class="sub"> ~30% showers (mostly before 8am). <b>No heat advisory.</b> Pack a light rain layer + a stroller rain cover, not just sunscreen.</span>
+    </div>
+  </div>
+
+  <!-- Two locked anchors -->
+  <div class="anchors">
+    <div class="pass out">
+      <div class="tag">▲ Train out</div>
+      <div class="time">7:45<span style="font-size:14px;font-weight:600"> AM</span></div>
+      <div class="train">MARC 880 · latest AM train</div>
+      <div class="route">Brunswick → Union Station<br>arrives <b>9:21 AM</b></div>
+    </div>
+    <div class="pass back">
+      <div class="tag">▼ Train home</div>
+      <div class="time">3:30<span style="font-size:14px;font-weight:600"> PM</span></div>
+      <div class="train">MARC 873 · earliest direct</div>
+      <div class="route">Union Station → Brunswick<br>arrives <b>4:51 PM</b></div>
+    </div>
+  </div>
+
+  <!-- BEFORE YOU LEAVE -->
+  <section>
+    <div class="sec-head"><h2>Do tonight — before you sleep</h2><div class="rule"></div></div>
+    <div class="card">
+      <div class="check">
+        <div class="box"></div>
+        <div class="txt">
+          <b>Book 4 free zoo entry passes.</b>
+          <span class="sub">Every person needs their own — <b>including James &amp; Jude</b>. It's a hard gate; don't gamble on walk-ups with two little kids. Weekday = better odds.<br><span class="link">nationalzoo.si.edu/passes</span></span>
+        </div>
+      </div>
+      <div class="check">
+        <div class="box"></div>
+        <div class="txt">
+          <b>Get a real SmarTrip ready.</b>
+          <span class="sub">Add a <b>SmarTrip card to Apple Wallet</b> (or grab a plastic one) — DC gates don't reliably take a bare credit-card tap. Jude rides free (under 5, up to 2 kids per adult); if James is 5+, he needs a fare too.</span>
+        </div>
+      </div>
+      <div class="check">
+        <div class="box"></div>
+        <div class="txt">
+          <b>Pack the bag.</b>
+          <span class="sub">Water bottles (refill stations inside the zoo), light rain jackets / stroller cover, sunscreen, snacks. Bring the stroller — wagons rent inside, wheelchairs are free.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE DAY -->
+  <section>
+    <div class="sec-head"><h2>The day, minute by minute</h2><div class="rule"></div></div>
+    <div class="timeline">
+
+      <div class="step">
+        <div class="t">7:25 <span class="approx">AM</span></div>
+        <div class="rail"><div class="dot"><svg><use href="#i-car"/></svg></div></div>
+        <div class="body">
+          <div class="what">Drive Harpers Ferry → Brunswick MARC</div>
+          <div class="note">~15 min / 8.2 mi. Park free — <span class="mono">675-space lot, 100 S. Maple Ave</span>.</div>
+        </div>
+      </div>
+
+      <div class="step major">
+        <div class="t">7:45 <span class="approx">AM</span></div>
+        <div class="rail"><div class="dot key"><svg><use href="#i-train"/></svg></div></div>
+        <div class="body">
+          <div class="what">MARC 880 departs Brunswick</div>
+          <div class="note">Be on the platform by <b>7:40</b>. This is the last morning train — miss it and there's no next one.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="t">9:21 <span class="approx">AM</span></div>
+        <div class="rail"><div class="dot"><svg><use href="#i-flag"/></svg></div></div>
+        <div class="body">
+          <div class="what">Arrive Washington Union Station</div>
+          <div class="note">Follow signs down to the Metro (Red Line). Use the elevators with the stroller.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="t"><span class="approx">~</span>9:30 <span class="approx">AM</span></div>
+        <div class="rail"><div class="dot"><svg><use href="#i-metro"/></svg></div></div>
+        <div class="body">
+          <div class="what">Red Line → <b>Shady Grove</b> direction</div>
+          <div class="note">Ride 7 stops to <b>Cleveland Park</b> (~18 min). Not Woodley Park — Cleveland Park is the downhill side.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="t"><span class="approx">~</span>9:50 <span class="approx">AM</span></div>
+        <div class="rail"><div class="dot"><svg><use href="#i-walk"/></svg></div></div>
+        <div class="body">
+          <div class="what">Walk downhill to the zoo entrance</div>
+          <div class="note">~12 min, gentle downhill to the Connecticut Ave gate (the lion statues).</div>
+        </div>
+      </div>
+
+      <div class="step major">
+        <div class="t">10:00 <span class="approx">AM</span></div>
+        <div class="rail"><div class="dot key"><svg><use href="#i-panda"/></svg></div></div>
+        <div class="body">
+          <div class="what">Enter the zoo — pandas first</div>
+          <div class="note"><b>Bao Li &amp; Qing Bao</b> are right at the top by the entrance and most active in the morning. See them first, then work downhill through Asia Trail.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="t"><span class="approx">~</span>12:30 <span class="approx">PM</span></div>
+        <div class="rail"><div class="dot"><svg><use href="#i-drop"/></svg></div></div>
+        <div class="body">
+          <div class="what">Lunch + water + a sit-down</div>
+          <div class="note">Food trucks &amp; cafés on site (own food is allowed). Refill bottles. Regroup before the walk back up.</div>
+        </div>
+      </div>
+
+      <div class="step major">
+        <div class="t">2:15 <span class="approx">PM</span></div>
+        <div class="rail"><div class="dot key amber"><svg><use href="#i-walk"/></svg></div></div>
+        <div class="body">
+          <div class="what">Start heading out — leave by 2:30</div>
+          <div class="note">Walk back <b>up</b> to the Connecticut Ave exit (no shuttle — see below), then downhill ~10 min to <b>Woodley Park</b> station.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="t"><span class="approx">~</span>2:50 <span class="approx">PM</span></div>
+        <div class="rail"><div class="dot"><svg><use href="#i-metro"/></svg></div></div>
+        <div class="body">
+          <div class="what">Woodley Park → <b>Glenmont</b> direction → Union</div>
+          <div class="note"><b>Take the elevator, not the escalator</b> — it's the 2nd-deepest station in the system (150 ft). ~18 min ride back to Union.</div>
+        </div>
+      </div>
+
+      <div class="step major">
+        <div class="t">3:30 <span class="approx">PM</span></div>
+        <div class="rail"><div class="dot key amber"><svg><use href="#i-train"/></svg></div></div>
+        <div class="body">
+          <div class="what">MARC 873 departs Union Station</div>
+          <div class="note">Be at the MARC platform by <b>3:15</b>. Arrives Brunswick <b>4:51 PM</b>.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="t"><span class="approx">~</span>5:05 <span class="approx">PM</span></div>
+        <div class="rail"><div class="dot"><svg><use href="#i-home"/></svg></div></div>
+        <div class="body">
+          <div class="what">Drive home from Brunswick</div>
+          <div class="note">~15 min back to Harpers Ferry. Two cooked, happy kids.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ZOO KNOW-BEFORE -->
+  <section>
+    <div class="sec-head"><h2>Inside the zoo — know before you go</h2><div class="rule"></div></div>
+
+    <div class="callout hero">
+      <svg aria-hidden="true"><use href="#i-alert"/></svg>
+      <div class="txt"><b>The internal shuttle is NOT running right now.</b> There's no ride back up the hill. Either pace the climb back to the entrance, or turn around before you reach the very bottom. A rented wagon saves little legs.</div>
+    </div>
+
+    <div class="card" style="margin-top:14px;padding:16px">
+      <div class="facts">
+        <div class="fact"><svg><use href="#i-panda"/></svg><div><b>Pandas are at the top</b> by the entrance — keep left. See them first at 10, no backtracking.</div></div>
+        <div class="fact"><svg><use href="#i-hill"/></svg><div>The zoo is <b>built on a hill</b>: enter at top, walk down, then walk back up to leave. Plan the day downhill-first.</div></div>
+        <div class="fact"><svg><use href="#i-check"/></svg><div>Open <b>8am–6pm</b> (buildings 9–6). Your 10–2:30 window has hours of margin — zoo says 2–3 hrs to see it all.</div></div>
+        <div class="fact"><svg><use href="#i-drop"/></svg><div>Water refill stations throughout. Strollers/wagons rent at the Visitor Center; <b>wheelchairs are free</b>.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MORNING OF + BACKUP -->
+  <section>
+    <div class="sec-head"><h2>Morning-of + backup plan</h2><div class="rule"></div></div>
+
+    <div class="card" style="padding:6px 16px;margin-bottom:12px">
+      <div class="check">
+        <div class="box"></div>
+        <div class="txt"><b>Glance at MARC service status</b><span class="sub">Confirm the 3:30 (873) is running — a severe-weather "R" schedule would drop it. Forecast says unlikely. <span class="link">mta.maryland.gov</span></span></div>
+      </div>
+      <div class="check">
+        <div class="box"></div>
+        <div class="txt"><b>Glance at Metro elevator status</b><span class="sub">Cleveland Park, Woodley Park &amp; Union were all in service yesterday. <span class="link">wmata.com</span></span></div>
+      </div>
+      <div class="check">
+        <div class="box"></div>
+        <div class="txt"><b>Out the door by 7:25.</b><span class="sub">The 7:45 is the only morning train — no cushion behind it.</span></div>
+      </div>
+    </div>
+
+    <div class="backup">
+      <div class="row"><span class="k">MISS THE 3:30?</span><span class="v">Next Brunswick train is <b>MARC 875 · 4:25 PM</b> → arrives Brunswick <b>5:38 PM</b>.</span></div>
+      <div class="row"><span class="k">HEADS UP</span><span class="v">It may leave up to 5 min early — be on the platform by <b>4:20</b>.</span></div>
+      <div class="row"><span class="k">NOTHING BETWEEN</span><span class="v">The Brunswick Line is rush-hour only. After 3:30 there is no train until 4:25.</span></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="verified">✓ EVERY TIME ON THIS CARD WAS VERIFIED · JUL 7, 2026</div>
+    Train times checked against the official Maryland MTA Brunswick Line timetable (to the minute). Zoo hours, pass policy &amp; shuttle status from nationalzoo.si.edu. Metro routing, elevators &amp; fares from wmata.com. Weather from NWS. Corrections vs. the original draft: shuttle is down, it's a mild rainy day (not a heat day), and you need a real SmarTrip.
+  </footer>
+
+</div>
+</body>
+</html>
