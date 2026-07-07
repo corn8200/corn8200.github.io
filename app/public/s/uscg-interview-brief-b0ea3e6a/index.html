@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<title>USCG Interview Brief — Plezia (Thu 9 Jul)</title>
+</head>
+<body>
+<title>USCG Interview Brief — Plezia, Thu 09 Jul</title>
+<style>
+  :root {
+    --ground: #eef2f6; --panel: #ffffff; --panel-2: #f6f8fb; --ink: #0d1b2a;
+    --ink-soft: #3f5266; --ink-faint: #6b7f92; --navy: #0b3a5c; --navy-line: #164e77;
+    --cg-orange: #d43a1f; --cg-orange-soft: #f4e3de; --cyan: #0a7d8c; --cyan-soft: #e0f0f2;
+    --good: #1f7a4d; --good-soft: #dcefe4; --warn: #b06a00; --warn-soft: #f6ead2;
+    --border: #d3dde6; --border-strong: #b6c5d2;
+    --shadow: 0 1px 2px rgba(13,27,42,.06), 0 8px 24px rgba(13,27,42,.05);
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0a1420; --panel: #10202f; --panel-2: #14273a; --ink: #e7eef4;
+      --ink-soft: #a9bccc; --ink-faint: #7b90a2; --navy: #4a9fd4; --navy-line: #2c5f85;
+      --cg-orange: #ff6a4d; --cg-orange-soft: #3a1f18; --cyan: #3fc0d0; --cyan-soft: #12313a;
+      --good: #46b985; --good-soft: #14301f; --warn: #e0a03a; --warn-soft: #332512;
+      --border: #24384a; --border-strong: #33506a;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #eef2f6; --panel: #ffffff; --panel-2: #f6f8fb; --ink: #0d1b2a;
+    --ink-soft: #3f5266; --ink-faint: #6b7f92; --navy: #0b3a5c; --navy-line: #164e77;
+    --cg-orange: #d43a1f; --cg-orange-soft: #f4e3de; --cyan: #0a7d8c; --cyan-soft: #e0f0f2;
+    --good: #1f7a4d; --good-soft: #dcefe4; --warn: #b06a00; --warn-soft: #f6ead2;
+    --border: #d3dde6; --border-strong: #b6c5d2;
+    --shadow: 0 1px 2px rgba(13,27,42,.06), 0 8px 24px rgba(13,27,42,.05);
+  }
+  :root[data-theme="dark"] {
+    --ground: #0a1420; --panel: #10202f; --panel-2: #14273a; --ink: #e7eef4;
+    --ink-soft: #a9bccc; --ink-faint: #7b90a2; --navy: #4a9fd4; --navy-line: #2c5f85;
+    --cg-orange: #ff6a4d; --cg-orange-soft: #3a1f18; --cyan: #3fc0d0; --cyan-soft: #12313a;
+    --good: #46b985; --good-soft: #14301f; --warn: #e0a03a; --warn-soft: #332512;
+    --border: #24384a; --border-strong: #33506a;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ground); color: var(--ink); font-family: var(--sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 26px 20px 80px; }
+  .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
+
+  /* Header */
+  .banner { background: linear-gradient(180deg, var(--navy), #072a44); border-radius: 14px; padding: 22px 24px; color: #eaf2f9; position: relative; overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--navy-line); }
+  .banner::before { content: ""; position: absolute; top: 0; right: 34px; bottom: 0; width: 46px; background: var(--cg-orange); transform: skewX(-20deg); opacity: .92; }
+  .banner::after { content: ""; position: absolute; top: 0; right: 84px; bottom: 0; width: 12px; background: #eaf2f9; transform: skewX(-20deg); opacity: .5; }
+  .banner .eyebrow { color: #9dc4e0; position: relative; }
+  .banner h1 { position: relative; margin: 6px 0 2px; font-size: clamp(21px, 4.2vw, 29px); letter-spacing: -.01em; font-weight: 800; text-wrap: balance; max-width: 80%; }
+  .banner .sub { position: relative; color: #bcd6ea; font-size: 14px; max-width: 84%; }
+  .vitals { position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(148px, 1fr)); gap: 1px; margin-top: 18px; background: rgba(255,255,255,.14); border-radius: 9px; overflow: hidden; }
+  .vital { background: rgba(4,25,42,.55); padding: 11px 13px; }
+  .vital .k { font-family: var(--mono); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: #8fb6d4; }
+  .vital .v { font-size: 15px; font-weight: 700; margin-top: 3px; color: #f2f8fc; font-variant-numeric: tabular-nums; }
+  .vital .v small { font-weight: 500; color: #bcd6ea; font-size: 12.5px; }
+
+  .alert { display: flex; gap: 12px; align-items: flex-start; margin-top: 14px; padding: 13px 16px; border-radius: 11px; background: var(--cg-orange-soft); border: 1px solid var(--cg-orange); }
+  .alert .dot { flex: none; margin-top: 3px; width: 9px; height: 9px; border-radius: 50%; background: var(--cg-orange); box-shadow: 0 0 0 4px color-mix(in srgb, var(--cg-orange) 22%, transparent); }
+  .alert b { color: var(--cg-orange); }
+  .alert .txt { font-size: 13.5px; color: var(--ink); }
+
+  /* TOC */
+  .toc { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 18px; }
+  .toc a { font-size: 12px; font-weight: 600; text-decoration: none; color: var(--ink-soft); background: var(--panel); border: 1px solid var(--border); border-radius: 20px; padding: 5px 12px; }
+  .toc a:hover { border-color: var(--cyan); color: var(--cyan); }
+  .toc a b { font-family: var(--mono); color: var(--cg-orange); margin-right: 5px; }
+
+  section { margin-top: 32px; scroll-margin-top: 14px; }
+  .sec-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 14px; }
+  .sec-num { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--cg-orange); letter-spacing: .05em; }
+  h2 { margin: 0; font-size: 18.5px; font-weight: 800; letter-spacing: -.01em; color: var(--ink); }
+  .sec-note { margin: 2px 0 0; color: var(--ink-faint); font-size: 13px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; box-shadow: var(--shadow); }
+  .pad { padding: 16px 18px; }
+  .flag { color: var(--cg-orange); font-weight: 700; }
+
+  .primer p { margin: 0 0 11px; font-size: 14.5px; color: var(--ink-soft); }
+  .primer p:last-child { margin-bottom: 0; }
+  .primer strong { color: var(--ink); }
+  .mirror { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 14px; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .mirror .h { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; text-transform: uppercase; padding: 8px 13px; font-weight: 700; }
+  .mirror .h.l { background: var(--cyan-soft); color: var(--cyan); }
+  .mirror .h.r { background: var(--panel-2); color: var(--ink-faint); border-left: 1px solid var(--border); }
+  .mirror .c { padding: 10px 13px; font-size: 13px; color: var(--ink-soft); border-top: 1px solid var(--border); }
+  .mirror .c.r { border-left: 1px solid var(--border); color: var(--ink); font-weight: 600; }
+
+  /* Glossary */
+  .divlabel { font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin: 20px 0 2px; padding-top: 14px; border-top: 2px solid var(--cyan-soft); }
+  .term { display: grid; grid-template-columns: 128px 1fr; gap: 16px; padding: 13px 0; border-top: 1px solid var(--border); }
+  .term:first-of-type { border-top: 0; }
+  .term .t .name { font-weight: 800; font-size: 14px; color: var(--ink); }
+  .term .t .say { font-family: var(--mono); font-size: 10.5px; color: var(--ink-faint); margin-top: 2px; }
+  .term .d { font-size: 13.4px; color: var(--ink-soft); }
+  .term .d .hook { display: block; margin-top: 5px; font-size: 12.6px; color: var(--cyan); }
+  .term .d .hook b { color: var(--cyan); font-weight: 700; }
+  @media (max-width: 560px) { .term { grid-template-columns: 1fr; gap: 3px; } }
+
+  .read p { margin: 0 0 10px; font-size: 14.5px; color: var(--ink-soft); }
+  .read p:last-child { margin-bottom: 0; }
+  .read strong { color: var(--ink); }
+  .read a { color: var(--cyan); }
+
+  /* Bridge stories */
+  .bridge { display: grid; gap: 13px; }
+  .story { overflow: hidden; }
+  .story .top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; background: var(--panel-2); border-bottom: 1px solid var(--border); }
+  .story .title { font-weight: 800; font-size: 14.5px; color: var(--ink); }
+  .meter { flex: none; font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: 4px 9px; border-radius: 20px; white-space: nowrap; }
+  .meter.strong { background: var(--good-soft); color: var(--good); }
+  .meter.solid { background: var(--cyan-soft); color: var(--cyan); }
+  .meter.analogy { background: var(--warn-soft); color: var(--warn); }
+  .story .body { padding: 3px 16px 13px; }
+  .story .line { display: grid; grid-template-columns: 88px 1fr; gap: 12px; padding: 8px 0; border-top: 1px solid var(--border); font-size: 13.4px; }
+  .story .line:first-child { border-top: 0; }
+  .story .line .lab { font-family: var(--mono); font-size: 10px; letter-spacing: .05em; text-transform: uppercase; color: var(--ink-faint); padding-top: 2px; }
+  .story .line .val { color: var(--ink-soft); }
+  .story .line .val strong { color: var(--ink); }
+  .story .line.say .val { background: var(--cyan-soft); color: var(--ink); border-left: 3px solid var(--cyan); padding: 9px 12px; border-radius: 0 7px 7px 0; font-style: italic; }
+  @media (max-width: 560px) { .story .line { grid-template-columns: 1fr; gap: 3px; } }
+
+  .case { border-left: 3px solid var(--cyan); }
+  .flow { display: flex; flex-wrap: wrap; align-items: center; gap: 7px; margin: 8px 0 14px; }
+  .flow .step { font-family: var(--mono); font-size: 11.5px; font-weight: 600; background: var(--panel-2); border: 1px solid var(--border); padding: 6px 9px; border-radius: 7px; color: var(--ink); }
+  .flow .arw { color: var(--cyan); font-weight: 700; }
+  .case ol { margin: 0; padding-left: 20px; }
+  .case li { font-size: 13.8px; color: var(--ink-soft); margin-bottom: 8px; }
+  .case li strong { color: var(--ink); }
+
+  /* Q&A */
+  .qa { display: grid; gap: 11px; }
+  .q { padding: 15px 16px; }
+  .q .ask { font-weight: 800; font-size: 14px; color: var(--ink); display: flex; gap: 9px; }
+  .q .ask::before { content: "Q"; font-family: var(--mono); color: var(--cg-orange); font-weight: 700; }
+  .q .ans { margin-top: 8px; font-size: 13.6px; color: var(--ink-soft); padding-left: 22px; }
+  .q .ans strong { color: var(--ink); }
+  .q .ans .quote { display: block; margin: 7px 0; padding: 9px 12px; background: var(--cyan-soft); border-left: 3px solid var(--cyan); border-radius: 0 7px 7px 0; font-style: italic; color: var(--ink); }
+  .q .ans ol { margin: 7px 0 0; padding-left: 20px; }
+  .q .ans ol li { margin-bottom: 5px; }
+
+  .callout { padding: 15px 16px; border-left: 3px solid var(--cg-orange); }
+  .callout .ct { font-weight: 800; font-size: 13.5px; color: var(--cg-orange); font-family: var(--mono); letter-spacing: .04em; text-transform: uppercase; margin-bottom: 8px; }
+  .callout ul { margin: 0; padding-left: 18px; }
+  .callout li { font-size: 13.3px; color: var(--ink-soft); margin-bottom: 5px; }
+  .callout li strong { color: var(--ink); }
+
+  /* Routing */
+  .route { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .route .col { padding: 15px 16px; }
+  .route .who { display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 14px; margin-bottom: 3px; }
+  .route .badge { font-family: var(--mono); font-size: 10px; letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px; border-radius: 6px; font-weight: 700; }
+  .route .to-perez .badge { background: var(--cg-orange-soft); color: var(--cg-orange); }
+  .route .to-plezia .badge { background: var(--cyan-soft); color: var(--cyan); }
+  .route .role { font-size: 12px; color: var(--ink-faint); margin-bottom: 10px; }
+  .route ol, .route ul { margin: 0; padding-left: 18px; }
+  .route li { font-size: 13.1px; color: var(--ink-soft); margin-bottom: 7px; }
+  .route li strong { color: var(--ink); }
+
+  /* Initiatives */
+  .inits { display: grid; gap: 11px; }
+  .init { padding: 14px 16px; }
+  .init .ih { display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; }
+  .init .name { font-weight: 800; font-size: 14px; color: var(--ink); }
+  .init .tagpill { font-family: var(--mono); font-size: 9.5px; letter-spacing: .08em; text-transform: uppercase; padding: 2px 7px; border-radius: 5px; font-weight: 700; background: var(--good-soft); color: var(--good); }
+  .init .tagpill.ask { background: var(--warn-soft); color: var(--warn); }
+  .init .what { font-size: 13.2px; color: var(--ink-soft); margin: 6px 0 0; }
+  .init .say { margin-top: 8px; font-size: 12.9px; font-style: italic; color: var(--ink); background: var(--cyan-soft); border-left: 3px solid var(--cyan); padding: 8px 11px; border-radius: 0 6px 6px 0; }
+  .init .say b { font-style: normal; font-family: var(--mono); font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--cyan); display: block; margin-bottom: 3px; }
+
+  /* Scenario cards */
+  .scen { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .scen .s { padding: 15px 16px; }
+  .scen .s.a { border-top: 3px solid var(--good); }
+  .scen .s.b { border-top: 3px solid var(--warn); }
+  .scen .st { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+  .scen .sname { font-weight: 800; font-size: 14px; color: var(--ink); }
+  .scen .drive { font-family: var(--mono); font-size: 12px; font-weight: 700; }
+  .scen .s.a .drive { color: var(--good); }
+  .scen .s.b .drive { color: var(--warn); }
+  .scen .addr { font-size: 12.6px; color: var(--ink-soft); margin-bottom: 8px; }
+  .scen .why { font-size: 12.6px; color: var(--ink-soft); }
+  .scen .why b { color: var(--ink); }
+
+  /* Pay table */
+  .paywrap { overflow-x: auto; }
+  table.pay { border-collapse: collapse; width: 100%; font-size: 12.5px; min-width: 460px; }
+  table.pay th, table.pay td { padding: 7px 9px; text-align: right; font-variant-numeric: tabular-nums; border-bottom: 1px solid var(--border); }
+  table.pay th:first-child, table.pay td:first-child { text-align: left; font-family: var(--mono); color: var(--ink-faint); }
+  table.pay thead th { font-family: var(--mono); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); border-bottom: 2px solid var(--border-strong); }
+  table.pay tr.hi td { background: var(--good-soft); font-weight: 700; color: var(--ink); }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .kv { display: grid; gap: 9px; }
+  .kv .row { display: flex; justify-content: space-between; gap: 10px; font-size: 13px; padding-bottom: 8px; border-bottom: 1px dashed var(--border); }
+  .kv .row:last-child { border-bottom: 0; padding-bottom: 0; }
+  .kv .row .k { color: var(--ink-faint); }
+  .kv .row .val { color: var(--ink); font-weight: 600; text-align: right; }
+  .kv .row .val .m { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+
+  .todo { display: grid; gap: 9px; }
+  .todo .item { display: flex; gap: 11px; align-items: flex-start; padding: 12px 15px; }
+  .todo .box { flex: none; margin-top: 1px; width: 17px; height: 17px; border-radius: 5px; border: 2px solid var(--border-strong); background: transparent; }
+  .todo .item.hot { border-color: var(--cg-orange); }
+  .todo .item.hot .box { border-color: var(--cg-orange); }
+  .todo .tt { font-size: 13.6px; color: var(--ink); font-weight: 600; }
+  .todo .td { font-size: 12.5px; color: var(--ink-soft); margin-top: 2px; }
+  .todo .item.hot .tt::after { content: "OWED NOW"; margin-left: 8px; font-family: var(--mono); font-size: 9px; letter-spacing: .1em; color: #fff; background: var(--cg-orange); padding: 2px 6px; border-radius: 4px; vertical-align: middle; }
+
+  footer { margin-top: 38px; padding-top: 16px; border-top: 1px solid var(--border); color: var(--ink-faint); font-size: 12px; }
+  footer .mono { font-family: var(--mono); }
+  a { color: var(--cyan); }
+
+  @media (max-width: 640px) {
+    .route, .grid2, .mirror, .scen { grid-template-columns: 1fr; }
+    .banner h1, .banner .sub { max-width: 100%; }
+    .banner::before { right: 18px; } .banner::after { right: 62px; }
+    .mirror .h.r, .mirror .c.r { border-left: 0; border-top: 1px solid var(--border); }
+  }
+  @media print { body { background: #fff; } .toc { display: none; } .banner, .card { box-shadow: none; } section { break-inside: avoid; } }
+</style>
+
+<div class="wrap">
+
+  <header class="banner">
+    <div class="eyebrow">USCG C5I Service Center (C5ISC) · Cyber Modernization · GS-12</div>
+    <h1>Interview Brief — Mr. Pete Plezia</h1>
+    <div class="sub">You're not the cyber expert in the room — you're the automation-and-modernization builder a CISSP can't hire from inside the compliance world. This brief teaches you their job, arms your stories, and flags what's still unconfirmed.</div>
+    <div class="vitals">
+      <div class="vital"><div class="k">When</div><div class="v">Thu 09 Jul · 1500</div></div>
+      <div class="vital"><div class="k">Format</div><div class="v">On-site <small>· 1:1 case</small></div></div>
+      <div class="vital"><div class="k">Interviewer</div><div class="v">Mr. Plezia <small>CISSP</small></div></div>
+      <div class="vital"><div class="k">His cell</div><div class="v" style="font-family:var(--mono)">571-610-1037</div></div>
+    </div>
+  </header>
+
+  <div class="alert">
+    <span class="dot"></span>
+    <div class="txt"><b>Two things unconfirmed with ~2 days left.</b> (1) <b>Location is genuinely open</b> — it could be Kearneysville WV (~17 min) <em>or</em> Alexandria VA (~1hr20+). Public evidence slightly tilts Alexandria; don't set a departure time on a guess. (2) The <b>note to Perez isn't sent.</b> Both are in §11. Text Plezia or Perez today to lock the exact address + access.</div>
+  </div>
+
+  <nav class="toc">
+    <a href="#s1"><b>01</b>The shop</a>
+    <a href="#s2"><b>02</b>Vocabulary</a>
+    <a href="#s3"><b>03</b>The read</a>
+    <a href="#s4"><b>04</b>Your stories</a>
+    <a href="#s5"><b>05</b>Whiteboard</a>
+    <a href="#s6"><b>06</b>Hard Qs</a>
+    <a href="#s7"><b>07</b>Ask them</a>
+    <a href="#s8"><b>08</b>Name-drop</a>
+    <a href="#s9"><b>09</b>Pay &amp; series</a>
+    <a href="#s10"><b>10</b>Getting there</a>
+    <a href="#s11"><b>11</b>Checklist</a>
+  </nav>
+
+  <!-- 1 -->
+  <section id="s1" class="primer">
+    <div class="sec-head"><span class="sec-num">01</span><div><h2>What this shop actually does</h2><p class="sec-note">Read twice. Their modernization mission is a near-word-for-word match to what you already built.</p></div></div>
+    <div class="card pad">
+      <p><strong>C5ISC</strong> — the Coast Guard's C5I Service Center — runs <strong>350+ IT systems</strong> and reports up through the CG CIO (CG-6). Its headline modernization push, in its own words: <strong>kill siloed backend databases, stand up one "integrated data environment," add AI, and roll out "zero trust" across every system.</strong> It's the tech engine behind <strong>Force Design 2028</strong>, the biggest USCG overhaul since ~1915.</p>
+      <p>Plezia's branch works the security-modernization edge of that — making compliance <em>faster and automated</em> instead of binders of paperwork. The Coast Guard has a documented AI program in development, literally named <strong>"RMF Automation,"</strong> to auto-generate security paperwork and continuously monitor controls (§8). That's not why they called you by accident.</p>
+      <p class="flag">Say this out loud in the room: their mission is a data-integration + automation + change-management problem — which is exactly the job you've been doing.</p>
+      <div class="mirror">
+        <div class="h l">What you built (current role + Army)</div>
+        <div class="h r">What C5ISC needs</div>
+        <div class="c">Fused siloed SCADA / historian / quality data into ONE pipeline</div>
+        <div class="c r">Kill siloed databases → one integrated data environment</div>
+        <div class="c">First production AI + big-data models across 9 plants</div>
+        <div class="c r">Add AI across 350+ systems ("AI on every desktop")</div>
+        <div class="c">LLM pipeline cut a manual document review 75%</div>
+        <div class="c r">"RMF Automation" — cut ATO paperwork &gt;50%</div>
+        <div class="c">Digital twin monitored a live process for drift</div>
+        <div class="c r">Continuous monitoring of controls for drift</div>
+        <div class="c">Wrote &amp; enforced access-control + data-residency standards</div>
+        <div class="c r">Zero trust = verify every access, everywhere</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section id="s2">
+    <div class="sec-head"><span class="sec-num">02</span><div><h2>The vocabulary — decoded</h2><p class="sec-note">Plain English + your hook into each. The <span style="color:var(--cyan);font-weight:700">modernization-edge</span> terms at the bottom are the ones to <em>volunteer</em> — they make a non-cyber candidate sound fluent.</p></div></div>
+    <div class="card pad">
+
+      <div class="divlabel" style="border:0;padding-top:0;margin-top:0">Core — know these so you don't blink</div>
+
+      <div class="term"><div class="t"><div class="name">RMF</div><div class="say">NIST SP 800-37 Rev 2</div></div><div class="d">The government's 7-step process to make a system secure enough to run and keep it that way: <em>Prepare → Categorize → Select → Implement → Assess → Authorize → Monitor.</em> (Rev 2 is current; there's no Rev 3.) <span class="hook"><b>Your hook:</b> a quality-management process with steps, controls, and continuous monitoring — Six Sigma DMAIC in a security costume.</span></div></div>
+
+      <div class="term"><div class="t"><div class="name">ATO</div><div class="say">Authorization to Operate · "AY-toe"</div></div><div class="d">The senior official's formal sign-off that a system may run — traditionally a point-in-time approval good ~3 years. Getting one = assembling months of evidence. <em>The</em> bottleneck everyone wants automated. <span class="hook"><b>Your hook:</b> the months-of-paperwork problem your 75% review-time pipeline attacks. Strongest bridge — §4.</span></div></div>
+
+      <div class="term"><div class="t"><div class="name">ConMon</div><div class="say">Continuous Monitoring · RMF step 7</div></div><div class="d">After the ATO, keep watching that controls still work as configs change and new vulnerabilities appear — ideally automated telemetry, not an annual manual review. <span class="hook"><b>Your hook:</b> a digital twin watching a live process for drift is the same mental model.</span></div></div>
+
+      <div class="term"><div class="t"><div class="name">Controls</div><div class="say">NIST SP 800-53 Rev 5 (5.1.1)</div></div><div class="d">The master catalog of security requirements (hundreds) a system must meet. RMF is mostly selecting, implementing, and proving controls. (Say "Rev 5" — precision matters to a CISSP.) <span class="hook"><b>Your hook:</b> a spec with hundreds of line-items you audit against — like a quality standard or a flight-standards reg.</span></div></div>
+
+      <div class="term"><div class="t"><div class="name">SSP / SAR / POA&amp;M</div><div class="say">the "authorization package"</div></div><div class="d"><strong>SSP</strong> = System Security Plan (boundary, categorization, how each control is implemented). <strong>SAR</strong> = assessment results. <strong>POA&amp;M</strong> = the tracked list of known gaps + fix dates. Together they're the package the AO reviews to grant an ATO. <span class="hook"><b>Your hook:</b> SSP = the spec sheet; POA&amp;M = a corrective-action log / punch list with owners and due dates.</span></div></div>
+
+      <div class="term"><div class="t"><div class="name">eMASS</div><div class="say">"ee-mass"</div></div><div class="d">DISA's web system of record where DoD (and USCG, via DoD RMF) builds and holds ATO packages. The database everyone complains about doing by hand. <span class="hook"><b>Your hook:</b> recognize it; say "the RMF system of record I understand you use" — don't claim hands-on depth a CISSP can probe.</span></div></div>
+
+      <div class="term"><div class="t"><div class="name">Zero Trust</div><div class="say">ZTA · two models exist</div></div><div class="d">Stop trusting anything just because it's "inside" — verify every user and access, every time. Know <strong>both</strong> models: <strong>CISA</strong> (5 pillars: Identity, Devices, Networks, Apps &amp; Workloads, Data) and <strong>DoD</strong> (7 pillars, FY2027 target). USCG follows the DoD track. <span class="hook"><b>Your hook:</b> old = guarded fence, free movement inside; ZT = every door checks your badge. You set access-control standards — this is that at scale.</span></div></div>
+
+      <div class="term"><div class="t"><div class="name">ISSO / ISSM</div><div class="say">the traditional cyber roles</div></div><div class="d">ISSO = owns one system's security posture + paperwork; ISSM = program-level policy/oversight. <span class="hook"><b>Your hook:</b> Plezia said this <em>won't</em> be a standard ISSO interview — he's not hiring a paperwork-runner, he wants the person who <strong>automates</strong> the ISSO's grind. Don't try to out-ISSO an ISSO.</span></div></div>
+
+      <div class="term"><div class="t"><div class="name">FISMA / AO / SCA</div><div class="say">the law + the people</div></div><div class="d"><strong>FISMA</strong> = the law requiring all this. <strong>AO</strong> (Authorizing Official) = the exec who accepts the risk and signs the ATO (older folks may say "DAA"). <strong>SCA</strong> = Security Control Assessor, the independent tester. <span class="hook"><b>Your hook:</b> AO = the plant manager who signs off before the line runs.</span></div></div>
+
+      <div class="divlabel">Modernization edge — volunteer these to stand out</div>
+
+      <div class="term"><div class="t"><div class="name">cATO</div><div class="say">Continuous ATO</div></div><div class="d">DoD's Feb-2022 construct: instead of a 3-year point-in-time ATO, keep a system continuously authorized by proving three things — continuous control monitoring, active real-time cyber defense, and an approved DevSecOps pipeline. No expiration, but revocable. <span class="hook"><b>Your hook:</b> this is "automate the ATO + monitor forever" — exactly what the CG's RMF Automation tool moves toward. Volunteering "cATO" signals you read past the compliance surface.</span></div></div>
+
+      <div class="term"><div class="t"><div class="name">CSRMC</div><div class="say">DoD, launched Sep 2025</div></div><div class="d">DoD's new Cybersecurity Risk Management Construct — modernizes/replaces traditional RMF and pushes toward continuous authorization (rolling evaluation, not a check every 3 years). Since USCG follows DoD RMF, this shapes their direction. <span class="hook"><b>Your hook:</b> lets you ask whether their RMF-automation work is the on-ramp to cATO — reads the policy tea leaves.</span></div></div>
+
+      <div class="term"><div class="t"><div class="name">OSCAL</div><div class="say">NIST machine-readable standard</div></div><div class="d">A NIST format (JSON/XML) that turns control catalogs, SSPs, and POA&amp;Ms into machine-readable data so tools can automate compliance. NIST's stated goal: "audit durations from months to minutes" (real-world: weeks-to-days). Mature in the FedRAMP cloud world, <em>emerging</em> in DoD/eMASS. <span class="hook"><b>Your hook:</b> it's a data <em>format</em>, not an engine — the plumbing that makes ATO automation possible. Frame as "where DoD/CG RMF is heading," not "what USCG runs today."</span></div></div>
+
+      <div class="term"><div class="t"><div class="name">CDM</div><div class="say">DHS/CISA program</div></div><div class="d">DHS's Continuous Diagnostics &amp; Mitigation — government-wide dashboards of cyber posture. GAO (Jun 2025) found data-quality gaps forcing <em>manual</em> dashboard updates at most agencies. USCG feeds these dashboards. <span class="hook"><b>Your hook:</b> a real, current, public pain point that your data-pipeline strength speaks to directly.</span></div></div>
+
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section id="s3" class="read">
+    <div class="sec-head"><span class="sec-num">03</span><div><h2>The read — who Plezia is &amp; how the interview runs</h2></div></div>
+    <div class="card pad">
+      <p><strong>He's findable — look him up before Thursday.</strong> Public evidence (LinkedIn <a href="https://www.linkedin.com/in/peteplezia">/in/peteplezia</a>) says Pete Plezia is a <strong>fellow Army veteran, 20+ years, CISSP since 2019</strong>, now a <strong>civilian</strong> "US Gov" employee living in Greencastle, PA (~30 min from the Kearneysville campus — a mild nudge that the job may sit up there). Not a public figure otherwise — no talks or press. So address him as <strong>"Mr. Plezia"</strong> and open with genuine <strong>veteran-to-veteran</strong> rapport, prior-service to now-civilian gov service. <em>(Treat his exact grade as unknown — likely GS-13/14, don't assume.)</em></p>
+      <p><strong>What his CISSP + "not a standard RMF/ISSO/cyber interview" tells you:</strong> he values demonstrated security sense but is deliberately hiring a modernization/automation engineer he can pair with — not an ISSO to out-RMF him. He took the compliance quiz off the table on purpose.</p>
+      <p><strong>Format — prep for a hybrid.</strong> Because this is a non-competitive single-selectee appointment where Plezia <em>is</em> the hiring manager, expect a conversational 1:1 (maybe a small panel) with at least one live <strong>"how would you approach this?"</strong> case — very likely a real C5ISC pain ("350+ systems, siloed data — how would you unify / automate the ATO?"). But don't under-prep: federal interviews carry structured-scoring DNA, so bring quantified stories too. <span class="flag">Open by asking what problem he's trying to solve with this hire</span>, then aim everything at his answer.</p>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section id="s4">
+    <div class="sec-head"><span class="sec-num">04</span><div><h2>Your bridge stories — what you did → why it fits</h2><p class="sec-note">All real, all in your packet. Tag = how hard to lean: <strong style="color:var(--good)">STRONG</strong> press it · <strong style="color:var(--cyan)">SOLID</strong> good fit · <strong style="color:var(--warn)">ANALOGY</strong> shows how you think. Italic = roughly what to say. <em>Give a different story to each question — recycling one tanks a federal score.</em></p></div></div>
+    <div class="bridge">
+
+      <div class="card story">
+        <div class="top"><span class="title">The LLM document-review pipeline</span><span class="meter strong">Strong · press it</span></div>
+        <div class="body">
+          <div class="line"><span class="lab">You did</span><span class="val">Built a pipeline — plant data + searchable knowledge base + an LLM — that <strong>cut job-hazard-analysis review time 75%</strong>, scaling pilot → enterprise.</span></div>
+          <div class="line"><span class="lab">Their world</span><span class="val">Their documented <strong>"RMF Automation"</strong> tool: AI drafts the ATO paperwork, humans keep the decision. Nearly the same architecture.</span></div>
+          <div class="line say"><span class="lab">Say it</span><span class="val">"Your RMF-automation use case is the exact pattern I shipped — ingest scattered artifacts, retrieve against a knowledge base, model does first-pass, expert validates, and I cut review time 75%. The hard part isn't generating the artifact — it's keeping a human owning the judgment call while the model does assembly and monitoring."</span></div>
+        </div>
+      </div>
+
+      <div class="card story">
+        <div class="top"><span class="title">Killing the data silos</span><span class="meter strong">Strong · press it</span></div>
+        <div class="body">
+          <div class="line"><span class="lab">You did</span><span class="val">Integrated SCADA, historian, sensor and quality data — walled-off systems — into <strong>one unified pipeline</strong> feeding models across nine plants.</span></div>
+          <div class="line"><span class="lab">Their world</span><span class="val">C5ISC's stated #1 goal, near-verbatim: eliminate siloed databases → one integrated data environment ("Data for Decisions").</span></div>
+          <div class="line say"><span class="lab">Say it</span><span class="val">"Your brief talks about killing siloed databases and building one integrated data environment across 350-plus systems. That's what I did across nine plants — pulled walled-off SCADA and historian data into one pipeline the AI could actually use. Same problem, different sensors — and the blocker was never the tech, it was governance and adoption."</span></div>
+        </div>
+      </div>
+
+      <div class="card story">
+        <div class="top"><span class="title">The digital twin watching for drift</span><span class="meter solid">Solid</span></div>
+        <div class="body">
+          <div class="line"><span class="lab">You did</span><span class="val">Digital-twin model + Python auto-tuning that monitored a live process and <strong>cut waste 70.8% ($189K/yr, verified)</strong>, proven against measured before/after.</span></div>
+          <div class="line"><span class="lab">Their world</span><span class="val"><strong>ConMon</strong> done right — real-time telemetry watching posture for drift instead of an annual manual review.</span></div>
+          <div class="line say"><span class="lab">Say it</span><span class="val">"Continuous monitoring clicks for me because I've built it — a twin watching a process live, catching drift, auto-correcting, and I could prove the delta in dollars. Point that instinct at control drift instead of oil waste and it's the same job."</span></div>
+        </div>
+      </div>
+
+      <div class="card story">
+        <div class="top"><span class="title">Setting access &amp; data standards</span><span class="meter solid">Solid</span></div>
+        <div class="body">
+          <div class="line"><span class="lab">You did</span><span class="val">Set the <strong>data-architecture &amp; security standards</strong> for the AI program — data dictionaries, access control, data-residency — so automation shipped with guardrails.</span></div>
+          <div class="line"><span class="lab">Their world</span><span class="val"><strong>Zero trust</strong> is access control + least-privilege + data-residency at enterprise scale.</span></div>
+          <div class="line say"><span class="lab">Say it</span><span class="val">"When I built the AI platform I owned the access-control and data-residency standards — nobody got data they shouldn't, and it never left where it was allowed to. That's the principle zero trust runs on, just at your scale."</span></div>
+        </div>
+      </div>
+
+      <div class="card story">
+        <div class="top"><span class="title">Authoring &amp; enforcing the standard (Army)</span><span class="meter solid">Solid · your secret weapon</span></div>
+        <div class="body">
+          <div class="line"><span class="lab">You did</span><span class="val">Revised the command's flight-standards reg (USAACE Reg 350-3), evaluated every crew against published standards, rated <strong>#1 of 2,000</strong>, trained 400+ officers.</span></div>
+          <div class="line"><span class="lab">Their world</span><span class="val">RMF <em>is</em> assessing a system against a published control set. You have deep reps at that exact discipline — in aviation safety.</span></div>
+          <div class="line say"><span class="lab">Say it</span><span class="val">"RMF is standards-to-practice — assess a system against a published control set. I spent years on the aviation-standards side of that: I rewrote the command standards regulation and evaluated every crew to it. The subject matter is new; standardizing an organization to published standards is literally the job I did in the Army."</span></div>
+        </div>
+      </div>
+
+      <div class="card story">
+        <div class="top"><span class="title">Trusted with high-stakes systems</span><span class="meter analogy">Analogy · gold for a security audience</span></div>
+        <div class="body">
+          <div class="line"><span class="lab">You did</span><span class="val">Ran 24/7 ops with full P&amp;L and <strong>zero OSHA recordables</strong>; flew 783+ combat MEDEVAC hours incident-free; held a <strong>TS/SCI</strong> (now inactive, reinstatable).</span></div>
+          <div class="line"><span class="lab">Their world</span><span class="val">"Risk Management" is RMF's first two words. Proves you're risk-native, not a move-fast-break-things AI enthusiast.</span></div>
+          <div class="line say"><span class="lab">Say it</span><span class="val">"I've run operations where the downside was somebody's life, not a rounding error — zero recordables, incident-free in combat, and I held a TS/SCI. I take risk and trust seriously because I've had to. I don't let AI run unsupervised."</span></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section id="s5">
+    <div class="sec-head"><span class="sec-num">05</span><div><h2>The whiteboard case — a repeatable method, out loud</h2><p class="sec-note">When he says "walk me through how you'd approach X," don't jump to an answer. Narrate this framework — it's a system-design rubric <em>and</em> Lean Six Sigma DMAIC. Name it "DMAIC" to signal method, not instinct.</p></div></div>
+    <div class="card case pad">
+      <div class="eyebrow" style="color:var(--cyan)">Your repeatable approach — say each step aloud</div>
+      <div class="flow">
+        <span class="step">clarify goals + constraints</span><span class="arw">→</span>
+        <span class="step">inventory current state &amp; data</span><span class="arw">→</span>
+        <span class="step">isolate THE bottleneck</span><span class="arw">→</span>
+        <span class="step">low-risk pilot</span><span class="arw">→</span>
+        <span class="step">metrics + guardrails</span><span class="arw">→</span>
+        <span class="step">scale</span>
+      </div>
+      <ol>
+        <li><strong>Ask before you answer.</strong> "What's the goal and the constraints?" State your assumptions aloud. Never present a finished design — federal interviewers score your reasoning, not a polished guess.</li>
+        <li><strong>Anchor in what you shipped.</strong> Your real example: <em>siloed data → unified pipeline → knowledge base → LLM first-pass → expert validates → −75% review time.</em> Then reframe it live: swap "job-hazard-analysis review" for "ATO package / ConMon evidence review" — same pattern.</li>
+        <li><strong>Draw the value stream (your ace).</strong> Current state — manual, serial, <em>months</em> — to future state — assisted, parallel, <em>days</em>. Mark exactly where time leaks. Most cyber folks have only <em>followed</em> the process; you can map and re-engineer it.</li>
+        <li><strong>Close on guardrails, not just speed.</strong> "And because I'd own the data-access and residency standards, it ships compliant by design." Then hand him the mic: "Is that the bottleneck you're trying to automate, or is the first fire somewhere else?"</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section id="s6">
+    <div class="sec-head"><span class="sec-num">06</span><div><h2>Hard questions — and how to answer</h2><p class="sec-note">Rehearse the first one out loud until it's ~45 seconds and automatic. It's the whole ballgame.</p></div></div>
+    <div class="qa">
+
+      <div class="card q">
+        <div class="ask">"You don't have a cyber background. Why should we hire you?"</div>
+        <div class="ans">Don't apologize, don't bluff. Reframe the gap as the reason:
+          <span class="quote">"You told me this isn't an ISSO/RMF-paperwork role — and that's exactly why I fit. Your mission is a data-integration, automation, and change-management problem: kill the siloed databases, stand up one integrated data environment across 350-plus systems, add AI, automate the ATO. That's what I just did at a nine-plant manufacturer — unified siloed SCADA/historian/quality data into one pipeline plus a knowledge base, built an LLM pipeline that cut review time 75%, and set the data-residency and access-control standards, for $240K in finance-verified savings. The RMF control depth is learnable, and you — a CISSP — already own it. What's hard to hire is someone who's actually shipped production AI and data integration in a regulated, safety-critical, multi-site org and driven adoption. And I'm not compliance-naive: as a standardization/instructor pilot I rewrote the command standards regulation and evaluated every crew to published standards — RMF is standards-to-practice, which is literally the job I did in the Army."</span>
+          The standards-officer bridge is the part <strong>no other candidate can offer</strong> — deliver it as the closer.</div>
+      </div>
+
+      <div class="card q">
+        <div class="ask">"Isn't AI risky / inaccurate / insecure for this?" — preempt this, in this order</div>
+        <div class="ans">A skeptic trusts the person who names the failure modes first. Volunteer, unprompted:
+          <ol>
+            <li><strong>Human-in-the-loop first</strong> — mirror their own tool's language: "the AI drafts and flags; the AO decides. Never autonomous authority over an ATO."</li>
+            <li><strong>Hallucination → grounding + citations:</strong> "it retrieves against authoritative artifacts and cites the source — if it can't cite the control, it doesn't assert it. Every output is auditable."</li>
+            <li><strong>Data security:</strong> "data boundary / residency, gov-cloud, least-privilege access to control data, models that don't train on it — I set exactly these standards before."</li>
+            <li><strong>The AI system is itself an asset under zero trust</strong> — put it under continuous monitoring like anything else.</li>
+          </ol>
+          Avoid hype words ("revolutionary," "fully automated"). Say <em>"decision-support that compresses analyst time."</em></div>
+      </div>
+
+      <div class="card q">
+        <div class="ask">"How would you get up to speed on RMF / our environment?"</div>
+        <div class="ans"><span class="quote">"The same way I learned nine plants cold — shadow the people doing the ATO grind for two weeks, map the current-state value stream myself, and find the two steps eating the most time. I learn a system by mapping it, under a lot more pressure than this."</span> Humility + a concrete method beats hand-waving.</div>
+      </div>
+
+      <div class="card q">
+        <div class="ask">"Where do you see yourself / are you okay at GS-12?"</div>
+        <div class="ans">Signal you want to <em>build</em>, not title-climb — and keep grade talk away from Plezia: <span class="quote">"I want to be the person shipping the modernization wins. If the work's real and the impact's measurable, I'm in."</span> Series/grade/ladder/step → Perez &amp; HR (§7, §9), never negotiated in the room.</div>
+      </div>
+    </div>
+    <div class="card callout" style="margin-top:12px">
+      <div class="ct">Federal interview rules private-sector folks break</div>
+      <ul>
+        <li><strong>Say "I," not "we."</strong> A scoring rubric can't credit the team — only your specific action.</li>
+        <li><strong>Quantify everything</strong> — $240K, 75%, 70.8%, $189K, zero recordables, 350 systems, 9 plants. Over-explain your action even when it feels excessive; panels score only what you explicitly say.</li>
+        <li><strong>Different story per question.</strong> Recycling the AI story four times drops your score.</li>
+        <li><strong>Anchor "how would you" answers in past tense</strong> — "here's how I actually did this," not aspiration.</li>
+        <li><strong>Clearance precision:</strong> say "TS/SCI adjudicated 2020, inactive since my 2022 retirement, reinstatable on sponsorship." <strong>Never</strong> "I have an active TS/SCI" — overstating is a red flag to a CISSP.</li>
+        <li><strong>Never badmouth an employer.</strong></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section id="s7">
+    <div class="sec-head"><span class="sec-num">07</span><div><h2>Questions to ask — and who to ask</h2><p class="sec-note">Modernization questions → Plezia, in the room. Grade / series / pay / logistics → Perez, before &amp; after.</p></div></div>
+    <div class="route">
+      <div class="card col to-plezia">
+        <div class="who"><span class="badge">Ask Plezia</span></div>
+        <div class="role">In the room — signals modernization fluency</div>
+        <ol>
+          <li>"The CG is standing up an AI tool to <strong>automate the ATO</strong> and monitor controls — is that landing in this branch, and would this role touch it?"</li>
+          <li>"Collapsing siloed data into one environment across 350+ systems — what's the real blocker: <strong>data governance, migration sequencing, or adoption?</strong>"</li>
+          <li>"As zero trust rolls out, how are you governing the <strong>AI/LLM tooling itself</strong> as a system under continuous monitoring?"</li>
+          <li>"Six-to-twelve months in, what does a <strong>great outcome</strong> for this hire look like to you?"</li>
+          <li>"With COMPASS and the software factory doing hands-on build, where does a government IC add the most value — <strong>owning the automation vision, or hands-on-keyboard?</strong>"</li>
+        </ol>
+      </div>
+      <div class="card col to-perez">
+        <div class="who"><span class="badge">Ask Perez</span></div>
+        <div class="role">Dale Perez · your advocate — before/after, never in the room</div>
+        <ul>
+          <li>Exact <strong>site address + gate/visitor procedure + parking</strong> (§10)</li>
+          <li>Announcement # / PD; <strong>series — 2210 vs 0343</strong> (§9)</li>
+          <li>Full-performance level &amp; <strong>ladder (12→13/14)?</strong></li>
+          <li>Any <strong>8140/8570 cert</strong> condition (Security+/CISSP)?</li>
+          <li>Line up the <strong>5 CFR 531.212 step-negotiation</strong> before EOD</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section id="s8">
+    <div class="sec-head"><span class="sec-num">08</span><div><h2>Name-drop these — current USCG modernization</h2><p class="sec-note">Naming a live 2026 initiative shows you did homework no other candidate did. Lead with the bullseye. <em>(Zero-trust status is ~2 yrs old — ask it, don't assert it.)</em></p></div></div>
+    <div class="inits">
+
+      <div class="card init">
+        <div class="ih"><span class="name">"RMF Automation"</span><span class="tagpill">Bullseye · lead with this</span></div>
+        <div class="what">Documented DHS AI use case (DHS-2740, generative AI, <strong>pre-deployment</strong>): auto-generates RMF docs, cuts ATO time &gt;50%, continuously monitors controls, humans keep the decision. Describe as <em>being built</em>, not in use.</div>
+        <div class="say"><b>Your line</b>"That use case is the exact pattern I built — an LLM pipeline that cut review time 75%. The hard part is keeping a human owning the judgment call while the model does assembly and monitoring. How far along is it, and is the bottleneck the model or the data plumbing?"</div>
+      </div>
+
+      <div class="card init">
+        <div class="ih"><span class="name">DoD CSRMC + cATO</span><span class="tagpill ask">Ask</span></div>
+        <div class="what">DoD launched the Cybersecurity Risk Management Construct (Sep 2025) pushing continuous authorization over point-in-time ATOs. USCG follows DoD RMF.</div>
+        <div class="say"><b>Your line</b>"With DoD standing up CSRMC and pushing cATO, is C5ISC positioning the RMF-automation tool as the on-ramp to continuous authorization, or a separate track?"</div>
+      </div>
+
+      <div class="card init">
+        <div class="ih"><span class="name">Zero trust across 350+ systems</span><span class="tagpill ask">Ask, don't assert</span></div>
+        <div class="what">C5ISC (CO Capt. Kevin Carroll) owns 350+ systems needing zero trust; DoD 7-pillar track, ~FY2027. Public detail is ~Feb 2024 — treat as stale.</div>
+        <div class="say"><b>Your line</b>"On the zero-trust rollout — which pillar is furthest along: identity, device, network, or data — and where does automation take the most load off your ISSOs?"</div>
+      </div>
+
+      <div class="card init">
+        <div class="ih"><span class="name">Force Design 2028 + RAPTOR</span><span class="tagpill">Strategic frame</span></div>
+        <div class="what">USCG's biggest overhaul since ~1915; a "technology" pillar with a RAPTOR rapid-prototype team. Commandant Adm. Kevin Lunday.</div>
+        <div class="say"><b>Your line</b>"The technology pillar and RAPTOR are the same muscle I built — standing up a production AI capability from scratch and scaling a pilot to enterprise. That prototype-to-production gap is where I do my best work."</div>
+      </div>
+
+      <div class="card init">
+        <div class="ih"><span class="name">Brian Campo's agenda</span><span class="tagpill">Senior-leader ref</span></div>
+        <div class="what">Senior USCG C4IT/CIO leadership: RPA effort ~$2.5M → ~200,000 labor-hours saved year one; "AI agent on every desktop by 2027"; fast-follows Army CamoGPT / Air Force NIPRGPT. <em>(Hedge his exact title.)</em></div>
+        <div class="say"><b>Your line</b>"That RPA result — $2.5M for 200,000 hours — is the exact ROI shape I delivered: $240K-plus in finance-verified annual savings. Same measured, savings-first approach."</div>
+      </div>
+
+      <div class="card init">
+        <div class="ih"><span class="name">COMPASS BPA + CDM</span><span class="tagpill ask">Ask</span></div>
+        <div class="what">COMPASS = 5-yr ~$700M app-support BPA (awarded ~Sep 2025). CDM = DHS dashboards with data-quality gaps GAO flagged in Jun 2025.</div>
+        <div class="say"><b>Your line</b>"Since USCG feeds the DHS CDM dashboards and GAO flagged data-quality gaps this year — could the continuous-monitoring piece of your RMF-automation work improve what you push up to CDM?"</div>
+      </div>
+
+    </div>
+    <p class="sec-note" style="margin-top:10px"><strong>Local angle (use once, if natural):</strong> the new Special Missions Command commissions ~Oct 2026 on the same Kearneysville campus — "I'm in Harpers Ferry, 15 minutes out. No relocation, no commute-attrition, and this campus is only getting busier."</p>
+  </section>
+
+  <!-- 9 -->
+  <section id="s9">
+    <div class="sec-head"><span class="sec-num">09</span><div><h2>Series, grade &amp; 2026 pay</h2><p class="sec-note">Take all of this to <strong>Perez / HR after selection</strong> — never to Plezia in the room. But know the numbers cold.</p></div></div>
+    <div class="card pad" style="margin-bottom:12px">
+      <p style="margin:0 0 10px;font-size:14px;color:var(--ink-soft)"><strong style="color:var(--ink)">The pay surprise (good):</strong> Harpers Ferry, Kearneysville &amp; Martinsburg (Jefferson &amp; Berkeley counties) are inside the <strong>Washington-Baltimore-Arlington locality</strong> for 2026 — <strong>not</strong> Rest-of-U.S. So a GS-12 there pays the full <strong>33.94% DC locality</strong>, ~$13K–$17K/yr more than you'd guess. And both possible duty stations (WV or Alexandria VA) are the <em>same</em> table — pay is identical either way.</p>
+      <div class="paywrap">
+        <table class="pay">
+          <thead><tr><th>GS-12 · 2026 · DC locality</th><th>Step 1</th><th>Step 3</th><th>Step 5</th><th>Step 7</th><th>Step 10</th></tr></thead>
+          <tbody>
+            <tr class="hi"><td>Washington-Balt.-Arlington</td><td>$102,415</td><td>$109,243</td><td>$116,071</td><td>$122,899</td><td>$133,142</td></tr>
+            <tr><td>Rest of U.S. (does NOT apply)</td><td>$89,508</td><td>$95,475</td><td>$101,443</td><td>$107,411</td><td>$116,362</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="grid2">
+      <div class="card callout" style="border-left-color:var(--cyan)">
+        <div class="ct" style="color:var(--cyan)">Series — 2210 vs 0343</div>
+        <ul>
+          <li>The role is <strong>almost certainly 2210 (IT Mgmt), likely INFOSEC-coded</strong> — it reports to a cyber branch. You don't pick the series; classification does.</li>
+          <li><strong>You plausibly qualify for 2210:</strong> frame your work as IT-primary — data pipelines/architecture, RAG, digital twins, LLM tooling, access-control standards, Python, SCADA. The risk is HR reading "Six Sigma Lead" as non-IT — so <strong>lead with the IT/data substance.</strong></li>
+          <li>0343 (no IT gate) is the series you qualify for most <em>cleanly</em> — useful only as leverage if the PD wording is flexible.</li>
+        </ul>
+      </div>
+      <div class="card callout">
+        <div class="ct">Levers — raise with Perez, pre-EOD</div>
+        <ul>
+          <li><strong>Step negotiation (5 CFR 531.212):</strong> competition was waived <em>for your specific skill set</em> — both "superior qualifications" and "special agency need" apply. Aim step 5–10, backed by current-comp docs + your savings record. <strong>Must be approved in writing before you start</strong> — far harder after.</li>
+          <li><strong>Cert condition:</strong> if INFOSEC-coded, expect a Security+ (or CISSP) requirement within ~6 months of start — a post-hire obligation, not a bar. Offer to pursue it (often agency-funded).</li>
+          <li><strong>Ladder:</strong> confirm full-performance level (13 or 14) and whether it's a non-competitive ladder — then it's 52 weeks per grade, no reapplying.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section id="s10">
+    <div class="sec-head"><span class="sec-num">10</span><div><h2>Getting there — location, drive &amp; access</h2><p class="sec-note"><span class="flag">This is the #1 unresolved item.</span> The address swings your drive from 17 minutes to 90+. Confirm with Perez/Plezia before you set a departure time.</p></div></div>
+    <div class="scen" style="margin-bottom:12px">
+      <div class="card s a">
+        <div class="st"><span class="sname">A · Kearneysville WV</span><span class="drive">~17 min</span></div>
+        <div class="addr">C5ISC / OSC campus · 408 Coast Guard Dr, 25430 · ~14 mi via US-340 E</div>
+        <div class="why"><b>For it:</b> C5ISC's app-dev/data hub; the local-veteran routing, on-site IC billet, Plezia living 30 min away in Greencastle PA, and the SMC standup all fit. A <b>gated USCG installation.</b></div>
+      </div>
+      <div class="card s b">
+        <div class="st"><span class="sname">B · Alexandria VA</span><span class="drive">~1h20+</span></div>
+        <div class="addr">C5ISC HQ (Springfield a distant variant) · ~65–72 mi · allow 2h in rush</div>
+        <div class="why"><b>For it:</b> C5ISC is HQ'd here, most posted cyber-branch roles are duty-stationed here, and Plezia's 571 is a NoVA cell. A <b>GSA-leased office</b> — retiree ID gets you nothing without a sponsor.</div>
+      </div>
+    </div>
+    <div class="card callout">
+      <div class="ct">Access playbook — depends on which site</div>
+      <ul>
+        <li><strong>If gated USCG base (Kearneysville):</strong> your Army retiree (Uniformed Services) ID clears the gate, but as a first-time visitor Plezia likely still pre-registers/escorts you through the Visitor Control Center — that can need 24–48h notice.</li>
+        <li><strong>If GSA-leased office (Alexandria):</strong> the retiree ID grants nothing. You need Plezia to pre-register you with building security, a REAL-ID DL or passport, sign-in, a visitor badge, and escort.</li>
+        <li><strong>Bring both ways:</strong> retiree USID <em>and</em> a REAL-ID-compliant license or passport. Verify your USID isn't expired. Arrive 30–45 min early for badging.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section id="s11">
+    <div class="sec-head"><span class="sec-num">11</span><div><h2>Contacts &amp; checklist</h2></div></div>
+    <div class="grid2" style="margin-bottom:12px">
+      <div class="card pad">
+        <div class="eyebrow" style="margin-bottom:11px">Contacts</div>
+        <div class="kv">
+          <div class="row"><span class="k">Mr. Pete Plezia (cell)</span><span class="val"><span class="m">571-610-1037</span></span></div>
+          <div class="row"><span class="k">Plezia (email)</span><span class="val"><span class="m">Peter.A.Plezia3@uscg.mil</span></span></div>
+          <div class="row"><span class="k">Dale Perez (mobile)</span><span class="val"><span class="m">202-417-1572</span></span></div>
+          <div class="row"><span class="k">Perez (email)</span><span class="val"><span class="m">dale.j.perez@uscg.mil</span></span></div>
+        </div>
+      </div>
+      <div class="card pad">
+        <div class="eyebrow" style="margin-bottom:11px">Day-of</div>
+        <div class="kv">
+          <div class="row"><span class="k">Attire</span><span class="val">Coat &amp; tie — over-dress slightly</span></div>
+          <div class="row"><span class="k">Arrive</span><span class="val">30–45 min early for badging</span></div>
+          <div class="row"><span class="k">Carry</span><span class="val">Retiree ID + REAL-ID/passport</span></div>
+          <div class="row"><span class="k">Also</span><span class="val">2–3 resume copies · notepad</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="todo">
+      <div class="card todo item hot"><span class="box"></span><div><div class="tt">Lock the location &amp; access with Perez/Plezia</div><div class="td">Exact address + gate/visitor procedure + parking + on-arrival POC. Do you need pre-registration (24–48h)? This sets your departure time — 17 min vs 90+.</div></div></div>
+      <div class="card todo item hot"><span class="box"></span><div><div class="tt">Send Perez the note</div><div class="td">Announcement #/PD · series (2210 vs 0343) · ladder (12→13/14) · cert condition · qual-rating · + the address/access above.</div></div></div>
+      <div class="card todo item"><span class="box"></span><div><div class="tt">Look up Plezia on LinkedIn</div><div class="td">Fellow Army vet, CISSP, Greencastle PA. Two minutes; primes the veteran-to-veteran open.</div></div></div>
+      <div class="card todo item"><span class="box"></span><div><div class="tt">Rehearse the "no cyber background" closer + AI-skeptic answer, out loud, twice</div><div class="td">Standing up. Those two are ~80% of the interview.</div></div></div>
+      <div class="card todo item"><span class="box"></span><div><div class="tt">Read §2 until the words feel normal</div><div class="td">You don't need mastery — you need to not blink at ATO, ConMon, cATO, eMASS, zero trust.</div></div></div>
+      <div class="card todo item"><span class="box"></span><div><div class="tt">Verify your retiree USID isn't expired · print resumes</div><div class="td">If expired, rely on passport + REAL ID + full sponsorship.</div></div></div>
+    </div>
+  </section>
+
+  <footer>
+    <div>Metrics trace to your packet resume. Job context grounded &amp; adversarially verified against OPM 2026 tables, the DHS AI Use-Case Inventory, NIST/DoD RMF sources, and USCG/C5ISC public materials (Jul 2026). Two items are deliberately hedged because they're genuinely unconfirmed: the <b>interview location</b> and Plezia's <b>exact grade</b> — confirm both with Perez.</div>
+    <div class="mono" style="margin-top:6px">USCG · C5ISC · GS-12 Cyber Modernization · Thu 09 Jul 2026 · 1500</div>
+  </footer>
+
+</div>
+</body>
+</html>
