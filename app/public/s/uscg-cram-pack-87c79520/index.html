@@ -1,0 +1,1237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>USCG Cram Pack — GRC · RAG · As-Code (Thu 9 Jul)</title>
+<style>
+  :root {
+    --ground: #eef2f6; --panel: #ffffff; --panel-2: #f6f8fb; --ink: #0d1b2a;
+    --ink-soft: #3f5266; --ink-faint: #6b7f92; --navy: #0b3a5c; --navy-line: #164e77;
+    --cg-orange: #d43a1f; --cg-orange-soft: #f4e3de; --cyan: #0a7d8c; --cyan-soft: #e0f0f2;
+    --good: #1f7a4d; --good-soft: #dcefe4; --warn: #b06a00; --warn-soft: #f6ead2;
+    --border: #d3dde6; --border-strong: #b6c5d2;
+    --shadow: 0 1px 2px rgba(13,27,42,.06), 0 8px 24px rgba(13,27,42,.05);
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #0a1420; --panel: #10202f; --panel-2: #14273a; --ink: #e7eef4;
+      --ink-soft: #a9bccc; --ink-faint: #7b90a2; --navy: #4a9fd4; --navy-line: #2c5f85;
+      --cg-orange: #ff6a4d; --cg-orange-soft: #3a1f18; --cyan: #3fc0d0; --cyan-soft: #12313a;
+      --good: #46b985; --good-soft: #14301f; --warn: #e0a03a; --warn-soft: #332512;
+      --border: #24384a; --border-strong: #33506a;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"] {
+    --ground: #eef2f6; --panel: #ffffff; --panel-2: #f6f8fb; --ink: #0d1b2a;
+    --ink-soft: #3f5266; --ink-faint: #6b7f92; --navy: #0b3a5c; --navy-line: #164e77;
+    --cg-orange: #d43a1f; --cg-orange-soft: #f4e3de; --cyan: #0a7d8c; --cyan-soft: #e0f0f2;
+    --good: #1f7a4d; --good-soft: #dcefe4; --warn: #b06a00; --warn-soft: #f6ead2;
+    --border: #d3dde6; --border-strong: #b6c5d2;
+    --shadow: 0 1px 2px rgba(13,27,42,.06), 0 8px 24px rgba(13,27,42,.05);
+  }
+  :root[data-theme="dark"] {
+    --ground: #0a1420; --panel: #10202f; --panel-2: #14273a; --ink: #e7eef4;
+    --ink-soft: #a9bccc; --ink-faint: #7b90a2; --navy: #4a9fd4; --navy-line: #2c5f85;
+    --cg-orange: #ff6a4d; --cg-orange-soft: #3a1f18; --cyan: #3fc0d0; --cyan-soft: #12313a;
+    --good: #46b985; --good-soft: #14301f; --warn: #e0a03a; --warn-soft: #332512;
+    --border: #24384a; --border-strong: #33506a;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0; background: var(--ground); color: var(--ink);
+    font: 16px/1.65 var(--sans);
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 28px 18px 80px; }
+  a { color: var(--cyan); }
+
+  header.hero { padding: 8px 0 4px; }
+  .eyebrow {
+    font: 600 11.5px/1.4 var(--mono); letter-spacing: .14em; text-transform: uppercase;
+    color: var(--cg-orange); margin-bottom: 10px;
+  }
+  h1 { font-size: clamp(26px, 5.4vw, 34px); line-height: 1.15; margin: 0 0 10px; text-wrap: balance; color: var(--ink); }
+  .sub { color: var(--ink-soft); max-width: 62ch; margin: 0 0 18px; }
+  .sub b { color: var(--ink); }
+
+  .vitals {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px; margin: 0 0 8px;
+  }
+  .vital { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; box-shadow: var(--shadow); }
+  .vital .k { font: 600 10.5px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-faint); }
+  .vital .v { font-weight: 650; font-size: 14.5px; margin-top: 3px; }
+  .vital .v .m { font-family: var(--mono); font-size: 13.5px; }
+
+  .plan { background: var(--panel); border: 1px solid var(--border); border-radius: 10px; padding: 16px 18px; margin: 18px 0 6px; box-shadow: var(--shadow); }
+  .plan .pt { font: 600 11px/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--navy); margin-bottom: 8px; }
+  .plan ol { margin: 0; padding-left: 20px; }
+  .plan li { margin: 5px 0; }
+  .plan li b { color: var(--ink); }
+
+  nav.toc {
+    position: sticky; top: 0; z-index: 5; display: flex; gap: 6px; overflow-x: auto;
+    padding: 10px 2px; margin: 14px -2px 6px;
+    background: var(--ground);
+    border-bottom: 1px solid var(--border);
+    -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  }
+  nav.toc::-webkit-scrollbar { display: none; }
+  nav.toc a {
+    flex: 0 0 auto; text-decoration: none; color: var(--ink-soft);
+    background: var(--panel); border: 1px solid var(--border); border-radius: 999px;
+    padding: 6px 13px; font: 600 12.5px/1.2 var(--sans); white-space: nowrap;
+  }
+  nav.toc a b { color: var(--cg-orange); font-family: var(--mono); font-weight: 700; margin-right: 5px; }
+
+  section.module { margin-top: 34px; }
+  .mod-head { margin-bottom: 6px; }
+  .mod-kicker { font: 700 11.5px/1.4 var(--mono); letter-spacing: .13em; text-transform: uppercase; color: var(--cg-orange); }
+  .mod-head h2 { font-size: clamp(21px, 4.4vw, 26px); line-height: 1.2; margin: 6px 0 6px; text-wrap: balance; }
+  .mod-why { color: var(--ink-faint); font-size: 14px; margin: 0 0 12px; max-width: 62ch; }
+  .mod-why b { color: var(--ink-soft); }
+
+  .module h3 { font-size: 18.5px; line-height: 1.3; margin: 26px 0 10px; text-wrap: balance; }
+  .module h4 { font-size: 15.5px; margin: 20px 0 8px; }
+  .module p, .module li { max-width: 70ch; }
+  .module ul, .module ol { padding-left: 22px; }
+  .module li { margin: 4px 0; }
+  hr { border: 0; border-top: 1px solid var(--border); margin: 26px 0; }
+  strong { color: var(--ink); }
+
+  .tw { overflow-x: auto; margin: 14px 0; border: 1px solid var(--border); border-radius: 9px; background: var(--panel); box-shadow: var(--shadow); }
+  table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 14px; line-height: 1.5; }
+  thead th {
+    text-align: left; font: 700 11px/1.4 var(--mono); letter-spacing: .09em; text-transform: uppercase;
+    color: var(--navy); background: var(--panel-2);
+    padding: 9px 12px; border-bottom: 1px solid var(--border-strong);
+  }
+  tbody td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tbody tr:last-child td { border-bottom: 0; }
+
+  blockquote { margin: 16px 0; }
+  blockquote.say, p.sayline {
+    background: var(--cyan-soft); border: 1px solid var(--cyan);
+    border-radius: 10px; padding: 14px 16px; margin: 16px 0;
+    position: relative;
+  }
+  blockquote.say::before, p.sayline::before {
+    content: "REHEARSE OUT LOUD"; display: block;
+    font: 700 10px/1 var(--mono); letter-spacing: .14em; color: var(--cyan);
+    margin-bottom: 8px;
+  }
+  blockquote.say p { margin: 8px 0; max-width: none; }
+  blockquote.say p:first-child { margin-top: 0; }
+  blockquote.say p:last-child { margin-bottom: 0; }
+  blockquote.plainq {
+    padding: 2px 0 2px 18px; color: var(--navy); font-size: 17px; line-height: 1.55;
+  }
+  blockquote.plainq p { margin: 6px 0; }
+
+  p.push {
+    background: var(--warn-soft); border: 1px solid var(--warn);
+    border-radius: 10px; padding: 12px 15px;
+  }
+
+  pre {
+    background: var(--panel); border: 1px dashed var(--border-strong); border-radius: 10px;
+    padding: 16px; overflow-x: auto; box-shadow: var(--shadow);
+    font: 12.5px/1.5 var(--mono); color: var(--ink);
+  }
+  code { font-family: var(--mono); font-size: .93em; background: var(--panel-2); border: 1px solid var(--border); border-radius: 4px; padding: 0 4px; }
+  pre code { background: none; border: 0; padding: 0; }
+
+  details.qa {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+    margin: 10px 0; box-shadow: var(--shadow);
+  }
+  details.qa summary {
+    cursor: pointer; padding: 13px 16px; font-weight: 700; font-size: 15.5px; line-height: 1.4;
+    list-style: none; display: flex; gap: 10px; align-items: baseline;
+  }
+  details.qa summary::-webkit-details-marker { display: none; }
+  details.qa summary::before { content: "+"; font: 700 16px/1 var(--mono); color: var(--cg-orange); flex: 0 0 auto; }
+  details.qa[open] summary::before { content: "–"; }
+  details.qa summary:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; border-radius: 10px; }
+  .qa-body { padding: 0 16px 14px; border-top: 1px solid var(--border); }
+  .qa-body > :first-child { margin-top: 14px; }
+
+  .callout {
+    background: var(--panel); border: 1px solid var(--border-strong); border-radius: 10px;
+    padding: 16px 18px; margin: 16px 0; box-shadow: var(--shadow);
+  }
+  .callout .ct { font: 700 11px/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--navy); margin-bottom: 8px; }
+  .callout ul { margin: 0; padding-left: 20px; }
+  .callout li { margin: 5px 0; }
+
+  .dayof { background: var(--panel); border: 1px solid var(--navy-line); border-radius: 12px; padding: 18px 20px; margin-top: 30px; box-shadow: var(--shadow); }
+  .dayof .ct { font: 700 11px/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--cg-orange); margin-bottom: 10px; }
+  .dayof ul { margin: 0; padding-left: 20px; }
+  .dayof li { margin: 6px 0; }
+
+  footer { margin-top: 40px; color: var(--ink-faint); font-size: 12.5px; line-height: 1.6; border-top: 1px solid var(--border); padding-top: 14px; }
+  footer .mono { font-family: var(--mono); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">Night-Before Curriculum · Volume 2 · Companion to the <a href="https://jcornelius.net/s/uscg-interview-brief-b0ea3e6a/" style="color:inherit">Interview Brief</a></div>
+  <h1>GRC Automation Specialist — talk details tomorrow.</h1>
+  <p class="sub">Pete sent the actual job description today. This pack assumes you know <b>nothing</b> — it builds GRC, RAG, and everything-as-code from zero, in your language, up to the level where you can whiteboard them unaided. Every factual claim was verified against live sources on 8 Jul 2026.</p>
+  <div class="vitals">
+    <div class="vital"><div class="k">When</div><div class="v">Thu 09 Jul · 1500<br><span class="m">leave ~1425</span></div></div>
+    <div class="vital"><div class="k">Where · confirmed</div><div class="v">408 Coast Guard Dr<br>Kearneysville WV</div></div>
+    <div class="vital"><div class="k">Dress · per Pete</div><div class="v">No suit — jacket &amp; slacks</div></div>
+    <div class="vital"><div class="k">Day-of cell</div><div class="v"><span class="m">717-377-1693</span></div></div>
+  </div>
+  <div class="plan">
+    <div class="pt">How to use the hours you have left</div>
+    <ol>
+      <li><b>Tonight (≈50 min):</b> Modules 1 → 2 → 3, in order, reading pace. Don't memorize — recognize.</li>
+      <li><b>Tonight (+10 min):</b> Draw the Module 2 whiteboard diagram once, by hand, narrating it.</li>
+      <li><b>Sleep.</b> Seriously.</li>
+      <li><b>Tomorrow morning (≈35 min):</b> Module 4 (5 min), then Module 5 <b>standing up, out loud</b> — tap each flashcard, answer first, then check.</li>
+      <li><b>In the truck (5 min, parked):</b> the opening two minutes, once. Then go be the guy who built it.</li>
+    </ol>
+  </div>
+</header>
+
+<nav class="toc">
+  <a href="#m0"><b>00</b>The JD</a>
+  <a href="#m1"><b>01</b>GRC</a>
+  <a href="#m2"><b>02</b>RAG</a>
+  <a href="#m3"><b>03</b>As-Code</a>
+  <a href="#m4"><b>04</b>AI Gov</a>
+  <a href="#m5"><b>05</b>Rehearse</a>
+  <a href="#dayof"><b>→</b>Day-of</a>
+</nav>
+
+
+<section class="module" id="m0">
+  <div class="mod-head">
+    <div class="mod-kicker">Module 00 · The assignment</div>
+    <h2>Pete's JD, decoded — he wrote it around you</h2>
+    <p class="mod-why">Yesterday's brief (Volume 1) taught you their world and strategy. Then Pete sent the actual job description. Every question tomorrow traces to one of these four bullets — and you already have proof for three of them.</p>
+  </div>
+  <div class="tw"><table>
+    <thead><tr><th>Pete's words (verbatim themes)</th><th>Translation</th><th>Your proof</th><th>Study</th></tr></thead>
+    <tbody>
+      <tr><td>"Apply Lean Six Sigma to re-engineer manual GRC tasks (evidence collection, control selection)"</td><td>Their compliance factory is slow and manual. Fix the process first, then automate it.</td><td>DMAIC on production lines — $240K+ finance-verified. This is your home turf.</td><td><b>M1</b></td></tr>
+      <tr><td>"Policy-as-Code, Documentation-as-Code in a version-controlled CI/CD framework"</td><td>Move rules and documents out of stale Word files into living, reviewed, machine-checked text.</td><td>Your honest gap — but the <em>discipline</em> is your old standards job. Framed in M3.</td><td><b>M3</b></td></tr>
+      <tr><td>"AI-powered tools (e.g., Retrieval-Augmented Generation) … support AI model governance"</td><td>Build the compliance assistant; write the rules that govern it.</td><td>You run a production RAG system today. Near-guaranteed deep-dive topic.</td><td><b>M2 + M4</b></td></tr>
+      <tr><td>"Integrate automated security controls into the DevSecOps pipeline"</td><td>Make security proof a byproduct of normal work instead of a paperwork event.</td><td>Cross-team integration across nine plants; SCADA-to-pipeline plumbing.</td><td><b>M3 §6</b></td></tr>
+    </tbody>
+  </table></div>
+  <p><b>The one-sentence read:</b> Pete didn't write this JD for a cyber person — he wrote it around your resume ("this is genuinely a different path for a hiring action for me"). Tomorrow's job is to prove the JD's author right.</p>
+</section>
+
+<section class="module" id="m1">
+  <div class="mod-head">
+    <div class="mod-kicker">Module 01 · Governance, Risk &amp; Compliance</div>
+    <h2>GRC from zero — what it actually is, and what it is for them</h2>
+    <p class="mod-why">You said you don't know what GRC is for them. After this module you do — down to what the paperwork physically looks like and why it takes months. <b>JD bullet 1.</b></p>
+  </div>
+  
+<p>You said you don’t even know what GRC is for them. After this section you will — down to what the paperwork physically looks like and why it takes months. Nothing here requires a cyber background. It’s a quality system. You already run one.</p>
+<h3 id="grc-101-the-three-letters-in-your-language">1. The three letters, in your language</h3>
+<p>GRC = <strong>Governance, Risk, and Compliance</strong>. It’s not a technology — it’s the management system a security organization runs on, the same way a plant runs on its Quality Management System.</p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Leg</th>
+<th>What it means</th>
+<th>Your world</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Governance</strong></td>
+<td>The written rules: who’s allowed to do what, who approves what, what the standards are</td>
+<td>The plant’s SOPs and quality manual; the Army’s aviation regs — you revised one (USAACE Reg 350-3)</td>
+</tr>
+<tr>
+<td><strong>Risk</strong></td>
+<td>Systematically finding what can go wrong, how bad, how likely, and deciding what you’ll accept vs. fix</td>
+<td>FMEA (Failure Modes and Effects Analysis) on a process; the pre-mission risk assessment worksheet where higher risk needs a higher-ranking signature</td>
+</tr>
+<tr>
+<td><strong>Compliance</strong></td>
+<td>Proving, with evidence, that you actually follow the rules — to auditors who check</td>
+<td>OSHA audits, ISO certification audits, checkrides. Not “are you safe” but “can you PROVE it to the examiner”</td>
+</tr>
+</tbody>
+</table></div>
+<p>Inside a federal CISO (Chief Information Security Officer) shop, a “GRC program” is the team and process that: writes the security policies (governance), runs every IT system through a formal risk-approval process before and while it operates (risk), and produces the evidence and scorecards that prove it to inspectors — DHS Office of Inspector General (OIG), GAO (Government Accountability Office), Congress (compliance).</p>
+<blockquote class="say">
+<p><strong>SAY THIS (if asked “what does GRC mean to you?”):</strong> “Honestly? It’s a quality management system pointed at security instead of product. Governance is the quality manual, risk is the FMEA, compliance is the audit. I’ve spent my whole career inside that triangle — I revised our command’s aviation standards regulation, I ran hazard analysis and OSHA programs at a plant, and I sat through the audits. The subject matter here is new to me. The system is not.”</p>
+</blockquote>
+<p>That answer is honest, it’s true, and no ISSO candidate will give it.</p>
+<h3 id="grc-101-grc-specifically-in-the-coast-guard-ciso-shop-the-machine-pete-lives-in">2. GRC specifically in the Coast Guard CISO shop — the machine Pete lives in</h3>
+<p>Here’s the actual machinery, one layer at a time:</p>
+<p><strong>The operating process: RMF.</strong> The Risk Management Framework, NIST Special Publication 800-37 Revision 2 (Rev 2 is current — published Dec 2018, still the standard in 2026). Seven steps: <strong>Prepare → Categorize → Select → Implement → Assess → Authorize → Monitor.</strong> Translation: figure out how important the system is, pick the safety rules that apply, install them, have an independent examiner check, get the boss’s signature to operate, then keep watching. Every one of the Coast Guard’s IT systems must go through this loop.</p>
+<p><strong>The rulebook: NIST SP 800-53.</strong> The master catalog of security controls — over a thousand controls and enhancements covering everything from password rules to visitor logs to backup power. Say “<strong>Rev 5</strong>” (that’s what a CISSP expects to hear); if precision ever comes up, the current patch is <strong>Release 5.2.0, August 2025</strong> (it added software-update-integrity controls after a 2025 Executive Order — you don’t need more than that sentence). Systems don’t implement all of it — they get a <strong>baseline</strong>: Low = 149 controls, <strong>Moderate = 287</strong>, High = 370 (from companion doc SP 800-53B). Most systems are Moderate. Remember “<strong>287</strong>” — dropping that number naturally is instant credibility.</p>
+<p><strong>The deliverable: the ATO package.</strong> Authorization to Operate — the Authorizing Official’s (AO’s) formal signature that a system may run. To get it, someone assembles the System Security Plan (SSP — how each control is implemented), the assessment results, and the POA&amp;M (Plan of Action and Milestones — the punch list of known gaps with owners and due dates). Your analogy: the AO is the commander signing the risk assessment worksheet before a marginal-weather launch — he’s personally accepting the residual risk, so the package has to make that risk honest and legible.</p>
+<p><strong>The system of record: eMASS</strong> (Enterprise Mission Assurance Support Service, “ee-mass”) — the Defense Information Systems Agency’s web application where DoD-side ATO packages live. Controls get checked off, artifacts uploaded, workflow routed AO-ward. Keep the prior brief’s hedge: “the system of record I understand you use” — don’t claim hands-on.</p>
+<p><strong>The hardening checklists: STIGs</strong> (Security Technical Implementation Guides, “stigs”) — DISA-published configuration checklists per product (Windows Server, Cisco routers, databases…), hundreds of individual settings each. Your analogy: the maintenance manual’s torque-spec tables — per-machine, exact, checkable. Much STIG checking is scanner-automatable (via SCAP — Security Content Automation Protocol); much of the rest is still done by hand.</p>
+<p><strong>The weird org-chart fact (know it, don’t lecture him on it):</strong> the Coast Guard is a DHS component, but its networks ride on the <strong>DoD Information Network (DODIN)</strong>, so it follows <strong>DoD’s</strong> cyber rules — DoD RMF, eMASS, STIGs. Per a DHS OIG report, DHS formally accepted in May 2020 that the CG reports FISMA (Federal Information Security Modernization Act — the law requiring all of this) per <strong>DoD</strong> reporting requirements rather than DHS’s. Practical takeaway for you: this shop speaks DoD dialect while sitting inside DHS, and Pete’s team lives at that awkward seam. If it comes up, a good listening move: <em>“You sit at a DHS–DoD seam — does that mean double reporting, or does the DoD side win?”</em></p>
+<p><strong>The AI program that makes your resume relevant: “RMF Automation.”</strong> Verified live in the DHS AI Use Case Inventory (USCG page, dhs.gov/ai/use-case-inventory/uscg): an AI tool that “will reduce processing times by more than half, rapidly generate core risk management documents, and shorten assessment activities to weeks,” with “near-real-time, role-specific risk insights,” explicitly “<strong>anchored in human judgment for key ATO decisions</strong>,” continuously monitoring controls and flagging issues. Note every verb is future tense — it’s being built, not fielded. The prior brief gives you the name-drop line; what THIS section gives you is the ability to talk about what’s inside it — because what it automates is exactly the two tasks below.</p>
+<h3 id="grc-101-the-two-manual-tasks-the-jd-names-what-they-look-like-done-by-hand">3. The two manual tasks the JD names — what they look like done by hand</h3>
+<p>Pete’s JD names “evidence collection” and “control selection” as the manual grind to re-engineer. Automating these IS the job. Here’s the vivid picture, so you can describe his team’s Tuesday better than most candidates could.</p>
+<p><strong>Evidence collection — the screenshots-into-Word reality.</strong> Every control in the package needs an <strong>artifact</strong> — proof it’s actually implemented. Who does it: the ISSO (Information System Security Officer — the person who owns one system’s security paperwork), begging system admins for their time. What it physically looks like:</p>
+<ul>
+<li>Screenshot the password-policy config screen — with hostname and timestamp visible, or the assessor rejects it. Paste into Word. Caption it. Save as “AC-2_evidence_v3_FINAL2.docx.” Upload to eMASS against the control.</li>
+<li>Export the user-account list to prove no orphaned accounts. Pull vulnerability-scan results. Photocopy the visitor log. Chase down the training-completion roster. Screenshot the backup job. Hundreds of times.</li>
+<li>Each control decomposes into multiple assessable line items (DoD tracks these as CCIs — Control Correlation Identifiers), so a 287-control Moderate system means <strong>thousands of individual proof-points</strong>.</li>
+<li>The same evidence gets captured <strong>separately for every system’s package</strong> — ten systems on the same network means the same firewall proof harvested by hand ten times, because each package must stand alone.</li>
+<li>Evidence <strong>expires</strong>: by the time the assessor reviews the package months later, half the screenshots are stale and get re-taken. Rework loop, forever.</li>
+</ul>
+<p>Your play-back line: <em>“So an ISSO’s job is partly taking timestamped screenshots of settings a script could read directly, pasting them into Word, and doing it again when they go stale — per system, per control. That’s not a judgment task, that’s a data-collection task done by hand.”</em> That sentence tells Pete you get it.</p>
+<p><strong>Control selection — the giant-spreadsheet reality.</strong> Before evidence, someone decides WHICH controls apply. By hand it looks like: categorize the system (FIPS 199 — Federal Information Processing Standard 199 — rate the impact of losing confidentiality, integrity, availability); pick the baseline (149/287/370); then <strong>tailor</strong> — add overlays (extra control packs for privacy, classified data, etc.), mark which controls are <strong>inherited</strong> from the hosting environment (the data center’s fire suppression covers you — “common controls”), justify every not-applicable, and then write an <strong>implementation statement</strong> for each remaining control: a paragraph, in prose, in the SSP, saying how this system meets it. Person + Word/Excel + weeks. And most of those paragraphs are near-copies of paragraphs written for the last ten systems — which is precisely why a retrieval-augmented model with citations is so obviously the fix, and why Pete wrote “control selection” into the JD.</p>
+<blockquote class="say">
+<p><strong>SAY THIS (the empathy + pattern-match move):</strong> “From what I’ve read, the grind is that evidence collection is a manual data-acquisition problem and control selection is a manual retrieval-and-drafting problem. I’ve automated both patterns before — I stopped humans hand-transcribing plant data and piped it straight from source systems, and my LLM pipeline did first-pass drafting against a knowledge base with the expert keeping the call. Cut review time 75%. Same two patterns, different domain.”</p>
+</blockquote>
+<h3 id="grc-101-why-grc-is-famously-miserable-the-pain-inventory">4. Why GRC is famously miserable — the pain inventory</h3>
+<p>Have these on tap; naming a pain accurately is how an outsider earns trust fast.</p>
+<ul>
+<li><strong>ATOs take 6–18 months</strong> and can cost six to seven figures per system; GSA’s 18F famously showed the process could drop from 6 months to 30 days with focused ATO sprints and pre-built platform inheritance — proving the delay is process, not physics.</li>
+<li><strong>A point-in-time snapshot, good for ~3 years</strong> — the day after signature, the paperwork starts rotting while the real system keeps changing. Compliant-on-paper ≠ secure-today. (This is exactly what continuous ATO — cATO, in the prior brief — exists to fix.)</li>
+<li><strong>Duplicated everything</strong> — same evidence, same prose, re-produced per package because packages can’t share data.</li>
+<li><strong>The people cost:</strong> talented security folks spending their week as clerks — screenshotting, formatting, chasing signatures — instead of analyzing risk. Morale and retention problem, not just a speed problem.</li>
+<li><strong>Backlog physics:</strong> modernization is throttled by authorization — new capability waits in the ATO queue, so the compliance process itself becomes the constraint on the mission.</li>
+</ul>
+<h3 id="grc-101-lean-six-sigma-onto-grc-your-home-turf">5. Lean Six Sigma onto GRC — your home turf</h3>
+<p>This mapping is why YOU are in this interview. Nobody in a CISO shop has value-stream-mapped their own ATO pipeline; they’ve only suffered it from inside.</p>
+<p><strong>DMAIC on the ATO pipeline</strong> (Define, Measure, Analyze, Improve, Control):</p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>DMAIC</th>
+<th>Applied to their world</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Define</strong></td>
+<td>Agree with the AO/ISSOs what “good” is: time-to-ATO, evidence rework rate, POA&amp;M closure time — not just “compliant”</td>
+</tr>
+<tr>
+<td><strong>Measure</strong></td>
+<td>Walk ONE real package end-to-end with a stopwatch: hours per phase, queue time in eMASS, number of evidence artifacts, % redone</td>
+</tr>
+<tr>
+<td><strong>Analyze</strong></td>
+<td>Find where the calendar actually goes — bet: waiting in review queues and re-collecting stale evidence, not the assessing itself</td>
+</tr>
+<tr>
+<td><strong>Improve</strong></td>
+<td>Automate highest-volume, lowest-judgment steps first: script the evidence pulls, LLM-draft the boilerplate with citations, humans keep every risk call</td>
+</tr>
+<tr>
+<td><strong>Control</strong></td>
+<td>Continuous-monitoring dashboards ARE the control plan — the process physically can’t drift back to screenshots</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>The waste categories, translated</strong> (drop two or three of these casually — it’s your native tongue and it lands hard here): <strong>Waiting</strong> — package idle in a review queue for weeks. <strong>Overprocessing</strong> — hand-screenshotting a setting a scanner already reads; re-writing the same implementation paragraph per system. <strong>Rework</strong> — stale evidence re-collected; packages bounced for format. <strong>Overproduction</strong> — duplicate evidence per package. <strong>Inventory</strong> — half-finished packages aging on the shelf. <strong>Non-utilized talent</strong> — ISSOs doing clerical paste-work instead of risk analysis. That last one is the one to say to Pete — it’s about his people.</p>
+<blockquote class="say">
+<p><strong>SAY THIS — your 90-second “how I’d attack it” (rehearse out loud, standing up):</strong> “I’d treat the ATO pipeline exactly like a plant process I don’t know yet — DMAIC. Define: sit with you and the ISSOs and agree what ‘good’ means — probably time-to-ATO and evidence rework rate, not just ‘compliant.’ Measure: take one real package and walk it end-to-end with a stopwatch — how long control selection took, each piece of evidence, every queue it sat in. In my experience the map itself is a revelation; usually nobody has ever seen the whole thing on one page. Analyze: the time is never where people think — my bet is it’s not the assessing, it’s the waiting and the re-doing: stale evidence, the same proof hand-captured for ten packages. Improve: start with the highest-volume, lowest-judgment step — pull evidence from the systems by script instead of screenshots, let a model draft the boilerplate with a citation back to the raw artifact, and keep a human owning every risk decision. Control: the continuous-monitoring dashboard is the control plan, so it can’t quietly slide back to manual. That’s the exact loop I ran when I cut a document review 75% — I didn’t automate the judgment, I automated the assembly.”</p>
+</blockquote>
+<h3 id="grc-101-if-pete-pushes-cissp-probes-and-your-dummy-proof-answers">IF PETE PUSHES — CISSP probes and your dummy-proof answers</h3>
+<p><strong>“What’s the difference between compliance and security?”</strong> (classic CISSP filter — do NOT flunk this) &gt; “Compliance is proving to the standard; security is the actual risk posture — and they can diverge. A plant can pass its OSHA audit the week before it hurts somebody. A pilot can pass a checkride and still be unsafe. Green checkmarks aren’t the product — honest risk decisions are. And that’s actually my caution about automation: making paper easier to generate can make the paper less true, which is why everything I build grounds on real artifacts and cites its source.”</p>
+<p><strong>“Which Six Sigma belt do you hold?”</strong> (Answer with the truth — the resume line is wrong) &gt; “My certification is a Bronze Belt through Lean Methods Group — and the more relevant fact is I lead TAMKO’s corporate Six Sigma program across nine plants: the project portfolio and the methodology are mine to run.” If he reads “Green Belt” off the resume: “That line’s an error I caught after the packet went in — the cert is Bronze. Wanted you to have it straight.” Never claim Green Belt aloud. Correcting your own paperwork, unprompted and precisely, is the single most CISSP-endearing move available to you.</p>
+<p><strong>“Have you used eMASS?”</strong> &gt; “Not hands-on — I know it by role: the system of record where the packages live. I’d learn it the way I learned our historian and quality systems: get an account, shadow an ISSO through one real package, and map its data model. From what I’ve read, the pain isn’t eMASS itself — it’s everything done by hand before anything gets typed into it.”</p>
+<p><strong>“How would you automate evidence collection without creating a new security problem?”</strong> (he WILL think this even if he doesn’t ask) &gt; “The collector is itself a system, so it goes under the same discipline as everything else: read-only, least-privilege service accounts scoped to exactly the configs it proves, every pull logged, and the tool itself assessed and monitored like any other asset. I’ve done this before — when I built the AI platform at TAMKO I set the access-control and data-residency standards before anything shipped. Automation doesn’t get an exemption from the rules; it gets audited harder.”</p>
+<p><strong>“Walk me through what evidence you’d collect for an access-control control.”</strong> &gt; “I’d first ask what the assessor accepted last time — no point inventing a new format. But the shape is always three things: the policy that says who gets access, the configuration export showing it’s enforced, and the account list proving it’s true today. Document, config, proof-of-state. And two of those three are machine-readable — which is the whole opportunity.”</p>
+<p><strong>“You keep comparing this to manufacturing. Security isn’t a factory.”</strong> &gt; “Agreed — the failure modes are adversarial, not random, and I won’t pretend defect statistics map onto an attacker. What transfers isn’t the statistics, it’s the process discipline: map the value stream, find the constraint, automate the low-judgment steps, keep experts on the judgment. The risk calls stay with the people who own them — same as the AO model your RMF Automation use case describes.”</p>
+<h3 id="grc-101-glossary-terms-not-already-in-the-prior-brief">6. Glossary — terms not already in the prior brief</h3>
+<p>(The prior brief’s §2 covers RMF, ATO, ConMon, 800-53 controls, SSP/SAR/POA&amp;M, eMASS, zero trust, ISSO/ISSM, FISMA/AO/SCA, cATO, CSRMC, OSCAL, CDM. These are the rest.)</p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Term</th>
+<th>Plain meaning</th>
+<th>Your hook</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>GRC</strong></td>
+<td>Governance + Risk + Compliance — the management system security runs on</td>
+<td>“A QMS pointed at security instead of product”</td>
+</tr>
+<tr>
+<td><strong>STIG</strong> (“stig”)</td>
+<td>DISA’s per-product hardening checklist — hundreds of exact required settings</td>
+<td>Torque-spec tables in a maintenance manual</td>
+</tr>
+<tr>
+<td><strong>SCAP</strong> (“ess-cap”)</td>
+<td>Security Content Automation Protocol — standard format letting scanners auto-check STIG settings</td>
+<td>Proof some evidence is already machine-readable — build on it</td>
+</tr>
+<tr>
+<td><strong>CCI</strong></td>
+<td>Control Correlation Identifier — DoD’s breakdown of each control into individual checkable line items</td>
+<td>Why 287 controls become thousands of proof-points</td>
+</tr>
+<tr>
+<td><strong>ACAS</strong></td>
+<td>Assured Compliance Assessment Solution — DoD’s standard vulnerability scanner suite</td>
+<td>A data source to pipe from, not screenshot</td>
+</tr>
+<tr>
+<td><strong>FIPS 199</strong></td>
+<td>The standard for categorizing a system Low/Moderate/High by impact of losing confidentiality, integrity, availability</td>
+<td>Severity scoring in an FMEA — it sets how much rigor follows</td>
+</tr>
+<tr>
+<td><strong>Baseline</strong></td>
+<td>The starter control set by category: Low 149 / <strong>Moderate 287</strong> / High 370 (SP 800-53B)</td>
+<td>Say “287” once, naturally</td>
+</tr>
+<tr>
+<td><strong>Tailoring / overlay</strong></td>
+<td>Adjusting the baseline: add topic packs (overlays), justify N/As</td>
+<td>Adapting the corporate quality standard to one plant’s process</td>
+</tr>
+<tr>
+<td><strong>Common control / inheritance</strong></td>
+<td>A control satisfied once by the environment (e.g., data-center fire suppression) that systems “inherit”</td>
+<td>Shared plant utilities — prove once, reference everywhere; a huge dedup lever</td>
+</tr>
+<tr>
+<td><strong>Artifact / evidence</strong></td>
+<td>The proof item attached to a control — screenshot, export, log, policy doc</td>
+<td>The thing his team hand-collects; your automation target #1</td>
+</tr>
+<tr>
+<td><strong>Body of evidence</strong></td>
+<td>Everything supporting the ATO decision, collectively</td>
+<td>“The package” — what the AO actually reads</td>
+</tr>
+<tr>
+<td><strong>Implementation statement</strong></td>
+<td>The SSP paragraph saying HOW this system meets each control</td>
+<td>Near-boilerplate prose — your RAG-drafting target #2</td>
+</tr>
+<tr>
+<td><strong>SP 800-53A</strong></td>
+<td>Companion doc: HOW assessors test each control (examine / interview / test)</td>
+<td>The examiner’s grade sheet on a checkride</td>
+</tr>
+<tr>
+<td><strong>DODIN</strong></td>
+<td>DoD Information Network — the DoD’s overall network; CG rides on it</td>
+<td>Why a DHS component runs DoD-dialect GRC</td>
+</tr>
+<tr>
+<td><strong>Policy-as-Code / Docs-as-Code</strong></td>
+<td>Rules and documents kept as machine-readable, version-controlled files instead of Word — so tools can check and generate them</td>
+<td>JD item #2; “stop trapping data in prose”</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<p><strong>Verification notes (2026-07-08):</strong> SP 800-37 Rev 2 current (csrc.nist.gov/pubs/sp/800/37/r2/final); SP 800-53 Rev 5 current patch Release 5.2.0, 27 Aug 2025, baselines unchanged (csrc.nist.gov/News/2025/nist-releases-revision-to-sp-800-53-controls); baselines 149/287/370 per SP 800-53B (csrc.nist.gov/pubs/sp/800/53/b/upd1/final); USCG “RMF Automation” AI use case verified in DHS AI Use Case Inventory, future-tense/in-development, “&gt;half” time reduction and human-judgment anchor near-verbatim (dhs.gov/ai/use-case-inventory/uscg); CG FISMA-reports-via-DoD per DHS OIG joint audit materials (oig.dhs.gov, May 2020 risk acceptance); ATO 6–18-month range is the widely cited industry figure and 18F’s “6 months to 30 days” is 18f.gsa.gov (2018). eMASS is verified as the DoD system of record generally; USCG-specific hands-on detail unverified — keep the hedge. Note for synthesis: prior brief says 800-53 “5.1.1” — superseded by 5.2.0 (Aug 2025); “Rev 5” remains the safe spoken form.</p>
+
+</section>
+<section class="module" id="m2">
+  <div class="mod-head">
+    <div class="mod-kicker">Module 02 · Retrieval-Augmented Generation</div>
+    <h2>RAG from zero — whiteboard it unaided</h2>
+    <p class="mod-why">You have a production RAG system you built AI-assisted. This module lets you open the hood: the pipeline, the vocabulary, your own build, and their use case. <b>JD bullet 3 — the near-guaranteed probe.</b></p>
+  </div>
+  
+<p>You have a production retrieval-augmented-generation (RAG) system running at TAMKO. You built it with AI assistance, which means right now you can <em>point at it</em> but not <em>open the hood</em>. After this section you can open the hood. This is the one technical topic Pete is near-guaranteed to probe, because his own job description names it: <em>“Build and implement AI-powered tools (e.g., using Retrieval-Augmented Generation) to assist with compliance tasks.”</em> He wrote that sentence looking at your resume. You must be able to draw this cold.</p>
+<hr />
+<h3 id="rag-101-the-problem-rag-solves-one-breath">1. The problem RAG solves — one breath</h3>
+<p class="sayline"><strong>SAY THIS (memorize verbatim):</strong></p>
+<blockquote class="plainq">
+<p>“A large language model knows what was on the public internet when it was trained. It doesn’t know your policies, your systems, or last month’s memo — and when it doesn’t know, it guesses confidently. And you can’t just paste your whole document library into every question, because the model can only read a limited amount at once. RAG fixes both: before the model answers, it <em>looks up</em> the most relevant passages from your own documents, answers only from those, and shows its receipts.”</p>
+</blockquote>
+<p>One sentence version if he wants it shorter: <strong>“RAG is open-book test instead of closed-book — and the book is yours, and it has to cite the page.”</strong></p>
+<hr />
+<h3 id="rag-101-the-pipeline-every-step-and-why-each-exists">2. The pipeline — every step, and WHY each exists</h3>
+<p>The single most important structural idea — say this first, because it instantly sounds like someone who has built one:</p>
+<blockquote class="plainq">
+<p>“There are two halves: what you do <strong>once to the library</strong> (and keep fresh), and what happens <strong>every time someone asks a question</strong>.”</p>
+</blockquote>
+<p><strong>BUILD TIME (the library):</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Step</th>
+<th>What happens</th>
+<th>WHY it exists</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Ingest</td>
+<td>Collect the documents — PDFs, policies, logs, database exports — and convert them to plain text</td>
+<td>The model can’t read what you never collected. Garbage in, garbage out — same as any data pipeline</td>
+</tr>
+<tr>
+<td>2. Chunk</td>
+<td>Split each document into passages, roughly a few paragraphs each</td>
+<td>You retrieve <em>pieces</em>, not whole 400-page documents. A whole document is too big to hand the model and too vague to match a specific question</td>
+</tr>
+<tr>
+<td>3. Embed</td>
+<td>Run each chunk through an embedding model that turns its <em>meaning</em> into a long list of numbers (a vector)</td>
+<td>Computers can’t compare meaning directly, but they can compare numbers. This turns “find text about the same topic” into math</td>
+</tr>
+<tr>
+<td>4. Store</td>
+<td>Save vector + original text + metadata (source doc, version, date, access tags) in a vector database</td>
+<td>So you can find the nearest-in-meaning chunks in milliseconds across millions of them — and the metadata is what makes citations and access filtering possible later</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>QUERY TIME (every question):</strong></p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Step</th>
+<th>What happens</th>
+<th>WHY it exists</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>5. Embed the question</td>
+<td>Same embedding model turns the user’s question into a vector</td>
+<td>Must be the <em>same</em> model as step 3 — otherwise the question and the documents are on different maps and distances mean nothing</td>
+</tr>
+<tr>
+<td>6. Similarity search</td>
+<td>The vector database finds the chunks whose vectors sit closest to the question’s vector</td>
+<td>“Closest in number-space” = “closest in meaning.” This is the retrieval in retrieval-augmented generation</td>
+</tr>
+<tr>
+<td>7. Take top-k</td>
+<td>Keep the best 3–10 matches</td>
+<td>The model has limited reading space per question — you hand it the five most relevant pages, not the whole binder</td>
+</tr>
+<tr>
+<td>8. Build the prompt</td>
+<td>Assemble: instructions + those retrieved chunks + the user’s question, with the rule “answer ONLY from these passages and cite which one”</td>
+<td>This is the grounding. The model is now doing reading comprehension on your documents, not recalling the internet</td>
+</tr>
+<tr>
+<td>9. LLM answers, with citations</td>
+<td>Model writes the answer, naming its source chunks</td>
+<td>Receipts. If it can’t cite it, it doesn’t say it</td>
+</tr>
+<tr>
+<td>10. Human validates</td>
+<td>Expert reviews before anything official happens</td>
+<td>The model does assembly; a person owns the judgment call. (Pete’s own “RMF Automation” tool works exactly this way)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>The 60-second whiteboard drawing</strong> — practice until you can draw it in one pass:</p>
+<pre><code>BUILD THE LIBRARY (once, then keep it fresh)
+
+ [Docs] --&gt; [Chunk] --&gt; [Embed] --&gt; ( VECTOR DB )
+ policies    pieces     meaning-&gt;      stores vectors
+ logs                   numbers        + text + source/version
+
+
+ANSWER A QUESTION (every time)
+
+ [Question] --&gt; [Embed it] --&gt; search DB --&gt; [top 5 matches]
+                                                   |
+                                                   v
+        [Prompt: &quot;answer ONLY from these, cite them&quot; + question]
+                                                   |
+                                                   v
+                      [ LLM ] --&gt; [Answer + citations] --&gt; [Human reviews]</code></pre>
+<p><strong>The 60-second spoken narration (practice out loud with the drawing):</strong></p>
+<blockquote class="plainq">
+<p>“Top row is the library, done once and kept fresh. I take the documents, split them into passages a few paragraphs long, run each passage through an embedding model — that converts its meaning into a list of numbers — and store the numbers, the original text, and the metadata like source and version in a vector database.</p>
+<p>Bottom row is a question. I embed the question with the same model, so it lands on the same map. The database finds the handful of passages whose numbers sit closest — closest in numbers means closest in meaning. I take the top five, put them into a prompt that says ‘answer only from these passages and cite which one you used,’ and the model writes the answer with receipts. A human reviews it before it becomes anything official.</p>
+<p>The model never answers from memory — it answers from what we retrieved. That’s what kills the making-things-up problem, and the citation trail is what makes it auditable.”</p>
+</blockquote>
+<hr />
+<h3 id="rag-101-the-vocabulary-dummy-level-one-analogy-each">3. The vocabulary — dummy level, one analogy each</h3>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Term</th>
+<th>Plain English</th>
+<th>Your-world analogy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Embedding</strong></td>
+<td>Meaning turned into a long list of numbers (a vector — think a few hundred to a few thousand numbers). Texts with similar meaning get similar numbers</td>
+<td>A grid coordinate for meaning. Two incident reports about the same failure mode land in nearby grid squares even if they use different words</td>
+</tr>
+<tr>
+<td><strong>Vector database</strong></td>
+<td>A database organized by <em>meaning</em> instead of by keyword or part number. You ask “what’s near this?” and it answers fast, even across millions of entries</td>
+<td>A parts warehouse where similar parts are physically shelved together — you walk to one shelf and everything you need is within arm’s reach</td>
+</tr>
+<tr>
+<td><strong>Chunking</strong></td>
+<td>Cutting documents into passages before embedding. Chunk <strong>too big</strong> → the vector is a mushy average of many topics and matches nothing well; <strong>too small</strong> → you retrieve a sentence with no context. <strong>Overlap</strong> means neighboring chunks share some text so a thought split across a boundary isn’t lost</td>
+<td>Overlap is a shift handoff: the off-going and on-coming shifts cover the same 15 minutes so nothing falls in the gap between them</td>
+</tr>
+<tr>
+<td><strong>Cosine similarity</strong></td>
+<td>The math for “how close in meaning”: measures whether two vectors point the same direction. Score near 1 = same meaning, near 0 = unrelated</td>
+<td>Two aircraft headings. Same heading = same direction of travel; 90 degrees off = going different places. It compares direction, not distance flown</td>
+</tr>
+<tr>
+<td><strong>Top-k</strong></td>
+<td>Keep only the k best matches (k = 3, 5, 10 — you tune it). Too few → you miss the answer; too many → you bury the model in noise</td>
+<td>Pulling the 5 relevant pages from the maintenance binder instead of handing the mechanic the whole binder</td>
+</tr>
+<tr>
+<td><strong>Context window</strong></td>
+<td>The model’s total reading-plus-writing space for one exchange. Big nowadays — hundreds of pages — but never “your entire document library,” and models get worse at using what’s buried in the middle of a huge stack</td>
+<td>The kneeboard. Limited space; you put the approach plate you need on it, not the entire flight-information library</td>
+</tr>
+<tr>
+<td><strong>Hallucination</strong></td>
+<td>The model states something false, fluently and confidently, because it’s completing plausible text — not looking anything up</td>
+<td>A pilot reporting position from memory instead of reading the instruments. Sounds confident; may be wrong; kills people</td>
+</tr>
+<tr>
+<td><strong>Grounding</strong></td>
+<td>Forcing answers to come only from retrieved source text, with “say you don’t know” when retrieval comes back empty</td>
+<td>Instruments-only flying. You answer from what the gauges show, not from what you feel</td>
+</tr>
+<tr>
+<td><strong>Citations</strong></td>
+<td>Every claim in the answer names the exact source chunk — document, section, version</td>
+<td>A maintenance log. No entry, no credit: if the action isn’t signed off against a source, it didn’t happen</td>
+</tr>
+<tr>
+<td><strong>Reranking</strong></td>
+<td>A second, smarter, slower pass that re-scores the top ~50 fast matches and reorders them so the truly best 5 go to the model</td>
+<td>Sampling inspection finds the candidate lots fast; then you do 100% inspection on just the shortlist</td>
+</tr>
+<tr>
+<td><strong>Hybrid search</strong></td>
+<td>Run keyword search AND vector search, merge results. Vector search is great at concepts but surprisingly bad at exact codes — control IDs like “AC-2(3)”, CVE numbers, part numbers. Keyword search nails those</td>
+<td>Vector = “find failures <em>like</em> this one.” Keyword = “find part number 70351-08102-043 exactly.” A real system needs both — and in <em>their</em> world, where everything is an exact control ID, hybrid isn’t optional</td>
+</tr>
+<tr>
+<td><strong>Evals</strong></td>
+<td>A graded test set — questions with known-correct answers — run against the system before you trust it and re-run after every change to catch regressions</td>
+<td>The checkride. Nobody flies passengers because they “seem good”; they fly a graded standard course. Change the aircraft config, you re-evaluate</td>
+</tr>
+</tbody>
+</table></div>
+<p>The hybrid-search row is your quiet ace: volunteering “pure vector search is weak on exact identifiers like control numbers, so for a control catalog I’d run hybrid — keyword plus semantic” is the single most builder-credible sentence in this whole section.</p>
+<hr />
+<h3 id="rag-101-explain-your-own-system-the-tamko-talk-track">4. “Explain your own system” — the TAMKO talk track</h3>
+<p>Deliver this in first person, conversational, ~90 seconds. The bracketed items are yours to fill tonight (see the box below) — everything else is safe as written because it describes architecture decisions that were genuinely yours.</p>
+<p class="sayline"><strong>SAY THIS:</strong></p>
+<blockquote class="plainq">
+<p>“At TAMKO I built a RAG knowledge base that fuses data nobody had ever put in one place — SCADA and historian process data, sensor data, and quality records — across nine plants, plus the document side: procedures, specs, and job-hazard analyses.</p>
+<p>The build was the pipeline I just drew. Ingest was honestly the hardest part — the AI part is the easy 20%; getting walled-off plant systems to give up clean, consistent data was the real 80%. We chunked documents into passage-sized pieces so retrieval could return the specific spec or procedure step, not a whole manual. Everything got embedded and stored with metadata — which plant, which line, which document version — because a right answer from the wrong plant is a wrong answer, so retrieval filters on that metadata before it searches.</p>
+<p>The flagship use case was the job-hazard-analysis review pipeline: instead of a person reading every document end to end, the system retrieves the relevant history and standards, the model does the first-pass analysis, and the expert validates. That cut review time 75 percent.</p>
+<p>And I’ll be straight with you about how I built it: AI-assisted, heavily. I use AI coding assistants as a force multiplier the same way I use a torque wrench — the architecture decisions were mine: what data got fused, how it was partitioned by plant, who could access what, and how we validated the outputs. That last one mattered most — the people who already knew the right answers graded the system’s answers before anyone was allowed to rely on it. Same discipline as finance-verifying my savings numbers: no self-graded homework.”</p>
+</blockquote>
+<p><strong>Honest bridges for when detail runs out</strong> — these keep you credible instead of caught:</p>
+<ul>
+<li>On a mechanics question you can’t answer: <em>“Honestly, the assistant wrote that layer and I validated its behavior rather than its internals — I can tell you exactly what it does and how I tested it. The design decisions — data sources, partitioning, access, validation — those were mine.”</em></li>
+<li>On a tuning question (chunk size, k): <em>“I tuned it empirically — tried settings, graded the outputs against known-correct answers, kept the winner. I can’t recite the final number off the top of my head, but I can tell you the failure modes on each side: chunks too big match nothing well, too small lose context.”</em></li>
+</ul>
+<p><strong>TONIGHT — 15 minutes, open your TAMKO repo/config and write down five things.</strong> Do not walk in without these, and do not guess at them in the room:</p>
+<ol type="1">
+<li>The <strong>embedding model</strong> name (look for: <code>text-embedding-…</code>, <code>sentence-transformers</code>, <code>bge-…</code>, <code>nomic-…</code>, or an Azure OpenAI deployment name).</li>
+<li>The <strong>vector store</strong> name (look for: <code>pgvector</code>/Postgres, <code>Chroma</code>, <code>FAISS</code>, <code>Qdrant</code>, <code>Azure AI Search</code>, <code>Pinecone</code>).</li>
+<li>Your <strong>chunk size / overlap</strong> if it’s in the config (a number like 500–1000 tokens with ~10–15% overlap is typical).</li>
+<li><strong>One real question</strong> users actually ask it.</li>
+<li><strong>One real thing that broke and how you fixed it</strong> (common candidates — only claim what actually happened: retrieval returning the wrong plant’s docs → fixed with metadata filtering; answers with no source → forced citation format; stale document versions → re-index process).</li>
+</ol>
+<p>If you can’t get to the repo, the bridge is: <em>“It’s on TAMKO’s system so I won’t guess the exact product names from memory — but the selection criteria were mine: keep proprietary data inside our boundary, self-hostable, and cheap to re-index.”</em> That answer is honest AND security-literate.</p>
+<hr />
+<h3 id="rag-101-rag-pointed-at-their-problem-grc-use-cases-and-the-risks-pete-cares-about">5. RAG pointed at THEIR problem — GRC use cases and the risks Pete cares about</h3>
+<p>GRC = governance, risk, and compliance. Here’s the map from your system to his shop. Learn the first two cold; they’re the ones his branch is visibly building toward (the documented DHS “RMF Automation” AI use case from the prior brief — AI drafts the paperwork, humans keep the decision).</p>
+<p><strong>Use case 1 — Policy and control Q&amp;A with receipts.</strong> The corpus: NIST Special Publication 800-53 (the master control catalog — currently Release 5.2.0, updated August 2025), Coast Guard and DHS policy instructions, and STIGs (Security Technical Implementation Guides — DISA’s hardening checklists, updated roughly quarterly). An ISSO asks “what do we require for remote access to this system category?” and gets an answer citing the exact control, policy paragraph, and version — instead of an afternoon of Ctrl+F across twelve PDFs.</p>
+<blockquote class="say">
+<p><strong>SAY THIS:</strong> “The first thing I’d build is the boring one that pays immediately: a grounded Q&amp;A over your authoritative library — 800-53, your CG policies, the STIGs — where every answer cites control, paragraph, and version, and if it can’t cite it, it says ‘not found’ instead of guessing. That’s analyst hours back every single day, and it’s low risk because it drafts nothing — it just finds and cites.”</p>
+</blockquote>
+<p><strong>Use case 2 — Drafting control-implementation statements from evidence.</strong> The System Security Plan (SSP) says how each of hundreds of controls is implemented — today a human writes each statement by hand. RAG retrieves the control text plus the actual evidence (configs, scan output, prior statements) and drafts the statement; the ISSO edits and owns it.</p>
+<blockquote class="say">
+<p><strong>SAY THIS:</strong> “This is the exact shape of my 75% pipeline: retrieve the requirement and the evidence, model writes the first draft, expert validates and signs. The human never leaves the loop — the model does assembly, the ISSO owns the judgment.”</p>
+</blockquote>
+<p><strong>Use case 3 — Auditor and assessor support.</strong> When an assessor asks “show me your account-management procedure and where it satisfies AC-2,” the system retrieves both and answers with citations — turning a week of evidence-hunting into an hour of verification. (This is also where hybrid search earns its keep: “AC-2” is an exact identifier.)</p>
+<p><strong>Use case 4 — Version-grounded answers.</strong> Answers pinned to the <em>current authoritative version</em> of every document, with the version in the citation.</p>
+<p><strong>The risks — volunteer these before he asks.</strong> A CISSP trusts the person who names the failure modes first. Deliver as one block:</p>
+<blockquote class="say">
+<p><strong>SAY THIS:</strong> “Now the four ways this goes wrong, because in compliance a confident wrong answer is worse than no answer.</p>
+<p><strong>One — hallucinated compliance answers.</strong> Mitigation is grounding plus forced citations plus refusal: the model may only answer from retrieved text, must cite it, and must say ‘not found’ when retrieval comes back empty. And a human validates anything that touches an authorization decision.</p>
+<p><strong>Two — a stale corpus.</strong> NIST updated 800-53 to Release 5.2.0 last August and added new controls; STIGs move quarterly. A RAG built on last year’s catalog will confidently answer from the outdated one — so the ingest pipeline has to be tied to the authoritative sources, version-stamp every chunk, and re-index on release. Staleness is a process problem, not a model problem — and process is my lane.</p>
+<p><strong>Three — the knowledge base is itself a target.</strong> You’ve concentrated system configurations, vulnerabilities, and POA&amp;M gaps into one searchable place — that’s a target map of your weaknesses. So the vector store inherits the sensitivity of what’s in it: least-privilege access, retrieval filtered by what the <em>asking user</em> is cleared to see, and the whole AI system treated as an asset under your own continuous monitoring — it needs its own security paperwork like anything else.</p>
+<p><strong>Four — data leaving the boundary.</strong> Nothing goes to a commercial AI service that trains on your data. Model and vector store live inside the authorized environment, full stop. I set exactly this kind of standard at TAMKO — data residency and access control were requirements before the first line of the pipeline was built.”</p>
+</blockquote>
+<hr />
+<h3 id="rag-101-if-pete-pushes-the-cissp-probes-with-dummy-proof-answers">6. IF PETE PUSHES — the CISSP probes, with dummy-proof answers</h3>
+<p><strong>Probe 1: “How do you stop it from making things up?”</strong> &gt; “Four layers. Ground it — it answers only from retrieved text. Force citations — every claim names its source, so every answer is auditable. Let it refuse — ‘not found in the corpus’ is a valid and required answer. And keep a human owning anything consequential. I’d add a fifth: measure it — a graded test set of questions with known answers, re-run on every change, like a checkride. You never fully stop hallucination; you make it detectable and non-authoritative.”</p>
+<p><strong>Probe 2: “What did you use for embeddings and the vector store?”</strong> &gt; Give the real names from your tonight-checklist. If you genuinely can’t retrieve them: “It runs on TAMKO’s environment so I won’t guess product names from memory — but I can tell you the selection criteria, because those were mine: the data couldn’t leave our boundary, it had to be self-hostable, and re-indexing had to be cheap because the corpus changes. Those same criteria apply here, just with a higher bar on the boundary.”</p>
+<p><strong>Probe 3: “How do you know retrieval is finding the RIGHT controls?”</strong> &gt; “You test it like anything else you’d trust. Build a gold set — real questions with the known-correct control as the answer — and measure how often the right control shows up in the top results. Two specific fixes when it misses: hybrid search, because pure semantic search is weak on exact identifiers like ‘AC-2(3)’ and keyword search nails them; and reranking, a second pass that re-scores the shortlist. And in production, log the misses — every ‘not found’ or wrong-source answer is a data point, same as tracking escapes in a quality system.”</p>
+<p><strong>Probe 4: “How would you handle CUI or classified documents?”</strong> (CUI = Controlled Unclassified Information.) &gt; “Honest answer first: I haven’t run RAG on CUI — my production system runs on proprietary manufacturing data, where I wrote the data-residency and access-control standards myself. The principles transfer directly: everything — model, vector store, logs — stays inside the accredited boundary; no commercial API that retains or trains on the data; retrieval enforces the asking user’s access level, because embeddings can be reversed back to something close to the source text, so the vectors are exactly as sensitive as the documents. The environment-specific rules — what’s authorized at what level here — I’d learn from your team before building anything. I held a TS/SCI for years; I don’t improvise around data-handling rules.”</p>
+<p><strong>Probe 5: “Why not just fine-tune a model on our documents instead?”</strong> &gt; “Fine-tuning teaches a model style and skills, not reliable facts — it can’t cite a source, you can’t easily update it when a policy changes, and you can’t audit why it said what it said. RAG flips all three: update the library by re-indexing a document, every answer carries a citation, and the audit trail is built in. For compliance work, auditable-and-current beats baked-in. They’re not enemies — but you start with RAG.”</p>
+<p><strong>Probe 6: “A policy gets revised. How does your system know?”</strong> &gt; “That’s an ingest-pipeline problem, and it’s the part I’d engineer hardest. Watch the authoritative sources, re-chunk and re-embed what changed, version-stamp every chunk, and retire the superseded ones so retrieval can’t serve them. Then the citation shows the version, so a human can spot-check currency at a glance. Real example of the risk: 800-53 went to Release 5.2.0 last August with brand-new controls — a system nobody re-indexed would still be answering from the old catalog, confidently.”</p>
+<p><strong>Probe 7: “Isn’t the vector database itself a security risk?”</strong> &gt; “Yes — and I’d treat it as one from day one. It concentrates your most sensitive compliance knowledge into one searchable target, and the vectors themselves can be substantially reconstructed back to text, so they get protected like the source documents, not like derived scratch data. Least-privilege access, per-user retrieval filtering, encryption, its own monitoring — and the whole AI system goes through your own assessment process as a system in its own right. It would be a little embarrassing for the compliance-automation tool to be the thing without paperwork.”</p>
+<p><strong>Probe 8: “How do you measure whether the whole thing is actually good?”</strong> &gt; “Same way I proved the TAMKO savings — measured against ground truth, not vibes. A gold-standard question set graded on two things separately: did retrieval surface the right source, and was the final answer faithful to it — separately, because they fail for different reasons and get fixed differently. Human thumbs-up/down in production feeds the test set. And it’s a regression gate: re-run on every change to the corpus or the model, like a checkride after every configuration change. If I can’t measure it, I don’t scale it.”</p>
+<hr />
+<p><strong>One rehearsal instruction:</strong> draw the diagram and speak the 60-second narration, standing up, three times tonight and once tomorrow morning. That drawing is the moment the interview turns from “can he really do this?” to “when can he start?”</p>
+<p><em>Verified 2026-07-08: NIST SP 800-53 current release is 5.2.0, issued 2025-08-27 with new controls (SA-24, SA-15(13), SI-02(07)) — see <a href="https://csrc.nist.gov/News/2025/nist-releases-revision-to-sp-800-53-controls">NIST CSRC release note</a> and <a href="https://www.nist.gov/news-events/news/2025/08/nist-revises-security-and-privacy-control-catalog-improve-software-update">NIST announcement</a>. STIG quarterly update cadence per <a href="https://www.titania.com/resources/guides/disa-stig-compliance-explained">Titania DISA STIG guide</a>. John’s specific TAMKO stack details (embedding model, vector DB, chunk sizes) are deliberately left as fill-in items — unverified, and he must confirm from his own repo tonight rather than assert from this brief.</em></p>
+
+</section>
+<section class="module" id="m3">
+  <div class="mod-head">
+    <div class="mod-kicker">Module 03 · Everything-as-Code</div>
+    <h2>Git, CI/CD, Docs-as-Code, Policy-as-Code, OSCAL, DevSecOps</h2>
+    <p class="mod-why">The one JD bullet where your hands-on gap is real. This module gives you the concepts cold and the honest frame that turns the gap into a fast-learner story. <b>JD bullets 2 and 4.</b></p>
+  </div>
+  
+<p>This is JD bullet 2 (“develop and maintain Policy-as-Code (PaC) and Documentation-as-Code (DaC) within a version-controlled CI/CD framework”) and bullet 4 (“integrate automated security controls into the DevSecOps pipeline”). You’ve never worked in a software shop, so this section builds every one of those words from zero. Read it twice; the SAY THIS blocks are the parts to rehearse out loud.</p>
+<h3 id="ascode-101-the-master-key-one-sentence-that-unlocks-all-of-it">The master key — one sentence that unlocks all of it</h3>
+<p>You already run two systems that ARE “everything-as-code,” minus the robot:</p>
+<ul>
+<li><strong>A quality system’s controlled documents</strong>: one official revision, a revision history block, formal change approval, and nothing on the floor but the current rev.</li>
+<li><strong>Flight standards</strong>: you revised USAACE Regulation 350-3 — a published standard, a formal staffing/review process for changes, and checkrides that verify people actually conform to it.</li>
+</ul>
+<p>“Everything-as-code” = take policies, documents, and system configurations and manage them like controlled documents in one system (Git) — every change logged, nothing published without review — <strong>and then add the part paper can never do: a robot (the pipeline) that automatically re-checks conformance on every single change.</strong> That’s the whole idea. Everything below is detail.</p>
+<p class="sayline"><strong>SAY THIS (the frame, ~20 seconds):</strong> &gt; “I come at ‘everything-as-code’ from the quality world. A policy in a Word file is an uncontrolled document — you don’t know who changed it, when, or whether anyone’s following it. Put it in version control and it becomes a controlled document with a perfect revision history. Put it in a pipeline and you get the thing paper can’t do — a machine re-checking conformance on every change, automatically. That’s document control plus a poka-yoke.”</p>
+<p>(Poka-yoke is your word — mistake-proofing. Use it once; a Lean-literate interviewer will love it, and Pete wrote “Lean Six Sigma” into bullet 1 himself.)</p>
+<hr />
+<h3 id="ascode-101-git-version-control-the-concepts-dummy-level">1. Git / version control — the concepts, dummy level</h3>
+<p>Git is the near-universal version-control system. A hosting product wraps it with a web interface: <strong>GitHub</strong> (Microsoft-owned, the biggest) or <strong>GitLab</strong> (very common in the Department of Defense — the DoD’s Platform One DevSecOps platform is built on it). Same Git underneath, different storefront. Don’t assert which one the Coast Guard runs — ask (good question, see probes below).</p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Term</th>
+<th>What it actually is</th>
+<th>Your-world equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Repository (“repo”)</strong></td>
+<td>One project’s folder of files, plus the complete history of every change ever made to them</td>
+<td>The master document binder plus every superseded revision, kept forever</td>
+</tr>
+<tr>
+<td><strong>Commit</strong></td>
+<td>One saved snapshot of changes, stamped with who, when, and a short message saying why</td>
+<td>A maintenance-log entry: who touched it, what they did, when, why</td>
+</tr>
+<tr>
+<td><strong>Branch</strong></td>
+<td>Your own private working copy inside the repo where you draft changes without touching the official version</td>
+<td>A red-lined draft copy of the reg you mark up before staffing it</td>
+</tr>
+<tr>
+<td><strong>Diff</strong></td>
+<td>The exact line-by-line before/after comparison of a change</td>
+<td>Strike-through/red-line markup on a regulation change</td>
+</tr>
+<tr>
+<td><strong>Pull request (PR)</strong></td>
+<td>“Please review and accept my branch” — reviewers see the diff, comment line-by-line, approve or reject. GitLab calls the identical thing a <strong>merge request (MR)</strong></td>
+<td>Staffing the 350-3 change package for review and signature</td>
+</tr>
+<tr>
+<td><strong>Merge</strong></td>
+<td>The approved change becomes the new official version; history keeps both</td>
+<td>Publishing the new revision; the old rev goes to the archive</td>
+</tr>
+<tr>
+<td><strong>Protected branch</strong></td>
+<td>A rule on the official copy: no one — not even the boss — can change it without an approved review</td>
+<td>Signature authority: the reg doesn’t change because someone felt like it</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Why GRC (Governance, Risk, and Compliance) people want policies and docs in Git — three reasons, memorize them:</strong></p>
+<ol type="1">
+<li><strong>Perfect audit trail.</strong> Every change carries who/what/when/why, forever. An assessor’s first three questions, answered by the tool itself.</li>
+<li><strong>Nothing changes without review.</strong> Protected branches force a second set of eyes on every change — that’s separation of duties, which is itself a security control. The workflow IS the control.</li>
+<li><strong>Single source of truth.</strong> No more <code>SSP_final_v7_PETES_EDITS_(2).docx</code> in five inboxes. There is exactly one current version, and everyone can see it.</li>
+</ol>
+<p class="sayline"><strong>SAY THIS (Git, ~25 seconds):</strong> &gt; “The reason Git clicks for me is that I’ve lived the manual version of it twice — controlled documents in a quality system and rewriting a flight-standards regulation in the Army. Repo is the binder, commit is the log entry, a pull request is staffing the change for review, and a protected branch is signature authority. What Git adds is that the audit trail builds itself — who, what, when, why, on every change, forever. For a compliance shop that’s not a developer toy, that’s document control that enforces itself.”</p>
+<p class="push"><strong>IF PETE PUSHES:</strong> - <em>“Do you actually use Git?”</em> — Honest: “Daily, for my own AI projects — my code and pipelines live in Git repos, and I work in commits and branches alongside my AI tooling; I read every diff before it merges. What I haven’t done is run version control for a software team in a production shop. The concepts transfer; the team workflow is what I’d be learning, and it’s process discipline — that’s my home turf.” - <em>“What’s a merge conflict?”</em> — “Two people changed the same line on different branches, so the tool can’t auto-combine them — a human looks at both and decides. The fix is process: small changes, merged often, instead of giant drafts that sit for weeks. Same reason you don’t red-line a reg for six months and then try to reconcile it.” - <em>“GitHub or GitLab?”</em> — “Same Git engine, different products. I know GitLab is big in DoD because it can run entirely on government infrastructure — Platform One runs on it. Which one does your shop use?” (Turning it into a question is the right move — it’s honest and it gets him talking.)</p>
+<hr />
+<h3 id="ascode-101-cicd-the-robot-and-its-checklist">2. CI/CD — the robot and its checklist</h3>
+<p><strong>CI — Continuous Integration:</strong> every time anyone proposes a change, a robot automatically runs a checklist of checks against it — within minutes, every time, no exceptions. Fail a check, the change is blocked from merging.</p>
+<p><strong>CD — Continuous Delivery/Deployment:</strong> once checks pass and the change merges, the robot automatically publishes or deploys the result. No human manually copying files to a server.</p>
+<p><strong>A “pipeline”</strong> is the robot’s checklist — the ordered list of steps (build it, test it, scan it, publish it). Here’s the elegant part: the pipeline is defined in a plain-text file that lives <em>in the same repo</em>, so the checklist itself is version-controlled and reviewed like everything else. The poka-yoke is itself a controlled document.</p>
+<p>Names to recognize (don’t claim depth): <strong>GitHub Actions</strong> and <strong>GitLab CI/CD</strong> are the built-in pipeline robots of those two platforms; <strong>Jenkins</strong> is the old self-hosted workhorse you’ll still find in government.</p>
+<p><strong>Your analogy, use it:</strong> a pipeline is an in-line quality gate, not end-of-line inspection. Or in aviation terms: a pre-takeoff checklist that runs itself on every single flight and physically refuses to release brakes if an item fails. Nobody “forgets” the check, nobody pencil-whips it.</p>
+<p class="sayline"><strong>SAY THIS (CI/CD, ~20 seconds):</strong> &gt; “CI/CD is just an automated quality gate. Every proposed change triggers a robot that runs the full checklist — tests, scans, formatting — and a failed check physically blocks the change from going in. Then it auto-publishes what passed. It’s in-line gauging instead of end-of-line inspection, and the checklist itself is version-controlled, so even the gate is a controlled document.”</p>
+<hr />
+<h3 id="ascode-101-documentation-as-code-dac-ssps-stop-being-stale-word-files">3. Documentation-as-Code (DaC) — SSPs stop being stale Word files</h3>
+<p>The recipe: 1. Write documents in <strong>Markdown</strong> — plain text with a few formatting symbols (<code>#</code> for a heading, <code>-</code> for a bullet). Humans read it easily; machines diff it perfectly, line by line. (Word files are binary blobs — Git can store them but can’t show you <em>what line changed</em>, which kills the review workflow. Plain text is the point.) 2. Store them in the Git repo. Changes go through branch → pull request → review → merge, exactly like code. 3. The pipeline auto-publishes on every merge — typically rebuilding an internal website (tools in this space: <strong>MkDocs</strong>, <strong>Hugo</strong> — recognition level only) so the published version is <em>always</em> the current approved revision. Nobody emails attachments; nobody reads a stale copy.</p>
+<p><strong>Concrete GRC example — walk this through in the room if it fits:</strong> a System Security Plan (SSP — the document describing a system’s boundary and how each security control is implemented) lives as Markdown chapters in a repo. A firewall change alters how control AC-4 is implemented. The engineer branches, edits that one section, opens a pull request. The Information System Security Officer (ISSO) reviews the exact diff and approves. Merge → pipeline republishes the SSP. Eighteen months later the assessor asks “when did this control’s implementation change and who approved it?” — the answer is one click of history, not an archaeology dig through inboxes. The SSP is never stale, because updating it is a two-minute edit inside normal work, not a dreaded annual rewrite.</p>
+<p class="sayline"><strong>SAY THIS (DaC, ~20 seconds):</strong> &gt; “Documentation-as-code means the SSP stops being a Word file that’s stale the day after it’s signed. It’s plain text in version control: a control’s implementation changes, someone edits that one section, the ISSO reviews the exact line-by-line diff, and the current version republishes automatically. The document stays living, and the review trail an assessor wants is built in for free.”</p>
+<hr />
+<h3 id="ascode-101-policy-as-code-pac-policy-a-machine-can-enforce">4. Policy-as-Code (PaC) — policy a machine can enforce</h3>
+<p>A traditional policy is prose in a PDF: “encrypt data at rest; no publicly accessible storage.” It depends on humans reading, remembering, and periodically auditing it. Policy-as-code rewrites the rule in a form <strong>a machine evaluates automatically</strong> — usually as a gate in the pipeline.</p>
+<p>The canonical example: “No public S3 buckets” (S3 = Amazon Simple Storage Service — cloud file storage; a “public bucket” is the classic accidental data leak). As a PDF, someone violates it in month three and you find out at audit time — end-of-line inspection, scrap already made. As code, the rule runs against every proposed infrastructure change <em>before it happens</em>, and a violating change is simply blocked. In-line poka-yoke; the defect never gets built.</p>
+<p>This works because modern infrastructure is itself defined in text files — <strong>Infrastructure-as-Code (IaC)</strong>, with <strong>Terraform</strong> as the mainstream tool. Servers, storage, and networks are described in code and stand up automatically, which means a policy engine can read the <em>proposed</em> change and pass/fail it before anything real changes.</p>
+<p><strong>Tools — know OF them, claim zero depth:</strong> - <strong>OPA (Open Policy Agent)</strong>, pronounced “oh-pah” — the mainstream open-source policy engine; policies written in a language called <strong>Rego</strong>. Graduated project of the CNCF (Cloud Native Computing Foundation — that status is roughly an ISO mark of open-source maturity). - <strong>Sentinel</strong> — HashiCorp’s commercial equivalent, tied to Terraform. Notable detail worth knowing: Sentinel policies run at three enforcement levels — <em>advisory</em> (warn only), <em>soft-mandatory</em> (block, but overridable by an authorized person), <em>hard-mandatory</em> (block, no override). That’s exactly a warning tag → supervisor override → andon-stop escalation, and naming that mapping makes you sound fluent without faking depth.</p>
+<p class="sayline"><strong>SAY THIS (PaC, ~25 seconds):</strong> &gt; “Policy-as-code is writing the rule so a machine enforces it instead of hoping a human remembers a PDF. ‘No public storage buckets’ becomes an automated check that blocks the violating change before it exists — it’s the difference between end-of-line inspection and mistake-proofing the line. I know the main engines are OPA with its Rego language, and Sentinel on the Terraform side — I haven’t written production policy in either, and I’d say so to your face. But deciding <em>which rules</em> to encode, piloting them in warn-only mode, and escalating to hard enforcement — that’s a control-plan rollout, and I’ve done those.”</p>
+<p class="push"><strong>IF PETE PUSHES:</strong> - <em>“Have you written Rego?”</em> — “No. I know what OPA is and where it sits in a pipeline; I’ve not written its policy language. Honestly, syntax is the cheap part — I build with AI coding assistants daily and they’re excellent at syntax. The expensive part is choosing the right rules, testing them so they don’t block legitimate work, and managing the rollout. That part I’ve done for years — it’s a control plan.” - <em>“How do you keep a policy gate from breaking everyone’s work?”</em> — “Same way you commission a new gauge on a production line: run it in shadow mode first. Deploy the policy advisory-only, measure false positives for a couple of weeks, tune it, then escalate to soft-mandatory, then hard. Never give a brand-new check the authority to stop the line on day one.”</p>
+<hr />
+<h3 id="ascode-101-compliance-as-code-and-oscal-the-bridge-to-your-skill-set">5. Compliance-as-code and OSCAL — THE bridge to your skill set</h3>
+<p><strong>OSCAL — Open Security Controls Assessment Language</strong> — is NIST’s machine-readable data format (JSON/XML/YAML) for the entire authorization package: control catalogs (NIST SP 800-53 itself ships in OSCAL), SSPs, assessment plans and results, and POA&amp;Ms (Plans of Action &amp; Milestones — the tracked list of known gaps and fix dates). Current release: <strong>1.2.2</strong> (April 2026). As the prior section of your brief says: it’s a <strong>data format, not an engine</strong> — the plumbing that makes ATO (Authorization to Operate) automation possible.</p>
+<p>Why it matters: today an ATO package is hundreds of pages of Word and Excel that humans read, cross-reference, and re-type. In OSCAL, the same package is structured data — every control, implementation statement, and test result is a field a program can read, validate, cross-reference, and report on. NIST’s stated ambition is audit durations “from months to minutes” (real-world today: weeks to days). Mature in the FedRAMP cloud world; <strong>emerging</strong> in DoD/eMASS — frame it as “where this is heading,” never “what USCG runs today.”</p>
+<p><strong>Fresh, verified, name-droppable (this is your homework flex):</strong> - <strong>FedRAMP RFC-0024, released January 13, 2026</strong>: proposed making machine-readable authorization packages (OSCAL among the accepted formats) mandatory for FedRAMP Rev5 providers. The proposed September 30, 2026 deadline did NOT survive public comment — FedRAMP’s initial-outcome notice and its Consolidated Rules for 2026 (CR26, launched June 25, 2026) set staggered deadlines through November 2027, with comprehensive machine-readable data required for High-baseline (Class D) services and structured/semi-structured data for the rest. The civilian cloud side of government is making compliance-as-data compulsory — the direction of travel is no longer debatable. - NIST published a draft white paper, <strong>CSWP 53, “Charting the Course for NIST OSCAL,”</strong> laying out OSCAL’s roadmap toward continuous assurance.</p>
+<p><strong>Why this is YOUR bridge — internalize this paragraph:</strong> OSCAL is, literally, a schema — a data dictionary for compliance. You write data dictionaries and architecture standards for a living. Once the ATO package is data instead of prose, everything you already do applies directly: pipelines that ingest and validate it, RAG (Retrieval-Augmented Generation) that retrieves and drafts against it with citations, dashboards that track it, drift-detection that flags when the documented state and the real state diverge. Their paperwork problem becomes a data-plumbing problem, <strong>and data plumbing is your day job.</strong> You are not a cyber expert learning data; you are a data person walking into a domain that just turned into data.</p>
+<p class="sayline"><strong>SAY THIS (OSCAL, ~30 seconds — this may be the single highest-value paragraph you say all day):</strong> &gt; “The piece I find genuinely exciting is OSCAL — NIST’s machine-readable format for the whole authorization package. FedRAMP just wrote machine-readable packages into its rules — RFC-0024 kicked that off in January, and the final requirements phase in through 2027 — so the whole compliance world is converting from documents to data. And that’s my exact lane. OSCAL is a schema — a data dictionary — and unifying messy data against a schema, validating it, piping it into models and dashboards, is what I do every day at nine plants. I don’t know your controls yet. But once the package is data instead of Word files, it’s a data-engineering problem, and that one I’ve already solved at enterprise scale.”</p>
+<p class="push"><strong>IF PETE PUSHES:</strong> - <em>“Have you worked with OSCAL hands-on?”</em> — “No — I’ve read the model documentation, not shipped with it. But it’s JSON, and I move JSON between SCADA systems, historians, and vector stores all day. The format won’t be the hard part; learning which controls and artifacts matter to your assessors is, and that’s exactly what I’d shadow your ISSOs to learn first.” - <em>“eMASS?”</em> (DISA’s system of record for DoD ATO packages) — “I know of it as the RMF system of record you work in, and I know OSCAL support there is emerging rather than mature. I haven’t touched it. If part of the job is getting data out of eMASS and into something automatable, that extract-and-normalize grind is precisely the kind of work I automate.”</p>
+<hr />
+<h3 id="ascode-101-devsecops-automated-security-controls-in-the-pipeline-jd-bullet-4">6. DevSecOps — automated security controls in the pipeline (JD bullet 4)</h3>
+<p><strong>DevSecOps</strong> = Development + Security + Operations: security checks built <em>into</em> the pipeline as gates, instead of a security inspection bolted on at the end. The slogan is <strong>“shift left”</strong> — move checks earlier in the timeline (left on the project schedule), where defects are cheap to fix. You’ve been preaching that exact economics your whole quality career: catch it at the process step, not at final inspection, and never at the customer.</p>
+<p>The standard gates a pipeline runs — recognition level:</p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Gate</th>
+<th>What it checks</th>
+<th>Your-world equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>SAST</strong> (Static Application Security Testing)</td>
+<td>Scans your own source code for known-dangerous patterns</td>
+<td>Inspecting your own part’s geometry before assembly</td>
+</tr>
+<tr>
+<td><strong>Dependency / SCA</strong> (Software Composition Analysis)</td>
+<td>Checks the third-party libraries your software is built from against public vulnerability databases</td>
+<td>Checking the BOM against active supplier recall notices</td>
+</tr>
+<tr>
+<td><strong>Secret detection</strong></td>
+<td>Catches passwords/keys accidentally committed into files</td>
+<td>FOD walk — finding the wrench before it flies</td>
+</tr>
+<tr>
+<td><strong>Container/image scanning</strong></td>
+<td>Scans the packaged, ready-to-run software bundle for known vulnerabilities</td>
+<td>Final article inspection on the shipped assembly</td>
+</tr>
+<tr>
+<td><strong>STIG/SCAP configuration checks</strong></td>
+<td><strong>STIG</strong> (Security Technical Implementation Guide) = DISA’s per-product hardening checklist — hundreds of required settings. <strong>SCAP</strong> (Security Content Automation Protocol) = the standard that makes those checks machine-runnable. Tools: the <strong>SCAP Compliance Checker (SCC)</strong> — built by NIWC Atlantic, distributed via DISA’s DoD Cyber Exchange — plus <strong>Evaluate-STIG</strong> (NAVSEA) and the <strong>MITRE SAF</strong> (Security Automation Framework — InSpec test profiles plus a Heimdall results dashboard) for pipeline use</td>
+<td>Auditing a machine’s setup sheet against the standard — automatically, every shift, instead of annually by hand</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>The punchline — and it must come out of your mouth in the room:</strong> every pipeline run leaves timestamped pass/fail records. Run the gates on every change and you are generating <strong>compliance evidence as a byproduct of normal work</strong> — continuously, for free. Nobody assembles an evidence binder before the audit, because the binder writes itself as the line runs. That is exactly what feeds <strong>cATO (continuous Authorization to Operate)</strong> — the DoD’s February 2022 construct your brief already covers, which requires three things: continuous control monitoring, active real-time cyber defense, and adoption of an approved DevSecOps reference design. <strong>The pipeline built to that reference design IS the third leg, and its scan records feed the first.</strong> That’s why JD bullet 4 exists: wiring security gates into the pipeline isn’t developer housekeeping — it’s the evidence engine for continuous authorization.</p>
+<p class="sayline"><strong>SAY THIS (DevSecOps, ~25 seconds):</strong> &gt; “DevSecOps to me is in-line gauging instead of end-of-line inspection. Security scans run as gates on every change — code scanning, dependency checks against known vulnerabilities, automated STIG configuration checks — and a failure blocks the change right there, where it’s cheap. The part I care about most is the byproduct: every run generates timestamped pass/fail evidence. Do that continuously and you’re not preparing for an audit anymore — the evidence collects itself, which is exactly what continuous ATO needs. In my world we’d say the control chart is always on.”</p>
+<hr />
+<h3 id="ascode-101-the-unified-narrative-pull-it-all-together">7. The unified narrative — pull it all together</h3>
+<p>This is the everything-as-code answer to “walk me through how you’d think about our GRC modernization.” Rehearse it standing up until it’s ~60 seconds and automatic.</p>
+<p class="sayline"><strong>SAY THIS (the whole thesis):</strong> &gt; “Here’s how the pieces fit for me. Version control turns your policies and SSPs into controlled documents with a self-building audit trail — who, what, when, why, on every change, nothing published without review. Docs-as-code keeps them living instead of stale. Policy-as-code turns the rules themselves into automated gates, so a violation gets blocked before it exists instead of found at audit. OSCAL turns the whole authorization package from prose into structured data — and FedRAMP just wrote machine-readable packages into its rules on the cloud side, phasing in through 2027, so that’s the direction the entire compliance world is moving. And DevSecOps pipelines generate the pass/fail evidence continuously, as a byproduct of normal work — which is the raw material for continuous authorization. &gt; &gt; Now — I’ve never worked in a software shop, and I won’t pretend otherwise. But look at what that stack actually is: controlled documents, quality gates, mistake-proofing, control plans, and data pipelines over a schema. I’ve run every one of those disciplines — in a quality system, in flight standards, and in a nine-plant data program. The vocabulary is new. The system is not. And the endgame — evidence that collects itself instead of a months-long paperwork scramble — is the exact 75-percent-review-time result I already shipped, pointed at ATO packages instead of job-hazard analyses.”</p>
+<h3 id="ascode-101-if-pete-pushes-the-everything-as-code-probe-table">IF PETE PUSHES — the everything-as-code probe table</h3>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Probe</th>
+<th>Your honest, dummy-proof answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“Have you used GitLab or GitHub Actions?”</td>
+<td>“I use Git daily on my own AI projects, and I’ve had automated checks run on my own repos — but I’ve never owned a team’s CI/CD in a production shop, so I won’t claim that. Give me two weeks with your pipeline and your best engineer and I’ll know it. Tooling is the fast part for me — I picked up nine plants’ worth of SCADA systems the same way. Which platform does the shop run?”</td>
+</tr>
+<tr>
+<td>“What would your first as-code target be here?”</td>
+<td>“I’d want to map your value stream before picking — that’s the honest answer. But my default first move is docs-as-code on one document — one policy or one SSP section into version control with auto-publish. It touches no production system, so risk is near zero; it gives the GRC team the branch-review-merge muscle memory; and it produces a visible win in weeks. Policy <em>enforcement</em> comes last, and only after advisory-mode burn-in — you never give a brand-new gauge authority to stop the line on day one.”</td>
+</tr>
+<tr>
+<td>“What’s the difference between policy-as-code and docs-as-code?”</td>
+<td>“Docs-as-code is documents humans read, managed with code discipline — versioned, reviewed, auto-published. Policy-as-code is rules machines enforce — automated checks in the pipeline. Both live in the same repo; one informs people, the other physically blocks violations.”</td>
+</tr>
+<tr>
+<td>“Isn’t Git overkill for policy documents?”</td>
+<td>“The tech isn’t the point — the discipline is. Perfect audit trail, forced review, one current version, always-published. I’d never run a plant on uncontrolled documents; I wouldn’t run a compliance program on them either. Word-files-in-email is the uncontrolled-document problem with better fonts.”</td>
+</tr>
+<tr>
+<td>“How would you test a policy before enforcing it?”</td>
+<td>“Shadow mode. Run it advisory-only against real changes, measure false positives, tune, then escalate — advisory, then blocking-with-override, then hard block. It’s commissioning a new gauge: prove measurement capability before it gets authority over the line.”</td>
+</tr>
+<tr>
+<td>“Who approves a change in this model?”</td>
+<td>“The repo enforces it: protected branches mean nothing merges without designated reviewers signing off, and you can require specific owners for specific files — the ISSO must approve anything touching the SSP, for example. It’s a signature-authority matrix the tool physically enforces.”</td>
+</tr>
+<tr>
+<td>“You keep saying your AI writes the code. What do YOU do?”</td>
+<td>“I own the problem definition, the data, the validation, and the rollout. The AI is a force multiplier on syntax — like a CNC machine is on machining. Nobody asks the machinist to apologize for the CNC; they ask whether the part measures in spec. Mine did: $240K finance-verified, measured before-and-after.”</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="ascode-101-terms-from-this-section-30-second-flashcard-pass">Terms from this section — 30-second flashcard pass</h3>
+<p><strong>Repo · commit · branch · diff · pull request (GitLab: merge request) · protected branch · pipeline · GitHub Actions / GitLab CI · Markdown · Infrastructure-as-Code / Terraform · OPA + Rego · Sentinel (advisory / soft / hard) · OSCAL 1.2.2 · FedRAMP RFC-0024 (Jan 2026; finalized via CR26, phased through 2027) · SAST · dependency/SCA scanning · secret detection · STIG · SCAP · SCC · Evaluate-STIG · MITRE SAF · shift left · cATO’s three legs.</strong></p>
+<p>You don’t need mastery of any of them. You need to not blink, expand the acronym correctly, attach your one-line analogy, and be candid about which ones you’ve touched.</p>
+<hr />
+<p><em>Verified 2026-07-08: OSCAL latest release 1.2.2 (2026-04-30) and NIST draft CSWP 53 (<a href="https://pages.nist.gov/OSCAL/">NIST OSCAL</a>, <a href="https://csrc.nist.gov/News/2025/draft-charting-the-course-for-nist-oscal">CSRC</a>); FedRAMP RFC-0024 released 2026-01-13; proposed 2026-09-30 deadline superseded by the initial-outcome notice and CR26 (staggered deadlines through 2027-11-01; comprehensive machine-readable only for Rev5 Class D/High) (<a href="https://www.fedramp.gov/notices/0009/">fedramp.gov/notices/0009</a>); DoD cATO memo 2022-02-03 and its three criteria (<a href="https://media.defense.gov/2022/Feb/03/2002932852/-1/-1/0/CONTINUOUS-AUTHORIZATION-TO-OPERATE.PDF">DoD memo PDF</a>); OPA CNCF-graduated 2021, Rego (<a href="https://www.cncf.io/projects/open-policy-agent-opa/">CNCF</a>); Sentinel enforcement levels (<a href="https://spacelift.io/blog/terraform-policy-as-code">Spacelift guide</a>); SCC 5.14 (Feb 2026), Evaluate-STIG, MITRE SAF/InSpec/Heimdall current (<a href="https://anchore.com/blog/top-stig-compliance-tools/">Anchore STIG tools 2026</a>, <a href="https://saf.mitre.org/">MITRE SAF</a>); USCG software factory standing up via a Software Factory Implementation and Sustainment contract (<a href="https://www.reisystems.com/devsecops-the-ultimate-solution-to-software-vulnerabilities-for-dod-dhs/">REI Systems</a>). Unverified/hedged: which Git platform USCG’s shop runs (coached as a question, not a claim).</em></p>
+
+</section>
+<section class="module" id="m4">
+  <div class="mod-head">
+    <div class="mod-kicker">Module 04 · AI Model Governance</div>
+    <h2>The JD's sleeper phrase — five minutes, tops</h2>
+    <p class="mod-why">The quiet tail of bullet 3. Short on purpose: know the landscape names, then bridge to the governance you already wrote at TAMKO.</p>
+  </div>
+  
+<p>Bullet 3 of the job description ends quietly: “…and support AI model governance processes.” Don’t skim past it. It’s the one phrase in the JD where Pete is asking you to think about the AI itself as a thing that needs rules — and it’s also where the tool you’ll propose building (the RAG compliance assistant) turns around and points at you. <strong>The sleeper insight: whatever AI you build for his branch instantly becomes a governed asset itself.</strong> If you show you already know that, you sound senior.</p>
+<h3 id="ai-gov-101-what-ai-model-governance-means-dummy-level">What “AI model governance” means — dummy level</h3>
+<p>It is NOT the same “governance” as the G in GRC (Governance, Risk, and Compliance — governing the <em>enterprise’s security</em>). AI model governance is governing the <em>AI</em>: the rules for how an organization builds, buys, and uses AI safely. In a federal shop in 2026 it boils down to five things. Think of it as flight standards for models — every aircraft on the flight line has to be on the property book, inspected before flight, monitored in service, flown by a rated pilot, and documented in the logbook. Same five moves:</p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Governance move</th>
+<th>Plain English</th>
+<th>Your world</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Inventory</strong></td>
+<td>Know every AI use case you’re running — a public list, refreshed annually</td>
+<td>The property book / aircraft on the flight line</td>
+</tr>
+<tr>
+<td><strong>Risk review before deployment</strong></td>
+<td>Test it and assess impact BEFORE it touches a real decision; higher-stakes uses get heavier review</td>
+<td>Pre-flight inspection; first-article inspection on a new line</td>
+</tr>
+<tr>
+<td><strong>Monitoring after deployment</strong></td>
+<td>Watch for drift, degraded accuracy, and misuse once it’s live</td>
+<td>Your digital twin watching a live process; maintenance trend analysis</td>
+</tr>
+<tr>
+<td><strong>Human oversight</strong></td>
+<td>A human owns every consequential decision; AI drafts, people decide</td>
+<td>Pilot-in-command authority — autopilot flies, the PIC is responsible</td>
+</tr>
+<tr>
+<td><strong>Documentation</strong></td>
+<td>Write down what the model is, what data it saw, what it’s for, where it fails — the industry term is a “model card”</td>
+<td>The aircraft logbook / a spec sheet for the model</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="ai-gov-101-the-policy-landscape-names-verified-know-these-four">The policy landscape — names verified, know these four</h3>
+<p>You only need to <em>recognize</em> these and place them; nobody expects you to recite them.</p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Name it as</th>
+<th>What it is</th>
+<th>One thing to know</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>NIST AI Risk Management Framework (AI RMF 1.0)</strong></td>
+<td>NIST’s voluntary framework (Jan 2023) for trustworthy AI. Four functions: <strong>Govern, Map, Measure, Manage</strong></td>
+<td>It’s voluntary — like ISO 9001 versus a customer spec. Its July 2024 <strong>Generative AI Profile (NIST AI 600-1)</strong> names the LLM-specific risks: confabulation (hallucination), prompt injection, data leakage</td>
+</tr>
+<tr>
+<td><strong>OMB Memo M-25-21</strong> (Apr 2025)</td>
+<td>The White House Office of Management and Budget’s binding rule for federal AI use — replaced the old M-24-10</td>
+<td>Requires each agency to have a <strong>Chief AI Officer</strong>, a <strong>public AI use-case inventory</strong>, and minimum risk-management practices for <strong>“high-impact AI”</strong> — AI that touches rights, safety, or critical missions. Agencies must report those practices to OMB by <strong>September 2026</strong> — i.e., this is live work for DHS <em>right now</em></td>
+</tr>
+<tr>
+<td><strong>DHS Directive 139-08</strong> (Jan 2025)</td>
+<td>DHS’s own AI use-and-acquisition policy; the DHS CIO is the Chief AI Officer</td>
+<td>Core rule: AI output can never be the <strong>sole basis</strong> for an enforcement action or benefit denial — human judgment is mandatory</td>
+</tr>
+<tr>
+<td><strong>ALCOAST 103/25</strong> (Mar 2025)</td>
+<td>A Coast Guard–wide message (an ALCOAST is the USCG’s ALARACT). Announced <strong>CG-ODA</strong> (Office of Data &amp; Analytics) as the technical authority for data/analytics/AI — formally established by COMDTINST 5402.5 (May 2024) — and ordered <strong>every command to inventory its AI use cases</strong> — including commercial web tools and contractor-run AI</td>
+<td>This is why “RMF Automation” appears in the public DHS AI use-case inventory at all. The inventory duty lands on branches like Pete’s</td>
+</tr>
+</tbody>
+</table></div>
+<p>Everything above is verified current as of July 2026. Don’t go deeper than this table — depth here is Pete’s Chief AI Officer chain’s job, not yours.</p>
+<h3 id="ai-gov-101-your-authentic-hook-youve-already-done-this-minus-the-label">Your authentic hook — you’ve already done this, minus the label</h3>
+<p>At TAMKO you <strong>wrote</strong> the data-architecture and AI security standards the program ran under: access control, data residency, and validation against measured results. That IS lightweight AI model governance. Bridge it:</p>
+<p class="sayline"><strong>SAY THIS:</strong> &gt; “I’ve actually done AI model governance — just without the federal vocabulary. When I stood up the AI program across nine plants, I wrote the standards it ran under: who could access which data, where data was allowed to live, and the rule that no model output counted until it was validated against measured results — that’s how the $240K in savings got finance-verified instead of taken on faith. And I knew every AI system we were running, because I built the list. Reading OMB M-25-21 and the NIST AI framework prepping for this, they map almost one-for-one: inventory your use cases, review risk before deployment, monitor after, keep a human owning the decision. I’ve run that playbook — I’d just be running it under Coast Guard policy instead of mine.”</p>
+<p>That last sentence is honest and checkable: you read the policies, you didn’t operate under them. A CISSP will respect that framing far more than pretended fluency.</p>
+<h3 id="ai-gov-101-if-pete-pushes">IF PETE PUSHES</h3>
+<p><strong>Probe 1 — “Okay: how would you govern the RAG tool you just proposed?”</strong> (The most likely probe — he’s testing whether you eat your own cooking.) &gt; “Same way I’d govern any measurement system in a plant — control the inputs, prove it before you trust it, watch it in service. Concretely: the retrieval corpus only holds authoritative, version-controlled documents, so the model can’t cite stale policy. Every answer must cite its source — if it can’t cite, it doesn’t assert. Before anyone relies on it, I’d build an evaluation set — known questions with known right answers — and it has to pass; rerun that eval every time the model or corpus changes, like a regression test or a post-maintenance check flight. A human validates anything that feeds a real decision — the AI drafts, the assessor or the Authorizing Official decides. Log every query and answer so it’s auditable. Access control mirrors the documents’ own permissions, and the model never trains on Coast Guard data. And it goes on the AI use-case inventory like anything else — I wouldn’t build a compliance tool that’s itself out of compliance.”</p>
+<p><strong>Probe 2 — “What’s model drift, and how would you catch it?”</strong> &gt; “Drift is the model quietly getting worse because the world changed underneath it — new policy revisions the corpus doesn’t have, new question patterns it wasn’t checked against. Same failure mode I watched for with the digital twin: the process moves, the model’s picture of it goes stale. You catch it the same way — trend the evaluation scores over time instead of trusting a one-time test, spot-check a sample of live outputs on a schedule, and alarm when accuracy drops below a threshold. It’s continuous monitoring — ConMon for the model itself.”</p>
+<p><strong>Probe 3 — “Would this tool count as ‘high-impact AI’ under OMB’s memo?”</strong> (He may use the exact term — don’t blink.) &gt; “Honestly, that’s a call for your Chief AI Officer chain, and I’d raise it rather than assume. My read: if it only drafts documents and a human owns every authorization decision, it’s decision-support, likely below the high-impact line. But it sits close to it, because ATO decisions affect mission-critical systems — so I’d build it to the high-impact standard anyway: pre-deployment testing, monitoring, human override. Cheaper to build the guardrails in than retrofit them after a designation.”</p>
+<p><strong>One trap:</strong> don’t volunteer the phrase “the Coast Guard’s AI governance is immature” or any critique. You don’t know their internals; CG-ODA and the DHS Chief AI Officer own that turf. Your posture is “I’ll build inside whatever governance you have, and my tools come pre-instrumented for it.”</p>
+<p>Sources: <a href="https://digitalgovernmenthub.org/examples/omb-m-25-21-accelerating-federal-use-of-ai-through-innovation-governance-and-public-trust/">OMB M-25-21 overview</a> · <a href="https://www.dhs.gov/sites/default/files/2025-09/25_0926_cio_dhs_compliance_plan_for_omb_m-25-21_508.pdf">DHS compliance plan for M-25-21</a> · <a href="https://www.nist.gov/itl/ai-risk-management-framework">NIST AI RMF</a> · <a href="https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf">NIST AI 600-1 GenAI Profile</a> · <a href="https://www.dhs.gov/sites/default/files/2025-01/25_0116_CIO_DHS-Directive-139-08-508.pdf">DHS Directive 139-08</a> · <a href="https://fedscoop.com/dhs-ai-policy-2025-prohibited-uses/">FedScoop on 139-08</a> · <a href="https://content.govdelivery.com/accounts/USDHSCG/bulletins/3d56a86">ALCOAST 103/25</a> · <a href="https://www.dhs.gov/ai/use-case-inventory/uscg">USCG AI use-case inventory</a></p>
+
+</section>
+<section class="module" id="m5">
+  <div class="mod-head">
+    <div class="mod-kicker">Module 05 · The Rehearsal Layer</div>
+    <h2>Q&amp;A bank and story arsenal — do this one OUT LOUD</h2>
+    <p class="mod-why">Requirement-to-story map, ten likely questions as tap-to-reveal flashcards (answer first, then check), your opening two minutes, questions for Pete, landmines, and the close.</p>
+  </div>
+  
+<p>The prior brief taught you their world (Risk Management Framework, Authorization to Operate, continuous monitoring) and gave you the bridge stories. This layer is new: Pete’s actual job description arrived today, and it has exactly four responsibilities. Every question he asks tomorrow will trace back to one of them. Here’s the one best story per bullet, the ten questions to expect, your opening, your questions, your landmines, and your close.</p>
+<hr />
+<h2 id="qa-bank-requirement-story-the-four-jd-bullets-mapped">1. Requirement → Story: the four JD bullets, mapped</h2>
+<p>Rule from the prior brief still applies: <strong>different story per question.</strong> This table is your allocation — don’t let one story cover two bullets.</p>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>JD bullet (his words)</th>
+<th>Your single best story</th>
+<th>The numbers to say out loud</th>
+<th>Delivery cue</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. Analyze and Improve GRC Processes</strong> — “Apply methodologies like Lean Six Sigma to re-engineer manual GRC tasks (e.g., evidence collection, control selection)”</td>
+<td>The <strong>blowdown-oil digital twin</strong>, told as a DMAIC arc (Define, Measure, Analyze, Improve, Control — the Six Sigma method). Backup for the “evidence collection” example specifically: the <strong>shift-brief Power App</strong> — a manual, every-shift information-assembly ritual re-engineered into an automated workflow. That IS evidence collection, with oil instead of audit artifacts.</td>
+<td><strong>70.8%</strong> waste cut, <strong>$189K/yr</strong> finance-verified (twin); <strong>$16.8K/yr</strong> (shift-brief app)</td>
+<td>Name the DMAIC phases as you tell it — “I measured the baseline before I touched anything” is the sentence a process re-engineering role wants to hear.</td>
+</tr>
+<tr>
+<td><strong>2. Implement “Everything-as-Code”</strong> — Policy-as-Code (PaC), Documentation-as-Code (DaC), version control, CI/CD</td>
+<td>Nearest fit, honestly framed: you <strong>revised USAACE Regulation 350-3</strong> (the command’s training-operations regulation), <strong>modernized the Electronic Flight Bag program</strong>, and now <strong>write the data-architecture and security standards docs</strong> at TAMKO. You have deep reps at <em>standards with change control</em> — the paper version of as-code. The gap: you haven’t run a production CI/CD pipeline. Own it (script below).</td>
+<td>Reg governed a command training <strong>400+</strong> aviators/yr; standards now cover <strong>9 plants</strong></td>
+<td>Lead with the discipline, not the tooling: “I’ve run version-controlled standards my whole career — just with signatures instead of Git. The tooling is the easy half.”</td>
+</tr>
+<tr>
+<td><strong>3. Apply AI and Automation</strong> — “AI-powered tools (e.g., using Retrieval-Augmented Generation)”</td>
+<td>Your strongest card, no contest: the <strong>RAG vector store</strong> fusing SCADA (Supervisory Control and Data Acquisition), historian, sensor, and quality data across nine plants, plus the <strong>LLM (large language model) document-analysis pipeline</strong> that cut job-hazard-analysis review time. He put “Retrieval-Augmented Generation” in his own JD — he wrote that line looking at your resume.</td>
+<td><strong>75%</strong> review-time cut; <strong>9 plants</strong>; part of <strong>$240K+</strong> verified savings</td>
+<td>Say the word “grounded” early: “the model only answers from retrieved source documents, with citations.” That one word tells a CISSP you understand the failure mode.</td>
+</tr>
+<tr>
+<td><strong>4. Collaborate and Integrate</strong> — work with GRC, IT, and engineering teams; integrate into the DevSecOps pipeline; drive adoption</td>
+<td>The <strong>pilot-to-enterprise scale-out</strong>: selected into a new corporate role to take Inwood’s AI systems to all nine plants — translating executive objectives into per-plant implementation plans, partnering with <strong>finance</strong> to verify every dollar claimed, and guiding technical staff through iterative delivery. Adoption is the deliverable, not the demo.</td>
+<td><strong>2 promotions in 3.5 years</strong>; 9 plants; every savings number <strong>finance-verified</strong>, not self-reported</td>
+<td>Close it with the prior brief’s line: “the blocker was never the tech — it was governance and adoption.” That’s his bullet 4 in one sentence.</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="qa-bank-the-90-second-decode-for-bullet-2-the-one-bullet-the-prior-brief-didnt-cover">The 90-second decode for bullet 2 (the one bullet the prior brief didn’t cover)</h3>
+<p>You need to <em>not blink</em> at these four terms. Dummy-level, with your analogies:</p>
+<ul>
+<li><strong>Version control (Git):</strong> a maintenance logbook for files. Every change is recorded — who, what, when, why — nothing is ever erased, and you can roll back to any prior entry. “Repository” (repo) = the logbook; “commit” = a signed entry; “merge request / pull request” = a proposed change that a reviewer must approve before it enters the book.</li>
+<li><strong>CI/CD (Continuous Integration / Continuous Delivery):</strong> a robot inspector wired to the logbook. Every time anyone commits a change, the robot automatically runs the full checklist — does it build, do the tests pass, does it meet the standard — and only green changes go through. It’s a pre-flight check that runs itself on <em>every</em> flight instead of once a year. “Pipeline” = that automated checklist.</li>
+<li><strong>Policy-as-Code (PaC):</strong> write the security rule so a <em>computer</em> can check it, instead of a sentence in a Word document a human has to interpret. Example: instead of a policy memo saying “sessions must time out at 15 minutes,” a small rule file that reads every system’s actual configuration and fails the pipeline if any timeout is wrong. The common open-source engine here is <strong>Open Policy Agent (OPA)</strong> and its rule language <strong>Rego</strong> — recognize the names; don’t claim hands-on (verified current, CNCF-graduated project).</li>
+<li><strong>Documentation-as-Code (DaC):</strong> keep the security documents themselves — System Security Plans (SSPs), procedures — as plain-text files in the same version-controlled repo. Changes go through reviewed merge requests; the polished document is generated automatically. The binder can never drift from reality, because the binder <em>is</em> the repo.</li>
+<li><strong>OSCAL (Open Security Controls Assessment Language):</strong> NIST’s machine-readable data format (JSON/XML/YAML) for control catalogs, SSPs, and POA&amp;Ms (Plans of Action and Milestones — the tracked gap lists). It’s the plumbing that makes PaC/DaC possible in the GRC world. Fresh fact if you want one: <strong>AWS started delivering its compliance reports to customers in OSCAL format in June 2026</strong> — a sign the machine-readable-compliance world is arriving (verified).</li>
+</ul>
+<hr />
+<h2 id="qa-bank-top-10-likely-questions-model-answers-in-your-voice">2. Top 10 likely questions — model answers in your voice</h2>
+<p>Each answer: conversational STAR shape (situation → action → result), 2–4 sentences, at least one number. Rehearse these standing up, out loud.</p>
+<details class="qa"><summary>Q1. “Walk me through something you automated end-to-end.”</summary><div class="qa-body">
+<p class="sayline"><strong>SAY THIS:</strong> “Proportional-integral-derivative loop tuning — PID, the little controllers that keep an industrial process on setpoint — was a manual, tribal-knowledge job at our plant, so I measured how it was actually being done, then built a Python tool that reads live process data, computes better controller settings, and puts them in front of a human to approve before anything changes. I validated it against instrumented before-and-after measurements, and finance verified $37K a year in savings. Now I’m scaling it from the pilot plant to all nine — the end-to-end part isn’t the script, it’s baseline, build, human gate, measured proof, then scale.”</p>
+<p class="push"><strong>IF PETE PUSHES</strong> — “Why the human gate? Doesn’t that defeat automation?” → “Because I don’t let automation touch a live process without a person owning the decision until it’s earned trust with data. Same posture I’d take here: the tool drafts, the Authorizing Official decides.”</p>
+</div></details><details class="qa"><summary>Q2. “You’re not a cyber guy — why should I hire you into a CISO shop?”</summary><div class="qa-body">
+<p>This is the whole ballgame and the prior brief’s §6 has your full 45-second version — rehearse <em>that</em> one verbatim. The short conversational core, keyed to his JD:</p>
+<p class="sayline"><strong>SAY THIS:</strong> “Because you didn’t write a cyber JD — you wrote an automation JD. All four of your bullets — process re-engineering, everything-as-code, AI and RAG, cross-team integration — are the job I’m doing right now at a nine-plant manufacturer, where I’ve delivered $240K in finance-verified savings doing exactly that. The control depth is learnable and you already own it; what’s hard to hire is someone who’s shipped production AI in a regulated, safety-critical org and driven adoption. And I’m not standards-naive — I spent years as the Army standardization instructor pilot who revised the command’s training regulation and evaluated every crewmember against the published standard. RMF is standards-to-practice, and that was literally my job.”</p>
+</div></details><details class="qa"><summary>Q3. “How would you approach automating evidence collection here?”</summary><div class="qa-body">
+<p>Don’t design blind — narrate the DMAIC method from the prior brief’s §5 whiteboard framework.</p>
+<p class="sayline"><strong>SAY THIS:</strong> “First I’d shadow the people doing it — sit with two or three ISSOs (Information System Security Officers) for a couple weeks and map the current-state value stream: every step, every handoff, every hour. My bet, from every manual process I’ve ever mapped, is that most of the evidence already exists in machine-readable form — scan results, configuration baselines, account lists — and the hours go into humans finding it, copying it, and formatting it into the package. So I’d pilot on one system: automate the pull from the systems of record into the required format, keep the ISSO as the validator who signs it, and measure hours before and after. That’s the exact pattern that cut my document-review process 75% — and I wouldn’t scale until the pilot numbers were verified.”</p>
+<p class="push"><strong>IF PETE PUSHES</strong> — “Which controls would you automate first?” → “The ones where the evidence is already machine-readable and the collection is most frequent — vulnerability scan results, configuration compliance, account and access listings. I’d rank candidates by hours-spent times frequency times data availability, not by what’s technically coolest. What are your top two time sinks? You’d know better than my guess.”</p>
+<p class="push"><strong>IF PETE PUSHES</strong> — “What about controls that need human judgment, like policy or training controls?” → “Those stay human — automation collects and assembles, it doesn’t attest. The win is giving your people back the hours so their judgment goes where only judgment works.”</p>
+</div></details><details class="qa"><summary>Q4. “Tell me about your RAG system.”</summary><div class="qa-body">
+<p>You must be able to whiteboard this unaided. The chain, dummy-level: <strong>documents and data get split into passages → each passage is converted into an embedding (a list of numbers that captures its meaning) → embeddings are stored in a vector store (a database you search by meaning, not keywords) → a question gets embedded the same way → the closest-matching passages are retrieved → the LLM answers using only those passages, and cites them.</strong></p>
+<p class="sayline"><strong>SAY THIS:</strong> “The problem was nine plants’ worth of knowledge locked in SCADA historians, sensor feeds, quality records, and documents nobody could search. I built a Retrieval-Augmented Generation system: the source material gets chunked into passages, each passage is turned into an embedding — a numeric fingerprint of its meaning — and stored in a vector store; when someone asks a question, we retrieve the closest passages and the language model answers only from those, with citations back to the source. That grounding is the whole point: the model can’t freelance, and every answer is auditable. Riding on that, my document-analysis pipeline cut job-hazard-analysis review time 75 percent — same architecture your RMF Automation use case describes.”</p>
+<p class="push"><strong>IF PETE PUSHES</strong> — “Which embedding model? Which vector database?” → “I build AI-assisted, and I’m straight about that: I own every architecture decision — the grounding, the citations, the access controls, the chunking strategy — and I’d have to check the repo for exact library versions because I don’t memorize those. Ask me <em>why</em> any piece is there and I can defend it.”</p>
+<p class="push"><strong>IF PETE PUSHES</strong> — “How do you stop it leaking data to people who shouldn’t see it?” → “Access control at the retrieval layer — the store only returns passages the asking user is cleared to see — plus data-residency rules on where anything is stored or processed. I wrote those standards for our program myself; the model is only as trustworthy as the retrieval boundary around it.”</p>
+</div></details><details class="qa"><summary>Q5. “How do you handle it when the AI is wrong?”</summary><div class="qa-body">
+<p class="sayline"><strong>SAY THIS:</strong> “I design assuming it will be wrong — that’s not pessimism, it’s process control. Three guardrails: ground it so it only answers from retrieved source documents and cites them — if it can’t cite it, it doesn’t assert it; keep a human owning every consequential decision, so the model drafts and flags but never decides; and validate outputs against measured reality — every savings number I claim survived a finance audit, not my own scoring. When my auto-tuner touched a live process, it ran in advisory mode with hard limits until the before-and-after data earned it more trust.”</p>
+<p class="push"><strong>IF PETE PUSHES</strong> — “Give me a specific time it was wrong.” → Have one real example loaded from your actual builds (a bad retrieval, a hallucinated citation, a tuning recommendation outside limits) and tell it in that three-guardrail frame: what caught it, and what you changed so that class of error gets caught automatically.</p>
+</div></details><details class="qa"><summary>Q6. “What do you know about what we do?”</summary><div class="qa-body">
+<p class="sayline"><strong>SAY THIS:</strong> “Public homework, so correct me where I’m off: you’re the Cybersecurity Modernization Branch in the Coast Guard CISO shop, and the enterprise around you runs hundreds of IT systems that all need authorization and continuous monitoring — historically by hand, in a framework, RMF, that produces months of paperwork per system. DHS’s public AI inventory shows the Coast Guard building an RMF Automation capability — AI drafts the security documentation, humans keep the decision — and all of it sits inside Force Design 2028, the service’s biggest structural overhaul since World War II. So my read is you’re hiring someone to industrialize compliance: take the manual grind out and keep the judgment in. How close is that?”</p>
+<p>(Ending with “how close is that?” turns a quiz into a conversation and hands him the mic — the prior brief’s advice, applied.)</p>
+</div></details><details class="qa"><summary>Q7. Behavioral — “Tell me about a conflict and how you handled it.”</summary><div class="qa-body">
+<p>Use the standardization-pilot story — it’s gold for a security audience because it’s <em>their</em> daily conflict: enforcing a standard on people who outrank you.</p>
+<p class="sayline"><strong>SAY THIS:</strong> “As the standardization instructor pilot in Korea I evaluated every crewmember in a 62-person flight organization — including pilots senior to me — against the published standard, and sometimes that meant failing an evaluation for someone who outranked me. My rule was: the disagreement is never between him and me, it’s between his performance and the published standard, so I’d debrief with the standard open on the table, no ego, and a concrete path to re-evaluation. I was rated the number-one standardization officer in a 2,000-person aviation organization doing it that way. That’s the empathy I’d bring to your ISSOs — enforcing standards without making enemies is a trained skill.”</p>
+</div></details><details class="qa"><summary>Q8. Behavioral — “Tell me about a failure.”</summary><div class="qa-body">
+<p>The shape that works: real failure → caught by measurement → changed your process, not just the artifact. Anchor it in your model-validation discipline — <strong>and slot in the true specific detail from your build; the shape below is the coaching, your memory supplies the facts:</strong></p>
+<p class="sayline"><strong>SAY THIS (adapt the specifics to what actually happened):</strong> “The first version of my digital-twin airflow model was wrong — the math looked right, the plant data said otherwise. I’d leaned on assumptions instead of instrumented baseline measurements, so I scrapped it, instrumented the process properly, and rebuilt from measured data. That failure is why my rule ever since is ‘no claim without a measured before-and-after’ — and it’s why the $189K number is finance-verified instead of a slide-deck estimate.”</p>
+<p class="push"><strong>IF PETE PUSHES</strong> — “What did the failure cost?” → Be honest and specific: time, credibility runway, whatever it was. A CISSP is testing whether you’ll report bad news accurately — that’s the whole job of a POA&amp;M.</p>
+</div></details><details class="qa"><summary>Q9. Behavioral — “Tell me about learning something hard, fast.”</summary><div class="qa-body">
+<p class="sayline"><strong>SAY THIS:</strong> “After twenty years in Army aviation I walked into continuous-process manufacturing knowing nothing about it — and my method was to shadow the operators, map the process myself end to end, and ask the dumb questions in week one instead of month six. Two promotions in three and a half years came out of that, and at night I did Harvard’s CS50 and CS50-AI to build the software foundation on purpose rather than by accident. Give me your ATO process for two weeks and I’ll hand you back a value-stream map of it — that’s how I learn a system, and I’ve done it under a lot more pressure than this.”</p>
+</div></details><details class="qa"><summary>Q10. “What’s your hands-on experience with version control and CI/CD?”</summary><div class="qa-body">
+<p>The honest-gap answer for JD bullet 2. Do not inflate this — he can probe it in thirty seconds.</p>
+<p class="sayline"><strong>SAY THIS:</strong> “I work in version control every day because that’s how AI-assisted development runs — my projects live in repos with tracked changes. What I haven’t done is own a production CI/CD pipeline with gated, automated deployment — I know exactly what it is and why it matters, because I ran the paper version for years: as the standards officer, no change entered the command regulation without review and sign-off, and every aviator was evaluated against the current published version. That’s a pull-request workflow with signatures instead of Git. Put me in your pipeline and the discipline is already there; the tooling I’ll pick up in weeks, and picking up tooling fast is the most documented thing about me.”</p>
+<p class="push"><strong>IF PETE PUSHES</strong> — “Terraform? Ansible?” → “I know what they are — infrastructure-as-code, you declare the state you want and the tool makes it real — and I haven’t run them in production. I won’t pretend otherwise; show me which ones your shop uses and I’ll be dangerous inside a month.”</p>
+<hr />
+<h2 id="qa-bank-the-opening-two-minutes-tell-me-about-yourself">3. The opening two minutes — “tell me about yourself”</h2>
+<p>Scripted to land on his JD. About 220 words ≈ 90 seconds at speaking pace. Practice until it sounds like talking, not reciting.</p>
+<p class="sayline"><strong>SAY THIS:</strong></p>
+<p>“Twenty years Army — I started as an airborne infantryman and sniper, became a medevac pilot with 783 combat hours over three Afghanistan tours, served in the 160th Special Operations Aviation Regiment, and finished as a standardization instructor pilot. That last job matters for this room: I was the person who wrote the standards, taught the standards, and evaluated everyone against the standards — I revised our command’s aviation training regulation and was rated the number-one standardization officer in a 2,000-person organization.</p>
+<p>“When I retired in 2022 I went into manufacturing — quality manager at a continuous-process plant, then operations manager running it 24/7 with full P&amp;L and zero recordable injuries. Along the way I built the company’s first production AI: a digital twin that cut a waste stream 70 percent, AI-based process-control tuning, and a language-model pipeline that cut a safety-document review process 75 percent — about $240K a year in savings, all finance-verified. This February they created a corporate role for me — AI and Six Sigma Lead — to scale that across all nine plants: unified data pipelines, a retrieval-augmented-generation knowledge system, and the data-architecture and access-control standards to govern it.</p>
+<p>“Then I read your JD — Six Sigma process re-engineering, everything-as-code, AI and RAG, cross-team integration — and honestly, it reads like my current job description with a security mission. So I’d rather spend our time on your problems than my resume: what’s the problem you’re trying to solve with this hire?”</p>
+<p>(That last question is deliberate — the prior brief’s advice to aim everything at his answer. Let him talk, then route every story to what he says.)</p>
+<hr />
+<h2 id="qa-bank-questions-to-ask-pete-8-ranked">4. Questions to ask Pete — 8, ranked</h2>
+<p>Modernization questions only. Grade, series, ladder, step, pay → Perez, never in this room. Ask 4–6 of these depending on time; #1 and #8 are non-negotiable.</p>
+<ol type="1">
+<li><strong>“What’s already been tried here to automate the GRC workload — and where did it stall?”</strong> (The single highest-value question: it hands you the failure map so you don’t propose the corpse of a previous project, and it shows you think in current-state-first terms.)</li>
+<li><strong>“Walk me through what a normal week looks like in this seat — how much is building, how much is meetings and coordination, how much is the compliance grind itself?”</strong> (Day-to-day reality check; also signals you intend to actually build.)</li>
+<li><strong>“What tooling would I inherit on day one — eMASS obviously, but is there a Git and pipeline environment I can build in, scanners I can pull from, or am I standing that up from scratch?”</strong> (Directly keys to JD bullet 2 and tells you the true maturity level.)</li>
+<li><strong>“The Coast Guard’s RMF Automation use case in the DHS inventory — is that landing in this branch, and would this role touch it?”</strong> (Carried over from the prior brief because it’s the bullseye — his JD’s bullet 3 is almost a paraphrase of that use case.)</li>
+<li><strong>“What does success look like to you at 90 days, and at a year? What’s the artifact that makes you say ‘this hire worked’?”</strong> (Gets his scoreboard on the record — and gives you your first-quarter plan for free.)</li>
+<li><strong>“How’s the team composed — feds versus contractors, and who’s actually hands-on-keyboard versus overseeing? Where does this role sit in that split?”</strong> (Federal IT reality: knowing whether you direct contractors or build yourself changes everything about the job.)</li>
+<li><strong>“With the Special Missions Command standing up on this campus later this year — does that change this branch’s workload or priorities, and does this role feel any of it?”</strong> (Shows local, current homework; also quietly reminds him you live 15 minutes away and the campus is growing.)</li>
+<li><strong>Save for last — your closer: “What would make the person in this role indispensable to you?”</strong> (Then aim your closing statement, below, directly at whatever he answers.)</li>
+</ol>
+<hr />
+<h2 id="qa-bank-landmines-do-not-step-here">5. Landmines — do NOT step here</h2>
+<div class="tw"><table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Landmine</th>
+<th>Why it’s dangerous</th>
+<th>What to do instead — exact phrasing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Claiming “Green Belt”</strong></td>
+<td>The resume his team has says Green Belt; the truth is <strong>Bronze Belt</strong> (Lean Methods Group, 2023). If he checks, an unexplained inflation reads as dishonesty — fatal in a CISO shop.</td>
+<td>Never say “Green Belt” aloud. If certs or training come up at all, correct it yourself, cleanly: <strong>“One correction to the resume you have — that line should read Lean Six Sigma Bronze Belt, Lean Methods Group, 2023; the Green Belt entry is my error and I’ve corrected it. What I actually do day-to-day is run the corporate Six Sigma program as the AI and Six Sigma Lead — the practice is well past the cert, but I want the paper accurate.”</strong> Volunteered accuracy against your own interest is the most CISSP-legible virtue that exists.</td>
+</tr>
+<tr>
+<td><strong>Trying to out-cyber a CISSP</strong></td>
+<td>He holds the credential and told you this <em>isn’t</em> a cyber quiz. Reciting RMF steps at him invites a probe two layers deeper than you can go.</td>
+<td>Use their vocabulary to <em>ask</em>, not to lecture: “you own the control depth — I bring the automation.” Every prior-brief term (ATO, ConMon, cATO) is for fluency, not flexing.</td>
+</tr>
+<tr>
+<td><strong>Badmouthing compliance people or “paperwork”</strong></td>
+<td>The ISSOs whose grind you’d automate are his people, possibly in the building. “Compliance is dumb” = “I’ll be a culture problem.”</td>
+<td>Empathy for the ISSO grind: <strong>“I’ve been the standards enforcer — I know that work is skilled and thankless. I don’t want to replace their judgment, I want to give them their hours back.”</strong></td>
+</tr>
+<tr>
+<td><strong>Freelancing grade/ladder/pay talk</strong></td>
+<td>Plezia is the hiring manager, not the classifier; raising money in the room converts your interview into a negotiation you can’t win there.</td>
+<td>If he raises it: <strong>“If the work’s real and the impact’s measurable, I’m in — I’ll sort the paperwork details with Mr. Perez.”</strong> All grade/series/step business goes to Dale Perez, before or after, never in the room.</td>
+</tr>
+<tr>
+<td><strong>Overclaiming hands-on coding</strong></td>
+<td>One probe — “what did you import for that?” — and an inflated claim collapses, taking your real accomplishments with it.</td>
+<td>Own the AI-assisted posture proudly and pre-emptively: <strong>“I build AI-assisted — that’s a force multiplier, and I own every architecture decision in the stack. Ask me why anything is there and I’ll defend it; ask me to recite library versions and I’ll check the repo like anyone honest would.”</strong></td>
+</tr>
+<tr>
+<td><strong>Bluffing an acronym you don’t know</strong></td>
+<td>A CISSP salts conversation with acronyms half-consciously. One nod-along at a term you can’t define, followed by one follow-up question, ends the interview’s trust.</td>
+<td>The graceful recovery, scripted — practice saying it without flinching: <strong>“I don’t know that one yet — decode it for me? I’m about two weeks into your world’s vocabulary and I’d rather ask than nod.”</strong> Asked once, this <em>raises</em> your credibility. Asked confidently, twice, it’s charming. Bluffing once is disqualifying.</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="qa-bank-the-close-ask-for-the-job">6. The close — ask for the job</h2>
+<p>When he signals wrap-up (and after his answer to your “indispensable” question), say this — three sentences, eye contact, then stop talking:</p>
+<p class="sayline"><strong>SAY THIS:</strong> “Pete, your JD describes the job I’m already doing, pointed at a mission I’d be proud to serve again — and I’m fifteen minutes up the road, ready to build. I won’t be the deepest RMF resume you’ve seen, but I’ll be the only candidate who’s actually shipped this exact automation in production, proven the savings through finance, and spent a career standardizing organizations to published standards. I want this job — give me the grind your team hates most, and I’ll hand it back to you automated.”</p>
+<hr />
+<p><em>Verification notes for the synthesis step: RMF/ATO/ConMon/cATO/CSRMC/eMASS/OSCAL/RMF-Automation framing reused unchanged from the prior brief (verified there, Jul 2026). Newly verified today: <a href="https://www.cncf.io/projects/open-policy-agent-opa/">Open Policy Agent — CNCF graduated project</a>, <a href="https://www.openpolicyagent.org/">OPA/Rego current docs</a>, <a href="https://pages.nist.gov/OSCAL/">NIST OSCAL project — active, updated Jun 2026</a>, <a href="https://aws.amazon.com/blogs/security/spring-2026-soc-1-and-2-reports-are-now-available-in-oscal-format/">AWS delivering Spring 2026 SOC reports in OSCAL format (Jun 2026)</a>. All candidate numbers trace to resume.txt / john-facts.txt canonical claims; the Q8 failure story is a coached shape — John must supply the true specific detail before rehearsing it.</em></p>
+</div></details>
+</section>
+
+<div class="dayof" id="dayof">
+  <div class="ct">Day-of — Pete's own instructions (email, 8 Jul)</div>
+  <ul>
+    <li><b>1425</b> — leave Harpers Ferry. Arrive 10–15 min early per Pete.</li>
+    <li><b>Main gate:</b> prepare to stop · photo ID (bring retiree USID <em>and</em> REAL-ID license) · vehicle may be searched · say <em>"reporting to the lobby for a scheduled interview."</em></li>
+    <li><b>Park</b> at the edge of the lot along the fence line (guard will direct). Enter the <b>double doors</b>, sign in at the <b>guard desk on the left</b>, wait in the lobby — Pete meets you there.</li>
+    <li><b>Carry:</b> 2–3 resume copies · notepad · pen. <b>Trouble?</b> Call Pete's cell <span style="font-family:var(--mono)">717-377-1693</span>.</li>
+    <li><b>Wear:</b> Pete's words — "no need to wear a suit. Jacket and slacks, slacks and dress shirt. you do you."</li>
+  </ul>
+</div>
+
+<footer>
+  <div>Built 8 Jul 2026 from Pete Plezia's JD email ("Interview reference information") and visitor instructions, John's submitted packet resume, and the Volume 1 brief. Five sections drafted and independently fact-checked against primary sources the same day (NIST SP 800-37 Rev 2 / SP 800-53 Rel 5.2.0 / OSCAL 1.2.2, DHS AI Use-Case Inventory "RMF Automation" DHS-2740, OMB &amp; DHS AI policy, DoD cATO memo). All accomplishment numbers trace to the canonical resume record. Where hands-on depth doesn't exist, the scripts say so honestly — that's the strategy, not a gap in the prep.</div>
+  <div class="mono" style="margin-top:6px">USCG C5ISC · CG-C5I-Y · GRC Automation Specialist · GS-12 · Thu 09 Jul 2026 · 1500</div>
+</footer>
+
+</div>
+</body>
+</html>
