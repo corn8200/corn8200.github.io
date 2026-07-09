@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<title>USCG Interview Card</title>
+</head>
+<body>
+<style>
+  :root{
+    --ink:#182430; --paper:#fbfaf7; --navy:#0b3a5c; --stripe:#c8431c;
+    --muted:#5b6a77; --line:#d9dee3; --chip:#eef1f4; --mono:"SF Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --ink:#e4e9ee; --paper:#141a21; --navy:#8fb8d8; --stripe:#e8663d;
+           --muted:#93a1ad; --line:#2c3742; --chip:#1e2731; }
+  }
+  :root[data-theme="dark"]{ --ink:#e4e9ee; --paper:#141a21; --navy:#8fb8d8; --stripe:#e8663d;
+           --muted:#93a1ad; --line:#2c3742; --chip:#1e2731; }
+  :root[data-theme="light"]{ --ink:#182430; --paper:#fbfaf7; --navy:#0b3a5c; --stripe:#c8431c;
+           --muted:#5b6a77; --line:#d9dee3; --chip:#eef1f4; }
+
+  .card{ background:var(--paper); color:var(--ink);
+    font:400 13px/1.42 -apple-system,"Helvetica Neue",Arial,sans-serif;
+    max-width:980px; margin:0 auto; padding:20px 22px 26px; }
+  .card *{ box-sizing:border-box; }
+
+  .mast{ display:flex; flex-wrap:wrap; align-items:baseline; gap:6px 14px;
+    border-bottom:2.5px solid var(--navy); padding-bottom:8px; margin-bottom:14px; }
+  .mast h1{ font-size:17px; font-weight:800; letter-spacing:.01em; margin:0; color:var(--navy); }
+  .mast .meta{ font-size:11.5px; color:var(--muted); font-weight:600; }
+
+  .grc{ background:var(--chip); border-radius:6px; padding:9px 12px; margin-bottom:14px; font-size:12.5px; }
+  .grc b{ color:var(--navy); }
+
+  .cols{ display:grid; grid-template-columns:1fr 1fr; gap:4px 24px; }
+  @media (max-width:640px){ .cols{ grid-template-columns:1fr; } }
+
+  .sec{ break-inside:avoid; margin-bottom:13px; }
+  .sec h2{ font-size:10px; font-weight:800; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--navy); margin:0 0 5px; padding-bottom:3px; border-bottom:1px solid var(--line); }
+  .sec.hot h2{ color:var(--stripe); border-bottom-color:var(--stripe); }
+  .sec ul{ margin:0; padding-left:16px; }
+  .sec li{ margin:0 0 4px; }
+  .sec p{ margin:0 0 5px; }
+  b.n{ font-variant-numeric:tabular-nums; }
+  .say{ font-style:italic; }
+  .mono{ font-family:var(--mono); font-size:10.5px; }
+
+  .pipe{ font-family:var(--mono); font-size:10.5px; line-height:1.6; background:var(--chip);
+    border-radius:6px; padding:8px 10px; overflow-x:auto; white-space:pre; }
+
+  .gloss{ display:flex; flex-wrap:wrap; gap:4px 10px; font-size:11px; color:var(--muted); }
+  .gloss span b{ color:var(--ink); font-weight:700; }
+
+  .foot{ margin-top:6px; border-top:2.5px solid var(--navy); padding-top:8px;
+    font-size:11.5px; font-weight:600; color:var(--muted); }
+  .foot b{ color:var(--ink); }
+
+  @media print{
+    :root, :root[data-theme="dark"]{ --ink:#111; --paper:#fff; --navy:#0b3a5c; --stripe:#b23a15;
+      --muted:#444; --line:#bbb; --chip:#f1f1ee; }
+    .card{ font-size:9pt; line-height:1.32; padding:0; max-width:none; }
+    .mast h1{ font-size:12.5pt; } .mast .meta{ font-size:8pt; }
+    .grc{ font-size:8.5pt; padding:6px 9px; margin-bottom:9px; }
+    .sec{ margin-bottom:8px; } .sec h2{ font-size:7pt; }
+    .pipe,.mono{ font-size:7pt; }
+    .gloss{ font-size:7.5pt; } .foot{ font-size:8pt; }
+    .cols{ gap:2px 20px; }
+  }
+</style>
+
+<div class="card">
+  <div class="mast">
+    <h1>Interview Card — GRC Automation Specialist, GS-12</h1>
+    <span class="meta">USCG C5I · Pete Plezia (CISSP, Modernization Branch Chief) · Thu 9 Jul · 15:00 · Kearneysville</span>
+  </div>
+
+  <div class="grc">
+    <b>GRC = Governance · Risk · Compliance — for them it means RMF:</b> select controls (NIST 800-53) → write the SSP → collect evidence → win the ATO → monitor forever (ConMon) → track gaps (POA&amp;M). Today: a person + Word/Excel + weeks per system. The JD's four bullets = automate that grind.
+    <div class="gloss" style="margin-top:5px">
+      <span><b>SSP</b> how each control is met, per system</span>
+      <span><b>ATO</b> authority to operate</span>
+      <span><b>ConMon</b> continuous monitoring</span>
+      <span><b>POA&amp;M</b> plan for known gaps</span>
+      <span><b>OSCAL</b> ATO package as JSON, not prose</span>
+      <span><b>AC-2</b> account-mgmt control (example ID)</span>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div>
+      <div class="sec">
+        <h2>Your numbers — quote exactly</h2>
+        <ul>
+          <li><b class="n">75%</b> review-time cut — flagship RAG pipeline (JHA first-pass, expert keeps the call)</li>
+          <li><b class="n">$240K</b> finance-verified savings · <b class="n">9</b> plants · <b class="n">2</b> promotions → corporate AI &amp; Six Sigma Lead</li>
+          <li>Fused data nobody had combined: SCADA + historian + sensor + quality + procedures/specs/JHAs</li>
+          <li>Army <b class="n">20</b> yrs · CW3 (DA-selected CW4) · standardization IP — revised the command training reg, evaluated every crewmember to the published standard</li>
+          <li><b class="n">783</b> combat flight hrs / <b class="n">2,370</b> incident-free · developed <b class="n">400+</b> aviation warrant officers · held TS/SCI for years (lapsed, reinstatable)</li>
+        </ul>
+      </div>
+
+      <div class="sec">
+        <h2>RAG — one breath, then the drawing</h2>
+        <p class="say">"Open-book test instead of closed-book — the book is yours, and it has to cite the page."</p>
+        <div class="pipe">ONCE  docs → chunk → embed → [VECTOR DB + metadata: source·version·access]
+ASK   question → embed (same model) → 5 nearest chunks
+      → "answer ONLY from these, cite which" → draft → HUMAN OWNS IT</div>
+      </div>
+
+      <div class="sec">
+        <h2>Aces — say these unprompted</h2>
+        <ul>
+          <li>Say <b>"grounded"</b> early: answers only from retrieved source text, with citations.</li>
+          <li><b>Hybrid search:</b> <span class="say">"pure vector search is weak on exact IDs like AC-2(3) — for a control catalog I'd run keyword + semantic."</span></li>
+          <li><b>Metadata filtering:</b> <span class="say">"a right answer from the wrong plant is a wrong answer."</span></li>
+          <li><b>Ingest is the real 80%</b> — the AI is the easy 20%; clean, consistent data from walled-off systems is the work.</li>
+        </ul>
+      </div>
+
+      <div class="sec">
+        <h2>Hallucination — 4 layers + 1</h2>
+        <p><b>Ground it · force citations · let it refuse</b> ("not found" is a valid, required answer) <b>· human owns anything consequential</b> — plus <b>measure it</b>: graded eval set, re-run on every change, like a checkride.</p>
+      </div>
+
+      <div class="sec">
+        <h2>Security probes — his home turf, expect these</h2>
+        <ul>
+          <li>Vectors reconstruct to ~source text → <b>protect the vector store like the documents</b>: least privilege, per-user retrieval filtering, encryption, own monitoring.</li>
+          <li>Everything — model, store, logs — <b>inside the accredited boundary</b>; no commercial API that retains or trains. I set that standard at TAMKO before line one.</li>
+          <li>The AI system <b>goes through your assessment process itself</b> — "embarrassing if the compliance tool is the thing without paperwork."</li>
+        </ul>
+      </div>
+    </div>
+
+    <div>
+      <div class="sec">
+        <h2>Their problem → your story</h2>
+        <ul>
+          <li><b>SSP drafting:</b> exact shape of the 75% pipeline — retrieve requirement + evidence, model drafts, ISSO edits and owns it.</li>
+          <li><b>Assessor Q&amp;A:</b> "show me AC-2" → retrieves procedure + evidence with citations; a week of hunting → an hour of verification (hybrid search earns its keep).</li>
+          <li><b>Staleness:</b> 800-53 went to <b>5.2.0 last August</b> — tie ingest to authoritative sources, version-stamp every chunk, retire superseded. Process problem — my lane.</li>
+          <li><b>OSCAL:</b> "literally a schema. I move JSON between SCADA, historians, and vector stores all day — the hard part is learning which artifacts your assessors care about, and I'd shadow your ISSOs to learn it."</li>
+        </ul>
+      </div>
+
+      <div class="sec">
+        <h2>Honest edges — say them straight</h2>
+        <ul>
+          <li><b>CUI:</b> "Haven't run RAG on CUI — mine runs on proprietary manufacturing data where I wrote the residency and access standards myself. Principles transfer; I held a TS/SCI for years — I don't improvise around data-handling rules."</li>
+          <li><b>OSCAL:</b> "Read the model docs, haven't shipped with it."</li>
+          <li><b>Not a career ISSO:</b> control depth is learnable and you own it — what's hard to hire is shipped production AI in a regulated, safety-critical org.</li>
+        </ul>
+      </div>
+
+      <div class="sec hot">
+        <h2>Landmines — do not step on</h2>
+        <ul>
+          <li>Lean Six Sigma <b>BRONZE Belt (2023)</b> — the resume Pete has says Green. If certs come up: correct it yourself, hand him v2 from the folder.</li>
+          <li><b>CW3, DA-selected for CW4</b> — never "promoted to CW4."</li>
+          <li>Stack names (embedding model / vector DB): <b>don't guess products</b> — give the selection criteria: stays in boundary, self-hostable, cheap to re-index.</li>
+        </ul>
+      </div>
+
+      <div class="sec">
+        <h2>Ask Pete — pick 3–4</h2>
+        <ul>
+          <li>What does this seat actually do day-to-day, first 90 days?</li>
+          <li>Walk me through evidence collection today — who, what tools, hours per system?</li>
+          <li>How many systems / ATOs does the shop own?</li>
+          <li>What makes year one a win for you?</li>
+          <li>Who's on the team I'd build with? Is the PD finalized?</li>
+        </ul>
+        <p style="color:var(--muted); font-size:11px;">(Grade / ladder / series questions → Perez afterward, not this room.)</p>
+      </div>
+
+      <div class="sec">
+        <h2>The closer — if "why you?"</h2>
+        <p class="say">"You didn't write a cyber JD — you wrote an automation JD. All four bullets are the job I'm doing now at a nine-plant manufacturer, $240K verified. Control depth is learnable and you already own it; what's hard to hire is someone who's shipped production AI in a regulated org and driven adoption. And standards-to-practice was literally my Army job."</p>
+      </div>
+
+      <div class="sec hot">
+        <h2>If he signals "moving forward"</h2>
+        <ul>
+          <li><b>1.</b> Take it clean: <span class="say">"That's great to hear — I want this role."</span> Full stop.</li>
+          <li><b>2.</b> One flag, zero numbers: <span class="say">"So the process goes smoothly — pay-setting above the minimum step will matter on my end. I know that's HR's lane; wanted you to have it before the paperwork starts."</span> Then stop talking.</li>
+          <li><b>3.</b> Get: HR point of contact · timeline · PD status. <b>No negotiation in the room.</b></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot">
+    <b>408 Coast Guard Dr, Kearneysville</b> · leave Harpers Ferry ~<b>14:15</b>, gate by 14:40 · photo ID · vehicle may be searched · say: <b>"reporting to the lobby for a scheduled interview"</b> · park at the fence line · guard desk left inside the double doors · Pete cell <b>717-377-1693</b> · jacket &amp; slacks, no suit · phone silent or in truck · <b>2–3 copies of resume v2</b> in the folder
+  </div>
+</div>
+</body>
+</html>
