@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Zero Build Win Plan — Dad + Kid</title>
+<style>
+  :root{
+    --ground:#12111c;
+    --surface:#1b1930;
+    --surface-2:#232043;
+    --line:#332f52;
+    --ink:#eae7f7;
+    --ink-dim:#a7a1c7;
+    --ink-faint:#726c95;
+    --gold:#ffc24a;
+    --gold-deep:#e79a2c;
+    --cyan:#57d7e0;
+    --good:#5fd08a;
+    --warn:#ffb84d;
+    --danger:#ff6b6e;
+    --danger-bg:rgba(255,107,110,.12);
+    --good-bg:rgba(95,208,138,.12);
+    --shadow:0 1px 0 rgba(255,255,255,.04) inset, 0 8px 30px rgba(0,0,0,.35);
+    --maxw:660px;
+  }
+  @media (prefers-color-scheme: light){
+    :root{
+      --ground:#efecf6;
+      --surface:#ffffff;
+      --surface-2:#f5f2fb;
+      --line:#e0daf0;
+      --ink:#211d33;
+      --ink-dim:#5c5680;
+      --ink-faint:#8b85ab;
+      --gold:#c9860f;
+      --gold-deep:#a86d05;
+      --cyan:#1596a2;
+      --good:#2c9d5c;
+      --warn:#b9791a;
+      --danger:#d83f43;
+      --danger-bg:rgba(216,63,67,.09);
+      --good-bg:rgba(44,157,92,.10);
+      --shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 6px 20px rgba(60,40,110,.10);
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#12111c;--surface:#1b1930;--surface-2:#232043;--line:#332f52;
+    --ink:#eae7f7;--ink-dim:#a7a1c7;--ink-faint:#726c95;--gold:#ffc24a;--gold-deep:#e79a2c;
+    --cyan:#57d7e0;--good:#5fd08a;--warn:#ffb84d;--danger:#ff6b6e;
+    --danger-bg:rgba(255,107,110,.12);--good-bg:rgba(95,208,138,.12);
+    --shadow:0 1px 0 rgba(255,255,255,.04) inset, 0 8px 30px rgba(0,0,0,.35);
+  }
+  :root[data-theme="light"]{
+    --ground:#efecf6;--surface:#ffffff;--surface-2:#f5f2fb;--line:#e0daf0;
+    --ink:#211d33;--ink-dim:#5c5680;--ink-faint:#8b85ab;--gold:#c9860f;--gold-deep:#a86d05;
+    --cyan:#1596a2;--good:#2c9d5c;--warn:#b9791a;--danger:#d83f43;
+    --danger-bg:rgba(216,63,67,.09);--good-bg:rgba(44,157,92,.10);
+    --shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 6px 20px rgba(60,40,110,.10);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0;background:var(--ground);color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    line-height:1.5;-webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:20px 16px 64px}
+
+  /* ---- hero ---- */
+  .hero{
+    position:relative;overflow:hidden;border-radius:18px;
+    background:
+      radial-gradient(120% 90% at 85% -10%, rgba(255,194,74,.20), transparent 55%),
+      radial-gradient(90% 80% at -5% 110%, rgba(87,215,224,.16), transparent 55%),
+      linear-gradient(180deg,var(--surface-2),var(--surface));
+    border:1px solid var(--line);box-shadow:var(--shadow);
+    padding:26px 22px 24px;margin-bottom:22px;
+  }
+  .eyebrow{
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--gold);font-weight:700;display:flex;align-items:center;gap:8px;
+  }
+  .eyebrow::before{content:"";width:9px;height:9px;background:var(--gold);
+    transform:rotate(45deg);border-radius:1px;box-shadow:0 0 12px var(--gold-deep)}
+  h1{
+    font-size:clamp(30px,8vw,46px);line-height:1.02;margin:12px 0 6px;
+    font-weight:900;letter-spacing:-.02em;text-wrap:balance;
+  }
+  h1 .win{color:var(--gold)}
+  .thesis{font-size:16px;color:var(--ink-dim);max-width:52ch;margin:0}
+  .thesis b{color:var(--ink)}
+
+  /* ---- section ---- */
+  section{margin-top:26px}
+  .sec-head{display:flex;align-items:baseline;gap:12px;margin:0 4px 12px}
+  .sec-num{font-family:ui-monospace,monospace;font-size:12px;color:var(--gold);
+    font-weight:700;letter-spacing:.05em;padding-top:3px;min-width:26px}
+  h2{font-size:20px;font-weight:800;letter-spacing:-.01em;margin:0;text-wrap:balance}
+  .sec-sub{margin:2px 0 0;color:var(--ink-faint);font-size:13px}
+
+  .card{
+    background:var(--surface);border:1px solid var(--line);border-radius:14px;
+    box-shadow:var(--shadow);padding:16px 16px 6px;
+  }
+  .card + .card{margin-top:12px}
+
+  /* rule rows */
+  .rule{padding:9px 0;border-top:1px solid var(--line);display:flex;gap:12px;align-items:flex-start}
+  .rule:first-child{border-top:0}
+  .rk{flex:0 0 auto;font-family:ui-monospace,monospace;font-size:11px;font-weight:700;
+    letter-spacing:.03em;color:var(--ground);background:var(--gold);
+    border-radius:6px;padding:3px 7px;margin-top:2px;white-space:nowrap}
+  .rk.cy{background:var(--cyan)}
+  .rk.gd{background:var(--good)}
+  .rk.dg{background:var(--danger)}
+  .rbody{flex:1;min-width:0}
+  .rbody b{color:var(--ink)}
+  .rbody .t{font-weight:700;font-size:15px}
+  .rbody .d{color:var(--ink-dim);font-size:14px;margin-top:1px}
+  .rbody .d code{font-family:ui-monospace,monospace;font-size:12.5px;
+    background:var(--surface-2);padding:1px 5px;border-radius:5px;color:var(--ink)}
+
+  /* callouts */
+  .call{border-radius:12px;padding:12px 14px;margin:0 0 12px;font-size:14px;border:1px solid}
+  .call.good{background:var(--good-bg);border-color:color-mix(in srgb,var(--good) 40%,transparent);color:var(--ink)}
+  .call.bad{background:var(--danger-bg);border-color:color-mix(in srgb,var(--danger) 40%,transparent);color:var(--ink)}
+  .call .lbl{font-weight:800;letter-spacing:.04em;text-transform:uppercase;font-size:11px;
+    display:block;margin-bottom:3px}
+  .call.good .lbl{color:var(--good)}
+  .call.bad .lbl{color:var(--danger)}
+
+  /* loadout list */
+  ol.slots{list-style:none;counter-reset:slot;margin:4px 0 10px;padding:0}
+  ol.slots li{counter-increment:slot;display:flex;gap:12px;align-items:flex-start;
+    padding:10px 0;border-top:1px solid var(--line)}
+  ol.slots li:first-child{border-top:0}
+  ol.slots li::before{content:counter(slot);flex:0 0 auto;width:26px;height:26px;
+    display:grid;place-items:center;border-radius:8px;background:var(--surface-2);
+    border:1px solid var(--line);font-family:ui-monospace,monospace;font-weight:700;
+    font-size:13px;color:var(--gold);margin-top:1px}
+  .slot-name{font-weight:800;font-size:15px}
+  .slot-why{color:var(--ink-dim);font-size:13.5px}
+
+  .pill{display:inline-block;font-family:ui-monospace,monospace;font-size:10.5px;
+    font-weight:700;letter-spacing:.04em;padding:2px 6px;border-radius:5px;
+    vertical-align:middle;margin-left:6px}
+  .pill.s{background:var(--gold);color:var(--ground)}
+  .pill.a{background:color-mix(in srgb,var(--cyan) 22%,transparent);color:var(--cyan);
+    border:1px solid color-mix(in srgb,var(--cyan) 45%,transparent)}
+
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 12px}
+  .chip{font-size:12.5px;padding:4px 10px;border-radius:20px;border:1px solid var(--line);
+    background:var(--surface-2);color:var(--ink-dim)}
+  .chip.hot{border-color:color-mix(in srgb,var(--danger) 40%,transparent);color:var(--danger)}
+  .chip.quiet{border-color:color-mix(in srgb,var(--good) 40%,transparent);color:var(--good)}
+
+  .note{font-size:13px;color:var(--ink-faint);padding:4px 4px 0}
+  .note b{color:var(--ink-dim)}
+
+  footer{margin-top:34px;padding-top:16px;border-top:1px solid var(--line);
+    color:var(--ink-faint);font-size:12.5px;text-align:center}
+  footer b{color:var(--gold)}
+
+  @media (max-width:420px){
+    .rule{flex-direction:column;gap:3px}
+    .rk{margin-top:0}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="eyebrow">Zero Build &middot; Duos &middot; Dad + 5yo</div>
+    <h1>The <span class="win">Victory</span> Plan</h1>
+    <p class="thesis"><b>You carry the fights. He does three simple jobs. You win on placement, not kills.</b> You almost never need eliminations — you need to survive the first minute and be the last team hiding while everyone deletes each other.</p>
+  </header>
+
+  <!-- 01 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">01</span>
+      <div><h2>Before you drop</h2><p class="sec-sub">The biggest free wins — most people skip these.</p></div>
+    </div>
+    <div class="call good">
+      <span class="lbl">Play this mode</span>
+      <b>Reload (Zero Build).</b> You auto-respawn while your teammate's alive, games run ~15 min, and it still gives real Victory Crowns. The kid dying becomes a non-event — he parachutes right back. Far more forgiving than the 100-player map.
+    </div>
+    <div class="card">
+      <div class="rule"><span class="rk cy">BR</span><div class="rbody"><div class="t">Casual Zero Build Duos, party of two</div><div class="d">Unranked lobbies are stuffed with <b>bots</b> — slow, miss a lot. Free kills and breathing room. No "fill."</div></div></div>
+      <div class="rule"><span class="rk dg">AVOID</span><div class="rbody"><div class="t">Ranked</div><div class="d">Strips the bots out and feeds you sweats — the exact opposite of what you want.</div></div></div>
+      <div class="rule"><span class="rk gd">DRILL</span><div class="rbody"><div class="t">Team Rumble = the practice range</div><div class="d">Infinite respawns, zero pressure, great for learning buttons. No win, though — practice here, then switch to Reload.</div></div></div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <div class="rule"><span class="rk">SET</span><div class="rbody"><div class="t">Settings, do once</div><div class="d">Aim Assist <code>100%</code> &middot; <b>Sprint by Default ON</b> &middot; Auto Open Doors ON &middot; <b>Visualize Sound Effects ON</b> &middot; Motion Blur OFF &middot; highest stable FPS.</div></div></div>
+      <div class="rule"><span class="rk">AIM</span><div class="rbody"><div class="t">Controller starting point</div><div class="d"><b>Linear</b> curve &middot; Look <code>~45%</code> &middot; ADS <code>~12%</code> &middot; deadzones as low as they go without drift. Wear headphones.</div></div></div>
+    </div>
+    <p class="note"><b>Why "Visualize Sound Effects" matters most:</b> footsteps become on-screen icons — the kid can <i>see</i> "someone's over there" even though he can't read directional audio yet. Makes his "watch our back" job real.</p>
+  </section>
+
+  <!-- 02 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">02</span>
+      <div><h2>The kid's whole job</h2><p class="sec-sub">Don't overload a 5-year-old. This is the entire list.</p></div>
+    </div>
+    <div class="card">
+      <div class="rule"><span class="rk">JOB 1</span><div class="rbody"><div class="t">Loot</div><div class="d">Open chests, grab floor loot. He loves the chest sound — and it frees you to watch angles.</div></div></div>
+      <div class="rule"><span class="rk">JOB 2</span><div class="rbody"><div class="t">Ping</div><div class="d">One button. "See a bad guy? PING him and tell me." Second set of eyes.</div></div></div>
+      <div class="rule"><span class="rk">JOB 3</span><div class="rbody"><div class="t">Heal on your call</div><div class="d">"Drink your shields." A topped-up teammate survives the stray shot.</div></div></div>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <div class="rule"><span class="rk gd">REFLEX</span><div class="rbody"><div class="t">Peek &amp; shoot from cover</div><div class="d">Pop out, shoot, pop <b>back</b>. Never stand in the open.</div></div></div>
+      <div class="rule"><span class="rk gd">REFLEX</span><div class="rbody"><div class="t">Follow Dad</div><div class="d">Stay a few steps from you. That's the whole aiming curriculum.</div></div></div>
+    </div>
+    <div class="call bad" style="margin-top:12px">
+      <span class="lbl">The one rule, said out loud</span>
+      When a fight starts, <b>he gets behind a rock and stops shooting — Dad takes the gunfight.</b> One reliable shooter beats a good shooter + a flailing one. Also: ignore "harvest mats" entirely — building doesn't exist in Zero Build. Replace it with "always full on shield."
+    </div>
+  </section>
+
+  <!-- 03 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">03</span>
+      <div><h2>How you win the gunfights</h2><p class="sec-sub">Zero Build fundamentals. These never change.</p></div>
+    </div>
+    <div class="card">
+      <div class="rule"><span class="rk">1</span><div class="rbody"><div class="t">Cover is your build</div><div class="d">Never more than one sprint-dash from a rock/wall/hill. Bushes &amp; fences <b>don't stop bullets.</b></div></div></div>
+      <div class="rule"><span class="rk">2</span><div class="rbody"><div class="t">Peek-shoot-recover</div><div class="d">Fire 1–2 shots, then pull <b>fully</b> behind cover to heal/reload. Greed on the peek = death.</div></div></div>
+      <div class="rule"><span class="rk">3</span><div class="rbody"><div class="t">High ground, behind the crest</div><div class="d">Only your head clears. They have to fully expose to hit you.</div></div></div>
+      <div class="rule"><span class="rk">4</span><div class="rbody"><div class="t">Rotate EARLY, storm at your back</div><div class="d">Move before the timer forces you. Everyone's in front of you; nobody flanks from behind.</div></div></div>
+      <div class="rule"><span class="rk">5</span><div class="rbody"><div class="t">Never cross open fields</div><div class="d">Path edge-to-edge, sprint the gap in one dash, or take a car (it's mobile cover).</div></div></div>
+      <div class="rule"><span class="rk">6</span><div class="rbody"><div class="t">A third party is always coming</div><div class="d">A loud fight pulls people in ~10 sec. Don't over-commit. Most ZB deaths are the third party.</div></div></div>
+      <div class="rule"><span class="rk">7</span><div class="rbody"><div class="t">"Shoot the hurt guy"</div><div class="d">Let two squads chunk each other, then push the low survivor with no shields. Free kill.</div></div></div>
+      <div class="rule"><span class="rk">8</span><div class="rbody"><div class="t">Shotgun opens, AR closes</div><div class="d">Blast (hipfire) → swap to AR → beam them during the pump cooldown. The core ZB kill.</div></div></div>
+      <div class="rule"><span class="rk">9</span><div class="rbody"><div class="t">Heal to 200 before every final circle</div><div class="d">Endgames are decided in single pumps. Enter at 200, not 140.</div></div></div>
+      <div class="rule"><span class="rk">10</span><div class="rbody"><div class="t">Late game: grab an edge early</div><div class="d">High-ground pocket, wall at your back — let the middle kill itself.</div></div></div>
+    </div>
+  </section>
+
+  <!-- 04 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">04</span>
+      <div><h2>This season's loadout</h2><p class="sec-sub">Chapter 7 Season 3 "Runners" &middot; verified ~Jul 15, 2026.</p></div>
+    </div>
+    <div class="card">
+      <ol class="slots">
+        <li><div><span class="slot-name">Striker Pump <span class="pill s">S</span></span> <span class="slot-why">— close-range king. <b>Chaos Reloader</b> is an equal S-tier alternative.</span></div></li>
+        <li><div><span class="slot-name">Flex SMG <span class="pill s">S</span></span> <span class="slot-why">— best SMG, ideal shotgun follow-up.</span></div></li>
+        <li><div><span class="slot-name">Surgical Burst Rifle <span class="pill a">TOP AR</span></span> <span class="slot-why">— best AR now. Swap for a <b>Hunting Rifle</b> if you want reach.</span></div></li>
+        <li><div><span class="slot-name">Seven Sliders <span class="pill a">MOBILITY</span></span> <span class="slot-why">— near-mandatory. The slide is your cover &amp; peek; ADS mid-slide slows time. Slide on <b>water</b> so they don't overheat.</span></div></li>
+        <li><div><span class="slot-name">Heals</span> <span class="slot-why">— Big Shield Pots + Minis, plus a med item for HP on the move.</span></div></li>
+      </ol>
+    </div>
+    <div class="card" style="margin-top:12px">
+      <div class="rule"><span class="rk dg">SKIP</span><div class="rbody"><div class="t">Chaos Exploder Rifle</div><div class="d">Was strong at launch, got nerfed <b>twice</b> — don't rely on it. The Surgical Burst is the reliable pick.</div></div></div>
+      <div class="rule"><span class="rk cy">SPRITE</span><div class="rbody"><div class="t">Grab one early (Striker = mobility, Boss = HP/shield)</div><div class="d">But you must <b>bank it at an Extraction Site</b>, and it resets if you're eliminated. Not a free permanent buff.</div></div></div>
+      <div class="rule"><span class="rk cy">MYTHIC</span><div class="rbody"><div class="t">Best ZB boss drops</div><div class="d">Skeletor → <b>Reacher Extending Shotgun</b>; Voidblade → <b>Voidblade's Burst Rifle</b>. Contest only if you want them; else third-party whoever fights the boss.</div></div></div>
+      <div class="rule"><span class="rk">SOUND</span><div class="rbody"><div class="t">Season quirk: play by sound</div><div class="d">The sound-visualizer got nerfed this season. Suppressed guns (<b>Ranger Pistol</b>) hide your position.</div></div></div>
+    </div>
+    <p class="note" style="margin-top:14px"><b>Shattered Coast — where to land:</b></p>
+    <div class="chips">
+      <span class="chip quiet">Latte Landing</span>
+      <span class="chip quiet">Golden Grove</span>
+      <span class="chip quiet">Battlewoods</span>
+      <span class="chip hot">Calamari Canyon — hot</span>
+      <span class="chip hot">Frosted Flats — hot</span>
+    </div>
+    <p class="note">Green = quiet, loot up in peace with the kid. Red = boss/mythic hubs where sweats farm — avoid unless you're hunting a mythic.</p>
+  </section>
+
+  <!-- 05 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">05</span>
+      <div><h2>When the kid goes down</h2><p class="sec-sub">This is the part that wins games other people throw.</p></div>
+    </div>
+    <div class="card">
+      <div class="rule"><span class="rk warn" style="background:var(--warn);color:var(--ground)">KNOCKED</span><div class="rbody"><div class="t">Crawling, not eliminated</div><div class="d">Do NOT panic-revive in the open. Break line of sight or kill/scare the shooter <b>first</b>, then revive under cover. Tell him: "crawl to Daddy AND to a rock."</div></div></div>
+      <div class="rule"><span class="rk dg">ELIMINATED</span><div class="rbody"><div class="t">Reboot Van play</div><div class="d">Grab his <b>Reboot Card</b> (~90 sec), run to a <b>Reboot Van</b> (note the 2–3 nearest at match start), hold to revive. He returns with a gray pistol and no shield — get him looted &amp; shielded immediately.</div></div></div>
+      <div class="rule"><span class="rk gd">DRILL</span><div class="rbody"><div class="t">Teach him the script</div><div class="d">"If you die, keep watching — I'm getting you back. <b>Don't close the game.</b>" Rage-quitting kills the reboot.</div></div></div>
+    </div>
+    <div class="call good" style="margin-top:12px">
+      <span class="lbl">Keep it fun or he won't come back</span>
+      Cheer every chest, ping, reboot, and top-10 — not just wins. Let him drive the car, do the victory emote together, keep sessions 20–30 min, buy the skin he keeps begging for. "Us winning together" is what makes him want to hop on with Dad.
+    </div>
+  </section>
+
+  <footer>
+    Season &amp; loadout verified <b>~Jul 15, 2026</b> (C7S3 "Runners"). Fortnite patches weekly — re-check the weapon meta if it's been a while. The fundamentals never expire.
+  </footer>
+
+</div>
+</body>
+</html>
