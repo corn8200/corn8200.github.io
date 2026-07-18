@@ -1,0 +1,1420 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#14161a">
+<title>Setting the Toilet Back Down — Field Manual</title>
+<style>
+  :root{
+    --iron:#14161a;
+    --surface:#1c1f25;
+    --surface-2:#23272f;
+    --surface-3:#2b3039;
+    --line:#333944;
+    --line-hi:#414957;
+    --ink:#e8eaed;
+    --ink-dim:#a3aab5;
+    --ink-faint:#6f7783;
+    --brass:#d9a441;
+    --brass-dim:#5a4a22;
+    --brass-deep:#b8862c;
+    --porcelain:#e9ece7;
+    --wax:#d9c489;
+    --wax-line:#a08f52;
+    --cyan:#57bccf;
+    --good:#4fae74;
+    --warn:#e0a13c;
+    --danger:#e8564f;
+    --danger-bg:rgba(232,86,79,.13);
+    --good-bg:rgba(79,174,116,.12);
+    --warn-bg:rgba(224,161,60,.12);
+    --brass-bg:rgba(217,164,65,.10);
+    --shadow:0 1px 0 rgba(255,255,255,.03) inset, 0 6px 24px rgba(0,0,0,.4);
+    --maxw:730px;
+  }
+  @media (prefers-color-scheme: light){
+    :root{
+      --iron:#e8e6e1;
+      --surface:#fdfdfc;
+      --surface-2:#f2f1ed;
+      --surface-3:#e7e5df;
+      --line:#dcd9d1;
+      --line-hi:#c4c0b5;
+      --ink:#1e2126;
+      --ink-dim:#575d66;
+      --ink-faint:#8a9099;
+      --brass:#9a6f14;
+      --brass-dim:#e8d9ae;
+      --brass-deep:#7d5a0c;
+      --porcelain:#ffffff;
+      --wax:#e3d3a0;
+      --wax-line:#9b8846;
+      --cyan:#1d7f93;
+      --good:#2c8551;
+      --warn:#996218;
+      --danger:#c0392f;
+      --danger-bg:rgba(192,57,47,.08);
+      --good-bg:rgba(44,133,81,.09);
+      --warn-bg:rgba(153,98,24,.09);
+      --brass-bg:rgba(154,111,20,.08);
+      --shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 4px 16px rgba(60,50,30,.09);
+    }
+  }
+  :root[data-theme="dark"]{
+    --iron:#14161a;--surface:#1c1f25;--surface-2:#23272f;--surface-3:#2b3039;
+    --line:#333944;--line-hi:#414957;--ink:#e8eaed;--ink-dim:#a3aab5;--ink-faint:#6f7783;
+    --brass:#d9a441;--brass-dim:#5a4a22;--brass-deep:#b8862c;--porcelain:#e9ece7;
+    --wax:#d9c489;--wax-line:#a08f52;--cyan:#57bccf;--good:#4fae74;--warn:#e0a13c;--danger:#e8564f;
+    --danger-bg:rgba(232,86,79,.13);--good-bg:rgba(79,174,116,.12);
+    --warn-bg:rgba(224,161,60,.12);--brass-bg:rgba(217,164,65,.10);
+    --shadow:0 1px 0 rgba(255,255,255,.03) inset, 0 6px 24px rgba(0,0,0,.4);
+  }
+  :root[data-theme="light"]{
+    --iron:#e8e6e1;--surface:#fdfdfc;--surface-2:#f2f1ed;--surface-3:#e7e5df;
+    --line:#dcd9d1;--line-hi:#c4c0b5;--ink:#1e2126;--ink-dim:#575d66;--ink-faint:#8a9099;
+    --brass:#9a6f14;--brass-dim:#e8d9ae;--brass-deep:#7d5a0c;--porcelain:#ffffff;
+    --wax:#e3d3a0;--wax-line:#9b8846;--cyan:#1d7f93;--good:#2c8551;--warn:#996218;--danger:#c0392f;
+    --danger-bg:rgba(192,57,47,.08);--good-bg:rgba(44,133,81,.09);
+    --warn-bg:rgba(153,98,24,.09);--brass-bg:rgba(154,111,20,.08);
+    --shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 4px 16px rgba(60,50,30,.09);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *{animation:none !important;transition:none !important}
+  }
+  body{
+    margin:0;background:var(--iron);color:var(--ink);
+    font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    font-size:16.5px;line-height:1.55;-webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:ui-monospace,"SF Mono",Menlo,Consolas,monospace}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 15px 80px}
+  a{color:var(--brass);text-decoration-thickness:1px;text-underline-offset:2px}
+  a:focus-visible,button:focus-visible,summary:focus-visible{
+    outline:2px solid var(--brass);outline-offset:2px;border-radius:4px}
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;overflow:hidden;
+    background:
+      radial-gradient(130% 100% at 88% -20%, var(--brass-bg), transparent 58%),
+      linear-gradient(180deg,var(--surface-2),var(--surface));
+    border-bottom:1px solid var(--line);
+    padding:30px 15px 26px;margin-bottom:0;
+  }
+  .hero-in{max-width:var(--maxw);margin:0 auto}
+  .eyebrow{
+    font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--brass);font-weight:700;
+    display:flex;align-items:center;gap:9px;
+  }
+  .eyebrow::before{content:"";width:8px;height:8px;background:var(--brass);
+    transform:rotate(45deg);border-radius:1px}
+  h1{
+    font-size:clamp(29px,7.4vw,44px);line-height:1.03;margin:13px 0 9px;
+    font-weight:850;letter-spacing:-.025em;text-wrap:balance;
+  }
+  h1 em{font-style:normal;color:var(--brass)}
+  .thesis{font-size:16.5px;color:var(--ink-dim);max-width:56ch;margin:0}
+  .thesis b{color:var(--ink);font-weight:650}
+  .meta-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+  .mchip{
+    font-family:ui-monospace,monospace;font-size:11.5px;letter-spacing:.02em;
+    padding:5px 10px;border-radius:6px;border:1px solid var(--line);
+    background:var(--surface);color:var(--ink-dim);
+  }
+  .mchip b{color:var(--ink);font-weight:700}
+
+  /* ---------- sticky nav ---------- */
+  .nav{
+    position:sticky;top:0;z-index:40;
+    background:color-mix(in srgb,var(--iron) 92%,transparent);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-in{max-width:var(--maxw);margin:0 auto;display:flex;gap:6px;
+    overflow-x:auto;padding:9px 15px;scrollbar-width:none}
+  .nav-in::-webkit-scrollbar{display:none}
+  .nav a{
+    flex:0 0 auto;font-family:ui-monospace,monospace;font-size:12px;font-weight:700;
+    letter-spacing:.03em;padding:6px 11px;border-radius:7px;text-decoration:none;
+    background:var(--surface-2);border:1px solid var(--line);color:var(--ink-dim);
+    white-space:nowrap;
+  }
+  .nav a:hover{color:var(--brass);border-color:var(--brass)}
+  .nav a.hot{color:var(--danger);border-color:color-mix(in srgb,var(--danger) 45%,transparent)}
+
+  /* ---------- sections ---------- */
+  section{margin-top:34px;scroll-margin-top:60px}
+  .sec-head{display:flex;align-items:flex-start;gap:13px;margin:0 2px 14px}
+  .sec-num{
+    font-family:ui-monospace,monospace;font-size:11.5px;font-weight:700;
+    letter-spacing:.04em;color:var(--iron);background:var(--brass);
+    padding:4px 8px;border-radius:6px;margin-top:4px;flex:0 0 auto;
+  }
+  .sec-num.dg{background:var(--danger);color:#fff}
+  .sec-num.gd{background:var(--good);color:#fff}
+  h2{font-size:23px;font-weight:800;letter-spacing:-.018em;margin:0;text-wrap:balance;line-height:1.2}
+  .sec-sub{margin:3px 0 0;color:var(--ink-faint);font-size:13.5px;font-family:ui-monospace,monospace}
+
+  h3{font-size:17px;font-weight:750;margin:22px 0 8px;letter-spacing:-.01em;text-wrap:balance}
+
+  .card{
+    background:var(--surface);border:1px solid var(--line);border-radius:13px;
+    box-shadow:var(--shadow);padding:17px 17px 18px;
+  }
+  .card + .card{margin-top:12px}
+  .card > :first-child{margin-top:0}
+  .card > :last-child{margin-bottom:0}
+  p{margin:0 0 11px}
+  .card p:last-child{margin-bottom:0}
+
+  /* ---------- steps w/ checkboxes ---------- */
+  ol.steps{list-style:none;margin:0;padding:0;counter-reset:st}
+  ol.steps > li{
+    counter-increment:st;display:flex;gap:12px;align-items:flex-start;
+    padding:13px 0;border-top:1px solid var(--line);
+  }
+  ol.steps > li:first-child{border-top:0;padding-top:2px}
+  ol.steps > li:last-child{padding-bottom:2px}
+  .tick{
+    flex:0 0 auto;width:30px;height:30px;margin-top:1px;padding:0;
+    display:grid;place-items:center;border-radius:8px;cursor:pointer;
+    background:var(--surface-2);border:1px solid var(--line-hi);
+    font-family:ui-monospace,monospace;font-weight:700;font-size:12.5px;
+    color:var(--brass);transition:background .13s,border-color .13s,color .13s;
+  }
+  .tick::before{content:attr(data-n)}
+  .tick[aria-pressed="true"]{background:var(--good);border-color:var(--good);color:#fff}
+  .tick[aria-pressed="true"]::before{content:"✓"}
+  .sbody{flex:1;min-width:0}
+  .sbody > :first-child{margin-top:0}
+  .sbody > :last-child{margin-bottom:0}
+  li.done .sbody{opacity:.42}
+  .st{font-weight:730;font-size:16.5px;display:block;margin-bottom:3px;letter-spacing:-.008em}
+  .sd{color:var(--ink-dim);font-size:15.5px}
+  .sd b{color:var(--ink);font-weight:650}
+
+  ul.tight{margin:8px 0 0;padding-left:19px;color:var(--ink-dim);font-size:15.5px}
+  ul.tight li{margin:5px 0}
+  ul.tight b{color:var(--ink);font-weight:650}
+  ul.tight code,.sd code,p code,td code{
+    font-family:ui-monospace,monospace;font-size:13.5px;
+    background:var(--surface-3);padding:1.5px 5px;border-radius:5px;color:var(--ink)}
+
+  /* ---------- callouts ---------- */
+  .call{
+    border-radius:11px;padding:13px 15px;margin:13px 0;font-size:15.5px;
+    border:1px solid;border-left-width:4px;color:var(--ink);
+  }
+  .call > :first-child{margin-top:0}
+  .call > :last-child{margin-bottom:0}
+  .call .lbl{
+    font-family:ui-monospace,monospace;font-weight:700;letter-spacing:.07em;
+    text-transform:uppercase;font-size:11px;display:block;margin-bottom:5px;
+  }
+  .call.stop{background:var(--danger-bg);border-color:color-mix(in srgb,var(--danger) 45%,transparent)}
+  .call.stop .lbl{color:var(--danger)}
+  .call.warn{background:var(--warn-bg);border-color:color-mix(in srgb,var(--warn) 45%,transparent)}
+  .call.warn .lbl{color:var(--warn)}
+  .call.good{background:var(--good-bg);border-color:color-mix(in srgb,var(--good) 45%,transparent)}
+  .call.good .lbl{color:var(--good)}
+  .call.pick{background:var(--brass-bg);border-color:color-mix(in srgb,var(--brass) 45%,transparent)}
+  .call.pick .lbl{color:var(--brass)}
+  .call .rec{
+    display:block;margin-top:9px;padding-top:9px;border-top:1px solid var(--line);
+    font-weight:650}
+  .call .rec b{color:var(--brass)}
+
+  /* ---------- tables ---------- */
+  .tw{overflow-x:auto;margin:12px 0;border:1px solid var(--line);border-radius:11px;background:var(--surface)}
+  table{border-collapse:collapse;width:100%;font-size:15px;min-width:390px}
+  th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+  th{
+    font-family:ui-monospace,monospace;font-size:10.5px;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--ink-faint);font-weight:700;
+    background:var(--surface-2);white-space:nowrap;
+  }
+  tr:last-child td{border-bottom:0}
+  td b{font-weight:680}
+  .num{font-family:ui-monospace,monospace;font-variant-numeric:tabular-nums;white-space:nowrap}
+  td.ok{color:var(--good);font-weight:650}
+  td.no{color:var(--danger);font-weight:650}
+  td.mid{color:var(--warn);font-weight:650}
+
+  /* ---------- diagrams ---------- */
+  figure{margin:15px 0;padding:0}
+  .dgw{overflow-x:auto;background:var(--surface-2);border:1px solid var(--line);
+    border-radius:11px;padding:15px 13px}
+  svg.dg{display:block;width:100%;min-width:420px;height:auto}
+  svg.dg.tall{min-width:0;max-width:400px;margin:0 auto}
+  svg.dg .lb{font-family:ui-monospace,monospace;font-size:12px;font-weight:600;fill:var(--ink-dim)}
+  svg.dg .lb.br{fill:var(--brass)}
+  svg.dg .lb.cy{fill:var(--cyan)}
+  svg.dg .lb.dg{fill:var(--danger)}
+  svg.dg .lb.gd{fill:var(--good)}
+  svg.dg .lb.wr{fill:var(--warn)}
+  svg.dg .lb.wx{fill:var(--wax-line)}
+  svg.dg .lb.dk{fill:#2a2d33}
+  figcaption{font-size:13.5px;color:var(--ink-faint);margin-top:8px;text-align:center;
+    font-family:ui-monospace,monospace}
+
+  /* ---------- links / video list ---------- */
+  ul.vids{list-style:none;margin:0;padding:0}
+  ul.vids li{padding:13px 0;border-top:1px solid var(--line)}
+  ul.vids li:first-child{border-top:0;padding-top:2px}
+  .vt{font-weight:700;font-size:15.5px;display:block;letter-spacing:-.008em}
+  .vm{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--ink-faint);
+    margin:3px 0 5px;display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+  .vm .ch{color:var(--brass);font-weight:700}
+  .vm .dot{opacity:.45}
+  .vw{color:var(--ink-dim);font-size:14.5px;margin:0}
+  .badge{
+    display:inline-block;font-family:ui-monospace,monospace;font-size:10px;
+    font-weight:700;letter-spacing:.06em;padding:2px 6px;border-radius:5px;
+    background:var(--good-bg);color:var(--good);
+    border:1px solid color-mix(in srgb,var(--good) 35%,transparent);
+  }
+
+  /* ---------- details ---------- */
+  details{border:1px solid var(--line);border-radius:11px;background:var(--surface);
+    margin:12px 0;overflow:hidden}
+  summary{
+    padding:13px 15px;cursor:pointer;font-weight:700;font-size:15.5px;
+    background:var(--surface-2);list-style:none;display:flex;gap:9px;align-items:center;
+  }
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸";color:var(--brass);font-size:13px;transition:transform .15s}
+  details[open] summary::before{transform:rotate(90deg)}
+  .dbody{padding:15px}
+  .dbody > :first-child{margin-top:0}
+  .dbody > :last-child{margin-bottom:0}
+
+  /* ---------- progress bar ---------- */
+  .prog{
+    position:sticky;bottom:0;z-index:39;margin:0 -15px;
+    background:color-mix(in srgb,var(--iron) 94%,transparent);
+    backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+    border-top:1px solid var(--line);padding:9px 15px;
+    display:flex;align-items:center;gap:12px;
+  }
+  .pbar{flex:1;height:6px;background:var(--surface-3);border-radius:3px;overflow:hidden}
+  .pfill{height:100%;width:0;background:var(--good);border-radius:3px;transition:width .2s}
+  .ptxt{font-family:ui-monospace,monospace;font-size:11.5px;color:var(--ink-dim);
+    font-variant-numeric:tabular-nums;white-space:nowrap}
+  .preset{
+    font-family:ui-monospace,monospace;font-size:11px;padding:4px 9px;border-radius:6px;
+    background:var(--surface-2);border:1px solid var(--line);color:var(--ink-faint);
+    cursor:pointer}
+  .preset:hover{color:var(--danger);border-color:var(--danger)}
+
+  hr.rule{border:0;border-top:1px solid var(--line);margin:30px 0 0}
+  .foot{margin-top:26px;color:var(--ink-faint);font-size:13px;
+    font-family:ui-monospace,monospace;line-height:1.7}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="eyebrow">Field Manual · Re-Set</div>
+    <h1>Setting the toilet <em>back down</em></h1>
+    <p class="thesis">The bowl is already off the floor. This picks up from there and takes you to a sealed, non-rocking, leak-tested fixture. <b>The whole job hinges on one rule: dry-fit before the wax touches anything.</b></p>
+    <div class="meta-row">
+      <span class="mchip"><b>1.5–2.5</b> hrs</span>
+      <span class="mchip"><b>$30–70</b> parts</span>
+      <span class="mchip">solo <b>doable</b></span>
+      <span class="mchip">shims <b>✓ have</b></span>
+    </div>
+  </div>
+</header>
+
+<nav class="nav" aria-label="Jump to phase">
+  <div class="nav-in">
+    <a href="#start">START HERE</a>
+    <a href="#buy">BUY</a>
+    <a href="#p1">1 · PREP</a>
+    <a href="#p2">2 · DRY FIT</a>
+    <a href="#p3" class="hot">3 · THE SET</a>
+    <a href="#p4" class="hot">4 · TIGHTEN</a>
+    <a href="#p5">5 · TANK</a>
+    <a href="#p6">6 · TEST</a>
+    <a href="#p7">7 · CAULK</a>
+    <a href="#trouble">TROUBLE</a>
+    <a href="#video">VIDEO</a>
+  </div>
+</nav>
+
+<div class="wrap">
+
+<!-- ============ START HERE ============ -->
+<section id="start">
+  <div class="sec-head">
+    <span class="sec-num dg">00</span>
+    <div><h2>Four questions before you buy anything</h2>
+    <p class="sec-sub">ten minutes here saves a second trip and a re-do</p></div>
+  </div>
+
+  <div class="card">
+    <ol class="steps">
+      <li>
+        <button class="tick" data-n="1" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Why did it come off in the first place?</span>
+          <p class="sd">If it was <b>leaking, rocking, or smelling</b> before you pulled it, re-setting it on the same substrate reproduces the failure. That history tells you what to look for when the flange is bare.</p>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="2" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Has anyone added flooring since it was last set?</span>
+          <p class="sd">Tile, LVP, underlayment — <b>this is the #1 cause of a recessed flange</b>, and it changes what you buy. Answer this before you read the flange table below, because it usually predicts the answer.</p>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="3" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Is there living space below this bathroom?</span>
+          <p class="sd">If yes, you get a free leak detector: check that ceiling at 24 hours and again at one week. If it's a slab, you don't — lean harder on the paper-towel test.</p>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="4" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Test the shutoff valve — NOW, while the floor is clear</span>
+          <p class="sd">Find and test your <b>main house shutoff</b> first. Then open the toilet's angle stop briefly into a bucket and confirm it fully closes and holds. Valves that haven't moved in years often weep or seize once disturbed.</p>
+          <div class="call warn"><span class="lbl">Why now</span>If that stop needs replacing, doing it with a freshly-set toilet in the way is dramatically worse — and if it's a sweat-on valve you'd be running a torch six inches from porcelain.</div>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <h3>Measure the flange height — this decides what you buy</h3>
+  <p style="color:var(--ink-dim)">Scrape enough old wax off to see bare metal or plastic, then lay a straightedge or torpedo level across the flange with <b style="color:var(--ink)">both ends resting on the finished floor</b>. Measure the gap at 3–4 points around it.</p>
+
+  <figure>
+    <div class="dgw">
+      <svg class="dg tall" viewBox="0 0 360 330" role="img" aria-label="Three flange height conditions in cross-section: sitting on the floor about a quarter inch proud is ideal, flush is acceptable with an extra-thick ring, and recessed below the floor requires an extender.">
+        <defs>
+          <pattern id="hatch" width="7" height="7" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="0" y2="7" stroke="var(--line-hi)" stroke-width="2"></line>
+          </pattern>
+        </defs>
+        <g>
+          <text class="lb gd" x="0" y="26">BEST</text>
+          <text class="lb" x="0" y="46">Sits ON the floor,</text>
+          <text class="lb" x="0" y="64">top ≈ 1/4" proud</text>
+          <text class="lb gd" x="0" y="86">→ Standard wax ring</text>
+          <rect x="190" y="52" width="160" height="12" fill="var(--surface-3)" stroke="var(--ink-faint)"></rect>
+          <rect x="190" y="64" width="160" height="26" fill="url(#hatch)" stroke="var(--ink-faint)"></rect>
+          <path d="M215 52 H325 V45 H215 Z" fill="var(--brass-dim)" stroke="var(--brass)" stroke-width="2"></path>
+        </g>
+        <line x1="0" y1="112" x2="360" y2="112" stroke="var(--line)" stroke-width="1"></line>
+        <g>
+          <text class="lb wr" x="0" y="134">OK</text>
+          <text class="lb" x="0" y="154">Flush with the floor</text>
+          <text class="lb wr" x="0" y="194">→ Extra-thick ring</text>
+          <rect x="190" y="160" width="160" height="12" fill="var(--surface-3)" stroke="var(--ink-faint)"></rect>
+          <rect x="190" y="172" width="160" height="26" fill="url(#hatch)" stroke="var(--ink-faint)"></rect>
+          <path d="M215 160 H325 V156 H215 Z" fill="var(--brass-dim)" stroke="var(--brass)" stroke-width="2"></path>
+        </g>
+        <line x1="0" y1="220" x2="360" y2="220" stroke="var(--line)" stroke-width="1"></line>
+        <g>
+          <text class="lb dg" x="0" y="242">PROBLEM</text>
+          <text class="lb" x="0" y="262">BELOW the floor</text>
+          <text class="lb" x="0" y="280">(new flooring went in)</text>
+          <text class="lb dg" x="0" y="302">→ Needs an extender</text>
+          <rect x="190" y="268" width="160" height="12" fill="var(--surface-3)" stroke="var(--ink-faint)"></rect>
+          <rect x="190" y="280" width="160" height="26" fill="url(#hatch)" stroke="var(--ink-faint)"></rect>
+          <path d="M215 280 H325 V274 H215 Z" fill="var(--brass-dim)" stroke="var(--brass)" stroke-width="2"></path>
+        </g>
+      </svg>
+    </div>
+    <figcaption>Hatched = subfloor. Solid band = finished floor. Brass = the flange.</figcaption>
+  </figure>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>What you measure</th><th>What you buy</th></tr></thead>
+      <tbody>
+        <tr><td class="ok">Flush to <span class="num">1/4"</span> proud</td><td><b>Standard wax ring.</b> This is correct height — you're fine.</td></tr>
+        <tr><td class="mid">Flush or slightly below</td><td><b>Extra-thick wax ring</b> — Oatey MaxWax <code>31188</code> or Fluidmaster <code>7513</code></td></tr>
+        <tr><td class="no">More than <span class="num">1/2"</span> below</td><td><b>Flange extender kit</b> — Oatey Set-Rite <code>43400</code> (corrects 1/8"–2-1/4") + a standard ring on top. Needs longer bolts.</td></tr>
+        <tr><td class="mid"><span class="num">1/4"</span> to <span class="num">1/2"</span> proud</td><td>Workable. Use a <b>thin / no-horn ring</b> and expect to shim more than usual — the base sits higher relative to the floor.</td></tr>
+        <tr><td class="no">More than <span class="num">1/2"</span> proud</td><td>The bowl can't seat on the floor — it bears on the flange rim. Real fixes are cutting the flange down or replacing it. <b>This is a call-a-plumber line.</b></td></tr>
+        <tr><td class="no">Readings differ by <span class="num">&gt;1/8"</span></td><td><b>The flange is tilted</b>, not just high or low. Wax handles this better than any waxless seal. Plan on more shimming, and re-check the flange fasteners.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="call stop">
+    <span class="lbl">Do not stack two wax rings to make up height</span>
+    Oatey — who makes the rings — is flat about it: stacked rings compress unevenly, don't adhere to each other, and shear apart when the bowl moves. Use one correctly-sized ring or an extender.
+    <span class="rec"><b>Honest note:</b> working master plumbers do stack routinely and get away with it. It's a pro's daily judgment call, not a homeowner's one-shot default.</span>
+  </div>
+
+  <h3>Two more things before the store</h3>
+  <div class="card">
+    <ol class="steps">
+      <li>
+        <button class="tick" data-n="5" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Bring the wax ring inside — and warm the room</span>
+          <p class="sd">Wax wants to be around <b>70°F</b> (under 80°F) so it compresses instead of crumbles. An hour in the warm bathroom does it. A 70° ring pressed onto a 45° flange still seats badly, so warm the <b>room</b>, not just the ring.</p>
+          <div class="call stop"><span class="lbl">Never</span>No hair dryer, heat gun, or microwave. A slumped ring looks fine and fails into your subfloor.</div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="6" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Inspect the toilet itself</span>
+          <p class="sd">A pulled toilet has usually been set down hard at least once. Check the <b>bowl and horn for chips and hairline cracks</b>, and the tank interior for cracks radiating from the bolt holes. Two minutes now beats finding it after the wax is committed.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <div class="call stop">
+    <span class="lbl">The rule that governs the entire job</span>
+    <p style="font-size:18px;font-weight:750;margin:4px 0 9px">Dry-fit the bare bowl first. No wax.</p>
+    <p>Find every rock point. Mark the position on the floor. Mark where the shims go. <b>Then</b> lift it off and place the ring.</p>
+    <p style="margin-bottom:0"><b>Wax has no memory.</b> It seals by cold-flow — it squashes and stays squashed. It does not spring back. The moment the bowl touches the ring and you lift it, that ring is scrap.</p>
+    <span class="rec">So: <b>buy two rings.</b> They're $4. That's the difference between finishing today and a store run with an open sewer pipe in your bathroom.</span>
+  </div>
+</section>
+
+<!-- ============ SHOPPING ============ -->
+<section id="buy">
+  <div class="sec-head">
+    <span class="sec-num">01</span>
+    <div><h2>What to buy</h2>
+    <p class="sec-sub">prices are ballpark — they vary by store</p></div>
+  </div>
+
+  <h3>Must have</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Item</th><th>Notes</th><th>~$</th></tr></thead>
+      <tbody>
+        <tr><td><b>Wax ring ×2</b></td><td>Oatey Johni-Ring <code>96401</code> includes brass bolts. <b>Buy the second one.</b></td><td class="num">4–5 ea</td></tr>
+        <tr><td><b>Brass closet bolts</b></td><td><span class="num">5/16"</span>. <i>Solid</i> brass, not brass-plated steel. Often in the ring kit — check first. See the length warning below.</td><td class="num">4–6</td></tr>
+        <tr><td><b>Toilet shims</b></td><td class="ok">✓ Ashley already got these</td><td class="num">—</td></tr>
+        <tr><td><b>Braided steel supply line</b></td><td>Measure the run first. Replace it — Fluidmaster says swap any connector over 5 years old.</td><td class="num">8–12</td></tr>
+        <tr><td><b>100% silicone caulk</b></td><td>Not latex, not acrylic, not grout, <b>never</b> mortar.</td><td class="num">6–10</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="call warn">
+    <span class="lbl">Bolt length trap</span>
+    Standard closet bolts are <span class="num">2-1/4"</span>. If you're going to <b>double-nut</b> them (recommended below), or you're using a flange extender or repair ring, that eats 1/4"–3/8" of usable thread at the bottom — and you can run out of thread above the nut without knowing until the irreversible phase.
+    <span class="rec"><b>→ Buy 3" or 3-1/2" bolts</b> if any of those apply, and test-thread a nut on during the dry fit to confirm you have thread to spare.</span>
+  </div>
+
+  <div class="call warn">
+    <span class="lbl">Supply line sizing</span>
+    The fill-valve end is <b>7/8" ballcock</b>; the stop end is almost always <b>3/8" compression</b>. Confirm both before buying, and measure the actual run — a too-short line strains the joint, a too-long one kinks.
+  </div>
+
+  <h3>Strongly recommended</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Item</th><th>Why</th><th>~$</th></tr></thead>
+      <tbody>
+        <tr><td><b>Mechanical test plug</b></td><td>Oatey Gripper. Far better than a rag — it cannot slip down the pipe and it's impossible to forget.</td><td class="num">5–8</td></tr>
+        <tr><td><b>Flange repair ring</b></td><td>Oatey Fix-It <code>42775</code>. Buy on spec, return it unused. You can't assess the flange until the wax is off — and by then you're committed. <i>It's painted steel, not stainless.</i></td><td class="num">10–15</td></tr>
+        <tr><td><b>Stainless #10 × 1-1/2" screws</b></td><td>For any empty flange screw holes. <b>Not drywall screws</b> — brittle, they snap under shear.</td><td class="num">4–6</td></tr>
+        <tr><td><b>Tank-to-bowl gasket kit</b></td><td><b>Only if you separated the tank from the bowl.</b> If the tank stayed on, don't touch it.</td><td class="num">8–15</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Tools</h3>
+  <div class="card">
+    <p class="sd">Adjustable wrench (10") · 1/2" nut driver or small socket · <b>plastic</b> putty knife <i>(metal gouges a PVC flange and scratches porcelain)</i> · mini hacksaw · utility knife · torpedo level · pencil · flashlight · nitrile gloves · bucket + sponge · shop vac · caulk gun · masking tape</p>
+  </div>
+
+  <div class="call good">
+    <span class="lbl">Sanitation — name the hazard</span>
+    Old wax, the horn, and the flange carry fecal contamination. <b>Nitrile gloves throughout.</b> Bag the old wax immediately. Disinfect the horn, flange face, and surrounding floor after scraping and before the new ring goes down. Don't touch your face; wash thoroughly after. Run the bath fan or crack a window for the <b>whole job</b>.
+  </div>
+</section>
+
+<!-- ============ PHASE 1 ============ -->
+<section id="p1">
+  <div class="sec-head">
+    <span class="sec-num">02</span>
+    <div><h2>Prep the opening</h2>
+    <p class="sec-sub">phase 1 · ~20 min · fully reversible</p></div>
+  </div>
+
+  <div class="card">
+    <ol class="steps">
+      <li>
+        <button class="tick" data-n="1" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Drain the toilet's trapway</span>
+          <p class="sd">A pulled toilet still holds <b>a quart or more</b> of standing water in the trap. Tip it and lower it and that water runs straight out the horn onto your fresh wax — which is exactly what "contaminated seal" means. Sponge or shop-vac it out, tip the bowl into a bucket, wipe the horn dry.</p>
+          <div class="call good"><span class="lbl">Bonus</span>That's 8–10 lbs off the lift, which matters a lot when you're aiming it solo.</div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="2" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Plug the drain</span>
+          <p class="sd">The open drain is <b>untrapped</b>. Sewer gas comes up it, and it will swallow any nut, screw, or scraper you drop.</p>
+          <ul class="tight">
+            <li><b>Best:</b> mechanical test plug, wing nut snugged</li>
+            <li><b>Fallback:</b> a rag too big to pass the pipe, with a <b>long tail hanging visibly</b> over the flange rim</li>
+          </ul>
+          <div class="call stop"><span class="lbl">Write this on your hand</span>Pull the plug <b>before</b> the ring goes down. A rag flushed into the closet bend goes where a plunger can't reach and an auger only drives deeper — that's a full re-pull of the toilet you just set.</div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="3" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Scrape both surfaces</span>
+          <p class="sd">Old wax comes off <b>the flange AND the toilet's horn</b> (the outlet on the underside of the bowl). Leftover nubs act as spacers that hold the bowl up off the new ring.</p>
+          <ul class="tight">
+            <li>Pry the bulk off with the plastic putty knife, bag it immediately</li>
+            <li>Scrape to bare and dry — wax won't seat against a greasy film</li>
+            <li><b>Don't obsess.</b> Get it bare enough to <i>inspect</i> — that's the real reason it matters. Wax hides cracks and broken bolt ears.</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="4" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Inspect the flange — your stop-work checkpoint</span>
+          <div class="tw" style="margin-top:9px">
+            <table>
+              <thead><tr><th>What you find</th><th>What to do</th></tr></thead>
+              <tbody>
+                <tr><td class="ok">Sound, intact bolt slots</td><td>Proceed</td></tr>
+                <tr><td class="mid">Missing or backed-out screws</td><td><b>The common middle case.</b> Drive stainless #10 × 1-1/2" into every open hole, into solid subfloor. On tile, pilot-drill first or you'll crack it.</td></tr>
+                <tr><td class="mid">Cracked, or a broken bolt ear</td><td>Flange repair ring over the top — see the drop-down below</td></tr>
+                <tr><td class="no">Screws spin or pull out by hand</td><td>The wood is gone. Longer screws don't fix it. <b>Stop and fix the subfloor.</b></td></tr>
+                <tr><td class="no">Spongy floor, dark stains, musty smell</td><td>Subfloor rot. <b>Stop.</b></td></tr>
+                <tr><td class="no">Damaged <b>drain</b> section · cast iron · lead · slab</td><td>🛑 <b>Call a plumber.</b> This is the line.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="5" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Set the closet bolts and lock them upright</span>
+          <p class="sd">Head <b>into</b> the flange slot, threads pointing <b>up</b>. Slide both to position — equidistant from the wall, on a line parallel to it. <b>Measure it</b>; flange slots are arcs and it's easy to set them out of square.</p>
+          <p class="sd">You cannot align 55 lbs of porcelain onto bolts that flop over. Lock them:</p>
+          <ul class="tight">
+            <li><b>Double-nut</b> — washer + nut run down onto the flange and tightened. Permanent, ~$2, and the standard fix for a bolt that spins. <i>Remember the length warning.</i></li>
+            <li>Or bolts with plastic retainer washers (Hercules Johni Quick Bolt, Sioux Chief PlumbPerfect)</li>
+            <li>Or pack scrap wax around the bolt bases — a real trade trick, easier to undo later than caulk</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <details>
+    <summary>If the flange needs a repair ring or an extender</summary>
+    <div class="dbody">
+      <p><b>Repair ring</b> (cracked flange / broken bolt ear) — it goes <i>over</i> the existing flange. Clear the broken ear first. Liberal bead of 100% silicone between the old flange and the new ring. Screws must reach <b>solid subfloor</b>, not just the plywood face. Re-square the new bolt slots to the wall before you commit.</p>
+      <p><b>Extender kit</b> (recessed flange) — dry-stack the rings to height first and check. Then a continuous 100% silicone bead between <b>every</b> layer <i>and</i> between the bottom layer and the original flange. Fasten down through into subfloor. <b>Longer bolts are mandatory.</b> Let the silicone skin over before you set the bowl.</p>
+      <p style="margin-bottom:0"><b>"Stop and fix the subfloor"</b> — that job is: cut back to sound material, sister or replace the framing, re-support the flange. It's a legitimate call-a-pro moment and it is a different day's work. Don't set a toilet on rotten wood because you already bought the ring.</p>
+    </div>
+  </details>
+
+  <div class="call warn">
+    <span class="lbl">If the job stalls here</span>
+    Store run, missing part, whatever: <b>plug the drain</b>, ventilate, tell the household the water is off and the bathroom is out of service. <b>Never leave an untrapped drain open overnight.</b>
+  </div>
+</section>
+
+<!-- ============ PHASE 2 ============ -->
+<section id="p2">
+  <div class="sec-head">
+    <span class="sec-num gd">03</span>
+    <div><h2>The dry fit</h2>
+    <p class="sec-sub">phase 2 · ~15 min · this is why the job works</p></div>
+  </div>
+
+  <figure>
+    <div class="dgw">
+      <svg class="dg" viewBox="0 0 640 232" role="img" aria-label="Top-down view of the toilet base footprint showing the flange and two closet bolts, with shims placed at the two points where the base rocked.">
+        <text class="lb" x="20" y="22">WALL</text>
+        <line x1="20" y1="32" x2="620" y2="32" stroke="var(--ink-faint)" stroke-width="3"></line>
+        <ellipse cx="360" cy="132" rx="118" ry="76" fill="var(--surface-3)" stroke="var(--ink-faint)" stroke-width="2"></ellipse>
+        <ellipse cx="360" cy="132" rx="34" ry="24" fill="none" stroke="var(--ink-faint)" stroke-width="2" stroke-dasharray="5 4"></ellipse>
+        <text class="lb" x="333" y="136">flange</text>
+        <circle cx="280" cy="132" r="6" fill="var(--brass)"></circle>
+        <circle cx="440" cy="132" r="6" fill="var(--brass)"></circle>
+        <text class="lb br" x="246" y="116">bolt</text>
+        <text class="lb br" x="432" y="116">bolt</text>
+        <rect x="252" y="178" width="44" height="13" rx="2" fill="var(--cyan)"></rect>
+        <rect x="424" y="178" width="44" height="13" rx="2" fill="var(--cyan)"></rect>
+        <text class="lb cy" x="196" y="212">SHIM</text>
+        <text class="lb cy" x="478" y="212">SHIM</text>
+        <text class="lb" x="20" y="82">Dry-fit with NO wax.</text>
+        <text class="lb" x="20" y="102">Rock it every way.</text>
+        <text class="lb" x="20" y="122">Pencil the spots that</text>
+        <text class="lb" x="20" y="142">lift. Shim only those.</text>
+      </svg>
+    </div>
+    <figcaption>Shims usually end up at the back, where they stay dry.</figcaption>
+  </figure>
+
+  <div class="card">
+    <ol class="steps">
+      <li>
+        <button class="tick" data-n="1" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Lower the bare bowl onto the bare flange</span>
+          <p class="sd">Over the standing bolts. <b>No wax.</b> This is your free rehearsal — everything you learn here you get to use once, for real, later.</p>
+          <div class="call warn"><span class="lbl">Lift correctly</span>Lift <b>the bowl only</b> — never by the tank, the seat, or the flush lever. Take the seat and lid off first, and if the tank is still attached, <b>seriously consider pulling it</b>: that's ~20 lbs off and it restores your sightlines to the bolts. Set the tank lid flat on a towel — it's the most-broken part in this whole job.</div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="2" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Find every rock point</span>
+          <p class="sd">Push the base firmly <b>front, back, left, and right</b>. Then sit on it. You're looking for any lift, anywhere.</p>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="3" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Mark the position on the floor</span>
+          <p class="sd">Pencil the base outline at 4–6 points, or run masking tape right up to the outer edge on both sides. <b>This is your aiming target later</b>, when you're lowering it blind. American Standard prints this exact tip on their install sheet.</p>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="4" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Shim until the rock is gone</span>
+          <ul class="tight">
+            <li>Thin end first, into the <b>widest</b> part of each gap, until it's in firm contact with both floor and porcelain</li>
+            <li><b>2–4 shims is normal.</b> One per side is the usual fix.</li>
+            <li>Aim to keep the <b>front of the bowl touching the floor</b> — shims typically end up at the back, out of the splash zone</li>
+            <li><b>Push by hand only. Never tap them with a hammer.</b></li>
+            <li>Danco shims are ribbed to interlock, so two can legitimately stack for a deeper gap</li>
+            <li><b>Needing more than ~1/4"?</b> Stop and re-check the flange. Something's wrong upstream.</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="5" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Mark the shim positions and test-thread a nut</span>
+          <p class="sd">Pencil each shim's spot on the floor and note which shim goes where. While you're down there: <b>run a nut onto each bolt</b> and confirm you have thread to spare above it. This is the last free moment to discover you need longer bolts.</p>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="6" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Lift it off and set it aside on a towel</span>
+          <p class="sd">Pull the shims back out. You now know exactly where everything goes.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ PHASE 3 ============ -->
+<section id="p3">
+  <div class="sec-head">
+    <span class="sec-num dg">04</span>
+    <div><h2>The one-shot set</h2>
+    <p class="sec-sub">phase 3 · ~20 min · irreversible from step 3 on</p></div>
+  </div>
+
+  <div class="call stop">
+    <span class="lbl">Read this whole phase before you start it</span>
+    Once the bowl touches wax, the ring is committed. If you lift it, twist it hard, or land it wrong, you scrape both surfaces again and open the second ring. <b>There is no salvage.</b>
+  </div>
+
+  <figure>
+    <div class="dgw">
+      <svg class="dg tall" viewBox="120 66 400 292" role="img" aria-label="Cross-section of a correctly set toilet: the bowl horn presses down into the wax ring, which is compressed against the closet flange sitting on the finished floor. Brass closet bolts pass through the base into the flange, a shim fills the gap under the foot, and the drain passage runs open through the middle.">
+        <rect x="20" y="196" width="600" height="42" fill="url(#hatch)" stroke="var(--ink-faint)"></rect>
+        <text class="lb" x="128" y="222">SUBFLOOR</text>
+        <rect x="20" y="178" width="600" height="18" fill="var(--surface-3)" stroke="var(--ink-faint)"></rect>
+        <text class="lb" x="128" y="192">FINISHED FLOOR</text>
+
+        <line x1="252" y1="240" x2="252" y2="300" stroke="var(--ink-dim)" stroke-width="3"></line>
+        <line x1="388" y1="240" x2="388" y2="300" stroke="var(--ink-dim)" stroke-width="3"></line>
+        <text class="lb" x="292" y="276">DRAIN</text>
+
+        <rect x="252" y="178" width="26" height="62" fill="var(--brass-dim)" stroke="var(--brass)" stroke-width="2"></rect>
+        <rect x="362" y="178" width="26" height="62" fill="var(--brass-dim)" stroke="var(--brass)" stroke-width="2"></rect>
+        <rect x="205" y="172" width="73" height="6" fill="var(--brass-dim)" stroke="var(--brass)" stroke-width="2"></rect>
+        <rect x="362" y="172" width="73" height="6" fill="var(--brass-dim)" stroke="var(--brass)" stroke-width="2"></rect>
+
+        <path d="M238 172 H278 V150 Q258 141 238 150 Z" fill="var(--wax)" stroke="var(--wax-line)" stroke-width="2"></path>
+        <path d="M362 172 H402 V150 Q382 141 362 150 Z" fill="var(--wax)" stroke="var(--wax-line)" stroke-width="2"></path>
+
+        <path d="M150 172 V98 Q150 86 170 86 H470 Q490 86 490 98 V172 H400 V120 H240 V172 Z" fill="var(--porcelain)" stroke="var(--ink-faint)" stroke-width="2"></path>
+        <rect x="256" y="120" width="22" height="32" fill="var(--porcelain)" stroke="var(--ink-faint)" stroke-width="2"></rect>
+        <rect x="362" y="120" width="22" height="32" fill="var(--porcelain)" stroke="var(--ink-faint)" stroke-width="2"></rect>
+        <text class="lb dk" x="282" y="108">TOILET BASE</text>
+
+        <path d="M150 178 H202 L150 171 Z" fill="var(--cyan)"></path>
+        <path d="M490 178 H438 L490 171 Z" fill="var(--cyan)"></path>
+
+        <rect x="214" y="92" width="9" height="80" fill="var(--brass)"></rect>
+        <rect x="417" y="92" width="9" height="80" fill="var(--brass)"></rect>
+        <rect x="208" y="86" width="21" height="8" rx="2" fill="var(--brass)"></rect>
+        <rect x="411" y="86" width="21" height="8" rx="2" fill="var(--brass)"></rect>
+
+        <rect x="140" y="326" width="13" height="11" fill="var(--brass-dim)" stroke="var(--brass)"></rect>
+        <text class="lb br" x="158" y="336">FLANGE + BOLTS</text>
+        <rect x="272" y="326" width="13" height="11" fill="var(--wax)" stroke="var(--wax-line)"></rect>
+        <text class="lb wx" x="290" y="336">WAX RING</text>
+        <rect x="360" y="326" width="13" height="11" fill="var(--cyan)"></rect>
+        <text class="lb cy" x="378" y="336">SHIM</text>
+        <rect x="422" y="326" width="13" height="11" fill="var(--porcelain)" stroke="var(--ink-faint)"></rect>
+        <text class="lb" x="440" y="336">TOILET</text>
+      </svg>
+    </div>
+    <figcaption>The weight of the toilet seals the wax. The bolts only stop it shifting.</figcaption>
+  </figure>
+
+  <div class="card">
+    <ol class="steps">
+      <li>
+        <button class="tick" data-n="1" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">REMOVE THE DRAIN PLUG</span>
+          <p class="sd">Flashlight. Look. Confirm. <b>This is the moment</b> — after the ring goes down you can't see in there anymore.</p>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="2" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Place the ring on the flange</span>
+          <div class="call pick">
+            <span class="lbl">⚔ Contested — ring on the flange, or on the bowl's horn?</span>
+            Fluidmaster (the maker) says press it onto the bowl outlet. Oatey and Lowe's say center it on the flange. Working plumbers split down the middle.
+            <span class="rec">→ <b>Put it on the flange.</b> You've already dry-fit and marked the floor, so you don't need it stuck to the bowl for alignment — and a flange-mounted ring can't fall off while you're maneuvering 55 lbs in a tight room.</span>
+          </div>
+          <p class="sd"><b>Orientation:</b> if your ring has a plastic cone, the <b>tapered end points DOWN into the drain</b>, flat wide side up toward the toilet. Follow whatever's printed on your package — products differ.</p>
+          <div class="call pick">
+            <span class="lbl">⚔ Contested — horn or no horn?</span>
+            Some plumbers say the plastic funnel prevents blockages on recessed collars; others say it's the direct cause of many leaking toilets, because wax gets squeezed off the top of it and plastic seals nothing.
+            <span class="rec">→ <b>Flange at or above the floor: plain no-horn ring. Recessed flange or cast-iron collar: the horn earns its place.</b></span>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="3" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Lower the bowl — straight down</span>
+          <p class="sd">Straddle it, lift with your legs, keep it close to your body. Lower <b>straight down</b> onto the bolts, using your pencil marks as the target.</p>
+          <div class="call good">
+            <span class="lbl">Solo method — pick one</span>
+            <ul class="tight" style="margin-top:2px">
+              <li><b>Set the bolts last.</b> If the flange slots are reachable through the base holes, land the bowl with no bolts in at all — a huge alignment margin — then drop the bolts through the holes and rotate them into the slots. <b>Verify reachability during the dry fit</b>, when it's free; it doesn't work on every flange.</li>
+              <li><b>Beveled wood stack.</b> Stack tapered strips (cedar shims, beveled ply) taller than <b>the bolts</b> — not the ring. Land the bowl on the wood, confirm alignment through the holes, then withdraw the strips one at a time, alternating sides. Tapered is the point: they slide out under load instead of needing a lift.</li>
+              <li>Two drinking straws of <b>different lengths</b> over the bolts as tall visual guides.</li>
+            </ul>
+            <span class="rec"><b>Point of no return:</b> once the horn contacts wax — roughly the last inch — alignment is finished. Any remaining wood comes straight out. No repositioning.</span>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="4" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Compress the ring</span>
+          <p class="sd">Steady downward body weight around the bowl until it <b>reaches the floor</b>.</p>
+          <div class="call pick">
+            <span class="lbl">⚔ Contested — twist to seat, or straight down only?</span>
+            Fluidmaster and Lowe's say twist slightly to spread the wax. Kohler and TOTO say do <b>not</b> move the bowl at all after placement.
+            <span class="rec">→ <b>Press straight down. No twist, no rock.</b> It's the only motion no manufacturer forbids — and having dry-fit and marked the floor, you never needed the twist for positioning.</span>
+          </div>
+          <p class="sd"><b>The tactile check:</b> you should feel steady, even resistance as the wax squashes, and the bowl should reach the floor. <b>If it stops short and feels hard</b>, something is holding it up — leftover wax, too thick a ring, a proud flange, debris. Lift it, diagnose it, and use the <b>new</b> ring.</p>
+          <div class="call stop"><span class="lbl">Do not lift or rock the bowl after this point</span>Kohler states it flatly: break the seal and you must install a new one. The common way people ruin a good set is lifting or twisting the bowl <i>later</i> to make the tank bolts or supply line line up. <b>Make the connections fit the toilet, not the other way around.</b></div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="5" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Now seat the shims</span>
+          <p class="sd">Slide them home by hand at your marked positions. Firm contact, no hammering.</p>
+          <div class="call warn"><span class="lbl">Order matters</span>If you used the wood-stack method, the shims go in <b>only after every piece of wood is out</b>. Loose shims sitting on the floor first get knocked out of position — or the wood lands on top of them and changes the height.</div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ PHASE 4 ============ -->
+<section id="p4">
+  <div class="sec-head">
+    <span class="sec-num dg">05</span>
+    <div><h2>Tighten</h2>
+    <p class="sec-sub">phase 4 · ~10 min · where people crack $300 of porcelain</p></div>
+  </div>
+
+  <div class="call stop">
+    <span class="lbl">The physics you actually need</span>
+    The wax seals from <b>the weight of the toilet</b>, not from bolt tension. The bolts only stop the bowl from shifting. <b>Cranking harder does not improve the seal. It only breaks china.</b>
+  </div>
+
+  <figure>
+    <div class="dgw">
+      <svg class="dg tall" viewBox="132 8 348 152" role="img" aria-label="Alternate tightening pattern: a quarter turn on the left nut, then a quarter turn on the right, repeating until the bowl stops moving.">
+        <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="var(--brass)"></path></marker></defs>
+        <ellipse cx="320" cy="82" rx="148" ry="46" fill="var(--surface-3)" stroke="var(--ink-faint)" stroke-width="2"></ellipse>
+        <circle cx="220" cy="82" r="17" fill="var(--brass)"></circle>
+        <circle cx="420" cy="82" r="17" fill="var(--brass)"></circle>
+        <text class="lb dk" x="215" y="88">L</text>
+        <text class="lb dk" x="415" y="88">R</text>
+        <text class="lb br" x="176" y="30">1/4 turn</text>
+        <text class="lb br" x="378" y="30">1/4 turn</text>
+        <path d="M248 62 Q320 34 392 62" fill="none" stroke="var(--brass)" stroke-width="2" marker-end="url(#ar)"></path>
+        <path d="M392 102 Q320 130 248 102" fill="none" stroke="var(--brass)" stroke-width="2" marker-end="url(#ar)"></path>
+        <text class="lb dg" x="140" y="154">Never run one side all the way down first.</text>
+      </svg>
+    </div>
+    <figcaption>Alternate. Small increments. Stop when it stops moving.</figcaption>
+  </figure>
+
+  <div class="card">
+    <ol class="steps">
+      <li>
+        <button class="tick" data-n="1" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Stack the hardware in the right order</span>
+          <p class="sd">Plastic bolt-cap base first (it's marked "up"), then the <b>metal washer</b>, then the nut. Get it wrong and the nut pulls straight back off.</p>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="2" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Alternate in small increments</span>
+          <ul class="tight">
+            <li>Both nuts <b>finger-tight</b> first</li>
+            <li>Then <b>alternate sides</b>, a <b>quarter turn or less</b> per nut per pass</li>
+            <li>Use a <b>1/2" nut driver or a small wrench choked up near the nut</b>. No breaker bar, no power driver. <b>Leverage is what cracks bowls.</b></li>
+            <li><b>Never run one side all the way down first</b> — that cantilevers the base and concentrates bending stress at one bolt boss</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="3" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Stop when the bowl stops moving</span>
+          <p class="sd">It no longer shifts when you try to move it by hand, and it's firm on the floor and shims. <b>That's it. That's the spec.</b></p>
+          <div class="call warn">
+            <span class="lbl">There is no published torque spec — don't chase a number</span>
+            No major manufacturer publishes one for closet bolts. Numbers online range from 5 to 30 ft-lb — a 6× spread, which is itself proof no spec exists. As a mental <b>ceiling only</b>: ~5–10 ft-lb is ample and things start breaking above ~15–20. Don't go get a torque wrench: on an unevenly bearing base you'll hit the number and crack the bowl anyway.
+            <span class="rec">The "<b>½ turn past hand tight</b>" figure you'll find online is for <b>TANK</b> bolts. Do not apply it to the floor bolts.</span>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="4" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">If it still rocks — diagnose, don't crank</span>
+          <div class="tw" style="margin-top:9px">
+            <table>
+              <thead><tr><th>Cause</th><th>Fix</th></tr></thead>
+              <tbody>
+                <tr><td>Wax not fully compressed</td><td>Continue tightening, small alternating increments</td></tr>
+                <tr><td>Unlevel floor / uneven bearing</td><td><b>More shims. Not more torque.</b> Torque will not fix this and will crack the bowl.</td></tr>
+                <tr><td>One side of the base lifting off the floor</td><td>Suspect a <b>cracked flange</b>, not a bad ring</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="5" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">If you hear a snap — stop and check three things</span>
+          <p class="sd">Usually it's the flat bolt head pulling up and settling into the flange slot, which is fine. But confirm: <b>(1)</b> does the bolt still resist an upward pull? <b>(2)</b> does the nut still gain purchase when you turn it — or did the threads strip? <b>(3)</b> inspect the base and, on an all-plastic flange, the thin area around the slot for a crack.</p>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="6" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Trim the bolts — but hold off on the caps</span>
+          <p class="sd">If they stand more than <b>~1/4"</b> above the nuts, cut the excess with the mini hacksaw. <b>Shield the china from the blade</b> with a putty knife or cardboard — that's Kohler's own warning.</p>
+          <div class="call warn"><span class="lbl">Leave the caps off for now</span>You're going to re-check bolt snugness at 24 hours and re-test for rock at one week. Snap the caps on <i>after</i> that — same for snap-off bolts. Otherwise you'll be prying them back off.</div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ PHASE 5 ============ -->
+<section id="p5">
+  <div class="sec-head">
+    <span class="sec-num">06</span>
+    <div><h2>Tank &amp; supply</h2>
+    <p class="sec-sub">phase 5 · ~20 min · skip 1–2 if the tank never came off</p></div>
+  </div>
+
+  <div class="card">
+    <ol class="steps">
+      <li>
+        <button class="tick" data-n="1" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Tank-to-bowl gasket</span>
+          <p class="sd">Replace it while you're in here — you rarely have the tank off. Center the gasket on the bowl inlet, set the tank down square.</p>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="2" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Tank bolts</span>
+          <ul class="tight">
+            <li><b>Rubber against porcelain, metal washer on top of the rubber, nut last.</b> Never seat a metal washer directly on porcelain. Follow your kit's diagram — stack order varies.</li>
+            <li>Hand-tight, then <b>alternate</b>, ~1/4 turn per nut per pass</li>
+            <li><b>Stop signal:</b> when the rubber washers just begin to flatten. Check the tank is level side-to-side and front-to-back.</li>
+            <li>Tank bolts are <b>not</b> strain-bearing. A little give is normal.</li>
+          </ul>
+          <div class="call stop"><span class="lbl">Never crank tank bolts to stop a tank-bolt leak</span>A leak there means a bad washer or a washer on the wrong side. More torque cracks the tank. Kohler's manual explicitly warns overtightening breaks vitreous china.</div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="3" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Supply line</span>
+          <ul class="tight">
+            <li><b>No thread tape</b> on the fill-valve nut or the compression nut at the stop — those seal with a rubber gasket, and tape prevents proper compression. <i>(Tape IS correct on a tapered NPT thread coming out of the wall.)</i></li>
+            <li><b>Anti-cross-thread trick:</b> turn the nut <b>backward</b> first until you feel the threads drop into engagement, <i>then</i> forward. It should spin easily for the first few turns. Tight early = back all the way off and restart. Never force it.</li>
+            <li><b>Fill-valve end: hand-tight only.</b> Fluidmaster: <i>"Do not over tighten the nut as it could damage fill valve or coupling nut, resulting in flooding and property damage."</i></li>
+            <li><b>Shutoff end: hand-tight plus about 1/2 turn.</b></li>
+            <li>Braided lines have a <b>minimum bend radius</b> — leave a gentle sweep, never a tight loop or kink, and never let the line bear weight</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="4" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Turn the water on SLOWLY</span>
+          <p class="sd">Kohler: <i>"Open the supply shut-off valve slowly to check for leaks."</i> A slow open catches a bad joint at a trickle instead of a spray.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <details>
+    <summary>If the angle stop drips or won't fully close</summary>
+    <div class="dbody">
+      <p>You should have caught this back in the opening checks — but if it shows up now:</p>
+      <ul class="tight" style="color:var(--ink-dim)">
+        <li>Confirm your <b>main house shutoff</b> works before touching anything</li>
+        <li>Tighten the <b>packing nut</b> 1/4 to 1/2 turn</li>
+        <li>Work the stem back and forth to break the mineral bond</li>
+        <li>A little penetrating oil where the stem enters the packing nut</li>
+        <li><b>Do not force it.</b> Excessive force shears the stem or breaks the wall connection — that's a flood, not a drip.</li>
+        <li>If it still won't hold, replace it with a quarter-turn ball stop. Using push-fit (SharkBite-type)? You skip the torch, but you still need a tube cutter, a <b>deburring/reaming tool</b>, and a <b>depth mark</b> on the pipe. A burr shreds the O-ring; an under-inserted fitting blows off under pressure. Not valid on galvanized.</li>
+      </ul>
+    </div>
+  </details>
+</section>
+
+<!-- ============ PHASE 6 ============ -->
+<section id="p6">
+  <div class="sec-head">
+    <span class="sec-num">07</span>
+    <div><h2>Adjust &amp; leak test</h2>
+    <p class="sec-sub">phase 6 · ~20 min + a watch period · before you caulk</p></div>
+  </div>
+
+  <div class="card">
+    <ol class="steps">
+      <li>
+        <button class="tick" data-n="1" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Water level</span>
+          <ul class="tight">
+            <li>Set the water <b>1/2" below the top of the overflow pipe</b></li>
+            <li>The fill valve's <b>C.L. (Critical Level) mark must sit 1" above</b> the top of the overflow pipe — a real backflow requirement (ASSE 1002), not a suggestion</li>
+            <li>Top of the fill valve ~3" above the overflow pipe puts the C.L. mark right automatically</li>
+            <li>Adjust while it fills: clockwise raises, counterclockwise lowers</li>
+          </ul>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="2" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Flapper chain and refill tube</span>
+          <p class="sd">Chain clips to the lever <b>directly above the flapper</b> with <b>1/2" of slack</b>. Too tight runs all night; too loose weakens the flush or traps the chain under the flapper.</p>
+          <p class="sd">Refill tube attaches to the fill-valve nipple with a <b>slight arch</b> into the overflow pipe. <b>Do not shove it down inside</b> the overflow — that siphons continuously.</p>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="3" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">The paper-towel leak test</span>
+          <ol class="tight" style="padding-left:19px">
+            <li>Dry the floor completely</li>
+            <li>Ring the entire base with <b>dry white paper towel</b></li>
+            <li>Flush <b>3–5 times over ~15 minutes</b>, watching the base during and right after each flush</li>
+            <li>Paper-towel every connection: shutoff, tank shank, tank-to-bowl joint</li>
+            <li>Check again after a few hours</li>
+          </ol>
+          <p class="sd" style="margin-top:9px"><b>Reading it:</b> wet only <i>after</i> flushing → wax seal or tank-to-bowl gasket. Damp with <i>no</i> flushing → tank condensation or a supply drip tracking down.</p>
+          <div class="call good"><span class="lbl">Why paper</span>A wax weep is a few drops per flush under the momentary head of passing water — far too little to pool on the floor, but instantly obvious on dry paper.</div>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="4" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Dye-test the flapper (free, do it during the watch period)</span>
+          <p class="sd">Ten drops of food coloring in the <b>tank</b>. Wait 15 minutes without flushing. Any color in the <b>bowl</b> means the flapper is passing — that's the phantom-refill failure, caught before you walk away.</p>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="5" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Reinstall the seat</span>
+          <p class="sd">Hand-snug the plastic nuts. Close the lid and seat to confirm they fit and don't shift. Don't overtighten plastic hardware.</p>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="6" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">At 24 hours: re-check bolts and re-test for rock — BEFORE caulking</span>
+          <p class="sd">Gently re-snug the closet nuts and repeat the rock test. Do this <b>now</b>, while the joint is still open. If you caulk first and then need to retighten, you'll be cutting and redoing the bead.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ PHASE 7 ============ -->
+<section id="p7">
+  <div class="sec-head">
+    <span class="sec-num">08</span>
+    <div><h2>Caulk the base</h2>
+    <p class="sec-sub">phase 7 · ~10 min + cure · code-required</p></div>
+  </div>
+
+  <p style="color:var(--ink-dim)">Sealing the fixture-to-floor joint is <b style="color:var(--ink)">required by code</b> — IRC P2705.1.3: <i>"Where fixtures come in contact with walls and floors, the contact area shall be water tight."</i> This is not a matter of taste.</p>
+
+  <figure>
+    <div class="dgw">
+      <svg class="dg tall" viewBox="0 0 400 268" role="img" aria-label="Top-down view showing a caulk bead around the front and sides of the toilet base with a deliberate gap left open at the back against the wall.">
+        <line x1="14" y1="30" x2="386" y2="30" stroke="var(--ink-faint)" stroke-width="3"></line>
+        <text class="lb" x="14" y="22">WALL</text>
+        <ellipse cx="200" cy="122" rx="104" ry="66" fill="var(--surface-3)" stroke="var(--ink-faint)" stroke-width="2"></ellipse>
+        <path d="M135 68 A104 66 0 1 0 265 68" fill="none" stroke="var(--good)" stroke-width="8" stroke-linecap="round"></path>
+        <path d="M137 63 H263" stroke="var(--danger)" stroke-width="8" stroke-linecap="round" stroke-dasharray="3 12"></path>
+        <text class="lb dg" x="14" y="52">LEAVE THE BACK OPEN</text>
+        <text class="lb gd" x="112" y="222">CAULK front + sides</text>
+        <text class="lb" x="14" y="248">A leak has to be able to get out</text>
+        <text class="lb" x="14" y="264">somewhere you can actually see it.</text>
+      </svg>
+    </div>
+    <figcaption>~1" gap at the back. A tell-tale, not a leak detector you rely on.</figcaption>
+  </figure>
+
+  <div class="call pick">
+    <span class="lbl">⚔ Contested — full perimeter, or leave a gap?</span>
+    <b>For the gap:</b> if the wax fails, water is forced out where you can see it instead of silently soaking the subfloor. <b>Against:</b> home inspectors point out toilets rarely leak <i>onto</i> the floor — they leak <i>through</i> it around the flange — so the gap catches a minority of failures and can give false confidence.
+    <span class="rec">→ <b>Caulk the front and both sides, leave a ~1" gap at the back.</b> It satisfies the code intent (sealing against mop water, splash, and wicking — the actual smell-and-rot problem) and the gap costs nothing. But treat it as a <b>bonus tell-tale</b>, not your leak detection. Your real checks are the paper towel and the ceiling below.</span>
+  </div>
+
+  <div class="card">
+    <ol class="steps">
+      <li>
+        <button class="tick" data-n="1" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Trim the shims flush first</span>
+          <p class="sd">Score with a sharp utility knife and <b>snap — one firm stroke</b>. Cut at a slight angle so the edges aren't visible. Hard plastic shims snap cleanly with a firm chisel hit (eye protection).</p>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="2" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Prep the joint — silicone won't bond to a wet dusty floor</span>
+          <p class="sd">Dry it completely, wipe with denatured alcohol, then <b>mask both sides with tape</b> for a clean bead.</p>
+        </div>
+      </li>
+      <li>
+        <button class="tick" data-n="3" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody">
+          <span class="st">Run the bead, tool it, pull the tape immediately</span>
+          <p class="sd"><b>100% silicone</b> — not latex, not acrylic. <b>Never grout or mortar</b>: that makes the next removal, in the trade's words, "a horrible job that sometimes involves breaking the toilet." Note that 100% silicone <b>cannot be painted</b>.</p>
+          <div class="call warn"><span class="lbl">Your shims are in the gap</span>Shim edges sit at the back — the same place you're leaving open. Put a <b>dab of silicone over each cut face</b> so the trimmed edge is sealed even though the joint there isn't.</div>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <h3>Cure &amp; wait times</h3>
+  <div class="tw">
+    <table>
+      <thead><tr><th>Item</th><th>Wait</th></tr></thead>
+      <tbody>
+        <tr><td><b>Wax ring</b></td><td class="ok"><b>Zero.</b> Wax is not an adhesive.</td></tr>
+        <tr><td>Flushing for leak tests</td><td class="ok">Immediately — no load on the bead</td></tr>
+        <tr><td><b>100% silicone caulk</b></td><td class="num">24–48 hrs to full cure</td></tr>
+        <tr><td>Sitting / leaning weight</td><td>Until the caulk is hard and firm to the touch</td></tr>
+        <tr><td>Re-check bolt snugness</td><td>24 hrs (before caulking) and after the first hot shower</td></tr>
+        <tr><td>Re-do the rock test</td><td>One week — wax keeps cold-flowing and settling</td></tr>
+        <tr><td>Check the ceiling below</td><td>24 hrs, then again at one week</td></tr>
+        <tr><td>Snap on the bolt caps</td><td class="mid">After the one-week rock re-test</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ============ TROUBLESHOOTING ============ -->
+<section id="trouble">
+  <div class="sec-head">
+    <span class="sec-num">09</span>
+    <div><h2>When it goes wrong</h2>
+    <p class="sec-sub">symptom → cause → fix</p></div>
+  </div>
+
+  <div class="tw">
+    <table>
+      <thead><tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr></thead>
+      <tbody>
+        <tr><td>Bowl won't drop to the floor, feels hard</td><td>Leftover wax; ring too thick; proud flange</td><td><b>Lift, scrape both surfaces, NEW ring.</b> Re-measure flange height.</td></tr>
+        <tr><td>Rocks after tightening</td><td>Wax not fully compressed</td><td>Continue in small alternating increments</td></tr>
+        <tr><td>Rocks after tightening</td><td>Unlevel floor</td><td class="no">More shims. NOT more torque.</td></tr>
+        <tr><td>One side of the base lifts</td><td>Cracked or broken flange</td><td>Repair ring — this is not a shim problem</td></tr>
+        <tr><td>Water weeping at the base after flushing</td><td>Wax seal failed</td><td>Pull it, scrape both, new ring. <b>Fix the rock first</b> or it fails identically.</td></tr>
+        <tr><td>Sewer smell, no visible water</td><td>Incomplete seal — gas escapes before water does</td><td>Same fix. <b>Odor alone is sufficient evidence.</b></td></tr>
+        <tr><td>Weak flush from the <b>very first flush</b></td><td class="no">You left the rag in the drain</td><td>Pull the toilet. A plunger won't reach it; an auger drives it deeper.</td></tr>
+        <tr><td>Weeping at the tank-to-bowl joint</td><td>Bad or misplaced spud washer</td><td>Replace the gasket. <b>Do not tighten harder — you'll crack the tank.</b></td></tr>
+        <tr><td>Drip at the fill-valve nut</td><td>Slightly loose, or cross-threaded</td><td>Turn <i>just</i> enough to stop it. If it went tight early on assembly, back all the way off and restart.</td></tr>
+        <tr><td>Drip at the shutoff</td><td>Loose compression nut, or worn packing</td><td>1/2 turn on the compression nut; or 1/4–1/2 on the packing nut</td></tr>
+        <tr><td>Tank runs continuously</td><td>Chain too tight; or refill tube shoved into the overflow</td><td>Add slack; re-arch the refill tube above the overflow</td></tr>
+        <tr><td>Bolt spins, won't tighten</td><td>Head pulling up through the keyhole slot</td><td><b>Double-nut it</b> — washer + nut down onto the flange</td></tr>
+        <tr><td>Bolt won't come off at all</td><td>Corroded / seized</td><td>Cut it. That's what the mini hacksaw is for.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <details>
+    <summary>Wax vs. waxless — the decision, honestly</summary>
+    <div class="dbody">
+      <p><b>→ Recommendation: traditional wax ring. Buy two.</b></p>
+      <p>You've committed to dry-fit-first, which already eliminates the main thing waxless seals solve (repositionability). Wax conforms to <i>any</i> gap and any imperfect flange face. Waxless seals have a <b>fixed minimum compressed height</b> and can leave the bowl hovering 1/4"–1/2" off the floor if the geometry isn't right — a worse day than a smeared wax ring, and a second wax ring costs $4.</p>
+      <p><b>Go waxless</b> (Fluidmaster 7530, Korky 6000, Sani Seal BL01) only if you expect to pull this toilet again soon <b>and</b> your flange is level and at or near correct height. Reported failures cluster where the flange sits <b>above</b> floor level — the seal can't flatten enough. They also add ~1/8" of height.</p>
+      <p>Oatey's own copy admits waxless "may not seal well on uneven or damaged surfaces" and have "unproven longevity." Foam types have a documented failure mode: the outer layer delaminates, the foam wicks and holds water against the flange, and the closet bolts rust off.</p>
+      <div class="call stop" style="margin-bottom:0"><span class="lbl">The single most common wrong-part purchase</span><b>Fluidmaster 7513 is NOT waxless.</b> It's an extra-thick <i>wax</i> ring with a plastic funnel, for flanges even with or <b>below</b> the floor. The waxless Fluidmaster is <b>7530</b>.</div>
+    </div>
+  </details>
+</section>
+
+<!-- ============ VIDEO ============ -->
+<section id="video">
+  <div class="sec-head">
+    <span class="sec-num">10</span>
+    <div><h2>Watch it done</h2>
+    <p class="sec-sub">every link checked live — titles, durations, view counts</p></div>
+  </div>
+
+  <h3>If you watch only two</h3>
+  <div class="card">
+    <ul class="vids">
+      <li>
+        <a class="vt" href="https://www.youtube.com/watch?v=xJOKiEv8p6Q">90% of Toilets Are Installed Wrong (Here's the Right Way)</a>
+        <div class="vm"><span class="ch">Home RenoVision DIY</span><span class="dot">·</span><span>16:04</span><span class="dot">·</span><span>7.2M views</span><span class="badge">VERIFIED</span></div>
+        <p class="vw">Jeff Thorman's mistake-first framing — built around what people actually get wrong rather than a neutral procedure. The best single video for "what am I about to screw up."</p>
+      </li>
+      <li>
+        <a class="vt" href="https://www.youtube.com/watch?v=WSk4L21-kv8">How to Repair a Rocking Toilet | Ask This Old House</a>
+        <div class="vm"><span class="ch">This Old House</span><span class="dot">·</span><span>1:56</span><span class="dot">·</span><span>342K views</span><span class="badge">VERIFIED</span></div>
+        <p class="vw">Under two minutes, and it nails your exact situation: Richard Trethewey sets plastic shims at the low points, snugs the closet nuts without overtightening, and stresses confirming the flange is secured to the subfloor. <b>Watch this one twice.</b></p>
+      </li>
+    </ul>
+  </div>
+
+  <h3>Full installs</h3>
+  <div class="card">
+    <ul class="vids">
+      <li>
+        <a class="vt" href="https://www.youtube.com/watch?v=wM-6bgV7G5s">How to Install a New Toilet | Ask This Old House</a>
+        <div class="vm"><span class="ch">This Old House</span><span class="dot">·</span><span>8:46</span><span class="dot">·</span><span>4.6M views</span></div>
+        <p class="vw">The fast credentialed version. Best as a mid-job refresher when you need to re-check one step without scrubbing a 40-minute video.</p>
+      </li>
+      <li>
+        <a class="vt" href="https://www.youtube.com/watch?v=fUsoQYydVq4">How to Install a Toilet: A Step-by-Step Guide</a>
+        <div class="vm"><span class="ch">Roger Wakefield Plumbing Education</span><span class="dot">·</span><span>39:49</span><span class="dot">·</span><span>79K views</span></div>
+        <p class="vw">A licensed master plumber walking the whole job unhurried. Length is the point — it has room to explain <i>why</i> each step matters. The one to watch start-to-finish.</p>
+      </li>
+      <li>
+        <a class="vt" href="https://www.youtube.com/watch?v=eIkPTezSkx4">How To Install A Toilet So It Won't Leak | DIY For Beginners</a>
+        <div class="vm"><span class="ch">Home RenoVision DIY</span><span class="dot">·</span><span>27:05</span><span class="dot">·</span><span>2.4M views</span></div>
+        <p class="vw">The procedural counterpart to the "90% wrong" video, framed around leak prevention. Beginner pacing means the seal steps get real screen time instead of a jump cut.</p>
+      </li>
+      <li>
+        <a class="vt" href="https://www.youtube.com/watch?v=3jQyqwy-QNA">The Toilet Install Trick Everyone Misses</a>
+        <div class="vm"><span class="ch">Home RenoVision DIY</span><span class="dot">·</span><span>26:56</span><span class="dot">·</span><span>543K views</span></div>
+        <p class="vw">Deep dive on the setting step — getting the bowl seated flat and level from the start so shims are a fine adjustment, not a crutch.</p>
+      </li>
+      <li>
+        <a class="vt" href="https://www.youtube.com/watch?v=YRtsnmKbDJs">Easy DIY Toilet Installation for Beginners</a>
+        <div class="vm"><span class="ch">Everyday Home Repairs</span><span class="dot">·</span><span>13:05</span><span class="dot">·</span><span>18K views</span></div>
+        <p class="vw">Real-time, single-take work rather than heavy editing — which makes the bowl-setting moment easier to follow. A middle ground between the TV segment and the plumber deep dive.</p>
+      </li>
+    </ul>
+  </div>
+
+  <h3>The seal, the flange, the shims, the caulk</h3>
+  <div class="card">
+    <ul class="vids">
+      <li>
+        <a class="vt" href="https://www.youtube.com/watch?v=_6auhFNvzOc">How to Replace a Toilet Wax Ring or Wax Free Toilet Seal</a>
+        <div class="vm"><span class="ch">FIX IT Home Improvement</span><span class="dot">·</span><span>3:19</span><span class="dot">·</span><span>155K views</span></div>
+        <p class="vw">The only one here exclusively about the seal — no install padding. Covers wax vs. wax-free side by side.</p>
+      </li>
+      <li>
+        <a class="vt" href="https://www.youtube.com/watch?v=-k_84hdHeTc">How to Fix a Low Toilet Flange | Ask This Old House</a>
+        <div class="vm"><span class="ch">This Old House</span><span class="dot">·</span><span>4:17</span><span class="dot">·</span><span>Jan 2026</span></div>
+        <p class="vw">The most common cause of a repeat wax-ring failure — a flange below finished floor after new tile went in. Newest video in the set, so the products shown are current.</p>
+      </li>
+      <li>
+        <a class="vt" href="https://www.youtube.com/watch?v=ChRwVmDkQMM">Replacing a Toilet Flange | Plumbing 101</a>
+        <div class="vm"><span class="ch">Roger Wakefield Plumbing Education</span><span class="dot">·</span><span>8:12</span><span class="dot">·</span><span>953K views</span></div>
+        <p class="vw">The escalation video: flange cracked, rusted, or broken bolt slots. Worth pre-watching so you can <i>recognize</i> a bad flange when you're staring at it.</p>
+      </li>
+      <li>
+        <a class="vt" href="https://www.youtube.com/watch?v=6gHLJlLjdNs">How To Fix A Wobbly Toilet | Permanent Solution</a>
+        <div class="vm"><span class="ch">Everyday Home Repairs</span><span class="dot">·</span><span>7:44</span><span class="dot">·</span><span>609K views</span></div>
+        <p class="vw">Goes past the quick shim fix into <i>why</i> it rocks — loose flange, rotted subfloor — so you don't shim over a real structural problem.</p>
+      </li>
+      <li>
+        <a class="vt" href="https://www.youtube.com/watch?v=Sje1VUNKQG8">Shimming &amp; Caulking a Toilet</a>
+        <div class="vm"><span class="ch">Honest Home Inspection</span><span class="dot">·</span><span>14:19</span><span class="dot">·</span><span>100K views</span></div>
+        <p class="vw">Shimming and caulking as one continuous job, at real-time pace. Hosted by a home inspector, so the framing is "what fails later" rather than "what looks done now."</p>
+      </li>
+      <li>
+        <a class="vt" href="https://www.youtube.com/watch?v=O9_N58MvqnY">Perfect Toilet Caulking (actually easier than doing a bad job)</a>
+        <div class="vm"><span class="ch">The Funny Carpenter</span><span class="dot">·</span><span>5:00</span><span class="dot">·</span><span>1.5M views</span></div>
+        <p class="vw">Five minutes on gun control, cut angle, tooling, and cleanup around the awkward curved base. Watch if the problem is "my caulk lines look terrible."</p>
+      </li>
+    </ul>
+  </div>
+
+  <h3>Text guides worth keeping open</h3>
+  <div class="card">
+    <ul class="vids">
+      <li>
+        <a class="vt" href="https://www.thisoldhouse.com/bathrooms/how-to-install-a-toilet">How To Install a Toilet</a>
+        <div class="vm"><span class="ch">This Old House</span><span class="dot">·</span><span>step photos + parts diagram</span><span class="badge">VERIFIED</span></div>
+        <p class="vw">The best text page of the set — real step photography and a labeled parts diagram. Covers uneven floors, caulking, and alternating bolt tightening. <b>This is the one to keep open on your phone during the job.</b></p>
+      </li>
+      <li>
+        <a class="vt" href="https://www.thisoldhouse.com/plumbing/how-to-fix-a-wobbly-toilet">How to Fix a Wobbly Toilet</a>
+        <div class="vm"><span class="ch">This Old House</span><span class="dot">·</span><span>12 numbered steps</span></div>
+        <p class="vw">Best text companion on the rocking problem. Their line on the bolts is the whole lesson: <i>"The goal is a snug, secure connection, not maximum force."</i> No caulking coverage and no step photos — use the guide above for visuals.</p>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ THE FIVE ============ -->
+<section id="five">
+  <div class="sec-head">
+    <span class="sec-num gd">11</span>
+    <div><h2>The five that actually matter</h2>
+    <p class="sec-sub">if you remember nothing else</p></div>
+  </div>
+
+  <div class="card">
+    <ol class="steps">
+      <li><button class="tick" data-n="1" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody"><span class="st">Measure the flange before you buy the ring</span>
+        <p class="sd">Flush to 1/4" proud is correct. Everything downstream depends on this one number.</p></div></li>
+      <li><button class="tick" data-n="2" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody"><span class="st">Dry-fit with no wax. Find the rock. Mark it. Shim it.</span>
+        <p class="sd">Then lift it off and set it for real. This single habit prevents most of the failures on this page.</p></div></li>
+      <li><button class="tick" data-n="3" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody"><span class="st">Pull the drain plug before the ring goes down</span>
+        <p class="sd">Flashlight. Confirm with your eyes, not your memory.</p></div></li>
+      <li><button class="tick" data-n="4" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody"><span class="st">Straight down, full body weight, then stop touching it</span>
+        <p class="sd">Once it's on wax, it's committed. Make the connections fit the toilet, not the other way around.</p></div></li>
+      <li><button class="tick" data-n="5" aria-pressed="false" aria-label="Mark step complete"></button>
+        <div class="sbody"><span class="st">Alternate quarter-turns until the movement stops, then quit</span>
+        <p class="sd">The weight seals it; the bolts just hold it. <b>There is no number to hit.</b></p></div></li>
+    </ol>
+  </div>
+
+  <div class="call good">
+    <span class="lbl">Time &amp; manpower</span>
+    <b>1.5–2.5 hours</b> picking up from a toilet already off the floor — budget the afternoon. A two-piece bowl alone is 50–60 lbs, well within one adult's capacity. The problem was never the weight; it's lowering a heavy glazed object straight down onto two bolts you can't see, in one motion, without twisting.
+    <span class="rec"><b>Solo is entirely doable</b> with the bolts-last or beveled-wood method plus your pencil marks. If you do have a helper: their job is to kneel and sight the bolts through the base holes, calling left/right/forward/back — <b>not</b> to help lift. Two people lifting one bowl is how it goes in crooked.</span>
+  </div>
+</section>
+
+<hr class="rule">
+<p class="foot">
+  Built from manufacturer install docs (Kohler, TOTO, American Standard, Fluidmaster, Oatey, Korky — PDFs pulled and read directly), This Old House, Fine Homebuilding, and working-plumber forums.<br>
+  Every claim adversarially fact-checked; every link verified live. Contested points are labeled ⚔ with both sides and a recommendation.<br>
+  <span style="color:var(--brass)">Good luck. Don't lift it twice.</span>
+</p>
+
+<div class="prog">
+  <div class="pbar"><div class="pfill" id="pfill"></div></div>
+  <span class="ptxt" id="ptxt">0 / 0</span>
+  <button class="preset" id="preset" type="button">reset</button>
+</div>
+
+</div>
+
+<script>
+(function(){
+  var KEY = "toilet-reset-progress-v1";
+  var ticks = Array.prototype.slice.call(document.querySelectorAll(".tick"));
+
+  ticks.forEach(function(t, i){ t.dataset.key = "s" + i; });
+
+  function load(){
+    try { return JSON.parse(localStorage.getItem(KEY) || "{}"); }
+    catch(e){ return {}; }
+  }
+  function save(state){
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){}
+  }
+  function paint(){
+    var state = load(), done = 0;
+    ticks.forEach(function(t){
+      var on = !!state[t.dataset.key];
+      t.setAttribute("aria-pressed", on ? "true" : "false");
+      var li = t.closest("li");
+      if (li) li.classList.toggle("done", on);
+      if (on) done++;
+    });
+    var pct = ticks.length ? (done / ticks.length) * 100 : 0;
+    document.getElementById("pfill").style.width = pct + "%";
+    document.getElementById("ptxt").textContent = done + " / " + ticks.length;
+  }
+
+  ticks.forEach(function(t){
+    t.addEventListener("click", function(){
+      var state = load();
+      if (state[t.dataset.key]) delete state[t.dataset.key];
+      else state[t.dataset.key] = 1;
+      save(state);
+      paint();
+    });
+  });
+
+  document.getElementById("preset").addEventListener("click", function(){
+    save({});
+    paint();
+  });
+
+  paint();
+})();
+</script>
+
+</body>
+</html>
