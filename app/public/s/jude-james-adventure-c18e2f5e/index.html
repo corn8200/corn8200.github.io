@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#BFE3FF">
+<title>Jude &amp; James's Big Adventure</title>
+<style>
+:root{
+  --sky:#BFE3FF; --sky2:#EAF6FF; --sun:#FFD24A; --red:#E4573D;
+  --forest:#2E7D4F; --grape:#7C5CBF; --ink:#263238; --white:#FFFFFF;
+  --round:ui-rounded,-apple-system,"SF Pro Rounded",BlinkMacSystemFont,"Comic Sans MS",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--round);color:var(--ink);background:linear-gradient(180deg,var(--sky) 0%,var(--sky2) 30rem);min-height:100vh;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:36rem;margin:0 auto;padding:1.2rem 1rem 6rem}
+header{text-align:center;padding:.6rem 0 .4rem}
+h1{font-size:1.7rem;line-height:1.1;margin:.2rem 0;letter-spacing:.01em}
+.starbank{display:inline-flex;align-items:center;gap:.4rem;background:var(--white);border-radius:99px;padding:.45em 1em;font-weight:800;font-size:1.15rem;box-shadow:0 3px 0 rgba(38,50,56,.12)}
+.hint{font-size:.85rem;color:#51636E;margin:.5rem 0 0}
+.days{position:sticky;top:.5rem;z-index:10;display:flex;justify-content:center;gap:.45rem;margin:1rem 0 1.4rem}
+.days button{font-family:var(--round);font-size:1.5rem;line-height:1;background:var(--white);border:3px solid transparent;border-radius:18px;padding:.45em .5em;cursor:pointer;box-shadow:0 3px 0 rgba(38,50,56,.15)}
+.days button.on{border-color:var(--red);transform:scale(1.12)}
+.days button:focus-visible{outline:3px solid var(--grape);outline-offset:2px}
+.day{display:none}
+.day.show{display:block}
+.dayname{text-align:center;font-size:1.25rem;font-weight:800;margin:0 0 .9rem;color:var(--forest)}
+.tile{position:relative;display:flex;align-items:center;gap:1rem;width:100%;text-align:left;font-family:var(--round);background:var(--white);border:none;border-radius:24px;padding:1rem 1.05rem;margin-bottom:.8rem;cursor:pointer;box-shadow:0 4px 0 rgba(38,50,56,.14)}
+.tile:active{transform:translateY(2px);box-shadow:0 2px 0 rgba(38,50,56,.14)}
+.tile .e{font-size:3.4rem;line-height:1;flex:0 0 auto}
+.tile .cap{font-size:1.12rem;font-weight:800;line-height:1.25;padding-right:2.6rem}
+.tile .cap small{display:block;font-weight:600;color:#6A7A85;font-size:.82rem;margin-top:.15rem}
+.tile .spk{position:absolute;right:.9rem;top:.9rem;font-size:1rem;opacity:.55}
+.tile .star{position:absolute;right:.72rem;bottom:.6rem;font-size:1.5rem;filter:grayscale(1);opacity:.45;transition:transform .18s}
+.tile.done{outline:4px solid var(--sun)}
+.tile.done .star{filter:none;opacity:1}
+@media (prefers-reduced-motion: no-preference){
+  .tile.pop .e{animation:jig .5s}
+  @keyframes jig{25%{transform:scale(1.25) rotate(-6deg)}60%{transform:scale(1.1) rotate(5deg)}}
+  .tile.done .star{transform:scale(1.35)}
+}
+.bigday{background:var(--sun);border-radius:24px;padding:.8rem 1rem;text-align:center;font-weight:800;margin-bottom:.9rem;box-shadow:0 4px 0 rgba(38,50,56,.14)}
+/* monster hunt */
+.hunt{background:var(--grape);border-radius:24px;padding:1rem;margin-bottom:.8rem;color:#fff;text-align:center;box-shadow:0 4px 0 rgba(38,50,56,.2)}
+.hunt h3{margin:.1rem 0 .2rem;font-size:1.2rem}
+.hunt p{margin:0 0 .7rem;font-weight:700}
+.chairs{display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap}
+.chairs button{font-family:var(--round);font-size:2.2rem;background:#fff;border:none;border-radius:18px;padding:.35em .4em;cursor:pointer;filter:grayscale(1);opacity:.75;box-shadow:0 3px 0 rgba(0,0,0,.25)}
+.chairs button.found{filter:none;opacity:1;transform:scale(1.08)}
+.chairs button:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:50}
+footer{text-align:center;font-size:.8rem;color:#6A7A85;margin-top:2rem}
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+<div class="wrap">
+<header>
+  <div class="starbank">⭐ <span id="stars">0</span></div>
+  <h1>Jude &amp; James's<br>BIG ADVENTURE</h1>
+  <p class="hint">Tap a picture and it talks! Tap the ⭐ when you did it!</p>
+</header>
+
+<nav class="days" aria-label="Days">
+  <button data-d="fri" aria-label="Camping day">🏕️</button>
+  <button data-d="sat" aria-label="Grandma day">👵</button>
+  <button data-d="sun" aria-label="Train day">🚂</button>
+  <button data-d="mon" aria-label="Mommy day">🎉</button>
+  <button data-d="tue" aria-label="Monster day">👾</button>
+</nav>
+
+<section class="day" id="d-fri">
+  <p class="dayname">Camping Day!</p>
+  <button class="tile" data-say="Big drive day! We are going to Uncle Jimmy's mountain!" data-k="f1"><span class="e">🚗</span><span class="cap">Big drive!<small>to Uncle Jimmy's mountain</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="Snack stop! We buy water and treats for camping!" data-k="f2"><span class="e">🛒</span><span class="cap">Snack stop!<small>water + treats</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="We build our tent on the mountain! You are a big helper!" data-k="f3"><span class="e">⛺</span><span class="cap">Build the tent!<small>big helper job</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="Campfire time with Uncle Jimmy!" data-k="f4"><span class="e">🔥</span><span class="cap">Campfire!<small>with Uncle Jimmy</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="Nighttime monster hunt with flashlights! Rawr!" data-k="f5"><span class="e">🔦</span><span class="cap">Flashlight monster hunt!<small>after dark</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="Sleep in the tent. Goodnight mountain! Goodnight owls!" data-k="f6"><span class="e">🌙</span><span class="cap">Tent sleep!<small>goodnight mountain</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+</section>
+
+<section class="day" id="d-sat">
+  <p class="dayname">Grandma Day!</p>
+  <button class="tile" data-say="Pack up camp! Say bye bye to Uncle Jimmy!" data-k="s1"><span class="e">🎒</span><span class="cap">Pack up!<small>bye Uncle Jimmy</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="Grandma's house! Big hugs and bubbly showers!" data-k="s2"><span class="e">👵</span><span class="cap">Grandma hugs!<small>+ bubble showers</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="Play at Grandma's all day!" data-k="s3"><span class="e">🧸</span><span class="cap">Play all day!<small>at Grandma's</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="Yummy dinner! Eat it all up, big day tomorrow!" data-k="s4"><span class="e">🍔</span><span class="cap">Yummy dinner!<small>eat it all up</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="Drive to the choo choo town! Sleepy time near the trains tonight!" data-k="s5"><span class="e">🚃</span><span class="cap">Choo-choo town sleep!<small>trains to peek at</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+</section>
+
+<section class="day" id="d-sun">
+  <p class="dayname">TRAIN DAY!</p>
+  <div class="bigday">🚂 Today we ride a REAL steam train! 🚂</div>
+  <button class="tile" data-say="Breakfast first! Then the big train!" data-k="u1"><span class="e">🍳</span><span class="cap">Breakfast!<small>then trains</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="ALL ABOARD! The huge steam train goes chugga chugga WOO WOO!" data-k="u2"><span class="e">🚂</span><span class="cap">ALL ABOARD!<small>chugga chugga WOO WOO</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="Ice cream at the old timey store!" data-k="u3"><span class="e">🍦</span><span class="cap">Ice cream!<small>old-timey store</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="The GIANT telescope! It is as tall as a mountain and it listens to outer space!" data-k="u4"><span class="e">📡</span><span class="cap">GIANT space dish!<small>it listens to stars</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="Cozy car nap. Zzzzzz." data-k="u5"><span class="e">😴</span><span class="cap">Cozy nap<small>zzzzz</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="We climb the tower on TOP of West Virginia! We are so high up!" data-k="u6"><span class="e">⛰️</span><span class="cap">Top of the WORLD!<small>tower climb</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="Hotel pool! CANNONBALL!" data-k="u7"><span class="e">🏊</span><span class="cap">POOL!<small>cannonball time</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+</section>
+
+<section class="day" id="d-mon">
+  <p class="dayname">Mommy Day!</p>
+  <div class="bigday">🎉 MOMMY COMES TODAY! 🎉</div>
+  <button class="tile" data-say="Waffles for breakfast!" data-k="m1"><span class="e">🧇</span><span class="cap">Waffles!<small>hotel breakfast</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="One more swim in the pool!" data-k="m2"><span class="e">🏊</span><span class="cap">Morning swim!<small>one more time</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="Grocery store mission! You pick one treat!" data-k="m3"><span class="e">🛒</span><span class="cap">Store mission!<small>pick one treat</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="A tiny Swiss village with funny wooden masks!" data-k="m4"><span class="e">🎭</span><span class="cap">Funny mask village!<small>tiny Swiss town</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="MOMMY IS HERE! Run and hug her!" data-k="m5"><span class="e">🎉</span><span class="cap">MOMMY!!!<small>biggest hug</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="We cook dinner in our little Swiss house!" data-k="m6"><span class="e">🍝</span><span class="cap">Cook dinner!<small>little Swiss house</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+</section>
+
+<section class="day" id="d-tue">
+  <p class="dayname">MONSTER DAY!</p>
+  <div class="bigday">👾 We meet the Flatwoods Monster! 👾</div>
+  <button class="tile" data-say="Monster museum! The friendly Flatwoods monster has a big round face!" data-k="t1"><span class="e">👾</span><span class="cap">Monster museum!<small>don't worry — friendly</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <div class="hunt">
+    <h3>🔎 MONSTER CHAIR HUNT!</h3>
+    <p>Find the giant monster chairs! Tap one when you spot it!<br><span id="huntcount">0</span> of 5 found</p>
+    <div class="chairs">
+      <button data-c="1" aria-label="chair one">👾</button>
+      <button data-c="2" aria-label="chair two">👾</button>
+      <button data-c="3" aria-label="chair three">👾</button>
+      <button data-c="4" aria-label="chair four">👾</button>
+      <button data-c="5" aria-label="chair five">👾</button>
+    </div>
+  </div>
+  <button class="tile" data-say="Last ice cream of the adventure!" data-k="t2"><span class="e">🍦</span><span class="cap">Last ice cream!<small>you earned it</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="Long ride home. Movie time in the car!" data-k="t3"><span class="e">🎬</span><span class="cap">Movie ride home<small>cozy time</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+  <button class="tile" data-say="HOME! You did the whole big adventure! Jude and James, you are explorers!" data-k="t4"><span class="e">🏠</span><span class="cap">HOME!<small>you did it, explorers!</small></span><span class="spk">🔊</span><span class="star">⭐</span></button>
+</section>
+
+<footer>Made for Jude &amp; James · July 2026 · tap 🔊 pictures any time</footer>
+</div>
+
+<script>
+(function(){
+  var KEY="jj-adventure";
+  var state={stars:0,done:{},chairs:{}};
+  try{var s=JSON.parse(localStorage.getItem(KEY)||"null"); if(s)state=s;}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  var starsEl=document.getElementById("stars");
+  function renderStars(){starsEl.textContent=state.stars}
+  renderStars();
+
+  function speak(txt){
+    try{
+      if(!window.speechSynthesis)return;
+      window.speechSynthesis.cancel();
+      var u=new SpeechSynthesisUtterance(txt);
+      u.rate=0.95;u.pitch=1.15;
+      window.speechSynthesis.speak(u);
+    }catch(e){}
+  }
+
+  // day switching + auto-today
+  var map={"2026-07-24":"fri","2026-07-25":"sat","2026-07-26":"sun","2026-07-27":"mon","2026-07-28":"tue"};
+  function pad(n){return(n<10?"0":"")+n}
+  var d=new Date(),tk=d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
+  var today=map[tk]||"fri";
+  var btns=document.querySelectorAll(".days button");
+  function show(day){
+    document.querySelectorAll(".day").forEach(function(s){s.classList.remove("show")});
+    var el=document.getElementById("d-"+day); if(el)el.classList.add("show");
+    btns.forEach(function(b){b.classList.toggle("on",b.getAttribute("data-d")===day)});
+  }
+  btns.forEach(function(b){b.addEventListener("click",function(){show(b.getAttribute("data-d"));speak(b.getAttribute("aria-label"))})});
+  show(today);
+
+  // tiles
+  document.querySelectorAll(".tile").forEach(function(t){
+    var k=t.getAttribute("data-k");
+    if(state.done[k])t.classList.add("done");
+    t.addEventListener("click",function(ev){
+      var r=t.getBoundingClientRect();
+      var starZone=(ev.clientX>r.right-70)&&(ev.clientY>r.bottom-56);
+      if(starZone){
+        if(!state.done[k]){state.done[k]=true;state.stars++;t.classList.add("done");speak("You earned a star! Great job!");burst();}
+        else{state.done[k]=false;state.stars=Math.max(0,state.stars-1);t.classList.remove("done");}
+        save();renderStars();return;
+      }
+      t.classList.remove("pop");void t.offsetWidth;t.classList.add("pop");
+      speak(t.getAttribute("data-say"));
+    });
+  });
+
+  // monster hunt
+  var huntCount=document.getElementById("huntcount");
+  function renderHunt(){
+    var n=0;
+    document.querySelectorAll(".chairs button").forEach(function(b){
+      var c=b.getAttribute("data-c");
+      if(state.chairs[c]){b.classList.add("found");n++;}else{b.classList.remove("found");}
+    });
+    huntCount.textContent=n;
+    return n;
+  }
+  renderHunt();
+  document.querySelectorAll(".chairs button").forEach(function(b){
+    b.addEventListener("click",function(){
+      var c=b.getAttribute("data-c");
+      state.chairs[c]=!state.chairs[c];
+      save();
+      var n=renderHunt();
+      if(state.chairs[c]){
+        if(n>=5){speak("YOU FOUND ALL FIVE MONSTER CHAIRS! You are champion monster hunters!");bigBurst();}
+        else{speak("Monster chair number "+n+" found! "+(5-n)+" to go!");burst();}
+      }
+    });
+  });
+
+  // confetti
+  var cv=document.getElementById("confetti"),cx=cv.getContext("2d"),parts=[],raf=null;
+  function size(){cv.width=innerWidth;cv.height=innerHeight}
+  size();addEventListener("resize",size);
+  var COLORS=["#FFD24A","#E4573D","#2E7D4F","#7C5CBF","#4FA3E3"];
+  function mk(n){
+    for(var i=0;i<n;i++)parts.push({x:Math.random()*cv.width,y:-20-Math.random()*80,v:2+Math.random()*3,w:6+Math.random()*7,a:Math.random()*6.28,s:(Math.random()<.5?-1:1)*(.05+Math.random()*.1),c:COLORS[i%COLORS.length]});
+    if(!raf)tick();
+  }
+  function tick(){
+    raf=requestAnimationFrame(tick);
+    cx.clearRect(0,0,cv.width,cv.height);
+    parts.forEach(function(p){p.y+=p.v;p.a+=p.s;cx.save();cx.translate(p.x,p.y);cx.rotate(p.a);cx.fillStyle=p.c;cx.fillRect(-p.w/2,-p.w/2,p.w,p.w*.6);cx.restore()});
+    parts=parts.filter(function(p){return p.y<cv.height+30});
+    if(!parts.length){cancelAnimationFrame(raf);raf=null;cx.clearRect(0,0,cv.width,cv.height)}
+  }
+  var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function burst(){if(!reduce)mk(40)}
+  function bigBurst(){if(!reduce)mk(160)}
+})();
+</script>
+</body>
+</html>
