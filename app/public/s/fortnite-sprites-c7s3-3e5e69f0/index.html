@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sprites: The Field Manual — Fortnite Ch.7 S3 "Runners"</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wdth,wght@0,75..125,400..900;1,75..125,400..900&family=Public+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16151f; --ink-2:#413d55; --muted:#6c6883; --hair:#dedbe9;
+  --bg:#f0eff6; --surface:#ffffff; --surface-2:#f7f6fb; --raise:0 1px 2px rgba(22,21,31,.06),0 8px 24px -12px rgba(22,21,31,.18);
+  --accent:#6144e8; --accent-soft:#efecfe; --accent-line:#c9bffa;
+  --beacon:#0e8fa0; --beacon-soft:#e0f4f7;
+  --gold:#9a6a12; --gold-soft:#faf0dc;
+  --trap:#c4323d; --trap-soft:#fdeaec;
+  --shadow-hero:#100e1b;
+  --fx-display:"Anybody","Helvetica Neue",Arial,sans-serif;
+  --fx-body:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --fx-mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ink:#eae9f3; --ink-2:#bab6cf; --muted:#918da8; --hair:#2a2739;
+    --bg:#0e0d16; --surface:#181726; --surface-2:#13121f; --raise:0 1px 2px rgba(0,0,0,.5),0 10px 30px -14px rgba(0,0,0,.8);
+    --accent:#9d8bff; --accent-soft:#221d3d; --accent-line:#3d3468;
+    --beacon:#4dd2e2; --beacon-soft:#0e2a2f;
+    --gold:#e6b45c; --gold-soft:#2e2413;
+    --trap:#ff8189; --trap-soft:#331419;
+    --shadow-hero:#08070f;
+  }
+}
+:root[data-theme="light"]{
+  --ink:#16151f; --ink-2:#413d55; --muted:#6c6883; --hair:#dedbe9;
+  --bg:#f0eff6; --surface:#ffffff; --surface-2:#f7f6fb;
+  --accent:#6144e8; --accent-soft:#efecfe; --accent-line:#c9bffa;
+  --beacon:#0e8fa0; --beacon-soft:#e0f4f7;
+  --gold:#9a6a12; --gold-soft:#faf0dc;
+  --trap:#c4323d; --trap-soft:#fdeaec;
+}
+:root[data-theme="dark"]{
+  --ink:#eae9f3; --ink-2:#bab6cf; --muted:#918da8; --hair:#2a2739;
+  --bg:#0e0d16; --surface:#181726; --surface-2:#13121f;
+  --accent:#9d8bff; --accent-soft:#221d3d; --accent-line:#3d3468;
+  --beacon:#4dd2e2; --beacon-soft:#0e2a2f;
+  --gold:#e6b45c; --gold-soft:#2e2413;
+  --trap:#ff8189; --trap-soft:#331419;
+}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--fx-body);font-size:16.5px;line-height:1.6;-webkit-text-size-adjust:100%}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+h1,h2,h3,h4{font-family:var(--fx-display);text-wrap:balance;margin:0;line-height:1.08;font-variation-settings:"wdth" 92}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:2.5px solid var(--accent);outline-offset:3px;border-radius:3px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* ---------- hero ---------- */
+.hero{background:var(--shadow-hero);color:#eae9f3;padding:52px 0 42px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;inset:auto -10% -70% 40%;height:340px;background:radial-gradient(closest-side,rgba(120,92,255,.42),transparent 72%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.eyebrow{font-family:var(--fx-mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;color:#a99cf7;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+.hero h1{font-size:clamp(38px,8.2vw,74px);font-weight:850;font-variation-settings:"wdth" 82;margin:16px 0 0;letter-spacing:-.02em}
+.hero h1 em{font-style:italic;color:#a99cf7;font-variation-settings:"wdth" 78}
+.deck{margin-top:18px;font-size:clamp(16.5px,2.3vw,19.5px);color:#c8c4de;max-width:60ch}
+.deck b{color:#fff;font-weight:700}
+.clock{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px}
+.clock div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:9px;padding:9px 13px;font-size:13px;color:#d5d1ea}
+.clock div b{display:block;font-family:var(--fx-display);font-size:23px;font-weight:800;color:#fff;line-height:1.15;font-variation-settings:"wdth" 85}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--hair)}
+nav .wrap{display:flex;gap:5px;overflow-x:auto;padding-top:9px;padding-bottom:9px;scrollbar-width:none}
+nav .wrap::-webkit-scrollbar{display:none}
+nav a{flex:0 0 auto;font-size:13px;font-weight:600;text-decoration:none;color:var(--muted);padding:6px 11px;border-radius:20px;white-space:nowrap}
+nav a:hover{color:var(--ink);background:var(--surface)}
+
+/* ---------- sections ---------- */
+section{padding:56px 0 8px}
+.shead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.shead h2{font-size:clamp(25px,4.4vw,36px);font-weight:800;letter-spacing:-.015em}
+.shead span{font-family:var(--fx-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.lede{color:var(--ink-2);max-width:68ch;margin-top:10px;font-size:17px}
+
+/* ---------- cards ---------- */
+.grid{display:grid;gap:14px;margin-top:24px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(270px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(215px,1fr))}
+.card{background:var(--surface);border:1px solid var(--hair);border-radius:13px;padding:18px 19px;box-shadow:var(--raise)}
+.card h3{font-size:17.5px;font-weight:750;margin-bottom:7px;font-variation-settings:"wdth" 96}
+.card p{color:var(--ink-2);font-size:15px}
+.card p + p{margin-top:9px}
+.kicker{font-family:var(--fx-mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:9px}
+.card.warn{background:var(--trap-soft);border-color:color-mix(in srgb,var(--trap) 35%,transparent)}
+.card.warn .kicker{color:var(--trap)}
+.card.good{background:var(--beacon-soft);border-color:color-mix(in srgb,var(--beacon) 32%,transparent)}
+.card.good .kicker{color:var(--beacon)}
+
+/* ---------- source badges ---------- */
+.src{display:inline-block;font-family:var(--fx-mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;padding:2px 6px;border-radius:4px;vertical-align:2px;font-weight:600;white-space:nowrap}
+.src.epic{background:var(--beacon-soft);color:var(--beacon)}
+.src.data{background:var(--accent-soft);color:var(--accent)}
+.src.est{background:var(--gold-soft);color:var(--gold)}
+
+/* ---------- roster ---------- */
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:26px 0 14px}
+.controls input{flex:1 1 190px;min-width:0;font-family:inherit;font-size:14.5px;padding:9px 13px;border-radius:9px;border:1px solid var(--hair);background:var(--surface);color:var(--ink)}
+.chip{font-family:var(--fx-body);font-size:12.5px;font-weight:650;padding:7px 12px;border-radius:20px;border:1px solid var(--hair);background:var(--surface);color:var(--muted);cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.tablewrap{overflow-x:auto;border:1px solid var(--hair);border-radius:13px;background:var(--surface);box-shadow:var(--raise)}
+table{border-collapse:collapse;width:100%;min-width:820px;font-size:14.5px}
+thead th{position:sticky;top:0;background:var(--surface-2);text-align:left;font-family:var(--fx-display);font-weight:700;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:11px 13px;border-bottom:1px solid var(--hair);white-space:nowrap;cursor:pointer;font-variation-settings:"wdth" 96}
+thead th:hover{color:var(--ink)}
+tbody td{padding:13px;border-bottom:1px solid var(--hair);vertical-align:top;color:var(--ink-2)}
+tbody tr:last-child td{border-bottom:0}
+tbody tr.hl{background:var(--accent-soft)}
+.sname{font-family:var(--fx-display);font-weight:750;font-size:15.5px;color:var(--ink);display:block;font-variation-settings:"wdth" 96}
+.rar{display:inline-block;font-family:var(--fx-mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;padding:2px 6px;border-radius:4px;margin-top:5px;font-weight:600}
+.rar.rare{background:var(--beacon-soft);color:var(--beacon)}
+.rar.epic{background:var(--accent-soft);color:var(--accent)}
+.rar.legendary{background:var(--gold-soft);color:var(--gold)}
+.rar.mythic{background:var(--trap-soft);color:var(--trap)}
+.num{font-family:var(--fx-mono);font-size:13px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.scale{font-family:var(--fx-mono);font-size:12px;color:var(--muted);display:block;margin-top:5px}
+.verdict{font-size:13.5px}
+.verdict b{color:var(--ink)}
+
+/* ---------- extraction clock ---------- */
+.timeline{margin-top:26px;background:var(--surface);border:1px solid var(--hair);border-radius:13px;padding:22px 20px;box-shadow:var(--raise)}
+.bar{display:flex;height:42px;border-radius:8px;overflow:hidden;font-family:var(--fx-mono);font-size:11px;font-weight:600;color:#fff;margin:16px 0 6px;min-width:100%}
+.bar span{display:flex;align-items:center;justify-content:center;text-align:center;padding:0 4px}
+.b1{background:var(--muted);flex:45}
+.b2{background:var(--beacon);flex:70}
+.b3{background:var(--trap);flex:10;font-size:9.5px}
+.b4{background:var(--accent);flex:30}
+.barkey{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:16px}
+.barkey div{font-size:14px;color:var(--ink-2)}
+.barkey b{display:block;font-family:var(--fx-display);font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink);font-variation-settings:"wdth" 96}
+
+/* ---------- lists ---------- */
+ul.tips{list-style:none;padding:0;margin:22px 0 0;display:grid;gap:11px}
+ul.tips li{background:var(--surface);border:1px solid var(--hair);border-left:3px solid var(--accent);border-radius:9px;padding:14px 17px;font-size:15px;color:var(--ink-2);box-shadow:var(--raise)}
+ul.tips li b{color:var(--ink);font-weight:700}
+ul.tips li.t-trap{border-left-color:var(--trap)}
+ul.tips li.t-good{border-left-color:var(--beacon)}
+
+/* ---------- calendar ---------- */
+.cal{margin-top:24px;display:grid;gap:0;border:1px solid var(--hair);border-radius:13px;overflow:hidden;background:var(--surface);box-shadow:var(--raise)}
+.cal .row{display:grid;grid-template-columns:112px 1fr;gap:14px;padding:15px 18px;border-bottom:1px solid var(--hair);align-items:start}
+.cal .row:last-child{border-bottom:0}
+.cal .row.past{opacity:.5}
+.cal .row.hard{background:var(--accent-soft)}
+.cal .d{font-family:var(--fx-mono);font-size:12.5px;font-weight:700;color:var(--accent);letter-spacing:.02em;font-variant-numeric:tabular-nums}
+.cal .row.past .d{color:var(--muted)}
+.cal .t{font-size:15px;color:var(--ink-2)}
+.cal .t b{color:var(--ink);display:block;font-family:var(--fx-display);font-weight:700;font-size:15.5px;font-variation-settings:"wdth" 96}
+
+/* ---------- misc ---------- */
+.callout{margin-top:24px;border:1px solid var(--accent-line);background:var(--accent-soft);border-radius:13px;padding:20px}
+.callout h3{font-size:17px;font-weight:750;margin-bottom:8px}
+.callout p{color:var(--ink-2);font-size:15px}
+.rule{border:0;border-top:1px solid var(--hair);margin:60px 0 0}
+footer{padding:44px 0 70px;color:var(--muted);font-size:13.5px}
+footer p + p{margin-top:12px}
+footer b{color:var(--ink-2)}
+.dl{display:grid;gap:9px;margin-top:14px}
+.dl div{display:grid;grid-template-columns:130px 1fr;gap:12px;font-size:14px;color:var(--ink-2)}
+.dl div b{font-family:var(--fx-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:2px}
+@media (max-width:560px){
+  .cal .row{grid-template-columns:1fr;gap:5px}
+  .dl div{grid-template-columns:1fr;gap:2px}
+}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow"><span>Chapter 7 · Season 3 · "Runners"</span><span>·</span><span>Verified 21 Jul 2026</span></div>
+    <h1>Sprites:<br>the field <em>manual</em></h1>
+    <p class="deck">Everything actually known about the season's core mechanic — the full 21-sprite roster, what each one really does, where they spawn, how the extraction clock works, and which "tips" from June are already dead. <b>Every number here survived an adversarial fact-check;</b> the ones that didn't are labelled as estimates.</p>
+    <div class="clock">
+      <div>Season ends<b>19 Aug</b></div>
+      <div>Days left<b>29</b></div>
+      <div>Base sprites<b>21</b></div>
+      <div>Collectibles<b>83</b></div>
+      <div>Next drop<b>Thu 23 Jul</b></div>
+    </div>
+  </div>
+</header>
+
+<nav><div class="wrap">
+  <a href="#rules">Six rules</a>
+  <a href="#roster">Roster</a>
+  <a href="#variants">Variants</a>
+  <a href="#clock">Extraction</a>
+  <a href="#level">Leveling</a>
+  <a href="#farm">Farming</a>
+  <a href="#best">Best sprites</a>
+  <a href="#tips">Advanced</a>
+  <a href="#cal">Calendar</a>
+  <a href="#kids">With kids</a>
+  <a href="#dead">Dead advice</a>
+</div></nav>
+
+<main class="wrap">
+
+<!-- ============ RULES ============ -->
+<section id="rules">
+  <div class="shead"><h2>The six rules that decide everything</h2><span>start here</span></div>
+  <p class="lede">The whole system is an extraction-shooter loop bolted onto Battle Royale. Learn these six and the rest is detail.</p>
+  <div class="grid g2">
+    <div class="card"><span class="kicker">Rule 1 · Banking</span><h3>A sprite is worthless until you extract it</h3><p>Find it, level it, and it's still a temporary rental. Extraction is the only save point. <span class="src epic">Epic</span></p></div>
+    <div class="card warn"><span class="kicker">Rule 2 · Loss</span><h3>Die holding it and it's gone — <em>and</em> stealable</h3><p>Elimination drops your equipped sprite <em>and every spare you were carrying</em> on the ground, levels intact, for the next player to bank. <span class="src epic">Epic</span></p></div>
+    <div class="card good"><span class="kicker">Rule 3 · Persistence</span><h3>Extraction saves the level, permanently</h3><p>Extract at Level 3 → it comes back at Level 3 next match. This was genuinely contested online; Epic's own help article settles it. <span class="src epic">Epic</span></p></div>
+    <div class="card warn"><span class="kicker">Rule 4 · The catch</span><h3>Buying a lost sprite back always returns it at Level 1</h3><p>Even if it's Mastered. Epic: <em>"Mastering a Sprite doesn't mean their level won't reset after losing them."</em> Mastery only unlocks rewards and Pod styles. <span class="src epic">Epic</span></p></div>
+    <div class="card"><span class="kicker">Rule 5 · Mastery</span><h3>Level 5 alone does nothing</h3><p>You must <em>extract</em> at Level 5 to Master a sprite. Reaching max and dying banks nothing at all. <span class="src epic">Epic</span></p></div>
+    <div class="card good"><span class="kicker">Rule 6 · The free win</span><h3>A Victory Royale auto-extracts everything</h3><p>Win the match and every sprite on you banks for free — no site, no crate, no risk. <span class="src data">Data</span></p></div>
+  </div>
+  <div class="callout">
+    <h3>The one-sentence strategy</h3>
+    <p>Because banked level is the <em>only</em> level that survives, the correct loop is <b>extract early and extract often</b> — every level you gain since your last extraction is money on the table in a game where anyone can take it off your corpse. Hoarding a Level 4 Mythic until the endgame is how most players lose their season.</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ ROSTER ============ -->
+<section id="roster">
+  <div class="shead"><h2>All 21 sprites</h2><span>live as of 21 Jul 2026</span></div>
+  <p class="lede">Ability text is Epic's own wording. Level scaling is community/datamine unless marked. Drop rates are third-party (fortnite.gg) — <b>Epic has never published a single sprite drop rate</b>, so every percentage you see anywhere online is someone else's datamine or an outright invention.</p>
+
+  <div class="controls">
+    <input id="q" type="search" placeholder="Search name, ability, how to get…" aria-label="Search sprites">
+    <button class="chip" data-r="all" aria-pressed="true">All</button>
+    <button class="chip" data-r="rare" aria-pressed="false">Rare</button>
+    <button class="chip" data-r="epic" aria-pressed="false">Epic</button>
+    <button class="chip" data-r="legendary" aria-pressed="false">Legendary</button>
+    <button class="chip" data-r="mythic" aria-pressed="false">Mythic</button>
+    <button class="chip" data-r="top" aria-pressed="false">★ Best</button>
+  </div>
+
+  <div class="tablewrap">
+  <table id="roster-table">
+    <thead><tr>
+      <th data-k="name">Sprite</th>
+      <th data-k="ability">What it does</th>
+      <th data-k="get">How to get it</th>
+      <th data-k="rate">Chest&nbsp;odds</th>
+      <th data-k="cost">Summon</th>
+      <th data-k="verdict">Verdict</th>
+    </tr></thead>
+    <tbody id="rbody"></tbody>
+  </table>
+  </div>
+  <p class="lede" style="font-size:14.5px;margin-top:14px"><b>Reading the odds column:</b> the five base Rare sprites, Burnt Peanut, Vini&nbsp;Jr. and Pollo all sit at 0% from Sprite Chests. That is not a bug — v41.20 rewrote chest loot so Rare sprites only drop <em>as variants</em>, and the rest have non-chest routes. You still find the Rares roaming the world for free.</p>
+</section>
+
+<hr class="rule">
+
+<!-- ============ VARIANTS ============ -->
+<section id="variants">
+  <div class="shead"><h2>Variants</h2><span>four live, three in the files</span></div>
+  <p class="lede">A variant keeps the base sprite's full ability and <em>adds</em> its bonus on top — Epic's words: <em>"20% more Ammo on top of their Sprite power."</em> They level and Master exactly like base sprites, each is its own collection entry, and only the one in your dedicated slot does anything. Epic deliberately calls the bonuses <em>"(small)"</em> — this is a collection chase, not a power spike.</p>
+  <div class="grid g3">
+    <div class="card good"><span class="kicker">Live · from launch</span><h3>Gold</h3><p><b>3× bonus Sprite XP from eliminations.</b> By far the best variant if you're chasing Mastery. <span class="src data">Data</span></p></div>
+    <div class="card good"><span class="kicker">Live · 11 Jun</span><h3>Gummy</h3><p><b>+20% Sprite Dust on extraction.</b> Buffed from 10% on 19 Jun — guides still printing 10% (including one updated today) are stale. <span class="src data">Data</span></p></div>
+    <div class="card good"><span class="kicker">Live · 18 Jun</span><h3>Galaxy</h3><p><b>+30% ammo when looting.</b> Also buffed from 20% on 19 Jun. <span class="src data">Data</span></p></div>
+    <div class="card good"><span class="kicker">Live · 9 Jul</span><h3>Holofoil</h3><p><b>5% squad-wide chance to find rare sprite variants from containers.</b> Only exists for 8 sprites: Water, Fire, Air, Ghost, King, Striker, Seven, Batman. <span class="src data">Data</span></p></div>
+    <div class="card"><span class="kicker">Unreleased · leaked live for ~10h on 25 Jun</span><h3>Gem</h3><p><b>Take 30% less fall damage.</b> Effect is known; the variant is not obtainable. A candidate for one of the last three Thursdays. <span class="src data">Data</span></p></div>
+    <div class="card"><span class="kicker">Arriving Thu 23 Jul, 9am ET</span><h3>Cube</h3><p><b>Effect genuinely unknown.</b> The wiki literally renders it "???". Outlets reporting "Overdrive while in the Storm" all attribute it to dataminers, not Epic. <span class="src est">Est.</span></p></div>
+    <div class="card"><span class="kicker">Unreleased · Zero Point only</span><h3>Quack</h3><p><b>Effect unknown.</b> The single most obscure entry in the system — one sprite, no Epic communication, ever. <span class="src est">Est.</span></p></div>
+  </div>
+  <div class="callout">
+    <h3>Two things nobody tells you about variants</h3>
+    <p><b>They cost 2–40× more to re-summon.</b> A Gold Water Sprite is 4,000 Dust against 100 for the base — so losing a variant hurts far more than losing a base sprite. Special summon costs are flat per tier: 4,000 Rare / 6,000 Epic / 10,000 Legendary / 15,000 Mythic.</p>
+    <p><b>Three sprites have no variants at all:</b> Burnt Peanut, Vini&nbsp;Jr. and Pollo. If a checklist tells you to hunt a Gold Burnt Peanut, that checklist is wrong.</p>
+    <p><b>Direct source conflict, unresolved:</b> Epic says Holofoil is <em>"slightly easier to find than Gold."</em> The datamined loot tables say Holofoil is the rarest variant by roughly 3×. Both are documented; nobody has reconciled them.</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ EXTRACTION ============ -->
+<section id="clock">
+  <div class="shead"><h2>The extraction clock</h2><span>where matches are lost</span></div>
+  <p class="lede">There are exactly three ways to bank a sprite: an <b>Extraction Crate</b> called at one of the 17 Extraction Sites, a <b>Portable Extractor</b> gizmo used anywhere, or <b>winning the match</b>. The crate is the one with rules people get wrong.</p>
+
+  <div class="timeline">
+    <div class="bar" role="img" aria-label="Extraction crate timeline: 45 second rift-in, then a 1 minute 10 second open window that collapses to 10 seconds once anyone deposits, then a 30 second teardown">
+      <span class="b1">45s rift-in</span>
+      <span class="b2">1:10 open window</span>
+      <span class="b3">→10s</span>
+      <span class="b4">30s teardown</span>
+    </div>
+    <div class="barkey">
+      <div><b>45s rift-in</b>You hit the screen, the crate flies in. Loud, beaconed, visible on the map. Free bait for anyone nearby.</div>
+      <div><b>1:10 open</b>The crate accepts sprites from <em>any</em> player — including the enemy who just killed you.</div>
+      <div><b>→ 10s collapse</b>The instant <em>anyone</em> deposits one sprite, the remaining window slams to ten seconds. This is the squad-wipe trap.</div>
+      <div><b>30s cooldown</b>Then the site is callable again. Sites are reusable, not one-shot per match.</div>
+    </div>
+  </div>
+
+  <ul class="tips">
+    <li class="t-trap"><b>The squad trap.</b> Because the first deposit cuts the window to 10 seconds, everyone must be stacked <em>and holding the sprite they want banked</em> before the first person touches the crate. One eager teammate extracting early costs the rest of the squad their sprites.</li>
+    <li class="t-trap"><b>The quickbar trap.</b> Interact with a crate while <em>not</em> holding a sprite and it auto-extracts the first sprite in your quickbar, reading left to right. This is exactly how people bank a junk Level 1 instead of the Mythic they've been protecting.</li>
+    <li class="t-good"><b>Anyone can use a crate anyone called.</b> Two techniques fall out of that: third-party a site around 40 seconds into the call animation and take the crate the caller paid for — and conversely, if you're losing the fight at your own crate, the enemy inherits it.</li>
+    <li><b>Sites are dead until the first Storm phase forms.</b> Both the crate screen and the Dust terminal are non-interactable before that. Hot-dropping an Extraction Site for an early bank is wasted time.</li>
+    <li class="t-good"><b>The beacon is free intel.</b> Red beacon = pre-first-storm. Blue = live and callable. <em>No</em> beacon inside a live circle = someone already called it, or it's cooling down. Somebody is there, or was, very recently.</li>
+    <li class="t-good"><b>Call a crate even with nothing to bank.</b> Since v41.20, Extraction Crates can also contain Shield Bubble Jr, Crash Pad Jr, Chug Splash or Friend Zone Bubble. The 17 sites are general-purpose loot points now.</li>
+  </ul>
+
+  <div class="callout">
+    <h3>Sprite Dust: the only thing that survives your own death</h3>
+    <p>Dust carries between matches, can't be dropped, and is <em>not</em> lost on elimination. Cap is 200,000. Extraction pays from 500, scaling with rarity and level (Gummy variants +20%).</p>
+    <div class="dl">
+      <div><b>Terminal</b>Every Extraction Site has a Sprite Dust Services terminal — it doubles as a mid-match upgrade bench.</div>
+      <div><b>Weapon upgrade</b>250 Common→Uncommon · 500 →Rare · 1,000 →Epic · 2,000 →Legendary. Blue AR to gold for less than one Mythic extraction.</div>
+      <div><b>Locate Sprites</b>100 Dust. The cheapest and most under-used purchase in the game.</div>
+      <div><b>Daily caps</b>20,000 XP for 1,000 Dust and a Portable Extractor for 2,000 Dust — <em>once per day each</em>. You cannot buy extractors on demand.</div>
+      <div><b>Lobby summon</b>Base: 100 Rare · 3,000 Epic · 5,000 Legendary · 7,500 Mythic. (Fishy is priced off-curve at 2,000; sources disagree.)</div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ LEVELING ============ -->
+<section id="level">
+  <div class="shead"><h2>Leveling, with actual numbers</h2><span>1 → 5</span></div>
+  <p class="lede">Only the sprite in your <em>dedicated slot</em> earns XP — carried spares are inert cargo. XP is shared across the squad, so your teammates' chests and kills level <em>your</em> equipped sprite.</p>
+
+  <div class="grid g3">
+    <div class="card"><span class="kicker">+75</span><h3>Container opened</h3><p>Chests, ammo boxes, cash registers, produce boxes. <span class="src data">Data</span></p></div>
+    <div class="card"><span class="kicker">+200</span><h3>Enemy eliminated</h3><p>The single biggest per-action award. <span class="src data">Data</span></p></div>
+    <div class="card"><span class="kicker">+100</span><h3>Enemy downed</h3><p>Assists pay +75. <span class="src data">Data</span></p></div>
+    <div class="card"><span class="kicker">+100 base</span><h3>Sprite extracted</h3><p>Increases with the extracted sprite's rarity, variant and level. <span class="src data">Data</span></p></div>
+  </div>
+
+  <div class="callout">
+    <h3>How much is a full Level 1 → 5, really?</h3>
+    <p>Epic has never published the thresholds, no wiki has them, no dataminer has them, and — contrary to what a lot of guides imply — <b>the in-game level bar shows no numbers at all.</b> It's a graphical bar with a "Lv. N" plate.</p>
+    <p>So we measured it: two creators' 1080p runs, HUD bar de-slanted into strips, fill fraction read before and after XP awards of known size. Result: roughly <b>350 / 590 / ~1,000 / ~1,150 XP</b> for levels 1→2 through 4→5, i.e. <b>~3,000–3,200 XP total</b>. That's about <b>41–43 containers</b> or <b>~16 eliminations</b> from scratch — halved to ~21 containers on a Mastery Monday. <span class="src est">Est. ±10–15%</span></p>
+    <p>Two useful corollaries: a full max in a single match is entirely realistic, and <b>surplus XP carries over</b> into the next level rather than being discarded — so banking a big elimination right before a level boundary isn't wasted.</p>
+  </div>
+
+  <ul class="tips">
+    <li class="t-good"><b>Quack Snacks are a full instant level.</b> 1,500 Gold Bars at Mending Machines (the medic-cross ones). They level <em>the equipped sprite</em>, so swap your target in before eating one — and two of them is the difference between a useless Punk Sprite and an unlimited-ammo Punk Sprite.</li>
+    <li class="t-trap"><b>Do not farm bots for XP.</b> Bot lobbies pay a flat quarter: containers 19 instead of 75, eliminations 50 instead of 200. The advice to "land quiet for easy bot kills" is actively backwards.</li>
+    <li><b>Mastery Monday is the leverage window.</b> Monday 9am ET → Tuesday 9am ET: 2× Sprite XP, 2× Sprite Dust from extractions, and boosted Legendary/Mythic spawn rates. Four remain: <b>27 Jul, 3 Aug, 10 Aug, 17 Aug</b>.</li>
+    <li class="t-trap"><b>Dream Sprite can't be Mastered normally.</b> At Level 5 it explodes with Legendary loot, force-extracts itself and resets to Level 1. It's the one sprite that is completely immune to die-and-lose-it.</li>
+    <li><b>A sprite handed to you keeps its level.</b> Levels ride with the sprite instance, not the player — which is the basis of the whole trading economy, and the single most useful mechanic for playing with a kid.</li>
+  </ul>
+</section>
+
+<hr class="rule">
+
+<!-- ============ FARMING ============ -->
+<section id="farm">
+  <div class="shead"><h2>Finding them</h2><span>four rails</span></div>
+  <p class="lede">The map is <b>Shattered Coast</b>. Sprite Chests are the primary rail, but three others matter — and one patch on 16 July changed the maths completely.</p>
+
+  <div class="callout">
+    <h3>The most important change of the season</h3>
+    <p>v41.20 rewrote Sprite Chest loot. Epic, verbatim: <em>"An Epic, Legendary or Mythic Sprite, or a higher-rarity variant is guaranteed. Sprite variants now appear more frequently. Rare Sprites will drop less often, and only as variants."</em> <span class="src epic">Epic</span></p>
+    <p>Practical effect: <b>Sprite Chests are now strictly better than normal chests</b>, every drop-rate table written before 16 July is void, and since Dust payout scales with rarity, your income per extraction went up too.</p>
+  </div>
+
+  <div class="grid g2">
+    <div class="card"><span class="kicker">Rail 1</span><h3>Sprite Chests</h3><p>Blue glow, pink crystal on the lid, a chest-audio cue like Chapter 2 vaults. Fixed candidate spawn points, <em>randomly activated each match</em> — a marked spot is a possibility, not a guarantee.</p><p><b>Turn on Visualized Sounds.</b> It converts the chest audio into a direction indicator on your HUD. Highest-leverage settings change for farming, by a distance.</p></div>
+    <div class="card"><span class="kicker">Rail 2</span><h3>Wild roaming sprites</h3><p>They spawn by biome, and this is the best-documented routing data anywhere: <b>Water</b> wet areas · <b>Fire</b> urban · <b>Earth</b> forest · <b>Air</b> mountains · <b>Punk</b> sewers/underground · <b>Duck</b> around Dirty Duck's · <b>Seven</b> forests, mountains, the Zero Point · <b>Vini Jr.</b> the Soccer Field · <b>Ghost</b> the whole island, <em>at night only</em>.</p><p>Chest-only (no roaming route): Fishy, Demon, King, Aura, Dream, Burnt Peanut.</p></div>
+    <div class="card"><span class="kicker">Rail 3</span><h3>Named routes</h3><p><b>Boss Sprite</b> — kill Wolfe, The Voidblade or Skeletor. <b>Striker</b> — score a goal at the Soccer Field. <b>Batman</b> — Hot Bat Summer quests, or duel Coastal Catwoman / Poison Ivy / High Tide Harley. <b>Vaults</b> — small keyed vaults each hold a Sprite Chest; two Epic-keycard "Sprite Vaults" hold several. <b>Fishing</b> works too.</p></div>
+    <div class="card"><span class="kicker">Rail 4</span><h3>Gizmos</h3><p><b>Sprite Locator</b> (v41.20) spawns a buried chest with a random sprite. <b>Hotfixed today (21 Jul)</b> to strongly favour variants — and Epic granted 3 free ones to everyone who'd used an extraction gizmo, acknowledging it underperformed.</p><p><b>Lucky Locator</b> — guarantees a sprite you haven't collected. <em>Not live.</em> Deferred to v41.30, and it's the single best collection tool coming.</p></div>
+  </div>
+
+  <ul class="tips">
+    <li class="t-trap"><b>Per-POI chest counts are genuinely unreliable.</b> The widely-copied "33 total" figure traces to one article from 9 June. A July-updated census sums to ~62 across 23 POIs while its own headline still says 33. Treat any specific per-POI number as approximate — including "Sinister Strip has the most."</li>
+    <li class="t-good"><b>Farm in Zero Build.</b> Rotations are faster, you're moving between chest spawns instead of harvesting mats, and central-map POIs let you chain more spawns per circle.</li>
+    <li class="t-good"><b>Killing runners is a legitimate farming strategy.</b> Players carry up to five spare sprites plus their equipped one, all of which drop with levels intact. A player camping an extraction site is a piñata.</li>
+    <li><b>Buy the 100-Dust "Locate Sprites" scan.</b> One extraction pays 500+, so it's effectively free, and almost nobody uses it.</li>
+    <li class="t-trap"><b>No NPC sells sprites.</b> All 11 NPCs were checked. The closest thing is Heatwave PJ at Latte Landing (350 gold) who pings chests and enemies in a wide radius.</li>
+  </ul>
+</section>
+
+<hr class="rule">
+
+<!-- ============ BEST ============ -->
+<section id="best">
+  <div class="shead"><h2>Which ones are actually good</h2><span>consensus across 8 lists</span></div>
+  <p class="lede">One structural insight explains the entire tier list better than any ranking: <b>sprites are ranked by activation cost, not by rarity or raw numbers.</b> Every consensus top pick triggers off something you already do involuntarily — healing, eliminating, reloading, traversing terrain, simply existing. Every trap demands a deliberate detour or a level gate that outlasts the average match.</p>
+
+  <div class="grid g2">
+    <div class="card good"><span class="kicker">Consensus #1</span><h3>Zero Point</h3><p>Auto-spawns a Shield Bubble Jr. when you heal yourself. Top of every list found. In Zero Build it's arguably the best in the game — it erases the mode's biggest vulnerability, healing in the open.</p><p><b>But:</b> at 0.00093% from chests it's effectively unfarmable. If you want it, you summon it for 7,500 Dust.</p></div>
+    <div class="card good"><span class="kicker">Consensus #2 · best aggressive</span><h3>Demon</h3><p>Siphons health and shield on every elimination, ~10 → ~30 effective HP by level. Top-tier in every source without exception. Best solo pick in the game — it's self-sustain with no teammate dependency, and it directly counters being third-partied.</p></div>
+    <div class="card good"><span class="kicker">Highest skill expression</span><h3>Ghost</h3><p>Cloak on reload, 3s → 5s. The S/A swing pick — the split is about skill floor, not power. Its value is conditional on you deliberately reloading to trigger it.</p><p><b>Counterplay to know:</b> cloak still leaves footsteps and a shimmer, and Seven Sprite's foot-trail reveal reads straight through it.</p></div>
+    <div class="card good"><span class="kicker">Newest top-3 entrant</span><h3>Boss</h3><p>Flat +HP and +Shield, up to roughly +25 each. The only pure raw-stat sprite: no activation condition, no skill requirement, no positioning. Ranked top-3 in the only tier list that postdates the 16 July patch.</p></div>
+    <div class="card warn"><span class="kicker">Trap #1</span><h3>King</h3><p>Bonus pickaxe damage. The <em>only</em> sprite Epic has explicitly nerfed (v41.10, against players and environmental objects), and it sits bottom in every single list. No source recommends it for any playstyle.</p></div>
+    <div class="card warn"><span class="kicker">Trap #2</span><h3>Water</h3><p>Shield regen while in water. Asks you to stand in water — positionally suicidal, and often simply impossible if the final circle is land-heavy.</p></div>
+    <div class="card warn"><span class="kicker">Trap #3 · conditional</span><h3>Dream &amp; Punk</h3><p>Both are Legendary sprites whose entire value sits behind Level 5, which most matches end before. Punk does literally nothing until Level 5 — then <em>always</em> grants unlimited ammo.</p><p>Genuine bait for casuals; a real win condition for grinders with two Quack Snacks.</p></div>
+    <div class="card warn"><span class="kicker">Rarity trap</span><h3>Grim</h3><p>Mythic rarity, B-tier performance. Marks anyone who damages you — but Fortnite's existing damage indicators and audio already tell you roughly where the shot came from.</p></div>
+  </div>
+
+  <div class="callout">
+    <h3>By playstyle</h3>
+    <div class="dl">
+      <div><b>Solo</b>Demon. On-elimination self-sustain compounds when there's nobody to revive or heal you.</div>
+      <div><b>Squads</b>Pollo and Seven — the only sprites whose effects reach teammates. Seven needs just one carrier per team.</div>
+      <div><b>Zero Build</b>Zero Point first, Air second. Both compensate directly for the mode's structural weaknesses.</div>
+      <div><b>Late game</b>Zero Point, Boss, Ghost.</div>
+      <div><b>Looting</b>Earth early, Burnt Peanut mid — but drop it by mid-game. This whole category was demoted hard once the combat and movement sprites arrived.</div>
+      <div><b>Ranked</b>Not applicable — see below.</div>
+    </div>
+  </div>
+
+  <div class="grid g2">
+    <div class="card warn"><span class="kicker">Important scope limit</span><h3>None of this exists in Ranked</h3><p>Epic, verbatim, on the extraction gizmos: <em>"Available only in unranked Battle Royale and Zero Build matches."</em> Sprites, Sprite Dust and Extraction Sites all carry the wiki's not-in-Competitive banner, where "Competitive" links directly to the Ranked article.</p><p>Sprites also appear in <b>no other mode</b> — not Reload, OG, Blitz, Ballistic, Save the World, Festival, Rocket Racing, or Creative. Battle Royale Build and Zero Build only.</p></div>
+    <div class="card"><span class="kicker">A caution on tier lists</span><h3>Most of what you'll find is stale</h3><p>Eight independent tier lists exist. Only <em>one</em> postdates the 16 July patch — so Batman, Air, Seven, Vini Jr. and Pollo have essentially no consensus yet. Any list that doesn't include Striker, Fishy, Aura, Boss and Grim predates 25 June and is missing a third of the roster.</p><p>Also worth knowing: that single recent list is a 1–21 ranking, not letter tiers. Several sites have "converted" it into S/A/B/C tiers that its author never wrote.</p></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ TIPS ============ -->
+<section id="tips">
+  <div class="shead"><h2>Things good players know</h2><span>and casuals don't</span></div>
+  <ul class="tips">
+    <li class="t-good"><b>Aura + Shock Rocks is the season's cleanest engineered combo</b> — and it only became reliable on 16 July, when Epic made shield damage count toward the charge. Before that you had to break shields before the sprite paid out at all.</li>
+    <li class="t-good"><b>You can Shock Rock–jump while knocked.</b> A downed teammate can launch themselves toward cover or a reboot instead of crawling. Shock Rocks can also be <em>thrown</em>, granting the effect to everyone in the blast radius.</li>
+    <li><b>Seven Sliders overheat in ~7.5 seconds on the ground — but sliding on water cools them.</b> ADS bullet-time mid-slide also reduces heat buildup, so you can chain a far longer slide than the default.</li>
+    <li class="t-good"><b>Vini Jr. is built specifically around Seven Sliders.</b> Sprinting makes your slide destructive; slide-kicking enemies buffs fire rate and reload speed. The two items are designed as a package.</li>
+    <li><b>Zero Point's bubble blocks bullets, not bodies.</b> You beat it by walking through the dome and shotgunning, by destroying the 400 HP centre prop, or with a Shield Breaker EMP — not by shooting the bubble.</li>
+    <li class="t-good"><b>Battle Bus Victory Royale: one teammate aboard wins it for the whole team</b> — including teammates who are knocked <em>or fully eliminated</em>. It spawns inside the 6th storm circle with a 2-minute window, and multiple teams can win the same match. The supply drops around it carry Friend Zone Bubbles: a 30-second dome that blocks fire from both directions, which is the single best tool for holding the bus.</li>
+    <li class="t-good"><b>Safe Extraction is the anomaly to drop everything for.</b> It wraps every in-circle Extraction Site in a bubble that blocks all gunfire and prevents players inside from damaging each other. Extraction becomes completely non-lethal. In Zero Build it also hands out unlimited Pocket Shockwave Grenades.</li>
+    <li class="t-trap"><b>Storm Surge fights the whole season's incentive structure.</b> The sprite economy pulls you toward avoiding fights to protect an unbanked sprite; Surge punishes exactly that. The resolution good players use: bank early with a Portable Extractor, then play normally.</li>
+    <li class="t-trap"><b>Spare sprites cost you real inventory slots for zero benefit.</b> A player hauling three spares to a site is fighting with a two-slot loadout — and holding a sprite in your hands prevents weapon use entirely.</li>
+  </ul>
+</section>
+
+<hr class="rule">
+
+<!-- ============ CALENDAR ============ -->
+<section id="cal">
+  <div class="shead"><h2>What's left of the season</h2><span>21 Jul → 19 Aug</span></div>
+  <p class="lede">Epic runs a fixed weekly cadence — <b>Mastery Mondays</b> (9am ET → 9am ET Tuesday), <b>New Sprite Day Thursdays</b> (9am ET), <b>Saturday Power Hours</b>. Everything below is either Epic-scheduled or explicitly marked as unannounced.</p>
+  <div class="cal">
+    <div class="row hard"><div class="d">Thu 23 Jul</div><div class="t"><b>New Sprite Day #6 — Cube variant</b>9am ET, server-side. Confirmed by Epic's own Week 7 promo graphic. The effect is unknown; every "Overdrive in the Storm" report traces to dataminers.</div></div>
+    <div class="row"><div class="d">Sat 25 Jul</div><div class="t"><b>Shiny Hours #3 and #4</b>2–4pm and 9–11pm ET. Gold, Gummy, Galaxy and Holofoil variants all boosted.</div></div>
+    <div class="row hard"><div class="d">Mon 27 Jul</div><div class="t"><b>Mastery Monday</b>2× Sprite XP, 2× Dust, boosted Legendary/Mythic spawns. Three more after this.</div></div>
+    <div class="row"><div class="d">~Thu 30 Jul</div><div class="t"><b>v41.30 expected — Lucky Locator</b>No Epic date published; 30 July is the best-supported estimate. Brings the gizmo that <em>guarantees a sprite you haven't collected</em>, earnable from the Mastery track. <span class="src est">Est.</span></div></div>
+    <div class="row"><div class="d">Thu 30 Jul<br>Thu 6 Aug<br>Thu 13 Aug</div><div class="t"><b>Three New Sprite Days, nothing announced</b>Epic has scheduled zero content for any of them. The unreleased inventory that has to fit: the Gem variant, the Quack variant, a datamined John Wick sprite, a Pollo re-enable, and the contest winners.</div></div>
+    <div class="row"><div class="d">Unscheduled</div><div class="t"><b>#DesignASprite winners — five, not three</b>Epic expanded the contest from three winners to five via its official account. No winners have been announced, no sprites named, and Epic never actually committed them to <em>this</em> season — "this season" is press inference, not an Epic statement.</div></div>
+    <div class="row hard"><div class="d">Wed 19 Aug</div><div class="t"><b>Season ends</b>Quest tracks hard-stop at 02:00. See below for what evaporates.</div></div>
+  </div>
+
+  <div class="callout">
+    <h3>Deadline items — the things that actually expire</h3>
+    <div class="dl">
+      <div><b>Gizmos</b><span>Portable Extractors, Sprite Locators and Extraction Site Boosters sitting in your inventory <b>expire at season end.</b> Epic says so twice, in writing. Use them; there is no reason to hoard.</span></div>
+      <div><b>Guardian styles</b><span>Extracting distinct sprites unlocks Pilot edit styles for The Guardian outfit via the Assemble the Guardian quests — which hard-stop 19 Aug.</span></div>
+      <div><b>Pod styles</b><span>Mastered sprites in the Sprite Mastery Pod are <em>"forever unlocked."</em> But Pod styles lag one update behind mastery, so a sprite mastered from the final drop may never become displayable. There's also a live bug where mastered sprites show as locked — <b>check your Pod before 19 Aug</b>, because after that you can't re-master.</span></div>
+      <div><b>Sprite Dust</b><span>Epic has said <em>nothing</em> about what happens to unspent Dust. Not carried over, not converted, not wiped — simply never addressed. Spend it daily rather than banking it.</span></div>
+      <div><b>The collection</b><span>Also unaddressed. Every Epic phrasing is "future matches," never "future seasons." Nobody knows if the collection survives into Chapter 7 Season 4.</span></div>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ KIDS ============ -->
+<section id="kids">
+  <div class="shead"><h2>Playing with kids</h2><span>the parts that bite</span></div>
+  <div class="grid g2">
+    <div class="card good"><span class="kicker">The good news</span><h3>You can hand a leveled sprite to a kid</h3><p>Carry it as an inventory item, drop it on the ground, they pick it up. <b>The receiver inherits its level</b> — so a Level 4 you grinded becomes their Level 4, and if they extract it, they bank both the sprite and the progress.</p></div>
+    <div class="card warn"><span class="kicker">The cost</span><h3>Your copy resets to Level 1</h3><p>Epic counts dropping as "losing" it. And you can only re-summon with Dust if <em>you had already extracted that sprite at least once</em> — give away a sprite you've never banked and it's gone for good.</p></div>
+    <div class="card warn"><span class="kicker">Split-screen</span><h3>PlayStation and Xbox only</h3><p>Not Switch, not mobile, not PC — and not in Solos, Ranked, or Creative. Player 2 links their own Epic account, so their collection and Dust are genuinely theirs.</p><p><b>The catch:</b> P2 never gets a lobby, so P2 <em>cannot equip a sprite or spend Dust to summon one before the drop.</em> Menu inventory sharing is also blocked — but ground drop/pickup still works, which is exactly the handoff mechanic above.</p></div>
+    <div class="card warn"><span class="kicker">Bot lobbies</span><h3>Roughly 17 of 21 sprites are unreachable</h3><p>Since 8 June, bot lobbies only carry Water, Fire, Earth and King. Sprite XP is quartered. And kids on Switch or mobile are matched into bot-heavy lobbies <em>by platform</em>, so the restriction hits them hardest.</p><p>The upside: bots basically never win, so Victory Royales — and therefore free auto-extractions — come easily.</p></div>
+    <div class="card warn"><span class="kicker">Mobile bug, still open</span><h3>A custom HUD can silently break extraction</h3><p>A custom layout <em>without a Reload button</em>, or with Dynamic Quickbar Slots on, can make Portable Extractors completely unusable. Fix: re-add the dedicated Reload button and use the default quickbar. Still unfixed as of Epic's latest revision.</p></div>
+    <div class="card"><span class="kicker">Handoff timing</span><h3>The 10-second collapse is brutal with a slow kid</h3><p>The moment the first person deposits, everyone else has ten seconds. Get the kid to the crate <em>first</em>, holding the right sprite, before anyone touches it.</p></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<!-- ============ DEAD ADVICE ============ -->
+<section id="dead">
+  <div class="shead"><h2>Advice that's already dead</h2><span>the fact-check pile</span></div>
+  <p class="lede">This season moves weekly, and a lot of very confident guides — including some updated <em>today</em> — are running stale or invented numbers. These are the ones worth knowing about.</p>
+  <ul class="tips">
+    <li class="t-trap"><b>"Light a campfire for double Sprite XP."</b> Dead. It was a Gone Wild event modifier, enabled 25 June and <b>switched off 9 July</b>. Late-June leveling guides still lead with it.</li>
+    <li class="t-trap"><b>"Throw or drop sprites into the crate."</b> Patched 30 June — it was a duplication glitch. Walk up and interact.</li>
+    <li class="t-trap"><b>"Farm bots for easy sprite XP."</b> Backwards. Bot lobbies pay a flat quarter across every action.</li>
+    <li class="t-trap"><b>"Gummy is +10% Dust, Galaxy is +20% ammo."</b> Both stale since 19 June — they're 20% and 30% now.</li>
+    <li class="t-trap"><b>Any drop-rate table written before 16 July.</b> One widely-cited table's percentages sum to <em>202%</em>, because it pairs current variant rates with pre-patch base rates. Another site's figures are a full order of magnitude off a third's. Nobody has Epic numbers, because Epic has never published any.</li>
+    <li class="t-trap"><b>"Burnt Peanut is the only sprite with no variants."</b> Three have none: Burnt Peanut, Vini Jr. and Pollo.</li>
+    <li class="t-trap"><b>"Extracted sprites come back at Level 1."</b> Only Dust-<em>summoned</em> copies do. Genuinely extracted ones return at the level you banked them.</li>
+    <li class="t-trap"><b>"There's a John Wick Sprite."</b> Datamined only, placeholder icon, no ability, not in the Battle Pass. Do not put it on a checklist.</li>
+  </ul>
+</section>
+
+<hr class="rule">
+
+<footer>
+  <p><b>How this was built.</b> Nine parallel researchers covered the roster, variants, acquisition, the extraction economy, leveling, tier-list consensus, patch history, advanced play and mode scoping. Every claim then went to an adversarial fact-checker instructed to refute it — which killed a fabricated tier-list conversion affecting 13 claims, several invented drop rates, a stale campfire strategy, and a "source conflict" on level persistence that turned out to be two articles describing different cases. A completeness critic then found four gaps, which were researched separately.</p>
+  <p><b>Confidence labels.</b> <span class="src epic">Epic</span> = Epic's own patch notes or help centre. <span class="src data">Data</span> = Fortnite Wiki, fortnite.gg, or reputable press with corroboration. <span class="src est">Est.</span> = measured, inferred, or contested — treat as approximate.</p>
+  <p><b>Known unknowns, stated plainly:</b> Epic publishes no drop rates or XP thresholds; the Cube and Quack variant effects are unknown; per-POI chest counts are disputed; the Holofoil rarity conflict between Epic's statement and the datamined tables is unresolved; and nothing is known about what happens to the collection or unspent Dust after 19 August.</p>
+  <p style="margin-top:22px">Verified 21 July 2026 against Epic patch notes v41.00 / v41.10 / v41.20, the Fortnite Wiki, and fortnite.gg. Sprite systems change weekly — re-check anything dated before the most recent Thursday.</p>
+</footer>
+
+</main>
+
+<script>
+const SPRITES=[
+ {name:"Water",rar:"rare",ability:"Replenish shield while in water for you and your nearby Squad.",scale:"",get:"Roams wet areas · chests",rate:"0%",cost:"100",verdict:"<b>Trap.</b> Asks you to stand in water; often impossible late.",top:0},
+ {name:"Earth",rar:"rare",ability:"Chance to find additional rare items when opening chests.",scale:"10% → 30% by level",get:"Roams forests · chests",rate:"0%",cost:"100",verdict:"Strong landing-phase pick. Drop it by mid-game.",top:0},
+ {name:"Fire",rar:"rare",ability:"Creates a fiery burst when you deal enough damage to an enemy.",scale:"Trigger 175 → 75 dmg",get:"Roams urban areas · chests",rate:"0%",cost:"100",verdict:"Most contested sprite in the game — rated A-tier to F-tier.",top:0},
+ {name:"Fishy",rar:"rare",ability:"Swim speed way up, plus a brief movement speed boost when you take damage.",scale:"Swim 25% → 200%",get:"Chests only",rate:"0%",cost:"2,000",verdict:"Map-dependent escape utility. Priced oddly for a Rare.",top:0},
+ {name:"Air",rar:"rare",ability:"Sprint faster, jump higher while sprinting and take zero fall damage.",scale:"",get:"Roams mountains · chests",rate:"0%",cost:"100",verdict:"<b>Top-6</b> in the only post-16-July ranking. Best Zero Build mobility.",top:1},
+ {name:"Duck",rar:"epic",ability:"Emoting or Jamming replenishes shields.",scale:"2 → 8 shield per tick",get:"Roams Dirty Duck's · chests",rate:"9%",cost:"3,000",verdict:"Mid. Demands downtime you rarely have, and reveals position.",top:0},
+ {name:"Ghost",rar:"epic",ability:"Grants cloak for a duration upon reloading.",scale:"3s → 5s cloak",get:"Roams island <b>at night</b> · chests",rate:"9%",cost:"3,000",verdict:"<b>Top tier.</b> Highest skill expression — you must reload deliberately.",top:1},
+ {name:"Demon",rar:"epic",ability:"Siphon some health and shields when you eliminate an opponent.",scale:"10 → 30 effective HP",get:"Chests only",rate:"9%",cost:"3,000",verdict:"<b>Best aggressive pick, best solo pick.</b> Top-tier in every source.",top:1},
+ {name:"King",rar:"epic",ability:"Your Pickaxe deals more damage.",scale:"+30 → +120 bonus dmg",get:"Chests only",rate:"9%",cost:"3,000",verdict:"<b>Trap.</b> The only sprite Epic has nerfed. Bottom of every list.",top:0},
+ {name:"Striker",rar:"epic",ability:"Gain Overdrive when you Mantle or Hurdle.",scale:"Overdrive 6s → 10s",get:"<b>Score a goal at the Soccer Field</b>",rate:"6.98%",cost:"3,000",verdict:"Was crowned best in the game in June; demoted since. Still strong.",top:1},
+ {name:"Aura",rar:"epic",ability:"Gain a Shock Rock charge when you deal enough damage.",scale:"",get:"Chests only",rate:"6.98%",cost:"3,000",verdict:"Became reliable on 16 July when shield damage started counting.",top:0},
+ {name:"Dream",rar:"legendary",ability:"Grants a random item at each level, exploding with legendary loot at Max Level.",scale:"Auto-extracts + resets at L5",get:"Chests only",rate:"6.98%",cost:"5,000",verdict:"<b>Conditional trap.</b> Can't be Mastered normally — but immune to die-and-lose-it.",top:0},
+ {name:"Punk",rar:"legendary",ability:"Possibly nothing… or infinitely something.",scale:"Nothing until L5, then unlimited ammo",get:"Roams sewers/underground",rate:"6.98%",cost:"5,000",verdict:"<b>Bait for casuals, win condition for grinders.</b> Two Quack Snacks fix it.",top:0},
+ {name:"Boss",rar:"legendary",ability:"A boost to your max HP and Shield.",scale:"+5 → +25 each",get:"<b>Kill Wolfe, The Voidblade or Skeletor</b>",rate:"6.98%",cost:"5,000",verdict:"<b>Top-3 in the newest ranking.</b> Unconditional value, zero activation cost.",top:1},
+ {name:"Seven",rar:"legendary",ability:"Makes enemy footsteps visible so your entire squad can track them.",scale:"10s → 30s trails",get:"Roams forests, mountains, Zero Point",rate:"6.98%",cost:"5,000",verdict:"<b>Best squad pick.</b> Only one teammate needs to carry it.",top:1},
+ {name:"Zero Point",rar:"mythic",ability:"Spawn a Shield Bubble Jr. when you use a healing item on yourself.",scale:"6s → 10s bubble",get:"Chests — <b>0.00093%</b>",rate:"0.00093%",cost:"7,500",verdict:"<b>Consensus #1 overall.</b> Effectively unfarmable — summon it instead.",top:1},
+ {name:"Burnt Peanut",rar:"mythic",ability:"Grants a low chance for additional loot from eliminations, including Mythic loot.",scale:"No variants exist",get:"Relic chests",rate:"0%",cost:"7,500",verdict:"Loot-economy pick, demoted with the rest of that category.",top:0},
+ {name:"Grim",rar:"mythic",ability:"Opponents who attack you get Scanned for a short duration.",scale:"3s → 5s scan",get:"Chests · very rare",rate:"0.09%",cost:"7,500",verdict:"<b>Rarity trap.</b> Mythic rarity, B-tier value. Damage indicators already do this.",top:0},
+ {name:"Batman",rar:"mythic",ability:"Deploy the Bat Cape to glide — and find rare Sprites in Chests more often.",scale:"",get:"<b>Hot Bat Summer quests</b> · duel Catwoman, Poison Ivy or Harley",rate:"2.23%",cost:"7,500",verdict:"The second effect is the real one: a chest-quality multiplier.",top:0},
+ {name:"Vini Jr.",rar:"mythic",ability:"Sprinting makes your slide destructive. Slide-kicking enemies increases fire rate and reload speed.",scale:"40 → 60 dmg · +10% → +50% fire rate",get:"Chests · no variants",rate:"0%",cost:"7,500",verdict:"<b>Top-3 in the newest ranking.</b> Built to pair with Seven Sliders.",top:1},
+ {name:"Pollo",rar:"mythic",ability:"Upon earning an elimination, slowly replenish shield for you and nearby squad members.",scale:"6s → 10s",get:"<b>Currently vaulted</b> — trade only",rate:"0%",cost:"7,500",verdict:"Excellent squad sprite that has barely been obtainable at all.",top:0}
+];
+
+const tbody=document.getElementById('rbody');
+let filter='all', query='', sortKey=null, sortDir=1;
+
+function render(){
+  let rows=SPRITES.filter(s=>{
+    const okR = filter==='all' || (filter==='top'? s.top===1 : s.rar===filter);
+    const hay=(s.name+' '+s.ability+' '+s.get+' '+s.verdict).toLowerCase();
+    return okR && (query==='' || hay.includes(query));
+  });
+  if(sortKey){
+    const ord={rare:0,epic:1,legendary:2,mythic:3};
+    rows=rows.slice().sort((a,b)=>{
+      let x,y;
+      if(sortKey==='name'){x=ord[a.rar]*100+SPRITES.indexOf(a);y=ord[b.rar]*100+SPRITES.indexOf(b);}
+      else if(sortKey==='rate'){x=parseFloat(a.rate)||0;y=parseFloat(b.rate)||0;}
+      else if(sortKey==='cost'){x=parseFloat(a.cost.replace(/,/g,''));y=parseFloat(b.cost.replace(/,/g,''));}
+      else {x=a[sortKey]||'';y=b[sortKey]||'';return x.localeCompare(y)*sortDir;}
+      return (x-y)*sortDir;
+    });
+  }
+  tbody.innerHTML = rows.length ? rows.map(s=>`<tr class="${s.top?'hl':''}">
+    <td><span class="sname">${s.name}</span><span class="rar ${s.rar}">${s.rar}</span></td>
+    <td>${s.ability}${s.scale?`<span class="scale">${s.scale}</span>`:''}</td>
+    <td>${s.get}</td>
+    <td class="num">${s.rate}</td>
+    <td class="num">${s.cost}</td>
+    <td class="verdict">${s.verdict}</td>
+  </tr>`).join('') : `<tr><td colspan="6" style="text-align:center;padding:32px;color:var(--muted)">No sprites match that.</td></tr>`;
+}
+
+document.querySelectorAll('.chip').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed','false'));
+  b.setAttribute('aria-pressed','true');
+  filter=b.dataset.r; render();
+}));
+document.getElementById('q').addEventListener('input',e=>{query=e.target.value.trim().toLowerCase();render();});
+document.querySelectorAll('#roster-table thead th').forEach(th=>th.addEventListener('click',()=>{
+  const k=th.dataset.k;
+  if(sortKey===k){sortDir*=-1;}else{sortKey=k;sortDir=1;}
+  render();
+}));
+render();
+</script>
+</body>
+</html>
