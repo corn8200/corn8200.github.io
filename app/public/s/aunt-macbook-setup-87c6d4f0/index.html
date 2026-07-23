@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Turning a spare MacBook into a simple machine for Aunt</title>
+<style>
+  :root {
+    --paper:#F6F7F4; --card:#FFFFFF; --ink:#1E2723; --ink-soft:#556059;
+    --line:#E4E7E1; --teal:#2E7C6B; --teal-deep:#245E51; --teal-tint:#E4F1ED;
+    --amber:#8A5E12; --amber-tint:#FBF1DC; --amber-line:#EBD9A8;
+    --red:#A8392F; --red-tint:#FBEAE6; --red-line:#F0CFC7;
+    --chip-ink:#FFFFFF;
+    --font-display:ui-rounded,"SF Pro Rounded",system-ui,sans-serif;
+    --font-body:-apple-system,BlinkMacSystemFont,"SF Pro Text",system-ui,"Segoe UI",Roboto,sans-serif;
+    --font-mono:ui-monospace,"SF Mono",Menlo,monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper:#121614; --card:#1A201D; --ink:#E9EDE9; --ink-soft:#98A59E;
+      --line:#2A322E; --teal:#5EB6A2; --teal-deep:#7ECCB9; --teal-tint:#173029;
+      --amber:#E6B65C; --amber-tint:#28220F; --amber-line:#41381B;
+      --red:#E88C7D; --red-tint:#2C1814; --red-line:#472520;
+      --chip-ink:#0F1311;
+    }
+  }
+  :root[data-theme="light"] {
+    --paper:#F6F7F4; --card:#FFFFFF; --ink:#1E2723; --ink-soft:#556059;
+    --line:#E4E7E1; --teal:#2E7C6B; --teal-deep:#245E51; --teal-tint:#E4F1ED;
+    --amber:#8A5E12; --amber-tint:#FBF1DC; --amber-line:#EBD9A8;
+    --red:#A8392F; --red-tint:#FBEAE6; --red-line:#F0CFC7; --chip-ink:#FFFFFF;
+  }
+  :root[data-theme="dark"] {
+    --paper:#121614; --card:#1A201D; --ink:#E9EDE9; --ink-soft:#98A59E;
+    --line:#2A322E; --teal:#5EB6A2; --teal-deep:#7ECCB9; --teal-tint:#173029;
+    --amber:#E6B65C; --amber-tint:#28220F; --amber-line:#41381B;
+    --red:#E88C7D; --red-tint:#2C1814; --red-line:#472520; --chip-ink:#0F1311;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:var(--font-body); font-size:1.0625rem; line-height:1.62;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap { max-width:42rem; margin:0 auto; padding:2.4rem 1.25rem 4rem; }
+
+  /* Header */
+  header { margin-bottom:2rem; }
+  .eyebrow {
+    font-family:var(--font-body); font-size:0.72rem; font-weight:600;
+    letter-spacing:0.14em; text-transform:uppercase; color:var(--teal);
+    margin:0 0 0.7rem;
+  }
+  h1 {
+    font-family:var(--font-display); font-weight:700;
+    font-size:clamp(1.75rem,5vw,2.4rem); line-height:1.1; letter-spacing:-0.01em;
+    text-wrap:balance; margin:0 0 0.6rem;
+  }
+  .lede { font-size:1.075rem; color:var(--ink-soft); margin:0 0 1.3rem; max-width:34rem; }
+  .meta {
+    display:flex; flex-wrap:wrap; gap:0.5rem; font-family:var(--font-body);
+    font-size:0.8rem;
+  }
+  .meta span {
+    background:var(--teal-tint); color:var(--teal-deep); font-weight:600;
+    padding:0.28rem 0.6rem; border-radius:999px;
+  }
+
+  /* Callouts */
+  .callout {
+    border-radius:0.7rem; padding:0.95rem 1.05rem; margin:1.5rem 0;
+    border:1px solid var(--line); background:var(--card);
+  }
+  .callout .tag {
+    display:inline-block; font-size:0.7rem; font-weight:700; letter-spacing:0.08em;
+    text-transform:uppercase; margin-bottom:0.35rem;
+  }
+  .callout p { margin:0.2rem 0 0; }
+  .callout p:first-of-type { margin-top:0; }
+  .callout.warn { background:var(--amber-tint); border-color:var(--amber-line); }
+  .callout.warn .tag { color:var(--amber); }
+  .callout.danger { background:var(--red-tint); border-color:var(--red-line); }
+  .callout.danger .tag { color:var(--red); }
+  .callout.tip { background:var(--teal-tint); border-color:transparent; }
+  .callout.tip .tag { color:var(--teal-deep); }
+
+  /* Steps */
+  .steps { display:flex; flex-direction:column; gap:1rem; margin:1.75rem 0; }
+  .step {
+    background:var(--card); border:1px solid var(--line); border-radius:0.85rem;
+    padding:1.15rem 1.2rem 1.25rem; display:grid;
+    grid-template-columns:2.1rem 1fr; gap:0.35rem 0.9rem; align-items:start;
+  }
+  .step .num {
+    grid-row:1 / span 2; width:2.1rem; height:2.1rem; border-radius:50%;
+    background:var(--teal); color:var(--chip-ink); font-family:var(--font-display);
+    font-weight:700; font-size:1.05rem; display:flex; align-items:center;
+    justify-content:center; margin-top:0.1rem;
+  }
+  .step h2 {
+    font-family:var(--font-display); font-weight:600; font-size:1.2rem;
+    line-height:1.25; margin:0.15rem 0 0; letter-spacing:-0.005em;
+  }
+  .step .body { grid-column:2; }
+  .step .why { color:var(--ink-soft); font-size:0.95rem; margin:0.3rem 0 0.7rem; }
+  .step ul { margin:0.5rem 0 0; padding-left:1.15rem; }
+  .step li { margin:0.35rem 0; }
+  .step li::marker { color:var(--teal); }
+
+  code {
+    font-family:var(--font-mono); font-size:0.86em; background:var(--teal-tint);
+    color:var(--teal-deep); padding:0.08rem 0.34rem; border-radius:0.3rem;
+    white-space:nowrap;
+  }
+  .path { color:var(--ink); font-weight:600; }
+  strong { font-weight:650; }
+
+  /* Bail section */
+  .bail { margin-top:2.5rem; }
+  .bail h3 {
+    font-family:var(--font-display); font-weight:700; font-size:1.35rem;
+    margin:0 0 0.3rem;
+  }
+  .bail .sub { color:var(--ink-soft); margin:0 0 1.1rem; }
+  .bail-grid { display:grid; gap:0.85rem; }
+  @media (min-width:520px){ .bail-grid { grid-template-columns:1fr 1fr; } }
+  .bail-card {
+    background:var(--card); border:1px solid var(--line); border-radius:0.75rem;
+    padding:1rem 1.05rem;
+  }
+  .bail-card h4 {
+    font-family:var(--font-display); font-weight:600; font-size:1.02rem; margin:0 0 0.3rem;
+  }
+  .bail-card p { margin:0; font-size:0.92rem; color:var(--ink-soft); }
+  .bail-card .price { color:var(--teal-deep); font-weight:650; }
+
+  footer {
+    margin-top:3rem; padding-top:1.3rem; border-top:1px solid var(--line);
+    font-size:0.82rem; color:var(--ink-soft);
+  }
+  footer a { color:var(--teal-deep); }
+  hr.soft { border:none; border-top:1px solid var(--line); margin:2rem 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Setup plan · for Aunt</p>
+    <h1>Make the spare MacBook a simple, safe machine for Aunt</h1>
+    <p class="lede">Photos from the family that just show up, and safe browsing &amp; email &mdash; with the trapdoors that let a very non-tech user break things (or get scammed) closed off. Follow it in order.</p>
+    <div class="meta">
+      <span>~45 minutes</span>
+      <span>$0 if she has wifi</span>
+      <span>No admin skills needed</span>
+    </div>
+  </header>
+
+  <div class="callout warn">
+    <span class="tag">Do this first — it decides everything</span>
+    <p>A MacBook has <strong>no ethernet port</strong> — it needs wifi. She had internet, "maybe just LAN." Before anything else, find out what her internet box actually offers (Step 1). And confirm the service is still active — the internet is separate from her dead PC, so it may still be on, or may have lapsed.</p>
+  </div>
+
+  <div class="steps">
+
+    <div class="step">
+      <div class="num">1</div>
+      <h2>Get it online</h2>
+      <div class="body">
+        <p class="why">The whole plan is dead unless the Mac can reach the internet over wifi.</p>
+        <ul>
+          <li>Look at her internet box (the modem/router the ISP left). If there's a <strong>wifi network name + password</strong> on a sticker, you're set — connect from the wifi menu (top-right of the screen).</li>
+          <li><strong>Wired-only, no wifi?</strong> Two cheap fixes: a small wifi router (~$20–40), or a <strong>USB-C&nbsp;→&nbsp;Ethernet adapter</strong> (~$15) and keep the Mac plugged in at a desk. For someone who sits in one spot, wired is fine and more reliable.</li>
+          <li>Confirm the ISP bill is still being paid — the service can outlive the old computer.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">2</div>
+      <h2>Update it &amp; check what you're working with</h2>
+      <div class="body">
+        <p class="why">A 6-year-old Mac is either great-for-years or nearing its last OS update — worth knowing which.</p>
+        <ul>
+          <li><span class="path">Apple menu → About This Mac.</span> If the chip says <strong>Apple M1/M2</strong>, you're golden for years. If it says <strong>Intel</strong>, it still works fine but is near the end of new macOS updates — not a dealbreaker, just don't sink money into it.</li>
+          <li>Run <span class="path">System Settings → General → Software Update</span> and let it finish before you set anything up.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">3</div>
+      <h2>Two accounts — the single biggest safety move</h2>
+      <div class="body">
+        <p class="why">A non-admin account is what makes the machine scam-resistant and hard to break.</p>
+        <ul>
+          <li>Keep one account as <strong>your</strong> admin account, password only you know.</li>
+          <li><span class="path">System Settings → Users &amp; Groups → Add Account</span> → make Aunt a <strong>Standard</strong> user (<em>not</em> Administrator).</li>
+          <li>Why it matters: a Standard user <strong>can't install software, change system settings, or be talked into "download this to fix your computer."</strong> That one setting blocks most malware and tech-support scams cold.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">4</div>
+      <h2>Give her one Apple ID</h2>
+      <div class="body">
+        <p class="why">A single free account powers both the photos and the email — no juggling.</p>
+        <ul>
+          <li>Create a free <strong>Apple ID</strong> for her (it comes with an <code>@icloud.com</code> email address).</li>
+          <li>Sign into it on her Standard account. Write the login down somewhere you'll both find it.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">5</div>
+      <h2>Family photos that just appear</h2>
+      <div class="body">
+        <p class="why">This is the "GrandPad magic" part — she does nothing, pictures show up.</p>
+        <ul>
+          <li>On <strong>your</strong> iPhone or Mac: <span class="path">Photos → Shared Album → create one ("Family")</span> and invite her Apple ID.</li>
+          <li>Anyone in the family drops photos into that album; they land in her Photos app automatically. No action from her, ever.</li>
+          <li>Bonus: set that shared album as her <strong>screen saver</strong> — family photos just cycle when the Mac is idle.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">6</div>
+      <h2>Email, kept simple</h2>
+      <div class="body">
+        <p class="why">Email is the #1 way scams reach seniors — set it up plain and give her one rule.</p>
+        <ul>
+          <li>Open <span class="path">Mail</span>, signed in with her iCloud address. Turn on junk filtering.</li>
+          <li>The one rule to tell her: <strong>never type a password or card number because an email told you to.</strong> Real companies don't ask that way.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">7</div>
+      <h2>Browsing with guardrails</h2>
+      <div class="body">
+        <p class="why">Browsing is the other risky surface — bookmark the good, block the bad.</p>
+        <ul>
+          <li>Open Safari, visit her sites, and <strong>bookmark them big</strong> on the start page (news, weather, whatever she reads).</li>
+          <li>On her account: <span class="path">System Settings → Screen Time → Content &amp; Privacy → Web Content</span> → limit adult/scam sites.</li>
+          <li>Install an <strong>ad-blocker</strong> — it kills most of the fake "your computer is infected!" popups before she ever sees them.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">8</div>
+      <h2>Make it easy on the eyes and hands</h2>
+      <div class="body">
+        <p class="why">Small text and a cluttered Dock are what make older users feel lost.</p>
+        <ul>
+          <li>Bigger everything: <span class="path">System Settings → Displays</span> → choose a "Larger Text" scaling; and <span class="path">Accessibility → Display</span> → increase text + <strong>pointer size</strong> so the cursor is easy to find.</li>
+          <li>Clean the <strong>Dock down to ~4 icons</strong>: Photos, Safari, Mail, Messages. Drag the rest off.</li>
+          <li>Turn on <strong>auto-login</strong> (<span class="path">Users &amp; Groups → Automatically log in as → her account</span>) so there's no login screen to fumble. Skip only if you want a password.</li>
+          <li>Turn on <span class="path">Accessibility → Reduce Motion</span> for a calmer, less disorienting screen.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="num">9</div>
+      <h2>Remote help so you never have to drive over</h2>
+      <div class="body">
+        <p class="why">This replaces GrandPad's "family manages it" feature — you fix things from your couch.</p>
+        <ul>
+          <li><strong>Your setup (best, free):</strong> install <strong>Tailscale</strong> on her Mac and add it to your tailnet, then enable <span class="path">System Settings → General → Sharing → Screen Sharing</span>. You connect from anywhere and she does <em>nothing</em>.</li>
+          <li><strong>Simpler route:</strong> <strong>AnyDesk</strong> or <strong>TeamViewer</strong> (free for personal use) with unattended access set up — same idea, no clicking on her end.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="callout danger">
+    <span class="tag">The one 2-minute talk that matters</span>
+    <p>The Standard account already blocks most real damage. Give her exactly two habits:</p>
+    <p><strong>1.</strong> Nobody real will ever call or pop up about your computer. Hang up / close it.</p>
+    <p><strong>2.</strong> Never type a password or card number because a message told you to.</p>
+    <p>Then drop a big note or bookmark on screen: <em>"Confused? Call John."</em></p>
+  </div>
+
+  <section class="bail">
+    <h3>When to bail on the MacBook</h3>
+    <p class="sub">It's the free option and it'll work — but two situations make something else the smarter call.</p>
+    <div class="bail-grid">
+      <div class="bail-card">
+        <h4>No easy way to get her online</h4>
+        <p>A real <strong>GrandPad</strong> ships with its own cellular data — no router, no wifi, nothing to set up. <span class="price">~$25–40/mo</span> via Consumer Cellular or Amazon. Worth it purely to skip the connectivity headache.</p>
+      </div>
+      <div class="bail-card">
+        <h4>The laptop itself frustrates her</h4>
+        <p>If the trackpad and windows trip her up, an <strong>iPad with Assistive Access</strong> is the closest true GrandPad — giant buttons, locked to a few apps, far easier to lock down than a Mac. Reuse an old one or buy a cheap base iPad.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Built for John, 2026-07-23. macOS steps written for a recent macOS; menu names may shift a little by version. GrandPad pricing per <a href="https://www.seniorliving.org/cell-phone/consumer-cellular/grandpad/">SeniorLiving.org</a> and <a href="https://www.amazon.com/GrandPad-Seniors-Accessibility-Enabled-Wireless/dp/B09S6THZJ1">Amazon</a> (verified July 2026).</p>
+  </footer>
+</div>
+</body>
+</html>
