@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Getting Your Gun Rights Back — A Plan for Jimmy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@500;600;700;800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #f6f4ec;
+    --card: #fdfcf7;
+    --ink: #262b21;
+    --muted: #67705e;
+    --pine: #2c4736;
+    --pine-soft: #e3e9e0;
+    --walnut: #7a6340;
+    --blaze: #c94f0c;
+    --blaze-soft: #faeadd;
+    --danger: #9c3524;
+    --danger-soft: #f7e7e2;
+    --rule: #d9d5c6;
+    --display: "Bitter", Georgia, serif;
+    --body: "Source Sans 3", -apple-system, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #161a15;
+      --card: #1e241d;
+      --ink: #e7e4d6;
+      --muted: #a0a892;
+      --pine: #9dbfa8;
+      --pine-soft: #26302a;
+      --walnut: #c2a878;
+      --blaze: #ef7d2e;
+      --blaze-soft: #33261b;
+      --danger: #e07a63;
+      --danger-soft: #33211c;
+      --rule: #39402f;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 1.075rem;
+    line-height: 1.62;
+  }
+  .wrap { max-width: 42rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; }
+  .eyebrow {
+    font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--walnut); font-weight: 700; margin-bottom: 1rem;
+  }
+  h1 {
+    font-family: var(--display); font-weight: 800; font-size: clamp(2rem, 6vw, 2.7rem);
+    line-height: 1.12; text-wrap: balance; color: var(--pine); margin-bottom: .75rem;
+  }
+  .dek { font-size: 1.18rem; color: var(--muted); margin-bottom: 2.25rem; text-wrap: balance; }
+  h2 {
+    font-family: var(--display); font-weight: 700; font-size: 1.45rem;
+    color: var(--pine); margin: 3rem 0 .9rem; text-wrap: balance;
+    padding-top: 1.5rem; border-top: 1px solid var(--rule);
+  }
+  h3 { font-family: var(--display); font-weight: 700; font-size: 1.05rem; margin-bottom: .35rem; }
+  p + p { margin-top: .85rem; }
+  a { color: var(--blaze); font-weight: 600; text-decoration-thickness: 1px; text-underline-offset: 2px; }
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--blaze); outline-offset: 2px; }
+  strong { font-weight: 700; }
+  .small { font-size: .85rem; color: var(--muted); }
+  .cite { font-size: .8rem; color: var(--muted); font-style: normal; }
+
+  .verdict {
+    background: var(--card); border: 1.5px solid var(--pine);
+    border-radius: 10px; padding: 1.5rem 1.5rem 1.25rem; margin-bottom: .9rem;
+  }
+  .verdict-word {
+    font-family: var(--display); font-weight: 800; font-size: 1.6rem; color: var(--blaze);
+    display: block; margin-bottom: .4rem;
+  }
+  .stats { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.15rem; }
+  .stat {
+    flex: 1 1 9rem; background: var(--pine-soft); border-radius: 8px;
+    padding: .7rem .85rem;
+  }
+  .stat b {
+    display: block; font-family: var(--display); font-weight: 700; font-size: 1.2rem;
+    color: var(--pine); font-variant-numeric: tabular-nums;
+  }
+  .stat span { font-size: .8rem; color: var(--muted); }
+
+  .checks { list-style: none; padding: 0; display: grid; gap: .6rem; }
+  .checks li { padding-left: 1.9rem; position: relative; }
+  .checks li::before {
+    content: "✓"; position: absolute; left: .2rem; top: 0;
+    color: var(--pine); font-weight: 800; font-family: var(--display);
+  }
+
+  .step { display: flex; gap: 1.1rem; margin-top: 1.6rem; }
+  .step-num {
+    flex: 0 0 auto; width: 2.5rem; height: 2.5rem; border-radius: 50%;
+    background: var(--pine); color: var(--paper);
+    font-family: var(--display); font-weight: 800; font-size: 1.25rem;
+    display: flex; align-items: center; justify-content: center; margin-top: .1rem;
+  }
+  .step-body { min-width: 0; }
+  .who {
+    display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--walnut);
+    border: 1px solid var(--walnut); border-radius: 999px;
+    padding: .1rem .55rem; margin-left: .5rem; vertical-align: 2px; white-space: nowrap;
+  }
+  .callbox {
+    background: var(--card); border: 1px solid var(--rule); border-left: 4px solid var(--blaze);
+    border-radius: 8px; padding: .8rem 1rem; margin-top: .7rem; font-size: .95rem;
+  }
+  .callbox b { font-variant-numeric: tabular-nums; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 1.35rem 1.5rem; margin-top: 1.2rem;
+  }
+  .card.good { border-color: var(--pine); background: var(--pine-soft); }
+  .card.bad { border: 1.5px solid var(--danger); background: var(--danger-soft); }
+  .card.bad h3 { color: var(--danger); }
+  .card ul { padding-left: 1.2rem; display: grid; gap: .5rem; margin-top: .6rem; }
+
+  table { width: 100%; border-collapse: collapse; margin-top: .9rem; font-variant-numeric: tabular-nums; }
+  th { text-align: left; font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 700; padding: .4rem 0; border-bottom: 1.5px solid var(--rule); }
+  th:last-child, td:last-child { text-align: right; }
+  td { padding: .55rem 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  tr.total td { border-bottom: none; font-weight: 700; color: var(--blaze); font-family: var(--display); font-size: 1.05rem; }
+
+  .tl { list-style: none; padding: 0; margin-top: 1rem; border-left: 2px solid var(--rule); }
+  .tl li { position: relative; padding: 0 0 1.15rem 1.4rem; }
+  .tl li::before {
+    content: ""; position: absolute; left: -6px; top: .45rem;
+    width: 10px; height: 10px; border-radius: 50%; background: var(--pine);
+  }
+  .tl li.hot::before { background: var(--blaze); }
+  .tl b { font-family: var(--display); }
+
+  .sources { font-size: .8rem; color: var(--muted); margin-top: .8rem; column-gap: 2rem; }
+  .sources li { margin-bottom: .3rem; }
+  footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--rule); font-size: .82rem; color: var(--muted); }
+
+  @media print {
+    body { background: #fff; color: #111; font-size: 10.5pt; }
+    .wrap { max-width: none; padding: 0; }
+    .card, .verdict, .callbox { break-inside: avoid; }
+    a { color: inherit; text-decoration: none; }
+    a[href^="http"]::after { content: " (" attr(href) ")"; font-size: .75em; color: #555; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">Prepared for Jimmy · Greenbrier County, West Virginia · July 2026</p>
+  <h1>Getting Your Gun Rights Back</h1>
+  <p class="dek">A step-by-step plan to legally erase a 20-year-old felony — and put you back in the deer woods with your own rifle.</p>
+
+  <div class="verdict">
+    <span class="verdict-word">Yes. This is fixable.</span>
+    <p>West Virginia has a law written for exactly your situation: one old, non-violent felony, sentence finished long ago, clean ever since. It's called <strong>expungement</strong> — a judge orders the conviction erased, and the law treats it as if it never happened. When that order is signed, your right to own a gun comes back under <em>both</em> West Virginia law and federal law. Your record comes clean for everything else, too.</p>
+    <div class="stats">
+      <div class="stat"><b>$110–$330</b><span>total cost — near zero if the fee waiver is granted</span></div>
+      <div class="stat"><b>2–5 months</b><span>realistic start-to-finish</span></div>
+      <div class="stat"><b>No lawyer</b><span>official state forms + John does the paperwork</span></div>
+    </div>
+  </div>
+  <p class="small">And while it's pending: <strong>you can legally bowhunt this fall.</strong> Details below.</p>
+
+  <h2>Why you qualify</h2>
+  <ul class="checks">
+    <li><strong>Your offense is eligible.</strong> Buying/selling stolen goods is a property offense. West Virginia's expungement law has a list of crimes that can never be expunged — violent crimes, sex offenses, DUI, crimes against kids. Yours is not on it.</li>
+    <li><strong>One felony is exactly what the law allows.</strong> The statute covers a single non-violent felony conviction.</li>
+    <li><strong>The waiting period is long gone.</strong> You only have to wait 5 years after the sentence ends. You've waited roughly 20.</li>
+    <li><strong>Sentence complete, nothing pending.</strong> That's the last box, and you check it.</li>
+  </ul>
+  <p class="cite">WV Code § 61-11-26 (non-violent felony expungement, expanded 2019).</p>
+
+  <h2>The plan, step by step</h2>
+  <p>Six steps. John handles the paperwork and phone calls; your part is mostly telling the truth and signing your name.</p>
+
+  <div class="step">
+    <div class="step-num">1</div>
+    <div class="step-body">
+      <h3>Find the old case file <span class="who">John's job</span></h3>
+      <p>Everything files in the county where the conviction happened, so we need the case number and copies of the old paperwork. West Virginia put circuit-court records online in 2025 — if your case is from 1999 or later, we can find it from the couch: <strong>courtswv.gov → “Court Records”</strong> (the WVPASS system — free to search, 25¢ a page to download). If it's older, one phone call to the circuit clerk of the county does it.</p>
+      <div class="callbox">If the case was here in Greenbrier County: Circuit Clerk, Lewisburg — <b>304-647-6626</b>. Certified copies are $1 a page; the whole packet usually runs $5–$15. We'll need the <strong>indictment and the sentencing order</strong>, certified.</div>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">2</div>
+    <div class="step-body">
+      <h3>Read the file for two things <span class="who">Together</span></h3>
+      <p>First: the paperwork must not say a weapon was <em>“used or exhibited”</em> during the offense — that's the one wrinkle that could block expungement of a property crime. Second: any old fines and court costs need to be paid off (if anything's outstanding, we pay it — it's usually small). This weekend, John also needs the straight story: which county, roughly what year, and that there's nothing else on your record anywhere — no other convictions, nothing domestic-violence related, nothing pending. No judgment; the plan just has to be built on the real record.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">3</div>
+    <div class="step-body">
+      <h3>Fill out the official forms <span class="who">John drafts · You sign</span></h3>
+      <p>The state publishes the exact forms free: petition <strong>SCA-C907</strong> with instruction packet <strong>SCA-C900</strong> (courtswv.gov). John fills them out; the main written part is the story of the last 20 years — steady work, family, hunting heritage, staying clean. You read it, make sure it's true, and sign in front of a notary (free at your bank).</p>
+      <p class="small">If money's tight, one extra form (SCA-C&amp;M-201, a financial affidavit) asks the court to waive the $200 filing fee entirely.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">4</div>
+    <div class="step-body">
+      <h3>File it and mail the copies <span class="who">John's job</span></h3>
+      <p>File at the circuit clerk's office in the conviction county — <strong>$200</strong>, or <strong>$0</strong> with the fee waiver. The instructions list the offices that get copies (State Police, the prosecutor, the arresting agency, the court) — certified mail, done in an afternoon.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">5</div>
+    <div class="step-body">
+      <h3>Wait out the clock <span class="who">Nobody's job</span></h3>
+      <p>Anyone who objects has 30 days to say so. Then the court must act within 60 days of filing — the judge can grant it on the papers alone, or set a short hearing. If there's a hearing, you show up, dress plain, and tell the truth: twenty-plus clean years speaks for itself. The legal standard is showing you're rehabilitated — and you've been living the proof for two decades.</p>
+    </div>
+  </div>
+
+  <div class="step">
+    <div class="step-num">6</div>
+    <div class="step-body">
+      <h3>Order granted — lock in the proof <span class="who">Together</span></h3>
+      <p>When the judge signs: pay the <strong>$100</strong> State Police processing fee, and <em>immediately</em> order <strong>4–5 certified copies of the expungement order</strong>. That sounds backwards, but once the record is sealed, the order itself is your proof it happened — you'll want copies for gun purchases and one for the truck glovebox, forever.</p>
+    </div>
+  </div>
+
+  <p class="card"><strong>One important note:</strong> West Virginia gives each person this relief <strong>once in a lifetime</strong>. That's why we do it carefully and right the first time — real records, honest paperwork, every box checked. Done that way, your case is about as strong as they come.</p>
+
+  <h2>This fall — already legal, starting now</h2>
+  <div class="card good">
+    <ul>
+      <li><strong>Archery &amp; crossbow deer season: Sept 26 – Dec 31, 2026.</strong> Bows and crossbows are not “firearms” under federal or West Virginia law — a felony conviction doesn't touch them. You can buy a bow tomorrow and hunt the whole season, fully legal.</li>
+      <li><strong>Big-bore air rifle.</strong> WV allows air rifles .45-cal and up (200-grain bullet minimum) for deer during firearms seasons — and air rifles aren't legally firearms either. A modern PCP air gun drops deer clean inside 75 yards.</li>
+      <li><strong>Muzzleloaders — not yet.</strong> Oddly, the law technically excludes old-style muzzleloaders too, but there's a trap (modern inline primers count as banned “ammunition”), and it's not worth any risk months before the real fix. Wait for the order, then hunt every season there is.</li>
+    </ul>
+  </div>
+
+  <h2>Until the judge signs — the don't list</h2>
+  <div class="card bad">
+    <h3>These keep the plan safe. A few months of discipline, then it's over.</h3>
+    <ul>
+      <li><strong>No guns and no ammunition</strong> under your control — the ammo part surprises people: a single loose shotgun shell in the truck is its own federal felony.</li>
+      <li><strong>“Not mine” doesn't help if it's in your space.</strong> Guns in your house, your truck, or a camp you control can be charged as yours. If others in the household own guns, they stay locked up, someone else keeps the key.</li>
+      <li><strong>Don't hold, borrow, or haul anyone's gun</strong> — even carrying a buddy's rifle back to the truck counts as possession.</li>
+      <li><strong>At family hunts, you're the bow guy this year.</strong> Next year you're not.</li>
+    </ul>
+  </div>
+
+  <h2>After the order — your first rifle in 20 years</h2>
+  <p>With the expungement in hand, the law treats the conviction as if it never happened. At the gun counter you answer <strong>“No”</strong> to the felony question on the federal form, honestly. One heads-up: the FBI background-check computers can take a while to catch up with a fresh expungement, so the first purchase may come back <em>delayed</em> or even wrongly denied. <strong>That's normal and fixable, not a problem</strong> — the dealer can release after 3 business days on a delay, and a certified copy of your order wins any appeal. There's even a one-time FBI registration (a “UPIN” number) that makes every check after that come back clean and instant. Once you're restored, West Virginia's permitless concealed-carry applies to you like anyone else.</p>
+
+  <h2>What it costs</h2>
+  <table>
+    <thead><tr><th>Item</th><th>Cost</th></tr></thead>
+    <tbody>
+      <tr><td>Certified copies of the old case file</td><td>$5–15</td></tr>
+      <tr><td>Court filing fee <span class="small">(waived entirely if the fee waiver is granted)</span></td><td>$0–200</td></tr>
+      <tr><td>Notary at your bank</td><td>$0–10</td></tr>
+      <tr><td>State Police fee — only if granted</td><td>$100</td></tr>
+      <tr><td>Certified copies of your expungement order</td><td>~$5</td></tr>
+      <tr class="total"><td>Total</td><td>$110–$330</td></tr>
+    </tbody>
+  </table>
+  <p class="small">A lawyer would bill $1,500–$3,000 for this exact filing. The forms are official, public, and free — that's the whole reason the state publishes them.</p>
+
+  <h2>The timeline</h2>
+  <ul class="tl">
+    <li class="hot"><b>This weekend</b> — talk it through; John gets the county, the year, and your go-ahead.</li>
+    <li><b>Early August</b> — pull the case file online or from the clerk; draft the petition.</li>
+    <li><b>Mid August</b> — you sign at the notary; John files and mails the copies.</li>
+    <li><b>September</b> — 30-day objection window runs out.</li>
+    <li><b>By roughly Halloween–Thanksgiving</b> — the court's 60-day deadline forces a decision.</li>
+    <li class="hot"><b>Best case</b> — you're buying your own deer rifle before the late seasons. Worst case, spring gobblers 2027 with your own shotgun. Either way, bow season is yours the whole time.</li>
+  </ul>
+
+  <h2>If Plan A ever hits a wall</h2>
+  <p>Two backups exist, and your profile is strong for both. West Virginia also lets you petition your home-county court (right in Lewisburg) just for gun rights — but that one has a catch: it fixes <em>state</em> law only, and federal courts have held it doesn't clear the <em>federal</em> ban on its own. It's a supplement, never the main move. And in 2025 the federal government revived its own rights-restoration program for the first time in 33 years — a $20 application expected to open during 2026, and the example case their own rulebook describes is basically you: a decades-old, non-violent felony and a clean life since. We'd only need it if the state path failed.</p>
+
+  <footer>
+    <p>Prepared July 23, 2026 by John, with legal research verified that day against the current text of WV Code §§ 61-11-26, 61-7-7, 61-3-18, 59-1-11 and 18 U.S.C. §§ 921(a)(20), 922(g), 925(c); <em>Caron v. United States</em>, 524 U.S. 308 (1998); <em>United States v. Herron</em>, 38 F.3d 115 (4th Cir. 1994); official forms SCA-C900/C907; WVPASS (courtswv.gov); WV DNR 2026–27 hunting regulations; and the Department of Justice's firearm-rights-restoration rulemaking. This is a family plan, not legal advice — Legal Aid of West Virginia (legalaidwv.org) gives free help if we ever want a second set of eyes.</p>
+  </footer>
+
+</div>
+</body>
+</html>
