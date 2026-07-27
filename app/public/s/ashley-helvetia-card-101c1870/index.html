@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<title>Hurricane to Helvetia: Monday drive card</title>
+</head>
+<body>
+<style>
+  :root {
+    --paper: #f7f7f5;
+    --card: #ffffff;
+    --ink: #14161a;
+    --stone: #6b6f76;
+    --rule: #dcdcd8;
+    --signal: #c8102e;
+    --signal-wash: #fdf0f2;
+    --go: #1f6b4a;
+    --go-wash: #eef5f1;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #101215;
+      --card: #181b1f;
+      --ink: #eceef1;
+      --stone: #9aa0a8;
+      --rule: #2c3036;
+      --signal: #ff6b7f;
+      --signal-wash: #2a1519;
+      --go: #6ddba4;
+      --go-wash: #12241c;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #101215;
+    --card: #181b1f;
+    --ink: #eceef1;
+    --stone: #9aa0a8;
+    --rule: #2c3036;
+    --signal: #ff6b7f;
+    --signal-wash: #2a1519;
+    --go: #6ddba4;
+    --go-wash: #12241c;
+  }
+  :root[data-theme="light"] {
+    --paper: #f7f7f5;
+    --card: #ffffff;
+    --ink: #14161a;
+    --stone: #6b6f76;
+    --rule: #dcdcd8;
+    --signal: #c8102e;
+    --signal-wash: #fdf0f2;
+    --go: #1f6b4a;
+    --go-wash: #eef5f1;
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 17px;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap {
+    max-width: 40rem;
+    margin: 0 auto;
+    padding: 1.5rem 1.1rem 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+  }
+
+  .masthead { border-top: 6px solid var(--signal); padding-top: 0.9rem; }
+  .masthead .eyebrow {
+    font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--signal); margin: 0 0 0.4rem;
+  }
+  .masthead h1 {
+    margin: 0; font-size: 2.1rem; line-height: 1.08; font-weight: 800;
+    letter-spacing: -0.025em; text-wrap: balance;
+  }
+  .masthead .sub {
+    margin: 0.5rem 0 0; color: var(--stone); font-size: 0.95rem; font-weight: 500;
+  }
+
+  .lead {
+    background: var(--go-wash); border: 1px solid var(--rule);
+    border-left: 5px solid var(--go); border-radius: 3px;
+    padding: 1rem 1.05rem;
+  }
+  .lead .big {
+    font-family: var(--mono); font-size: 2.5rem; font-weight: 700;
+    letter-spacing: -0.03em; line-height: 1; display: block;
+    font-variant-numeric: tabular-nums;
+  }
+  .lead p { margin: 0.55rem 0 0; font-size: 1rem; }
+  .lead strong { font-weight: 700; }
+
+  section {
+    background: var(--card); border: 1px solid var(--rule);
+    border-radius: 3px; padding: 1.05rem 1.05rem 1.15rem;
+  }
+  section > h2 {
+    margin: 0 0 0.75rem; font-size: 0.74rem; font-weight: 800;
+    letter-spacing: 0.15em; text-transform: uppercase; color: var(--stone);
+    border-bottom: 1px solid var(--rule); padding-bottom: 0.5rem;
+  }
+  section.danger { border-left: 5px solid var(--signal); background: var(--signal-wash); }
+  section.danger > h2 { color: var(--signal); }
+  section p { margin: 0 0 0.7rem; }
+  section p:last-child { margin-bottom: 0; }
+
+  ul { margin: 0; padding-left: 1.15rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  li::marker { color: var(--stone); }
+
+  .legs { display: flex; flex-direction: column; gap: 0; }
+  .leg {
+    display: grid; grid-template-columns: 5.2rem 1fr; gap: 0.85rem;
+    padding: 0.65rem 0; border-bottom: 1px solid var(--rule); align-items: baseline;
+  }
+  .leg:last-child { border-bottom: 0; padding-bottom: 0; }
+  .leg .when {
+    font-family: var(--mono); font-size: 0.9rem; font-weight: 700;
+    font-variant-numeric: tabular-nums; color: var(--stone); letter-spacing: -0.02em;
+  }
+  .leg .what { font-size: 1rem; }
+  .leg .what b { font-weight: 700; }
+  .leg .note { display: block; color: var(--stone); font-size: 0.87rem; margin-top: 0.15rem; }
+  .leg.warn .when, .leg.warn .what b { color: var(--signal); }
+
+  .calls { display: flex; flex-direction: column; gap: 0.8rem; }
+  .call { display: flex; flex-direction: column; gap: 0.1rem; }
+  .call .who {
+    font-size: 0.74rem; font-weight: 800; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--stone);
+  }
+  .call a {
+    font-family: var(--mono); font-size: 1.35rem; font-weight: 700;
+    color: var(--ink); text-decoration: none; letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+  .call a:hover, .call a:focus-visible { color: var(--signal); text-decoration: underline; }
+  .call .why { font-size: 0.87rem; color: var(--stone); }
+
+  .kv { display: grid; grid-template-columns: auto 1fr; gap: 0.4rem 0.9rem; font-size: 0.97rem; }
+  .kv dt { font-weight: 700; color: var(--stone); }
+  .kv dd { margin: 0; }
+  .kv code {
+    font-family: var(--mono); background: var(--paper);
+    padding: 0.1rem 0.35rem; border-radius: 2px; border: 1px solid var(--rule);
+  }
+
+  .steps { counter-reset: s; list-style: none; padding: 0; gap: 0.75rem; }
+  .steps li {
+    counter-increment: s; display: grid;
+    grid-template-columns: 1.7rem 1fr; gap: 0.7rem; align-items: start;
+  }
+  .steps li::before {
+    content: counter(s); font-family: var(--mono); font-weight: 700;
+    font-size: 0.9rem; color: var(--card); background: var(--ink);
+    width: 1.55rem; height: 1.55rem; border-radius: 50%;
+    display: grid; place-items: center; margin-top: 0.05rem;
+  }
+
+  footer { color: var(--stone); font-size: 0.85rem; text-align: center; padding-top: 0.5rem; }
+
+  a:focus-visible, :focus-visible { outline: 2px solid var(--signal); outline-offset: 2px; }
+
+  @media print {
+    body { background: #fff; }
+    section, .lead { break-inside: avoid; }
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="masthead">
+    <p class="eyebrow">Drive card &middot; keep offline</p>
+    <h1>Hurricane to Helvetia</h1>
+    <p class="sub">Monday 27 July 2026 &middot; screenshot this whole page before you leave</p>
+  </header>
+
+  <div class="lead">
+    <span class="big">9:00 AM</span>
+    <p><strong>Leave at 9:00.</strong> The drive is <strong>3 hours 30 to 3 hours 45</strong>, not the 2.5 hours the map promised, so you will get to Helvetia around <strong>12:30</strong>.</p>
+    <p><strong>Do not leave at 7:00.</strong> There is dense fog on your route until about 8:00, worst right at 7:00, and it is thickest on the two interstates you spend the first half of the drive on. By 9:00 it has burned off everywhere you are going.</p>
+  </div>
+
+  <section class="danger">
+    <h2>Read this part twice</h2>
+    <p><strong>There is no cell service in Helvetia.</strong> Not weak service. None. It fades out somewhere in the last 20 miles of backroad and it does not come back until you leave the valley.</p>
+    <p><strong>911 will not reach anyone by cell from the village.</strong> If something goes wrong, your options are the inn's wifi, the library, or satellite. All three are below.</p>
+    <p>Screenshot every section of this page now, while you still have signal. Do not count on loading it later.</p>
+  </section>
+
+  <section>
+    <h2>The drive</h2>
+    <div class="legs">
+      <div class="leg">
+        <span class="when">9:00</span>
+        <span class="what"><b>Leave Hurricane</b><span class="note">47 Stelling Dr. Fog is gone by now. Earlier is worse, not better.</span></span>
+      </div>
+      <div class="leg">
+        <span class="when">24 mi</span>
+        <span class="what"><b>I-64 East</b></span>
+      </div>
+      <div class="leg">
+        <span class="when">67 mi</span>
+        <span class="what"><b>I-79 North</b><span class="note">The long easy stretch. Last good coffee and clean bathrooms are on this leg. Use them.</span></span>
+      </div>
+      <div class="leg">
+        <span class="when">20 mi</span>
+        <span class="what"><b>US-19 / WV-4, Gauley Turnpike</b><span class="note">You come off the interstate here. Roads get smaller from now on.</span></span>
+      </div>
+      <div class="leg">
+        <span class="when">10 mi</span>
+        <span class="what"><b>WV-4, then WV-20 South toward Rock Cave</b></span>
+      </div>
+      <div class="leg warn">
+        <span class="when">15 mi</span>
+        <span class="what"><b>CR-11 Alexander Road. Stay on it.</b><span class="note">Paved the entire way. There is a turnoff called Carter Road that turns to gravel. Do not take it, and do not let the phone put you on it. Staying on Alexander Road is always the right answer.</span></span>
+      </div>
+      <div class="leg">
+        <span class="when">3.5 mi</span>
+        <span class="what"><b>CR-46 Adolph Rd, then CR-45 Pickens Rd</b></span>
+      </div>
+      <div class="leg warn">
+        <span class="when">1.6 mi</span>
+        <span class="what"><b>Drive past the village. You have not overshot.</b><span class="note">The inn is about 1.6 miles south of Helvetia on Pickens Rd. You will go through the village and keep going.</span></span>
+      </div>
+      <div class="leg">
+        <span class="when">12:30</span>
+        <span class="what"><b>Helvetia</b><span class="note">John and the boys are on an 11:00 walking tour that should finish around 12:30. Look for them at the Star Band Hall, the red building in the middle of the village.</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="danger">
+    <h2>Your phone will lie to you</h2>
+    <p><strong>Never follow anything labeled "WV 46."</strong> That is a different road on the far side of the state, about 110 road miles away. You want <strong>County Route 46</strong>, which the signs call <strong>Adolph Road</strong>.</p>
+    <p>Refuse these three if the map offers them, in this order of danger:</p>
+    <ul>
+      <li><strong>"Chemical &amp; Helvetia Railroad."</strong> It is a real county route numbered CR 46/7, so it looks like a version of the road you want. It is <strong>4.6 miles of solid gravel</strong> and it branches off the correct road less than two miles from the village. This is the one most likely to catch you.</li>
+      <li><strong>Carter Road.</strong> The gravel cutoff off Alexander Road. Stay on Alexander.</li>
+      <li><strong>Old Helvetia Road.</strong> Branches off the paved road a hundred feet from where you are going, and the name makes it sound correct. It is not.</li>
+    </ul>
+    <p style="margin-top:0.75rem"><strong>When the road signs and the phone disagree, the signs win.</strong> The village says so itself: GPS is not reliable there.</p>
+  </section>
+
+  <section class="danger">
+    <h2>You may not be able to get in yet</h2>
+    <p><strong>Check-in is 3:00 PM.</strong> You will arrive around 12:30, so there is a wait either way.</p>
+    <p>John is asking the innkeeper for an early check-in. <strong>Until he tells you it is approved, plan on not getting into the room before 3:00.</strong> Do not just try the lockbox and let yourself into a room someone else is still in.</p>
+    <p><strong>John and the boys are already in Helvetia,</strong> on an 11:00 walking tour that should end around 12:30. If you do not spot them the moment you arrive, that is where they are. It starts and ends at the <strong>Star Band Hall</strong>, the red building in the middle of the village.</p>
+  </section>
+
+  <section>
+    <h2>Where to wait</h2>
+    <p><strong>Helvetia Public Library, 4901 Pickens Rd. Open Monday 10:00 to 6:00.</strong> Wifi, computers, a bathroom, and a roof. It is the one place in the village reliably open on a Monday, and it is where to go if you arrive and cannot get in.</p>
+    <p>The post office, inside the Swiss Roots building, is open 10:00 to 2:00 on weekdays. <strong>The Hutte restaurant is closed Sunday through Wednesday,</strong> so do not plan on walking there for a meal or a phone.</p>
+    <p>If you get there before John does and want to say you made it, the library wifi is your first chance to send anything.</p>
+  </section>
+
+  <section>
+    <h2>The room, once it is yours</h2>
+    <dl class="kv">
+      <dt>Where</dt><dd>Swiss Roots Inn, the Gottlieb Suite<br>4916 Pickens Rd, Helvetia</dd>
+      <dt>Key</dt><dd>Lockbox at the <strong>front door of the inn</strong>. John is texting you the code separately. Save it in your Notes app, not just in the message.</dd>
+      <dt>Check-out</dt><dd>Tuesday 11:00 AM</dd>
+      <dt>Wifi</dt><dd>Network <code>ORBI02</code><br>Password <code>freeshrub509</code></dd>
+    </dl>
+    <p style="margin-top:0.85rem">That wifi is your connection to the outside world while you are in the village. Get on it as soon as you are inside and text John that you made it.</p>
+  </section>
+
+  <section>
+    <h2>Five minutes at home, before you go</h2>
+    <p>Your iPhone can text 911 through a satellite with no bars at all. It is <strong>text only</strong>, and it works on <strong>iPhone 14 and newer</strong>. It does not work on an iPhone 13 or older.</p>
+    <ol class="steps">
+      <li><strong>Check the phone.</strong> Settings, then General, then About, then Model Name. You need an iPhone 14 or newer.</li>
+      <li><strong>Update it.</strong> Settings, then General, then Software Update.</li>
+      <li><strong>Fill in your Medical ID.</strong> Health app, tap your picture, tap Medical ID. Add John as an emergency contact. If you ever use satellite SOS, responders get this automatically and John is told where you are.</li>
+      <li><strong>Share your location with John in Find My.</strong> Even off the grid your phone can push a location to him by satellite.</li>
+      <li><strong>Practice once.</strong> Outside, where you can see plenty of sky: swipe down from the top right corner, tap the <strong>Cellular</strong> button, tap <strong>Satellite</strong>, then tap <strong>Try Demo</strong>. It does not call 911.</li>
+    </ol>
+    <p style="margin-top:0.85rem">That practice run is worth more than everything else on this page. <strong>If the demo will not run, tell John before you leave.</strong> That is your sign the feature is not live on your phone.</p>
+  </section>
+
+  <section class="danger">
+    <h2>If you have no service and need help</h2>
+    <ol class="steps">
+      <li><strong>Dial 911 anyway.</strong> Sometimes a call goes through when nothing else will.</li>
+      <li><strong>If it will not connect,</strong> the screen offers <strong>Emergency Text via Satellite</strong>. Tap it, then tap <strong>Report Emergency</strong>.</li>
+      <li><strong>Answer by tapping.</strong> The questions are short and multiple choice.</li>
+      <li><strong>Get out of the car, into the open.</strong> It will not connect from inside a car or a building. Check for traffic first on a mountain road. If you are hurt and cannot get out, still try.</li>
+      <li><strong>Get away from heavy cover.</strong> Thin branches only slow it down. What actually blocks it is dense leaves, cliffs, steep valley walls and canyons. Helvetia sits in a valley, so terrain is the real problem, not trees. Walk toward the most open ground you can reach.</li>
+      <li><strong>Hold the phone normally, down in your hand,</strong> the way you hold it to read a text. <strong>Do not raise it toward the sky.</strong> Do not put it in a pocket or a bag.</li>
+      <li><strong>The screen tells you which way to turn.</strong> Turn slowly when it asks. <strong>If it tells you to move, move.</strong></li>
+      <li><strong>Wait longer than feels right.</strong> About thirty seconds under open sky, over a minute under trees, sometimes a few minutes. It is still working. <strong>Do not quit and start over.</strong></li>
+      <li><strong>Keep following the screen after it connects.</strong> You can lock the phone and the connection holds.</li>
+    </ol>
+    <p style="margin-top:0.85rem">If you start a session by accident, <strong>do not close it</strong>. Wait for a real person and tell them you are fine.</p>
+  </section>
+
+  <section>
+    <h2>Car trouble, and texting John</h2>
+    <p><strong>Flat tire, locked out, out of gas.</strong> Open Messages, type <strong>Roadside</strong> in the To field, then tap Roadside Assistance. It reaches AAA or Verizon. Same outdoor steps as above.</p>
+    <p><strong>To text John when you are safe but out of service,</strong> send the message the way you always do. When it fails, the phone offers to send it by satellite.</p>
+    <p>Two catches. Photos, videos, voice messages and group texts will not go by satellite, only plain text and emoji. And that path is <strong>not</strong> the emergency one. If you are actually in trouble, use 911 and Emergency Text via Satellite, because that is what reaches responders.</p>
+  </section>
+
+  <div class="lead">
+    <span class="big">Outside</span>
+    <p>Open sky. Phone low in your hand. Turn when the screen says turn. <strong>Wait longer than feels right.</strong></p>
+  </div>
+
+  <section>
+    <h2>Numbers</h2>
+    <div class="calls">
+      <div class="call">
+        <span class="who">John</span>
+        <a href="tel:+13042684985">304-268-4985</a>
+        <span class="why">He has no service in the village either. Texts will land when one of you gets to wifi.</span>
+      </div>
+      <div class="call">
+        <span class="who">Kevin Betler &middot; the innkeeper</span>
+        <a href="tel:+13046137584">304-613-7584</a>
+        <span class="why">Lives in Helvetia. The person to call about the inn or the road.</span>
+      </div>
+      <div class="call">
+        <span class="who">Helvetia Public Library</span>
+        <a href="tel:+13049245063">304-924-5063</a>
+        <span class="why">Open Monday 10 to 6. Has wifi and computers. The one reliably open place in the village.</span>
+      </div>
+      <div class="call">
+        <span class="who">Swiss Roots &middot; the inn's own line</span>
+        <a href="tel:+13049249100">304-924-9100</a>
+        <span class="why">The business number, separate from Kevin's cell. Try both.</span>
+      </div>
+      <div class="call">
+        <span class="who">St. Joseph's Hospital, Buckhannon</span>
+        <a href="tel:+13044732000">304-473-2000</a>
+        <span class="why">Nearest emergency room, about 64 minutes. Open 24 hours. 1 Amalia Drive.</span>
+      </div>
+      <div class="call">
+        <span class="who">Davis Medical Center, Elkins</span>
+        <a href="tel:+13046363300">304-636-3300</a>
+        <span class="why">About 75 minutes, and the one with a trauma center. For anything serious, this is worth the extra ten minutes.</span>
+      </div>
+      <div class="call">
+        <span class="who">Randolph County Emergency Management</span>
+        <a href="tel:+13046360483">304-636-0483</a>
+        <span class="why">Office hours. After hours use 304-636-2000. For road conditions and washouts.</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Before you get there</h2>
+    <ul>
+      <li><strong>Arrive with a full tank. Fill up at Flatwoods, I-79 Exit 67.</strong> That is the last easy stop and it is right at the ramp.</li>
+      <li><strong>Treat the area around Helvetia as having no fuel.</strong> There is none in the village. The often-repeated line about a gas station in Pickens five miles south traces back to wording that has not changed on the village website since 2021, and that store changed hands in January. <strong>The nearest fuel anyone can vouch for is Buckhannon, about an hour back the way you came.</strong> Do not run the tank down planning to fill near the village.</li>
+      <li><strong>Bring cash.</strong> There is no ATM in the village.</li>
+      <li><strong>The fog is the whole reason for the 9:00 start.</strong> Visibility drops under a mile at Hurricane, Charleston, Sutton and Weston from about 5:00 to 8:00, and 7:00 is the worst hour of it. That is the interstate half of your drive. By 9:00 it has lifted everywhere on your route.</li>
+      <li><strong>The Hutte restaurant is closed Sunday through Wednesday,</strong> not just Monday. John is buying groceries in Elkins and cooking at the suite, so there is no food to find in town.</li>
+      <li><strong>Last week's flooding was severe in these counties.</strong> If you come on water across the road, turn around. Do not guess at the depth. It is never worth it.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Driving home Tuesday</h2>
+    <p><strong>You leave at 8:00 Tuesday morning, sharp.</strong> Severe storms arrive Tuesday afternoon and the whole point is to be home ahead of them. Load the car Monday night so nothing holds you up.</p>
+    <p>You will be in two cars. <strong>Stay behind John and let him lead.</strong> For the first 40 minutes out of the valley neither of you will have a phone that works.</p>
+    <p><strong>If you get separated, pull over in the next town with signal and wait there.</strong> Do not keep driving to find each other and do not try to call. Agree on that town before you pull out.</p>
+  </section>
+
+  <footer>
+    Made Sunday evening for Monday's drive. If anything here disagrees with what you see on the road, believe the road.
+  </footer>
+
+</div>
+</body>
+</html>
