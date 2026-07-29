@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="color-scheme" content="light dark">
 <title>Aerial Survey, Greenbrier County</title>
-<link rel="stylesheet" href="/drone/0725/vendor/leaflet.css">
+<link rel="stylesheet" href="vendor/leaflet.css">
 <style>
 :root{
   --ground:#E6E9E4;
@@ -173,6 +173,12 @@ input[type=range]{
   width:100%;
   accent-color:var(--accent);
   cursor:pointer;
+}
+.tiny{
+  font-size:.66rem;
+  color:var(--muted);
+  margin:.18rem 0 0;
+  line-height:1.4;
 }
 .slabel{
   display:flex;
@@ -369,6 +375,25 @@ input[type=range]{
   margin-top:.4rem;
 }
 
+/* ---------- privacy ---------- */
+.privacy{margin-top:2.8rem}
+.privacy-box{
+  border:1px solid var(--line);
+  border-left:3px solid var(--accent);
+  border-radius:var(--radius);
+  background:var(--surface);
+  padding:1.05rem 1.15rem .35rem;
+  max-width:42rem;
+  font-size:.88rem;
+}
+.privacy-box p{margin:0 0 .8rem}
+.privacy-box strong{font-weight:640}
+.privacy-box .warn{
+  color:var(--muted);
+  border-top:1px solid var(--line);
+  padding-top:.75rem;
+}
+
 .foot{
   margin-top:2.6rem;
   padding-top:1rem;
@@ -405,7 +430,7 @@ input[type=range]{
           <input type="checkbox" id="orthoOn" checked>
           <label for="orthoOn">Drone imagery</label>
         </div>
-        <div class="slabel mono"><span>Fade to satellite</span><span id="opVal">100</span></div>
+        <div class="slabel mono"><span>Opacity</span><span id="opVal">100</span></div>
         <input type="range" id="opacity" min="0" max="100" value="100" aria-label="Drone imagery opacity">
       </div>
 
@@ -422,6 +447,14 @@ input[type=range]{
         <input type="checkbox" id="contourOn">
         <span class="swatch" aria-hidden="true"></span>
         <label for="contourOn">Contours, 5 ft</label>
+      </div>
+
+      <div>
+        <div class="row">
+          <input type="checkbox" id="contextOn">
+          <label for="contextOn">Surrounding land</label>
+        </div>
+        <p class="tiny">Off by default. Turning it on asks Esri for satellite tiles of the area around the property.</p>
       </div>
 
       <div class="btnrow">
@@ -471,19 +504,29 @@ input[type=range]{
 
   <div class="shots">
     <figure>
-      <img src="/drone/0725/photos/oblique-1.jpg" alt="Pasture sloping away toward a treeline with farm buildings at the left and hills beyond" loading="lazy" width="1800" height="1350">
+      <img src="photos/oblique-1.jpg" alt="Pasture sloping away toward a treeline with farm buildings at the left and hills beyond" loading="lazy" width="1800" height="1350">
       <figcaption>Looking across the pasture at the end of the flight, 15:01.</figcaption>
     </figure>
     <figure>
-      <img src="/drone/0725/photos/oblique-2.jpg" alt="Second oblique view over the same ground a minute later" loading="lazy" width="1800" height="1350">
+      <img src="photos/oblique-2.jpg" alt="Second oblique view over the same ground a minute later" loading="lazy" width="1800" height="1350">
       <figcaption>Same position, one minute later.</figcaption>
     </figure>
   </div>
 
+  <section class="privacy">
+    <h2>Who can see this</h2>
+    <div class="privacy-box">
+      <p><strong>The address is the key.</strong> This page sits at a long random web address. Nothing links to it, it is not listed anywhere, and it does not appear on any menu or index. Search engines are told to skip it, both in the page itself and in the site rules.</p>
+      <p><strong>Nothing here watches you.</strong> No account, no sign in, no cookies, no analytics, no tracking of any kind. Nobody is told that you opened it or how long you stayed.</p>
+      <p><strong>Everything loads from this one private address.</strong> The map, the heat layer, the contours, the three dimensional model and the photographs are all served from inside this same page folder. With the settings as they arrive, your browser does not contact any other company. The single exception is the surrounding land option in the map controls, which is switched off unless you turn it on, and the page says so at the switch.</p>
+      <p class="warn">Worth being plain about one thing. There is no password. Anyone holding this address can open it, so the address itself is the private part. Do not post it anywhere public. If you want it taken down, say so and it stops working.</p>
+    </div>
+  </section>
+
   <p class="foot">Built from the original flight photographs. Imagery flown 25 July 2026.</p>
 </main>
 
-<script src="/drone/0725/vendor/leaflet.js"></script>
+<script src="vendor/leaflet.js"></script>
 <script>
 (function(){
   "use strict";
@@ -503,12 +546,12 @@ input[type=range]{
 
   L.control.zoom({ position: "topright" }).addTo(map);
 
-  L.tileLayer(
+  var context = L.tileLayer(
     "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-    { maxZoom: 22, maxNativeZoom: 19, attribution: "Satellite base: Esri" }
-  ).addTo(map);
+    { maxZoom: 22, maxNativeZoom: 19, attribution: "Surrounding land: Esri" }
+  );
 
-  var ortho = L.tileLayer("/drone/0725/tiles/{z}/{x}/{y}.webp", {
+  var ortho = L.tileLayer("./tiles/{z}/{x}/{y}.webp", {
     minZoom: 14,
     maxZoom: 22,
     maxNativeZoom: 22,
@@ -518,7 +561,7 @@ input[type=range]{
   }).addTo(map);
 
   var thermalBounds = L.latLngBounds([37.8869701, -80.3806815], [37.8887248, -80.3778472]);
-  var thermal = L.tileLayer("/drone/0725/thermal/{z}/{x}/{y}.webp", {
+  var thermal = L.tileLayer("./thermal/{z}/{x}/{y}.webp", {
     minZoom: 14,
     maxZoom: 22,
     maxNativeZoom: 20,
@@ -541,6 +584,12 @@ input[type=range]{
   }
   orthoOn.addEventListener("change", applyOpacity);
   opacity.addEventListener("input", applyOpacity);
+
+  var contextOn = document.getElementById("contextOn");
+  contextOn.addEventListener("change", function(){
+    if (contextOn.checked) { context.addTo(map); context.bringToBack(); }
+    else { map.removeLayer(context); }
+  });
 
   /* ---------- thermal ---------- */
   var thermalOn = document.getElementById("thermalOn");
@@ -568,7 +617,7 @@ input[type=range]{
     if (contourLayer) { contourLayer.addTo(map); return; }
     if (contourLoading) { return; }
     contourLoading = true;
-    fetch("/drone/0725/contours5ft.geojson?r=2").then(function(r){
+    fetch("./contours5ft.geojson?r=2").then(function(r){
       return r.json();
     }).then(function(gj){
       function isLine(f){
@@ -750,8 +799,8 @@ input[type=range]{
   function boot(){
     loadMsg.textContent = "Building the model.";
     Promise.all([
-      import("/drone/0725/vendor/three.module.min.js"),
-      fetch("/drone/0725/heights.bin").then(function(r){ return r.arrayBuffer(); })
+      import("./vendor/three.module.min.js"),
+      fetch("./heights.bin").then(function(r){ return r.arrayBuffer(); })
     ]).then(function(res){
       build(res[0], new Uint16Array(res[1]));
     }).catch(function(){
@@ -788,7 +837,7 @@ input[type=range]{
     applyExag(1.6);
     geo.rotateX(-Math.PI / 2);
 
-    var tex = new THREE.TextureLoader().load("/drone/0725/texture.webp", function(){
+    var tex = new THREE.TextureLoader().load("./texture.webp", function(){
       loadMsg.style.display = "none";
     });
     tex.colorSpace = THREE.SRGBColorSpace;
