@@ -510,7 +510,7 @@ input[type=range]{
     if (contourLayer) { contourLayer.addTo(map); return; }
     if (contourLoading) { return; }
     contourLoading = true;
-    fetch("/drone/0725/contours5ft.geojson").then(function(r){
+    fetch("/drone/0725/contours5ft.geojson?r=2").then(function(r){
       return r.json();
     }).then(function(gj){
       function isLine(f){
