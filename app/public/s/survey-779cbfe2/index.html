@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="color-scheme" content="light dark">
+<title>Aerial Survey, Greenbrier County</title>
+<link rel="stylesheet" href="/drone/0725/vendor/leaflet.css">
+<style>
+:root{
+  --ground:#E6E9E4;
+  --surface:#F4F6F2;
+  --surface-2:#FFFFFF;
+  --line:#CBD2CB;
+  --text:#141A17;
+  --muted:#5C6661;
+  --accent:#C11A55;
+  --contour:#9A6528;
+  --shadow:0 2px 10px rgba(20,26,23,.13);
+  --radius:6px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --ground:#0E1513;
+    --surface:#18211E;
+    --surface-2:#1F2A26;
+    --line:#2C3833;
+    --text:#E9EDE9;
+    --muted:#8B9792;
+    --accent:#F2568A;
+    --contour:#D9A059;
+    --shadow:0 2px 14px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#0E1513;
+  --surface:#18211E;
+  --surface-2:#1F2A26;
+  --line:#2C3833;
+  --text:#E9EDE9;
+  --muted:#8B9792;
+  --accent:#F2568A;
+  --contour:#D9A059;
+  --shadow:0 2px 14px rgba(0,0,0,.5);
+}
+:root[data-theme="light"]{
+  --ground:#E6E9E4;
+  --surface:#F4F6F2;
+  --surface-2:#FFFFFF;
+  --line:#CBD2CB;
+  --text:#141A17;
+  --muted:#5C6661;
+  --accent:#C11A55;
+  --contour:#9A6528;
+  --shadow:0 2px 10px rgba(20,26,23,.13);
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--ground);
+  color:var(--text);
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;
+  line-height:1.55;
+}
+.mono{
+  font-family:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ---------- masthead ---------- */
+.masthead{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:.4rem 1.1rem;
+  padding:.85rem clamp(.9rem,3vw,1.6rem);
+  border-bottom:1px solid var(--line);
+  background:var(--surface);
+}
+.masthead h1{
+  margin:0;
+  font-size:clamp(1.02rem,2.5vw,1.22rem);
+  font-weight:640;
+  letter-spacing:-.012em;
+  text-wrap:balance;
+}
+.eyebrow{
+  font-size:.66rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-weight:600;
+}
+.masthead .when{
+  margin-left:auto;
+  font-size:.78rem;
+  color:var(--muted);
+}
+
+/* ---------- map ---------- */
+.mapwrap{position:relative}
+#map{
+  height:clamp(430px,74vh,860px);
+  width:100%;
+  background:var(--ground);
+  outline:none;
+}
+.leaflet-container{
+  font-family:inherit;
+  background:var(--ground);
+}
+
+.panel{
+  position:absolute;
+  top:.7rem;
+  left:.7rem;
+  z-index:600;
+  width:min(16.5rem,calc(100% - 1.4rem));
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.panel-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:.5rem;
+  padding:.5rem .68rem;
+  cursor:pointer;
+  user-select:none;
+  background:none;
+  border:0;
+  width:100%;
+  color:var(--text);
+  font:inherit;
+  text-align:left;
+}
+.panel-head:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+.panel-head .eyebrow{font-size:.63rem}
+.chev{
+  width:.6rem;height:.6rem;
+  border-right:1.8px solid var(--muted);
+  border-bottom:1.8px solid var(--muted);
+  transform:rotate(45deg);
+  transition:transform .18s ease;
+  flex:none;
+  margin-bottom:.18rem;
+}
+.panel[data-open="false"] .chev{transform:rotate(-45deg)}
+.panel[data-open="false"] .panel-body{display:none}
+.panel-body{
+  padding:.15rem .68rem .7rem;
+  display:flex;
+  flex-direction:column;
+  gap:.62rem;
+  border-top:1px solid var(--line);
+}
+
+.row{display:flex;align-items:center;gap:.55rem}
+.row label{font-size:.83rem;cursor:pointer;flex:1}
+input[type=checkbox]{
+  accent-color:var(--accent);
+  width:1rem;height:1rem;
+  flex:none;
+  cursor:pointer;
+}
+input[type=range]{
+  width:100%;
+  accent-color:var(--accent);
+  cursor:pointer;
+}
+.slabel{
+  display:flex;
+  justify-content:space-between;
+  font-size:.7rem;
+  color:var(--muted);
+  letter-spacing:.03em;
+}
+.swatch{
+  width:.8rem;height:0;flex:none;
+  border-top:2.5px solid var(--contour);
+}
+.ramp{
+  height:.42rem;
+  border-radius:2px;
+  margin:.1rem 0 .12rem;
+  background:linear-gradient(90deg,#1B0F3B,#6A1B7F,#B4327A,#E4633F,#F5A623,#FBE87A);
+}
+
+.btn{
+  font:inherit;
+  font-size:.79rem;
+  font-weight:560;
+  padding:.36rem .7rem;
+  border-radius:4px;
+  border:1px solid var(--line);
+  background:var(--surface-2);
+  color:var(--text);
+  cursor:pointer;
+  transition:border-color .15s ease,color .15s ease;
+}
+.btn:hover{border-color:var(--accent)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.btn[aria-pressed="true"]{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+.btnrow{display:flex;gap:.4rem}
+
+.readout{
+  position:absolute;
+  left:.7rem;
+  bottom:1.6rem;
+  z-index:600;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-left:3px solid var(--accent);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  padding:.5rem .7rem;
+  font-size:.8rem;
+  max-width:min(17rem,calc(100% - 1.4rem));
+  display:none;
+}
+.readout.on{display:block}
+.readout .big{
+  font-size:1.16rem;
+  font-weight:640;
+  letter-spacing:-.01em;
+  display:block;
+}
+.readout .sub{color:var(--muted);font-size:.73rem}
+
+.hint{
+  position:absolute;
+  right:.7rem;
+  bottom:1.6rem;
+  z-index:600;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:.32rem .6rem;
+  font-size:.72rem;
+  color:var(--muted);
+  box-shadow:var(--shadow);
+  max-width:min(14rem,calc(100% - 1.4rem));
+  display:none;
+}
+.hint.on{display:block}
+
+/* ---------- content ---------- */
+.sheet{
+  padding:clamp(1.5rem,4vw,2.8rem) clamp(.9rem,3vw,1.6rem) 3rem;
+  max-width:74rem;
+  margin:0 auto;
+}
+.sheet h2{
+  font-size:.68rem;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--muted);
+  font-weight:600;
+  margin:0 0 .9rem;
+}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(9.2rem,1fr));
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.stat{background:var(--surface);padding:.82rem .9rem}
+.stat .v{
+  font-size:clamp(1.16rem,3vw,1.42rem);
+  font-weight:640;
+  letter-spacing:-.018em;
+  display:block;
+  line-height:1.2;
+}
+.stat .k{
+  font-size:.67rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+  margin-top:.2rem;
+  display:block;
+}
+.stat .n{font-size:.72rem;color:var(--muted);display:block;margin-top:.14rem}
+
+.prose{
+  margin-top:2.4rem;
+  max-width:38rem;
+  font-size:.93rem;
+  color:var(--text);
+}
+.prose p{margin:0 0 .85rem}
+.prose .muted{color:var(--muted);font-size:.85rem}
+
+.shots{
+  margin-top:2.4rem;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,20rem),1fr));
+  gap:.75rem;
+}
+.shots figure{margin:0}
+.shots img{
+  width:100%;
+  height:auto;
+  display:block;
+  border-radius:var(--radius);
+  border:1px solid var(--line);
+}
+.shots figcaption{
+  font-size:.73rem;
+  color:var(--muted);
+  margin-top:.4rem;
+}
+
+.foot{
+  margin-top:2.6rem;
+  padding-top:1rem;
+  border-top:1px solid var(--line);
+  font-size:.75rem;
+  color:var(--muted);
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important;animation:none !important}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <span class="eyebrow">Aerial Survey</span>
+  <h1>Greenbrier County, West Virginia</h1>
+  <span class="when mono">25 July 2026, 14:52</span>
+</header>
+
+<div class="mapwrap">
+  <div id="map" tabindex="0"></div>
+
+  <div class="panel" id="panel" data-open="true">
+    <button class="panel-head" id="panelToggle" aria-expanded="true" aria-controls="panelBody">
+      <span class="eyebrow">Layers and tools</span>
+      <span class="chev" aria-hidden="true"></span>
+    </button>
+    <div class="panel-body" id="panelBody">
+
+      <div>
+        <div class="row">
+          <input type="checkbox" id="orthoOn" checked>
+          <label for="orthoOn">Drone imagery</label>
+        </div>
+        <div class="slabel mono"><span>Fade to satellite</span><span id="opVal">100</span></div>
+        <input type="range" id="opacity" min="0" max="100" value="100" aria-label="Drone imagery opacity">
+      </div>
+
+      <div>
+        <div class="row">
+          <input type="checkbox" id="thermalOn">
+          <label for="thermalOn">Heat</label>
+        </div>
+        <div class="ramp" aria-hidden="true"></div>
+        <div class="slabel"><span>Cool</span><span>Warm</span></div>
+      </div>
+
+      <div class="row">
+        <input type="checkbox" id="contourOn">
+        <span class="swatch" aria-hidden="true"></span>
+        <label for="contourOn">Contours, 5 ft</label>
+      </div>
+
+      <div class="btnrow">
+        <button class="btn" id="measureBtn" aria-pressed="false">Measure</button>
+        <button class="btn" id="clearBtn">Clear</button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="readout" id="readout" aria-live="polite"></div>
+  <div class="hint" id="hint">Tap points along a boundary. Three or more points close into an area.</div>
+</div>
+
+<main class="sheet">
+  <h2>The flight</h2>
+  <div class="stats">
+    <div class="stat"><span class="v mono">17.1</span><span class="k">Acres mapped</span><span class="n">6.9 hectares</span></div>
+    <div class="stat"><span class="v mono">0.86 in</span><span class="k">Per pixel</span><span class="n">2.17 cm ground sample</span></div>
+    <div class="stat"><span class="v mono">114</span><span class="k">Photographs</span><span class="n">plus 114 thermal frames</span></div>
+    <div class="stat"><span class="v mono">178 MP</span><span class="k">Final image</span><span class="n">15,389 by 11,597 pixels</span></div>
+    <div class="stat"><span class="v mono">234 ft</span><span class="k">Flight height</span><span class="n">above ground level</span></div>
+    <div class="stat"><span class="v mono">141 ft</span><span class="k">Relief</span><span class="n">2,185 ft to 2,326 ft</span></div>
+    <div class="stat"><span class="v mono">8 min</span><span class="k">Time aloft</span><span class="n">14:52 to 15:00</span></div>
+    <div class="stat"><span class="v mono">Sat</span><span class="k">Flown</span><span class="n">25 July 2026</span></div>
+  </div>
+
+  <div class="prose">
+    <p>Every photograph from the flight was matched against its neighbours, solved into a single camera path, and projected onto a model of the ground. The result is one continuous top down image with no perspective lean, so a fence line that runs straight on the property runs straight on the map.</p>
+    <p>That is what separates it from a photograph. You can measure on it. Turn on <strong>Measure</strong> and tap along a field edge, a treeline, or a pond, and the distance and acreage come back in real units.</p>
+    <p>The camera carries a second, thermal sensor, so the same pass recorded 114 heat frames alongside the photographs. Those stitch into their own map. Switch on <strong>Heat</strong> to see it. Roads, roofs and bare soil had been soaking up sun all afternoon and read warm. Canopy, shaded ground and the pond read cool. Mowing lines show up across the pasture that the eye does not pick out in the ordinary picture.</p>
+    <p>The contour lines come from the same flight. Points on the bare ground were separated from points on the canopy and rooftops, which leaves a model of the land itself under the vegetation. Lines are drawn every 5 ft of elevation.</p>
+    <p class="muted">Measurements are computed from the survey and are good to roughly a foot. Treat them as working figures, not a boundary survey. Elevations are heights above sea level.</p>
+  </div>
+
+  <div class="shots">
+    <figure>
+      <img src="/drone/0725/photos/oblique-1.jpg" alt="Pasture sloping away toward a treeline with farm buildings at the left and hills beyond" loading="lazy" width="1800" height="1350">
+      <figcaption>Looking across the pasture at the end of the flight, 15:01.</figcaption>
+    </figure>
+    <figure>
+      <img src="/drone/0725/photos/oblique-2.jpg" alt="Second oblique view over the same ground a minute later" loading="lazy" width="1800" height="1350">
+      <figcaption>Same position, one minute later.</figcaption>
+    </figure>
+  </div>
+
+  <p class="foot">Built from the original flight photographs. Imagery flown 25 July 2026.</p>
+</main>
+
+<script src="/drone/0725/vendor/leaflet.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  var SOUTH = 37.8867199, WEST = -80.3814354, NORTH = 37.8890117, EAST = -80.3776126;
+  var bounds = L.latLngBounds([SOUTH, WEST], [NORTH, EAST]);
+
+  var map = L.map("map", {
+    center: bounds.getCenter(),
+    zoom: 17,
+    minZoom: 14,
+    maxZoom: 22,
+    zoomControl: true,
+    maxBounds: bounds.pad(1.4),
+    maxBoundsViscosity: 0.7
+  });
+
+  L.tileLayer(
+    "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
+    { maxZoom: 22, maxNativeZoom: 19, attribution: "Satellite base: Esri" }
+  ).addTo(map);
+
+  var ortho = L.tileLayer("/drone/0725/tiles/{z}/{x}/{y}.webp", {
+    minZoom: 14,
+    maxZoom: 22,
+    maxNativeZoom: 22,
+    bounds: bounds,
+    tms: false,
+    attribution: "Drone survey, 25 July 2026"
+  }).addTo(map);
+
+  var thermalBounds = L.latLngBounds([37.8869701, -80.3806815], [37.8887248, -80.3778472]);
+  var thermal = L.tileLayer("/drone/0725/thermal/{z}/{x}/{y}.webp", {
+    minZoom: 14,
+    maxZoom: 22,
+    maxNativeZoom: 20,
+    bounds: thermalBounds,
+    opacity: 0.92,
+    attribution: "Thermal survey, 25 July 2026"
+  });
+
+  map.fitBounds(bounds);
+
+  /* ---------- imagery toggle and fade ---------- */
+  var orthoOn = document.getElementById("orthoOn");
+  var opacity = document.getElementById("opacity");
+  var opVal = document.getElementById("opVal");
+
+  function applyOpacity(){
+    var v = Number(opacity.value) / 100;
+    ortho.setOpacity(orthoOn.checked ? v : 0);
+    opVal.textContent = opacity.value;
+  }
+  orthoOn.addEventListener("change", applyOpacity);
+  opacity.addEventListener("input", applyOpacity);
+
+  /* ---------- thermal ---------- */
+  var thermalOn = document.getElementById("thermalOn");
+  thermalOn.addEventListener("change", function(){
+    if (thermalOn.checked) {
+      thermal.addTo(map);
+      if (contourLayer && contourOn.checked) { contourLayer.bringToFront(); }
+    } else {
+      map.removeLayer(thermal);
+    }
+  });
+
+  /* ---------- contours ---------- */
+  var contourOn = document.getElementById("contourOn");
+  var contourLayer = null;
+  var contourLoading = false;
+
+  var contourStyle = getComputedStyle(document.documentElement).getPropertyValue("--contour").trim() || "#C58A4E";
+
+  contourOn.addEventListener("change", function(){
+    if (!contourOn.checked) {
+      if (contourLayer) { map.removeLayer(contourLayer); }
+      return;
+    }
+    if (contourLayer) { contourLayer.addTo(map); return; }
+    if (contourLoading) { return; }
+    contourLoading = true;
+    fetch("/drone/0725/contours5ft.geojson").then(function(r){
+      return r.json();
+    }).then(function(gj){
+      contourLayer = L.geoJSON(gj, {
+        style: function(f){
+          var ft = f.properties.elev * 3.280839895;
+          var major = Math.abs(ft % 25) < 0.6;
+          return {
+            color: contourStyle,
+            weight: major ? 1.5 : 0.7,
+            opacity: major ? 0.95 : 0.62,
+            interactive: true
+          };
+        },
+        onEachFeature: function(f, layer){
+          var ft = Math.round(f.properties.elev * 3.280839895);
+          layer.bindTooltip(ft + " ft", { sticky: true, direction: "top" });
+        }
+      });
+      if (contourOn.checked) { contourLayer.addTo(map); }
+      contourLoading = false;
+    }).catch(function(){
+      contourLoading = false;
+      contourOn.checked = false;
+    });
+  });
+
+  /* ---------- measure ---------- */
+  var measureBtn = document.getElementById("measureBtn");
+  var clearBtn = document.getElementById("clearBtn");
+  var readout = document.getElementById("readout");
+  var hint = document.getElementById("hint");
+
+  var measuring = false;
+  var pts = [];
+  var line = null, poly = null;
+  var dots = [];
+
+  var accent = getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() || "#E8467C";
+
+  function fmtLen(m){
+    var ft = m * 3.280839895;
+    if (ft < 1000) { return Math.round(ft) + " ft"; }
+    return (ft / 5280).toFixed(2) + " mi";
+  }
+
+  function sphericalArea(latlngs){
+    var R = 6378137, n = latlngs.length, sum = 0;
+    if (n < 3) { return 0; }
+    for (var i = 0; i < n; i++) {
+      var a = latlngs[i], b = latlngs[(i + 1) % n];
+      sum += (b.lng - a.lng) * Math.PI / 180 *
+             (2 + Math.sin(a.lat * Math.PI / 180) + Math.sin(b.lat * Math.PI / 180));
+    }
+    return Math.abs(sum * R * R / 2);
+  }
+
+  function redraw(){
+    if (line) { map.removeLayer(line); line = null; }
+    if (poly) { map.removeLayer(poly); poly = null; }
+    dots.forEach(function(d){ map.removeLayer(d); });
+    dots = [];
+
+    if (!pts.length) { readout.classList.remove("on"); return; }
+
+    pts.forEach(function(p){
+      dots.push(L.circleMarker(p, {
+        radius: 4, color: accent, weight: 2,
+        fillColor: accent, fillOpacity: 1, interactive: false
+      }).addTo(map));
+    });
+
+    var perim = 0;
+    for (var i = 1; i < pts.length; i++) { perim += map.distance(pts[i - 1], pts[i]); }
+
+    if (pts.length >= 3) {
+      poly = L.polygon(pts, {
+        color: accent, weight: 2, fillColor: accent,
+        fillOpacity: 0.14, interactive: false
+      }).addTo(map);
+      var m2 = sphericalArea(pts);
+      var closed = perim + map.distance(pts[pts.length - 1], pts[0]);
+      readout.innerHTML =
+        '<span class="big mono">' + (m2 / 4046.8564224).toFixed(2) + ' acres</span>' +
+        '<span class="sub mono">' + Math.round(m2 * 10.7639) .toLocaleString() + ' sq ft, ' +
+        fmtLen(closed) + ' around, ' + pts.length + ' points</span>';
+    } else if (pts.length === 2) {
+      line = L.polyline(pts, { color: accent, weight: 2, interactive: false }).addTo(map);
+      readout.innerHTML =
+        '<span class="big mono">' + fmtLen(perim) + '</span>' +
+        '<span class="sub">straight line distance</span>';
+    } else {
+      readout.innerHTML = '<span class="sub">Tap a second point.</span>';
+    }
+    readout.classList.add("on");
+  }
+
+  function setMeasuring(on){
+    measuring = on;
+    measureBtn.setAttribute("aria-pressed", on ? "true" : "false");
+    hint.classList.toggle("on", on && pts.length === 0);
+    document.getElementById("map").style.cursor = on ? "crosshair" : "";
+  }
+
+  measureBtn.addEventListener("click", function(){ setMeasuring(!measuring); });
+
+  clearBtn.addEventListener("click", function(){
+    pts = [];
+    redraw();
+    readout.classList.remove("on");
+    hint.classList.toggle("on", measuring);
+  });
+
+  map.on("click", function(e){
+    if (!measuring) { return; }
+    pts.push(e.latlng);
+    hint.classList.remove("on");
+    redraw();
+  });
+
+  /* ---------- panel collapse ---------- */
+  var panel = document.getElementById("panel");
+  var panelToggle = document.getElementById("panelToggle");
+  panelToggle.addEventListener("click", function(){
+    var open = panel.getAttribute("data-open") === "true";
+    panel.setAttribute("data-open", open ? "false" : "true");
+    panelToggle.setAttribute("aria-expanded", open ? "false" : "true");
+  });
+
+  if (window.matchMedia && window.matchMedia("(max-width: 640px)").matches) {
+    panel.setAttribute("data-open", "false");
+    panelToggle.setAttribute("aria-expanded", "false");
+  }
+})();
+</script>
+</body>
+</html>
