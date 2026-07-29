@@ -303,6 +303,52 @@ input[type=range]{
 .prose p{margin:0 0 .85rem}
 .prose .muted{color:var(--muted);font-size:.85rem}
 
+/* ---------- 3d ---------- */
+.relief{margin-top:2.6rem}
+.relief-stage{
+  position:relative;
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  background:var(--surface);
+  height:clamp(320px,56vh,620px);
+  touch-action:none;
+  cursor:grab;
+}
+.relief-stage:active{cursor:grabbing}
+.relief-stage canvas{display:block;width:100%;height:100%}
+.relief-note{
+  position:absolute;
+  left:.7rem;bottom:.7rem;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:.4rem .62rem;
+  font-size:.72rem;
+  color:var(--muted);
+  box-shadow:var(--shadow);
+  pointer-events:none;
+}
+.relief-ctrl{
+  position:absolute;
+  right:.7rem;top:.7rem;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:.45rem .62rem;
+  box-shadow:var(--shadow);
+  width:10.5rem;
+}
+.relief-load{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:.8rem;
+  color:var(--muted);
+}
+
 .shots{
   margin-top:2.4rem;
   display:grid;
@@ -410,6 +456,18 @@ input[type=range]{
     <p>The contour lines come from the same flight. Points on the bare ground were separated from points on the canopy and rooftops, which leaves a model of the land itself under the vegetation. Lines are drawn every 5 ft of elevation.</p>
     <p class="muted">Measurements are computed from the survey and are good to roughly a foot. Treat them as working figures, not a boundary survey. Elevations are heights above sea level. Contours are most reliable in the open. Under heavy tree cover the camera sees very little bare ground, so those lines are the model's best reading rather than a measurement.</p>
   </div>
+
+  <section class="relief">
+    <h2>The shape of it</h2>
+    <div class="relief-stage" id="stage">
+      <div class="relief-load" id="reliefLoad">Drag to turn the land.</div>
+      <div class="relief-ctrl">
+        <div class="slabel mono"><span>Vertical</span><span id="exVal">1.6x</span></div>
+        <input type="range" id="exag" min="10" max="30" value="16" aria-label="Vertical exaggeration">
+      </div>
+      <div class="relief-note" id="reliefNote">Drag to turn. Pinch or scroll to zoom.</div>
+    </div>
+  </section>
 
   <div class="shots">
     <figure>
@@ -663,6 +721,159 @@ input[type=range]{
   if (window.matchMedia && window.matchMedia("(max-width: 640px)").matches) {
     panel.setAttribute("data-open", "false");
     panelToggle.setAttribute("aria-expanded", "false");
+  }
+})();
+</script>
+
+<script type="module">
+(function(){
+  "use strict";
+
+  var GRID_W = 512, GRID_H = 386;
+  var WORLD_W = 334.489, WORLD_H = 252.059;
+  var MIN_M = 666.222, RANGE_M = 58.742;
+
+  var stage = document.getElementById("stage");
+  var loadMsg = document.getElementById("reliefLoad");
+  var exag = document.getElementById("exag");
+  var exVal = document.getElementById("exVal");
+  var started = false;
+
+  var io = new IntersectionObserver(function(entries){
+    if (!entries[0].isIntersecting || started) { return; }
+    started = true;
+    io.disconnect();
+    boot();
+  }, { rootMargin: "300px" });
+  io.observe(stage);
+
+  function boot(){
+    loadMsg.textContent = "Building the model.";
+    Promise.all([
+      import("/drone/0725/vendor/three.module.min.js"),
+      fetch("/drone/0725/heights.bin").then(function(r){ return r.arrayBuffer(); })
+    ]).then(function(res){
+      build(res[0], new Uint16Array(res[1]));
+    }).catch(function(){
+      loadMsg.textContent = "The three dimensional view did not load.";
+    });
+  }
+
+  function build(THREE, heights){
+    var scene = new THREE.Scene();
+    var renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(stage.clientWidth, stage.clientHeight);
+    stage.appendChild(renderer.domElement);
+
+    var camera = new THREE.PerspectiveCamera(42, stage.clientWidth / stage.clientHeight, 1, 4000);
+
+    scene.add(new THREE.AmbientLight(0xffffff, 2.05));
+    var sun = new THREE.DirectionalLight(0xffffff, 0.85);
+    sun.position.set(-0.5, 1, 0.6);
+    scene.add(sun);
+
+    var geo = new THREE.PlaneGeometry(WORLD_W, WORLD_H, GRID_W - 1, GRID_H - 1);
+    var pos = geo.attributes.position;
+    var base = new Float32Array(heights.length);
+    for (var i = 0; i < heights.length; i++) {
+      base[i] = (heights[i] / 65535) * RANGE_M;
+    }
+
+    function applyExag(k){
+      for (var i = 0; i < base.length; i++) { pos.setZ(i, base[i] * k); }
+      pos.needsUpdate = true;
+      geo.computeVertexNormals();
+    }
+    applyExag(1.6);
+    geo.rotateX(-Math.PI / 2);
+
+    var tex = new THREE.TextureLoader().load("/drone/0725/texture.webp", function(){
+      loadMsg.style.display = "none";
+    });
+    tex.colorSpace = THREE.SRGBColorSpace;
+    tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+
+    var mesh = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({
+      map: tex, transparent: true, alphaTest: 0.5, side: THREE.DoubleSide
+    }));
+    scene.add(mesh);
+
+    var target = new THREE.Vector3(0, RANGE_M * 0.8, 0);
+    var theta = -0.6, phi = 1.02, radius = WORLD_W * 1.15;
+    var idle = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    function place(){
+      camera.position.set(
+        target.x + radius * Math.sin(phi) * Math.sin(theta),
+        target.y + radius * Math.cos(phi),
+        target.z + radius * Math.sin(phi) * Math.cos(theta)
+      );
+      camera.lookAt(target);
+    }
+
+    var pointers = new Map();
+    var lastPinch = 0;
+
+    stage.addEventListener("pointerdown", function(e){
+      pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      stage.setPointerCapture(e.pointerId);
+      idle = false;
+    });
+    stage.addEventListener("pointermove", function(e){
+      var p = pointers.get(e.pointerId);
+      if (!p) { return; }
+      if (pointers.size === 1) {
+        theta -= (e.clientX - p.x) * 0.006;
+        phi -= (e.clientY - p.y) * 0.006;
+        phi = Math.max(0.16, Math.min(1.46, phi));
+      }
+      p.x = e.clientX; p.y = e.clientY;
+      if (pointers.size === 2) {
+        var a = Array.from(pointers.values());
+        var d = Math.hypot(a[0].x - a[1].x, a[0].y - a[1].y);
+        if (lastPinch) { radius *= lastPinch / d; clampRadius(); }
+        lastPinch = d;
+      }
+    });
+    function release(e){
+      pointers.delete(e.pointerId);
+      if (pointers.size < 2) { lastPinch = 0; }
+    }
+    stage.addEventListener("pointerup", release);
+    stage.addEventListener("pointercancel", release);
+    stage.addEventListener("wheel", function(e){
+      e.preventDefault();
+      radius *= 1 + (e.deltaY * 0.0012);
+      clampRadius();
+      idle = false;
+    }, { passive: false });
+
+    function clampRadius(){
+      radius = Math.max(WORLD_W * 0.32, Math.min(WORLD_W * 2.6, radius));
+    }
+
+    exag.addEventListener("input", function(){
+      var k = Number(exag.value) / 10;
+      exVal.textContent = k.toFixed(1) + "x";
+      geo.rotateX(Math.PI / 2);
+      applyExag(k);
+      geo.rotateX(-Math.PI / 2);
+      target.y = RANGE_M * 0.5 * k;
+    });
+
+    window.addEventListener("resize", function(){
+      renderer.setSize(stage.clientWidth, stage.clientHeight);
+      camera.aspect = stage.clientWidth / stage.clientHeight;
+      camera.updateProjectionMatrix();
+    });
+
+    (function loop(){
+      requestAnimationFrame(loop);
+      if (idle) { theta += 0.0012; }
+      place();
+      renderer.render(scene, camera);
+    })();
   }
 })();
 </script>
