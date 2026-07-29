@@ -438,10 +438,12 @@ input[type=range]{
     zoom: 17,
     minZoom: 14,
     maxZoom: 22,
-    zoomControl: true,
+    zoomControl: false,
     maxBounds: bounds.pad(1.4),
     maxBoundsViscosity: 0.7
   });
+
+  L.control.zoom({ position: "topright" }).addTo(map);
 
   L.tileLayer(
     "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
