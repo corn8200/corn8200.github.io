@@ -509,10 +509,10 @@ input[type=range]{
 
       <div>
         <div class="row">
-          <input type="checkbox" id="contextOn">
+          <input type="checkbox" id="contextOn" checked>
           <label for="contextOn">Surrounding land</label>
         </div>
-        <p class="tiny">Off by default. Turning it on asks Esri for satellite tiles of the area around the property.</p>
+        <p class="tiny">Satellite view of the neighbouring land, from Esri. This is the only thing the page loads from outside. Switch it off and nothing leaves this address.</p>
       </div>
 
       <div class="btnrow">
@@ -587,7 +587,7 @@ input[type=range]{
     <div class="privacy-box">
       <p><strong>The address is the key.</strong> This page sits at a long random web address. Nothing links to it, it is not listed anywhere, and it does not appear on any menu or index. Search engines are told to skip it, both in the page itself and in the site rules.</p>
       <p><strong>Nothing here watches you.</strong> No account, no sign in, no cookies, no analytics, no tracking of any kind. Nobody is told that you opened it or how long you stayed.</p>
-      <p><strong>Everything loads from this one private address.</strong> The map, the heat layer, the contours, the three dimensional model and the photographs are all served from inside this same page folder. The one close photograph of the house is stored encrypted and only turns back into a picture inside your browser once the passphrase is typed. With the settings as they arrive, your browser does not contact any other company. The single exception is the surrounding land option in the map controls, which is switched off unless you turn it on, and the page says so at the switch.</p>
+      <p><strong>Everything loads from this one private address.</strong> The survey itself, meaning the map, the heat layer, the contours, the three dimensional model and the photographs, is served entirely from inside this same page folder. The one close photograph of the house is stored encrypted and only turns back into a picture inside your browser once the passphrase is typed. One thing does come from outside: the faint satellite view of the neighbouring land behind the property, which is fetched from Esri so the survey has something to sit on. Untick surrounding land in the map controls and the page stops talking to anyone but this address.</p>
       <p class="warn">Worth being plain about one thing. There is no password. Anyone holding this address can open it, so the address itself is the private part. Do not post it anywhere public. If you want it taken down, say so and it stops working.</p>
     </div>
   </section>
@@ -638,6 +638,9 @@ input[type=range]{
     opacity: 0.92,
     attribution: "Thermal survey, 25 July 2026"
   });
+
+  context.addTo(map);
+  context.bringToBack();
 
   map.fitBounds(bounds);
 
