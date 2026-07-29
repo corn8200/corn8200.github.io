@@ -420,6 +420,7 @@ input[type=range]{
   gap:.75rem;
 }
 .shots figure{margin:0}
+.shots [hidden]{display:none}
 .shots img{
   width:100%;
   height:auto;
@@ -536,7 +537,7 @@ input[type=range]{
     <div class="stat"><span class="v mono">178 MP</span><span class="k">Final image</span><span class="n">15,389 by 11,597 pixels</span></div>
     <div class="stat"><span class="v mono">234 ft</span><span class="k">Flight height</span><span class="n">above ground level</span></div>
     <div class="stat"><span class="v mono">141 ft</span><span class="k">Relief</span><span class="n">2,185 ft to 2,326 ft</span></div>
-    <div class="stat"><span class="v mono">8 min</span><span class="k">Time aloft</span><span class="n">14:52 to 15:00</span></div>
+    <div class="stat"><span class="v mono">7 min</span><span class="k">Time aloft</span><span class="n">14:52:46 to 15:00:05</span></div>
     <div class="stat"><span class="v mono">Sat</span><span class="k">Flown</span><span class="n">25 July 2026</span></div>
   </div>
 
@@ -728,7 +729,7 @@ input[type=range]{
           layer.bindTooltip(ft + " ft", { sticky: true, direction: "top" });
         }
       });
-      contourLayer = L.layerGroup([casing, lines]);
+      contourLayer = L.featureGroup([casing, lines]);
       if (contourOn.checked) { contourLayer.addTo(map); }
       contourLoading = false;
     }).catch(function(){
