@@ -16,7 +16,7 @@
   --text:#141A17;
   --muted:#5C6661;
   --accent:#C11A55;
-  --contour:#9A6528;
+  --contour:#C07A22;
   --shadow:0 2px 10px rgba(20,26,23,.13);
   --radius:6px;
 }
@@ -29,7 +29,7 @@
     --text:#E9EDE9;
     --muted:#8B9792;
     --accent:#F2568A;
-    --contour:#D9A059;
+    --contour:#E8A34A;
     --shadow:0 2px 14px rgba(0,0,0,.5);
   }
 }
@@ -41,7 +41,7 @@
   --text:#E9EDE9;
   --muted:#8B9792;
   --accent:#F2568A;
-  --contour:#D9A059;
+  --contour:#E8A34A;
   --shadow:0 2px 14px rgba(0,0,0,.5);
 }
 :root[data-theme="light"]{
@@ -52,7 +52,7 @@
   --text:#141A17;
   --muted:#5C6661;
   --accent:#C11A55;
-  --contour:#9A6528;
+  --contour:#C07A22;
   --shadow:0 2px 10px rgba(20,26,23,.13);
 }
 
@@ -513,15 +513,35 @@ input[type=range]{
     fetch("/drone/0725/contours5ft.geojson").then(function(r){
       return r.json();
     }).then(function(gj){
-      contourLayer = L.geoJSON(gj, {
+      function isLine(f){
+        var t = f.geometry && f.geometry.type;
+        return t === "LineString" || t === "MultiLineString";
+      }
+      function isMajor(f){
+        var ft = f.properties.elev * 3.280839895;
+        return Math.abs(ft % 25) < 0.6;
+      }
+      var casing = L.geoJSON(gj, {
+        filter: isLine,
         style: function(f){
-          var ft = f.properties.elev * 3.280839895;
-          var major = Math.abs(ft % 25) < 0.6;
+          return {
+            color: "#1A1105",
+            weight: isMajor(f) ? 3.4 : 2.2,
+            opacity: 0.34,
+            interactive: false,
+            lineJoin: "round"
+          };
+        }
+      });
+      var lines = L.geoJSON(gj, {
+        filter: isLine,
+        style: function(f){
           return {
             color: contourStyle,
-            weight: major ? 1.5 : 0.7,
-            opacity: major ? 0.95 : 0.62,
-            interactive: true
+            weight: isMajor(f) ? 1.9 : 1.05,
+            opacity: 0.96,
+            interactive: true,
+            lineJoin: "round"
           };
         },
         onEachFeature: function(f, layer){
@@ -529,6 +549,7 @@ input[type=range]{
           layer.bindTooltip(ft + " ft", { sticky: true, direction: "top" });
         }
       });
+      contourLayer = L.layerGroup([casing, lines]);
       if (contourOn.checked) { contourLayer.addTo(map); }
       contourLoading = false;
     }).catch(function(){
