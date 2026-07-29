@@ -453,6 +453,49 @@ input[type=range]{
   padding-top:.75rem;
 }
 
+/* ---------- explainer cards ---------- */
+.guide{margin-top:2.6rem}
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,17.5rem),1fr));
+  gap:1px;
+  background:var(--line);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.card{background:var(--surface);padding:1.05rem 1.1rem}
+.card h3{
+  margin:0 0 .42rem;
+  font-size:.9rem;
+  font-weight:640;
+  letter-spacing:-.008em;
+}
+.card p{margin:0;font-size:.85rem;color:var(--muted);line-height:1.6}
+
+/* ---------- method note ---------- */
+.method{margin-top:2.8rem}
+.mblock{
+  border-top:1px solid var(--line);
+  padding-top:1.15rem;
+  margin-top:1.15rem;
+  max-width:44rem;
+}
+.mblock:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.mblock h3{
+  margin:0 0 .55rem;
+  font-size:.95rem;
+  font-weight:640;
+  letter-spacing:-.008em;
+}
+.mblock p{margin:0 0 .8rem;font-size:.88rem;line-height:1.65}
+.mblock .limits{
+  border-left:3px solid var(--accent);
+  padding:.1rem 0 .1rem .8rem;
+  color:var(--muted);
+  font-size:.84rem;
+}
+
 .foot{
   margin-top:2.6rem;
   padding-top:1rem;
@@ -541,13 +584,42 @@ input[type=range]{
     <div class="stat"><span class="v mono">Sat</span><span class="k">Flown</span><span class="n">25 July 2026</span></div>
   </div>
 
-  <div class="prose">
-    <p>Every photograph from the flight was matched against its neighbours, solved into a single camera path, and projected onto a model of the ground. The result is one continuous top down image with no perspective lean, so a fence line that runs straight on the property runs straight on the map.</p>
-    <p>That is what separates it from a photograph. You can measure on it. Turn on <strong>Measure</strong> and tap along a field edge, a treeline, or a pond, and the distance and acreage come back in real units.</p>
-    <p>The camera carries a second, thermal sensor, so the same pass recorded 114 heat frames alongside the photographs. Those stitch into their own map. Switch on <strong>Heat</strong> to see it. Roads, roofs and bare soil had been soaking up sun all afternoon and read warm. Canopy, shaded ground and the pond read cool. Mowing lines show up across the pasture that the eye does not pick out in the ordinary picture.</p>
-    <p>The contour lines come from the same flight. Points on the bare ground were separated from points on the canopy and rooftops, which leaves a model of the land itself under the vegetation. Lines are drawn every 5 ft of elevation.</p>
-    <p class="muted">Measurements are computed from the survey and are good to roughly a foot. Treat them as working figures, not a boundary survey. Elevations are heights above sea level. Contours are most reliable in the open. Under heavy tree cover the camera sees very little bare ground, so those lines are the model's best reading rather than a measurement.</p>
-  </div>
+  <section class="guide">
+    <h2>What you are looking at</h2>
+    <div class="cards">
+
+      <article class="card">
+        <h3>The map itself</h3>
+        <p>A photograph taken from one point leans. Things near the edges tip away from the camera, so you cannot measure on them. This is 114 photographs cut apart and reprojected onto a model of the ground, so every pixel is seen as though from straight above it. That is what makes it a map instead of a picture. A fence line that runs straight on your land runs straight here.</p>
+      </article>
+
+      <article class="card">
+        <h3>Why 0.86 inches matters</h3>
+        <p>Each pixel covers a bit under an inch of ground. That single number decides what can be identified rather than just seen. At this scale a fence post is a few pixels across, a hive lid is a clear rectangle, and the mowing pattern in the pasture is legible. Public aerial imagery of this county is coarser by a wide margin and years older.</p>
+      </article>
+
+      <article class="card">
+        <h3>Heat</h3>
+        <p>The aircraft carries a second sensor that reads infrared instead of visible light, so it records how warm each surface is rather than what colour it is. After an afternoon of July sun the roads, roofs and bare soil hold heat while canopy, shade and the pond stay cool. It reads relative warmth, not calibrated temperature. It also shows things the eye cannot pick out, including mowing lines, damp ground and where topsoil is thin.</p>
+      </article>
+
+      <article class="card">
+        <h3>Contours</h3>
+        <p>Two different elevation models come out of the same flight. One records the top of everything the cameras saw, canopy and rooftops included. The other sorts out which points are bare ground and rebuilds the land underneath the vegetation. The contour lines are drawn from the second one, at 5 ft of height each. They are most reliable in the open, and under heavy tree cover they are the model's best reading rather than a measurement.</p>
+      </article>
+
+      <article class="card">
+        <h3>Measure</h3>
+        <p>Tap along a field edge, a treeline or the pond and it returns the distance and the acreage. The arithmetic runs on a curved earth model rather than on the flat screen, so an area measured at the edge of the map is as honest as one measured in the middle. Treat the figures as working numbers, good to roughly a foot, not as a boundary survey.</p>
+      </article>
+
+      <article class="card">
+        <h3>The third dimension</h3>
+        <p>Nothing in the 3D view is borrowed from anywhere else. The shape is the surface model and the skin stretched over it is this same map, both built from the same 114 photographs. Trees stand up in it because the model records the top of whatever the cameras saw on the day. Vertical is exaggerated on purpose, because 141 ft of rise spread across a quarter mile is genuinely hard to read at true scale.</p>
+      </article>
+
+    </div>
+  </section>
 
   <section class="relief">
     <h2>The shape of it</h2>
@@ -583,17 +655,34 @@ input[type=range]{
     </figure>
   </div>
 
-  <section class="privacy">
-    <h2>Who can see this</h2>
-    <div class="privacy-box">
-      <p><strong>The address is the key.</strong> This page sits at a long random web address. Nothing links to it, it is not listed anywhere, and it does not appear on any menu or index. Search engines are told to skip it, both in the page itself and in the site rules.</p>
-      <p><strong>Nothing here watches you.</strong> No account, no sign in, no cookies, no analytics, no tracking of any kind. Nobody is told that you opened it or how long you stayed.</p>
-      <p><strong>Everything loads from this one private address.</strong> The survey itself, meaning the map, the heat layer, the contours, the three dimensional model and the photographs, is served entirely from inside this same page folder. The one close photograph of the house is stored encrypted and only turns back into a picture inside your browser once the passphrase is typed. One thing does come from outside: the faint satellite view of the neighbouring land behind the property, which is fetched from Esri so the survey has something to sit on. Untick surrounding land in the map controls and the page stops talking to anyone but this address.</p>
-      <p class="warn">Worth being plain about one thing. There is no password. Anyone holding this address can open it, so the address itself is the private part. Do not post it anywhere public. If you want it taken down, say so and it stops working.</p>
-    </div>
+  <section class="method">
+    <h2>How this was made</h2>
+
+    <article class="mblock">
+      <h3>The imaging is not artificial intelligence</h3>
+      <p>Worth being precise about, because the word gets attached to everything now. The reconstruction is photogrammetry, and the mathematics is older than the computers running it. The software finds tens of thousands of distinctive points in every photograph, matches the ones that turn up in several frames at once, and solves backwards for where the aircraft must have been each time the shutter fired. From those recovered camera positions it triangulates a dense cloud of ground points, builds a surface from them, and drapes the photographs back over it.</p>
+      <p>The feature detector doing that work is a hand designed descriptor from the computer vision literature, not a learned model. No neural network is involved in the map, the heat layer, the contours or the terrain. Every number on this page traces back to the camera and the geometry.</p>
+    </article>
+
+    <article class="mblock">
+      <h3>Keeping it private</h3>
+      <p>The address is the key. This page sits at a long random address, nothing links to it, and search engines are told to skip it both in the page and in the site rules. The known AI training crawlers are refused by name. All of that protects against the page being found. None of it protects against the page being forwarded. Anyone holding the address can open it, which makes the address itself the sensitive part.</p>
+      <p>One photograph needed more than that, because it shows the house close up with people in the yard. It is encrypted where it sits, with AES-256-GCM. The key is derived from the passphrase inside your browser using PBKDF2-HMAC-SHA256 at 250,000 iterations against a random salt, and it never leaves your machine or crosses the network. The file on the server is ciphertext. Request it directly and you get noise rather than a picture. The cipher is authenticated, so a file that has been tampered with fails to open instead of opening wrong.</p>
+      <p class="limits"><strong>What that does not do.</strong> It does not protect the rest of the page, which stays readable to anyone with the address. It cannot stop someone who has already unlocked the photograph from keeping a copy. It is worth exactly as much as the passphrase and the judgement of whoever holds it. A password box that merely hid the picture with a line of code would have been easy and would have been worthless, because the file itself would still have been sitting there for anyone who asked for it directly.</p>
+      <p>Beyond that, nothing here watches you. No account, no sign in, no cookies, no analytics, no record of who opened it or for how long. Exactly one thing loads from outside this address, the satellite view of the neighbouring land behind the property, and it can be switched off in the map controls.</p>
+    </article>
+
+    <article class="mblock">
+      <h3>The machine that built it, and how it was checked</h3>
+      <p>The work from memory card to finished page was run by an AI agent. That covered reading the flight off the card, deciding to process it on a server after the laptop turned out to be short of disk space, running the reconstruction, cutting the map tiles, writing this page and deploying it. The interesting part is not that a machine did the work. It is what was done to find out whether the work was any good.</p>
+      <p>The heat layer landed about seven and a half feet out of position, because the visible and infrared reconstructions are solved independently and drift apart. It was found by correlating the edges of the two maps against each other rather than by eye, and the correction was proven rather than assumed: applying it drove the remaining error to zero, and applying it backwards doubled the error, which is what confirmed the direction.</p>
+      <p>The finished page was then reviewed by a second AI from a different maker, told to refute rather than approve and to answer "wrong" whenever it could not confirm a figure from the original data. It recomputed every number here against the raw elevation models and the photograph metadata. It caught one: the flight was described as eight minutes and actually ran seven minutes and nineteen seconds. That is corrected above. A separate reviewer, hunting for things that break rather than things that are untrue, found an empty image placeholder showing under the passphrase box before anyone had typed anything, and an error thrown when two map layers were switched on in one particular order. Both are fixed.</p>
+      <p class="limits">Those three faults are listed here on purpose. Anything a machine produces is worth precisely as much as the evidence that somebody went looking for its mistakes, and a review that finds nothing is usually a review that was not really trying.</p>
+    </article>
+
   </section>
 
-  <p class="foot">Built from the original flight photographs. Imagery flown 25 July 2026.</p>
+  <p class="foot">Flown, reconstructed and published by John Cornelius. Imagery captured 25 July 2026 and processed the same week. Built from the original flight photographs and nothing else.</p>
 </main>
 
 <script src="vendor/leaflet.js"></script>
