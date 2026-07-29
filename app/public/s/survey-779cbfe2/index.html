@@ -355,6 +355,64 @@ input[type=range]{
   color:var(--muted);
 }
 
+.lockbox{
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  background:var(--surface);
+  padding:1.6rem 1.3rem 1.3rem;
+  text-align:center;
+  aspect-ratio:4 / 3;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:.1rem;
+}
+.lock-ico{
+  width:1.05rem;height:.8rem;
+  border:2px solid var(--muted);
+  border-radius:2px;
+  position:relative;
+  margin-bottom:.55rem;
+}
+.lock-ico::before{
+  content:"";
+  position:absolute;
+  left:50%;top:-.62rem;
+  transform:translateX(-50%);
+  width:.62rem;height:.55rem;
+  border:2px solid var(--muted);
+  border-bottom:0;
+  border-radius:.34rem .34rem 0 0;
+}
+.lock-title{margin:0;font-weight:640;font-size:.95rem}
+.lock-sub{
+  margin:.42rem 0 .9rem;
+  font-size:.8rem;
+  color:var(--muted);
+  max-width:26rem;
+  line-height:1.5;
+}
+#lockForm{display:flex;gap:.4rem;flex-wrap:wrap;justify-content:center}
+#lockPass{
+  font:inherit;
+  font-size:.83rem;
+  padding:.36rem .6rem;
+  border:1px solid var(--line);
+  border-radius:4px;
+  background:var(--surface-2);
+  color:var(--text);
+  width:11rem;
+}
+#lockPass:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+.lock-msg{
+  margin:.7rem 0 0;
+  font-size:.76rem;
+  color:var(--muted);
+  min-height:1.1rem;
+}
+.lock-msg.bad{color:var(--accent)}
+
 .shots{
   margin-top:2.4rem;
   display:grid;
@@ -507,6 +565,21 @@ input[type=range]{
       <img src="photos/oblique-1.jpg" alt="Pasture sloping away toward a treeline with farm buildings at the left and hills beyond" loading="lazy" width="1800" height="1350">
       <figcaption>Looking across the pasture at the end of the flight, 15:01.</figcaption>
     </figure>
+
+    <figure>
+      <div class="lockbox" id="lockBox">
+        <span class="lock-ico" aria-hidden="true"></span>
+        <p class="lock-title">One photograph is held back</p>
+        <p class="lock-sub">The last frame shows the house close up with people in the yard, so it is encrypted rather than sitting on the open page. It needs the word John sent you.</p>
+        <form id="lockForm" autocomplete="off">
+          <input type="password" id="lockPass" placeholder="Passphrase" aria-label="Passphrase" autocomplete="off" spellcheck="false">
+          <button class="btn" type="submit" id="lockBtn">Unlock</button>
+        </form>
+        <p class="lock-msg" id="lockMsg" role="status"></p>
+      </div>
+      <img id="lockedImg" alt="The house at the end of the flight" width="1800" height="1350" hidden>
+      <figcaption id="lockedCap" hidden>The house at the end of the flight, 15:02.</figcaption>
+    </figure>
   </div>
 
   <section class="privacy">
@@ -514,7 +587,7 @@ input[type=range]{
     <div class="privacy-box">
       <p><strong>The address is the key.</strong> This page sits at a long random web address. Nothing links to it, it is not listed anywhere, and it does not appear on any menu or index. Search engines are told to skip it, both in the page itself and in the site rules.</p>
       <p><strong>Nothing here watches you.</strong> No account, no sign in, no cookies, no analytics, no tracking of any kind. Nobody is told that you opened it or how long you stayed.</p>
-      <p><strong>Everything loads from this one private address.</strong> The map, the heat layer, the contours, the three dimensional model and the photographs are all served from inside this same page folder. With the settings as they arrive, your browser does not contact any other company. The single exception is the surrounding land option in the map controls, which is switched off unless you turn it on, and the page says so at the switch.</p>
+      <p><strong>Everything loads from this one private address.</strong> The map, the heat layer, the contours, the three dimensional model and the photographs are all served from inside this same page folder. The one close photograph of the house is stored encrypted and only turns back into a picture inside your browser once the passphrase is typed. With the settings as they arrive, your browser does not contact any other company. The single exception is the surrounding land option in the map controls, which is switched off unless you turn it on, and the page says so at the switch.</p>
       <p class="warn">Worth being plain about one thing. There is no password. Anyone holding this address can open it, so the address itself is the private part. Do not post it anywhere public. If you want it taken down, say so and it stops working.</p>
     </div>
   </section>
@@ -767,6 +840,68 @@ input[type=range]{
     panel.setAttribute("data-open", "false");
     panelToggle.setAttribute("aria-expanded", "false");
   }
+})();
+</script>
+
+<script>
+(function(){
+  "use strict";
+
+  var form = document.getElementById("lockForm");
+  if (!form || !window.crypto || !window.crypto.subtle) { return; }
+
+  var pass = document.getElementById("lockPass");
+  var btn = document.getElementById("lockBtn");
+  var msg = document.getElementById("lockMsg");
+  var box = document.getElementById("lockBox");
+  var img = document.getElementById("lockedImg");
+  var cap = document.getElementById("lockedCap");
+
+  var ITERATIONS = 250000;
+
+  function say(text, bad){
+    msg.textContent = text;
+    msg.classList.toggle("bad", !!bad);
+  }
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    var phrase = pass.value.trim();
+    if (!phrase) { say("Type the passphrase first.", true); return; }
+
+    btn.disabled = true;
+    say("Checking.");
+
+    fetch("photos/oblique-2.enc").then(function(r){
+      if (!r.ok) { throw new Error("fetch"); }
+      return r.arrayBuffer();
+    }).then(function(buf){
+      var raw = new Uint8Array(buf);
+      var salt = raw.slice(0, 16);
+      var iv = raw.slice(16, 28);
+      var body = raw.slice(28);
+
+      return window.crypto.subtle.importKey(
+        "raw", new TextEncoder().encode(phrase), "PBKDF2", false, ["deriveKey"]
+      ).then(function(base){
+        return window.crypto.subtle.deriveKey(
+          { name: "PBKDF2", salt: salt, iterations: ITERATIONS, hash: "SHA-256" },
+          base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]
+        );
+      }).then(function(key){
+        return window.crypto.subtle.decrypt({ name: "AES-GCM", iv: iv }, key, body);
+      });
+    }).then(function(plain){
+      var url = URL.createObjectURL(new Blob([plain], { type: "image/jpeg" }));
+      img.src = url;
+      img.hidden = false;
+      cap.hidden = false;
+      box.remove();
+    }).catch(function(){
+      btn.disabled = false;
+      say("That passphrase does not open it. Check with John.", true);
+    });
+  });
 })();
 </script>
 
