@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mythics &amp; Best Loot: Fortnite Ch.7 S3 "Runners"</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anybody:ital,wdth,wght@0,75..125,400..900;1,75..125,400..900&family=Public+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#17151f; --ink-2:#433e56; --muted:#6d6885; --hair:#ddd9e8;
+  --bg:#f3f1f7; --surface:#ffffff; --surface-2:#f8f7fb;
+  --raise:0 1px 2px rgba(23,21,31,.06),0 10px 28px -14px rgba(23,21,31,.20);
+  --mythic:#a8760c; --mythic-soft:#fbf1dc; --mythic-line:#e7cf9c;
+  --zero:#0d7f93; --zero-soft:#e0f3f6; --zero-line:#a8dbe3;
+  --urgent:#b62f42; --urgent-soft:#fdeaed; --urgent-line:#f2bcc5;
+  --fx-display:"Anybody","Helvetica Neue",Arial,sans-serif;
+  --fx-body:"Public Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --fx-mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ink:#ecebf4; --ink-2:#bdb8d0; --muted:#928da9; --hair:#2b2839;
+    --bg:#100e16; --surface:#1a1824; --surface-2:#15131e;
+    --raise:0 1px 2px rgba(0,0,0,.5),0 12px 32px -16px rgba(0,0,0,.85);
+    --mythic:#f0b640; --mythic-soft:#2c2413; --mythic-line:#4d3d1a;
+    --zero:#4fd0e4; --zero-soft:#0d2a30; --zero-line:#1c4b54;
+    --urgent:#ff8394; --urgent-soft:#331520; --urgent-line:#5d2231;
+  }
+}
+:root[data-theme="dark"]{
+  --ink:#ecebf4; --ink-2:#bdb8d0; --muted:#928da9; --hair:#2b2839;
+  --bg:#100e16; --surface:#1a1824; --surface-2:#15131e;
+  --raise:0 1px 2px rgba(0,0,0,.5),0 12px 32px -16px rgba(0,0,0,.85);
+  --mythic:#f0b640; --mythic-soft:#2c2413; --mythic-line:#4d3d1a;
+  --zero:#4fd0e4; --zero-soft:#0d2a30; --zero-line:#1c4b54;
+  --urgent:#ff8394; --urgent-soft:#331520; --urgent-line:#5d2231;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--fx-body);font-size:16.5px;line-height:1.62}
+.wrap{max-width:1060px;margin:0 auto;padding:0 20px}
+h1,h2,h3,h4{font-family:var(--fx-display);margin:0;line-height:1.1;text-wrap:balance;font-variation-settings:"wdth" 90}
+p{margin:0}
+a{color:var(--zero);text-underline-offset:2px}
+:focus-visible{outline:2.5px solid var(--zero);outline-offset:3px;border-radius:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.clockbar{position:sticky;top:0;z-index:40;background:var(--surface);border-bottom:1px solid var(--hair)}
+.clockbar .wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-top:9px;padding-bottom:9px}
+.clockbar .lab{font-family:var(--fx-display);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:800}
+.clock{font-family:var(--fx-mono);font-size:.95rem;font-weight:700;color:var(--urgent);font-variant-numeric:tabular-nums}
+.clockbar .thin{color:var(--muted);font-size:.79rem}
+
+header.hero{padding:44px 0 32px;border-bottom:1px solid var(--hair)}
+.eyebrow{font-family:var(--fx-display);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--mythic);font-weight:800}
+h1{font-size:clamp(2.05rem,6.2vw,3.4rem);font-weight:850;font-variation-settings:"wdth" 84;margin:12px 0 0;letter-spacing:-.015em}
+.dek{margin-top:14px;font-size:1.06rem;color:var(--ink-2);max-width:64ch}
+
+.answer{margin:26px 0 0;background:var(--surface);border:1px solid var(--hair);border-top:3px solid var(--zero);border-radius:4px;padding:22px;box-shadow:var(--raise)}
+.answer h2{font-size:1.26rem;font-weight:800}
+.answer p{margin-top:11px;font-size:1.01rem;color:var(--ink-2)}
+.answer b{color:var(--ink)}
+
+section{padding:40px 0;border-bottom:1px solid var(--hair)}
+.sechead{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.secno{font-family:var(--fx-mono);font-size:.76rem;color:var(--muted);font-weight:600}
+h2.sec{font-size:clamp(1.4rem,3.3vw,1.9rem);font-weight:800;font-variation-settings:"wdth" 86}
+.lede{margin-top:10px;color:var(--ink-2);max-width:66ch}
+
+.chip{display:inline-block;font-family:var(--fx-display);font-size:.65rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:3px 8px;border-radius:2px;white-space:nowrap;border:1px solid transparent}
+.c-easy{background:var(--zero-soft);color:var(--zero);border-color:var(--zero-line)}
+.c-boss{background:var(--urgent-soft);color:var(--urgent);border-color:var(--urgent-line)}
+.c-vault{background:var(--mythic-soft);color:var(--mythic);border-color:var(--mythic-line)}
+
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.filters button{font-family:var(--fx-display);font-size:.72rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;padding:8px 13px;border-radius:3px;border:1px solid var(--hair);background:var(--surface);color:var(--ink-2);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(288px,1fr));gap:14px;margin-top:16px}
+.card{background:var(--surface);border:1px solid var(--hair);border-radius:4px;padding:16px;box-shadow:var(--raise);display:flex;flex-direction:column;gap:9px}
+.card[hidden]{display:none}
+.card .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.card h3{font-size:1.06rem;font-weight:800}
+.card .what{color:var(--ink-2);font-size:.94rem}
+.card .how{background:var(--surface-2);border:1px solid var(--hair);border-radius:3px;padding:10px 11px;font-size:.89rem;color:var(--ink-2)}
+.card .how b{color:var(--ink)}
+.card .how > b:first-child{font-family:var(--fx-display);font-size:.67rem;letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:4px;color:var(--muted);font-weight:800}
+.stat{font-family:var(--fx-mono);font-size:.79rem;color:var(--muted);font-variant-numeric:tabular-nums}
+
+.scroll{overflow-x:auto;margin-top:18px;border:1px solid var(--hair);border-radius:4px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:.92rem}
+th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--hair);vertical-align:top}
+th{font-family:var(--fx-display);font-size:.67rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:800;background:var(--surface-2)}
+tr:last-child td{border-bottom:0}
+td b{color:var(--ink)}
+td.num{font-family:var(--fx-mono);font-variant-numeric:tabular-nums}
+
+ol.steps{margin:18px 0 0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:10px}
+ol.steps li{counter-increment:s;position:relative;padding-left:38px;color:var(--ink-2)}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:1px;width:26px;height:26px;border-radius:3px;background:var(--zero-soft);color:var(--zero);border:1px solid var(--zero-line);font-family:var(--fx-mono);font-size:.79rem;font-weight:700;display:grid;place-items:center}
+ol.steps li b{color:var(--ink)}
+
+.check{margin-top:18px;display:flex;flex-direction:column;gap:3px}
+.check label{display:flex;gap:12px;align-items:flex-start;padding:12px 13px;background:var(--surface);border:1px solid var(--hair);border-radius:4px;cursor:pointer}
+.check label:hover{background:var(--surface-2)}
+.check input{margin:3px 0 0;width:17px;height:17px;flex:none;accent-color:var(--zero)}
+.check .txt{color:var(--ink-2);font-size:.95rem}
+.check .txt b{color:var(--ink);display:block}
+.check input:checked ~ .txt{opacity:.48;text-decoration:line-through}
+.progress{margin-top:12px;font-family:var(--fx-mono);font-size:.82rem;color:var(--muted)}
+
+.note{margin-top:18px;padding:14px 16px;border-radius:4px;font-size:.94rem;color:var(--ink-2)}
+.note.warn{background:var(--urgent-soft);border:1px solid var(--urgent-line)}
+.note.good{background:var(--zero-soft);border:1px solid var(--zero-line)}
+.note.gold{background:var(--mythic-soft);border:1px solid var(--mythic-line)}
+.note b{color:var(--ink)}
+
+details.src{margin-top:16px;border:1px solid var(--hair);border-radius:4px;background:var(--surface)}
+details.src summary{padding:12px 14px;cursor:pointer;font-family:var(--fx-display);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:800}
+details.src .body{padding:0 14px 14px;font-size:.87rem;color:var(--ink-2)}
+details.src a{display:block;margin-bottom:5px;word-break:break-word}
+
+footer{padding:34px 0 60px;color:var(--muted);font-size:.86rem}
+footer a{color:var(--zero)}
+</style>
+</head>
+<body>
+
+<div class="clockbar">
+  <div class="wrap">
+    <span class="lab">Season ends</span>
+    <span class="clock" id="clock">calculating</span>
+    <span class="thin">Wednesday Aug 19, per the in-game Battle Pass timer</span>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Chapter 7 Season 3 &middot; Runners &middot; Shattered Coast &middot; patch v41.30</div>
+    <h1>Fifteen Mythics, four bosses, and the sprite you asked about</h1>
+    <p class="dek">Every Mythic in the season with exact steps, sorted by how much risk it costs you. Written for Zero Build duos with a small teammate, because that is how you play.</p>
+
+    <div class="answer">
+      <h2>First, the sprite</h2>
+      <p>There is no <b>Jim</b> Air Sprite and no <b>Gem</b> Air Sprite. Both readings come back empty. The Gem class is real and went live Thursday Aug 6, but it covers eight sprites and Air is not one of them. Air's only variants are Gold, Gummy, Galaxy and Holofoil.</p>
+      <p>The twist: Gem would have been a <b>downgrade</b> on Air. Gem's entire bonus is 30% less fall damage, and the plain Air Sprite already cancels fall damage completely. That redundancy is the likely reason Epic skipped it.</p>
+      <p>The Air Sprite itself is real, is Rare tier, and you can have one tonight. Section 05 has the full spec. If what you actually want is a Gem, section 07 has the one Gem you can get on purpose rather than by luck.</p>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="sechead"><span class="secno">01</span><h2 class="sec">Every Mythic, ranked by how little can go wrong</h2></div>
+    <p class="lede">Guides that say "six Mythics" are quoting the June launch set. Counting the mobility items, event weapons and fishing, there are about fifteen live right now. Start at the top of this list, not with a boss.</p>
+
+    <div class="filters" id="filters">
+      <button data-f="all" aria-pressed="true">All</button>
+      <button data-f="easy" aria-pressed="false">No boss needed</button>
+      <button data-f="duel" aria-pressed="false">DC duels</button>
+      <button data-f="boss" aria-pressed="false">Boss kills</button>
+      <button data-f="vault" aria-pressed="false">Vault and luck</button>
+    </div>
+
+    <div class="grid" id="mythics">
+
+      <div class="card" data-cat="easy">
+        <div class="top"><h3>Duck Race, two Mythics</h3><span class="chip c-easy">Repeatable</span></div>
+        <p class="what">The best value play in the season. No fight, and it <b>resets every match</b>, so you can attempt it every single game.</p>
+        <div class="how"><b>Steps</b>Go to the large bridge directly north of Heatwave Harbor. Interact with the toy ducks to start the race. They swim downstream smashing boxes. Follow them to the finish line south of Heatwave Harbor, where cannons fire out the loot.</div>
+        <div class="how"><b>What drops</b>A chance at the <b>Mythic Striker Pump Shotgun</b> and the <b>Mythic Chaos Exploder Rifle</b>. Neither is guaranteed and both can roll Legendary. Even a failed roll pays out Chug Jugs, Gold Bars, ammo, materials and a Rift-To-Go, which is why it is worth running every match.</div>
+        <p class="stat">Third party risk: high. The cannons are loud and visible. Take the loot and leave, do not sweep the area.</p>
+      </div>
+
+      <div class="card" data-cat="easy">
+        <div class="top"><h3>Limitless Seven Sliders</h3><span class="chip c-easy">Puzzle</span></div>
+        <p class="what">Seven Sliders that <b>never overheat and never lose durability</b>. Unlimited mobility for the whole match, and the season's signature item. Under 90 seconds once you know the route.</p>
+        <div class="how"><b>Steps</b>Sinister Strip, the prison building in the northern section, opposite the giant sprite hologram. Downstairs into the basement tunnels. Find the locked cell. Deactivate the <b>North</b> Prison Security Grid behind its vent door, then the <b>South</b> one. Return to the cell, now unlocked, and take the Sliders. Rare Chests sit in the cell too.</div>
+        <p class="stat">Some guides call it the Electric Room. Same puzzle. An older single source claims an alternate at the Sunken Shores wishing fountain.</p>
+      </div>
+
+      <div class="card" data-cat="easy">
+        <div class="top"><h3>Spider-Man's Web-Shooters</h3><span class="chip c-easy">Free</span></div>
+        <p class="what">Mythic mobility, added Jul 30 and in the pool through season end. Web-swing across the map, chain swings, no fall damage while swinging. Works no matter which skin you wear.</p>
+        <div class="how"><b>Free route</b>Interact with a Spider-Man's Backpack webbed to a wall or cliff. Fourteen locations: Lifty Lodge, The Bus Stop, Latte Landing, Wonkeeland, Chopped Shop, The Battlewoods, Calamari Canyon, Frosted Flats, Fish Docks, Golden Grove, Shaken Sanctuary, Cluster Coast, Heatwave Harbor, Sinister Strip.</div>
+        <div class="how"><b>Guaranteed route</b>Buy from the Spider-Man NPC at The Battlewoods for <b>2,000 Gold Bars</b>.</div>
+      </div>
+
+      <div class="card" data-cat="easy">
+        <div class="top"><h3>9mm Baba Yaga</h3><span class="chip c-easy">Pet a dog</span></div>
+        <p class="what">John Wick's Mythic pistol. The Legendary Lancehead Pistol is the fallback, so this is a chance rather than a certainty.</p>
+        <div class="how"><b>Steps</b>Two possible spawns: the <b>southernmost building of Sinister Strip</b>, or the <b>underground sewers at The Battlewoods</b>. The dog is caged and guarded. Clear the bodyguards, open the cage, pet the dog. It also completes a Battle Pass quest.</div>
+        <p class="stat">Sources disagree on whether the roll happens when you open the cage or when you pet the dog. Do both. Your kid will volunteer for this one.</p>
+      </div>
+
+      <div class="card" data-cat="easy">
+        <div class="top"><h3>Batman Grapnel Gun</h3><span class="chip c-easy">2,000 gold</span></div>
+        <p class="what">Long-range grapple with a 3 second cooldown that auto-deploys the Batman cape glider from height. Hooks are finite and cannot be refilled, so the item is discarded when spent.</p>
+        <div class="how"><b>Steps</b>Buy from the Beach Bod Batman NPC for <b>2,000 Gold Bars</b>, one per match. Also appears in Rare Chests. Available until Aug 19.</div>
+        <p class="stat">NPC location is reported inconsistently even within a single outlet. The island north of Golden Grove has two sources behind it. Hook count is either 26 or 27 depending on who you read.</p>
+      </div>
+
+      <div class="card" data-cat="duel">
+        <div class="top"><h3>Poison Ivy's Ranger Pistol</h3><span class="chip c-easy">Duel</span></div>
+        <p class="what">Rated the best of the three DC weapons. Increased fire rate while aiming down sights, low recoil.</p>
+        <div class="how"><b>Where</b>North of The Battlewoods, on the shoreline at the Bus Stop landmark. She does not appear on the map and never moves.</div>
+        <div class="how"><b>The trap</b>You must <b>start the duel</b> from the interaction menu before damaging her. Just killing her gives you nothing. Hiring her as a Specialist for 350 gold also gives you nothing.</div>
+        <p class="stat">Damage 36 | Headshot 72 | Mag 17 | Fire rate 6.1 | Reload 1.23s</p>
+      </div>
+
+      <div class="card" data-cat="duel">
+        <div class="top"><h3>Harley Quinn's Warforged AR</h3><span class="chip c-easy">Duel</span></div>
+        <p class="what">Mythic assault rifle, second best of the DC set by consensus ranking.</p>
+        <div class="how"><b>Where</b>Southwest of Sinister Strip, along the shoreline. Same duel rule: start the duel first.</div>
+        <p class="stat">Duelling also gives a chance at a Batman Sprite, not a guaranteed one.</p>
+      </div>
+
+      <div class="card" data-cat="duel">
+        <div class="top"><h3>Catwoman's Rapid Fire SMG</h3><span class="chip c-easy">Duel</span></div>
+        <p class="what">Rapid fire, larger magazine, faster reload. Rated the weakest of the three DC Mythics, so do this one last.</p>
+        <div class="how"><b>Where</b>South shore of Wonkeeland. Start the duel first.</div>
+      </div>
+
+      <div class="card" data-cat="vault">
+        <div class="top"><h3>Mighty Impact Sniper Rifle</h3><span class="chip c-vault">Vault</span></div>
+        <p class="what">The most decisive item in the season on raw maths. <b>432 headshot damage with no damage falloff</b>, so it one-shots a full health and shield player at any range in either mode, as long as you read the bullet drop.</p>
+        <div class="how"><b>Steps</b>Farm Rare Chests until an <b>Epic Vault Keycard</b> drops. Take it to an Epic Sprite Vault: beneath <b>The Shape at Sinister Strip</b>, or <b>east of Frosted Flats</b>. Only two exist per match. The rifle is <b>guaranteed</b> once you are inside, which makes this the only non-random Mythic weapon in the game.</div>
+        <p class="stat">Damage 144 | Headshot 432 | Mag 1 | Fire rate 0.64 | Reload 2.55s</p>
+      </div>
+
+      <div class="card" data-cat="vault">
+        <div class="top"><h3>Mythic Goldfish</h3><span class="chip c-vault">Fishing</span></div>
+        <p class="what">A throwable that deals a flat <b>250 damage</b> on a direct hit. Maximum health plus shield is 200, so a clean hit is an instant elimination. It is a projectile, not a consumable, so you <b>pick it back up</b> after every throw.</p>
+        <div class="how"><b>Steps</b>Fish. Prioritise <b>golden fishing spots</b>, most common in the rivers running toward the Zero Point at map centre. Rare Chests are the other source. A Pro Fishing Rod or a Harpoon Gun improves the roll.</div>
+        <p class="stat">Quoted at 0.04% per match by one source and roughly 1 in a million per cast by a datamine. Those numbers are irreconcilable, so treat this as a lottery ticket you buy while doing something else.</p>
+      </div>
+
+      <div class="card" data-cat="vault">
+        <div class="top"><h3>Bank Shot Pistol</h3><span class="chip c-vault">Chests</span></div>
+        <p class="what">The only weapon in the game that shoots around cover. One shot per magazine, reloads after every shot, and the round <b>ricochets</b> off walls, floors and ceilings with a trajectory preview while aiming. A bounced hit carries a <b>1.5x damage bonus</b>. It cannot headshot, so the bounce is the weapon.</p>
+        <div class="how"><b>Steps</b>Chests, Rare Chests and fishing spots. The Mythic tier is reportedly most common in Vaults, particularly Renegade and Sprite Vaults.</div>
+      </div>
+
+      <div class="card" data-cat="boss">
+        <div class="top"><h3>Dark Voyager's Chaos Rifle</h3><span class="chip c-boss">Boss</span></div>
+        <p class="what"><b>The easiest boss Mythic by a distance</b>, and the one to do first. Added Jul 30, so it is missing from every older guide. Mythic version of the Chaos Exploder with a bigger magazine and faster reload.</p>
+        <div class="how"><b>Why it is easy</b>Voyager Unleashed spawns at a random spot in the <b>second</b> circle, but unlike the other bosses he is <b>permanently marked on the map</b> as a cube icon. No hunting. He also has notably low health, and his drop is listed as guaranteed rather than a roll.</div>
+        <div class="how"><b>The trick</b>He fires cube projectiles and calls cubes down to crush you, so dodge the ground telegraphs. Wait for him to <b>generate his cube shield</b>, then dump damage. That is the window.</div>
+      </div>
+
+      <div class="card" data-cat="boss">
+        <div class="top"><h3>Reacher Extending Shotgun</h3><span class="chip c-boss">Boss</span></div>
+        <p class="what">Skeletor's drop, and the highest confirmed DPS of the three roaming boss weapons. Spread <b>tightens the longer you fire</b>, so it is unusually good at mid range for a shotgun.</p>
+        <div class="how"><b>Beating Skeletor</b>Rated possibly the easiest of the three roamers. He fires purple power blasts that knock you back. Fight at medium to long range with an AR and strafe the blasts.</div>
+        <p class="stat">DPS 176.4 | Damage 101 | Crit 145 | Mag 3 | Fire rate 1.75 | Reload 1.96s</p>
+      </div>
+
+      <div class="card" data-cat="boss">
+        <div class="top"><h3>The Voidblade's Burst Rifle</h3><span class="chip c-boss">Boss</span></div>
+        <p class="what">Mythic burst AR with increased accuracy while aiming down sights. The long-range answer of the boss set.</p>
+        <div class="how"><b>Beating the Voidblade</b>Highly mobile, uses verticality and dive-bomb attacks. Never stand still or she lands the overhead shot. Move laterally and use tracking weapons.</div>
+        <p class="stat">DPS 165.01 | Damage 29 | Crit 43.5 | Mag 33 | Fire rate 5.69 | Reload 2.38s</p>
+      </div>
+
+      <div class="card" data-cat="boss">
+        <div class="top"><h3>Wolfe's Maven Auto Shotgun</h3><span class="chip c-boss">Boss</span></div>
+        <p class="what">Full-auto shotgun that is <b>more effective when you land fewer pellets</b>, which makes it forgiving on sloppy hits and better in a real fight than its DPS number suggests.</p>
+        <div class="how"><b>Beating Wolfe</b>Close range, dashes constantly, demands tracking aim. Bring mobility and an SMG or shotgun, and keep moving.</div>
+        <p class="stat">DPS 146 | Damage 100 | Crit 150 | Mag 7 | Fire rate 1.46 | Reload 4.42s</p>
+      </div>
+
+    </div>
+
+    <div class="note warn"><b>Boss Mythics are a coin flip, not a reward.</b> Killing Skeletor, Voidblade or Wolfe drops <b>either</b> the Mythic <b>or</b> the Legendary base version of the same gun. A widely shared datamine claimed a June hotfix made Mythics guaranteed, but guides updated well after that date still describe it as random, so plan on needing several kills for a specific gun. Voyager Unleashed is the exception, and it is also the easiest fight. Do that one.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sechead"><span class="secno">02</span><h2 class="sec">How bosses actually work this season</h2></div>
+    <p class="lede">This changed from previous seasons and most guides get it wrong. There are no boss POIs to memorise.</p>
+
+    <ol class="steps">
+      <li><b>Bosses do not exist at the start of the match.</b> The three roamers only appear once the <b>first storm circle finishes closing</b>. Hunting early is wasted time.</li>
+      <li><b>They share one pool of nine spawn zones</b> and re-roll every match, so you cannot land somewhere to farm a specific boss.</li>
+      <li><b>A red skull appears on your minimap within about 200 metres.</b> Watch the minimap, not the full map. There is an audio cue too.</li>
+      <li><b>Voyager Unleashed is different.</b> He spawns in the <b>second</b> circle at a random spot but is permanently marked as a cube icon, visible to everyone from the moment he appears.</li>
+      <li><b>Every boss drops 1,000 Gold Bars plus one healing item</b>, either a Self-Revive, a Chug Jug or a Big Shield Potion. Even a Legendary roll pays for itself.</li>
+    </ol>
+
+    <p class="lede" style="margin-top:22px"><b>The nine spawn zones:</b> among the trees north of Calamari Canyon; north of Heatwave Harbor; Collider Corridor north of Calamari Canyon; near the Extractor Point northeast of Calamari Canyon; east of the snowy stretch between The Battlewoods and Wonkeeland; the snowy area southwest of Latte Landing; west of The Battlewoods; near the trees where The Battlewoods meets the Zero Point; and the Extraction Site west of Golden Grove. They cluster around <b>Calamari Canyon and Frosted Flats</b>.</p>
+
+    <div class="note good"><b>Doing this with a five year old.</b> Treat a boss as a solo fight you happen to have a lookout for. Same rule as your gunfight plan: he gets behind cover and pings, you take the fight. Open from distance, make the boss walk to you, full shields before you start, then take the drop and leave immediately. The boss is not the danger. The team that heard the boss fight is.</div>
+
+    <div class="note warn"><b>Dying with a Mythic weapon costs you nothing beyond the match.</b> Weapons have no cross-match persistence at all, and whoever kills you can pick yours up. There is zero reason to play passively to protect one. Use it aggressively. Sprites are the opposite, and confusing the two is the biggest strategic mistake available this season.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sechead"><span class="secno">03</span><h2 class="sec">Land at Sinister Strip</h2></div>
+    <p class="lede">If you only remember one thing: Sinister Strip is the highest-ceiling drop on the map. It is the only POI holding two Mythics that need no boss, plus a sprite vault.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>What is there</th><th>Where exactly</th></tr></thead>
+        <tbody>
+          <tr><td><b>Limitless Seven Sliders</b></td><td>Prison building, northern section, opposite the giant sprite hologram. Basement tunnels, both security grids, locked cell.</td></tr>
+          <tr><td><b>9mm Baba Yaga</b></td><td>Southernmost building. Clear guards, open cage, pet dog.</td></tr>
+          <tr><td><b>Epic Sprite Vault</b></td><td>Beneath The Shape. Needs an Epic Vault Keycard. Holds the guaranteed Mighty Impact Sniper.</td></tr>
+          <tr><td><b>Harley Quinn</b></td><td>Just southwest along the shoreline. Duel for her Mythic AR.</td></tr>
+          <tr><td><b>Four Sprite Chests</b></td><td>The densest sprite chest cluster anywhere on the map.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note warn"><b>The catch:</b> it is chaotic and heavily contested. With a small teammate, the safer version is to land the quiet edge, let the first wave kill each other, then walk in and run the prison puzzle once it is empty.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sechead"><span class="secno">04</span><h2 class="sec">Gold, and the rule that changes how you play</h2></div>
+    <p class="lede">Gold Bars <b>do not carry over between matches</b> in Chapter 7. Your balance resets to zero every game, so any gold you die holding is wasted. Earn early, spend everything.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Earning</th><th>Pays</th><th>Worth buying</th><th>Costs</th></tr></thead>
+        <tbody>
+          <tr><td>Supply Drop job</td><td class="num">1,000</td><td>Spider-Man Web-Shooters</td><td class="num">2,000</td></tr>
+          <tr><td>Chest job</td><td class="num">~750</td><td>Batman Grapnel Gun</td><td class="num">2,000</td></tr>
+          <tr><td>Safe</td><td class="num">500</td><td>Chug Jug</td><td class="num">1,000</td></tr>
+          <tr><td>Cash register</td><td class="num">250</td><td>Seven Sliders</td><td class="num">500</td></tr>
+          <tr><td>Eliminated player</td><td class="num">100 to 175</td><td>Rift-To-Go</td><td class="num">500</td></tr>
+          <tr><td>Standard chest</td><td class="num">~75</td><td>Shield Potion</td><td class="num">250</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="lede" style="margin-top:18px">Job boards are the fastest earner because they mark the objective on your map and pay in one lump. There are around 30 vending machine locations with a guaranteed spawn, usually grouped in threes, at essentially every named POI.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sechead"><span class="secno">05</span><h2 class="sec">The Air Sprite, in full</h2></div>
+
+    <div class="grid">
+      <div class="card" style="border-top:3px solid var(--zero)">
+        <div class="top"><h3>Air Sprite</h3><span class="chip c-easy">Rare tier</span></div>
+        <p class="what">Increased sprint speed, increased sprint jump height, and <b>complete fall damage negation</b>. Jump height scales as the sprite levels.</p>
+        <div class="how"><b>The catch guides bury</b>Sprinting and sprint-jumping still burn stamina. It makes you faster, not infinite.</div>
+        <div class="how"><b>Where it spawns</b>Regular Chests, Rare Chests, Sprite Chests, Sprite Locator Chests, and off players you eliminate. It favours <b>high and mountainous terrain</b>, so land high. Reported hotspots: Lifty Lodge, south of Latte Landing, Calamari Canyon.</div>
+      </div>
+
+      <div class="card">
+        <div class="top"><h3>Its four variants</h3></div>
+        <p class="what">Air has exactly four on top of the base: <b>Gold, Gummy, Galaxy, Holofoil</b>. No Gem, no Cube.</p>
+        <div class="how"><b>What they add</b>Gold gives triple sprite XP from eliminations, the only variant bonus that is solidly corroborated. Gummy adds Sprite Dust on extraction and Galaxy adds ammo on pickup, but published percentages for both contradict each other across sources. Holofoil is claimed to give a squad-wide 5% chance at rare variants from chests, single-sourced.</div>
+      </div>
+
+      <div class="card">
+        <div class="top"><h3>Better sprites than Air</h3></div>
+        <p class="what">If you want the strongest rather than the one you named, two beat it outright in Zero Build.</p>
+        <div class="how"><b>Zero Point Sprite</b>Spawns a Shield Bubble Jr. whenever you heal yourself. It turns every heal into a protected heal, which is the highest-leverage effect in the game. Widely rated the best sprite there is.</div>
+        <div class="how"><b>Boss Sprite</b>Passively raises your max health and shield with no activation. Especially noticeable in Zero Build, where extra shield buys the seconds that win a close trade. Dropped by bosses.</div>
+      </div>
+    </div>
+
+    <div class="note good"><b>Why no Gem Air Sprite exists.</b> The eight live Gem sprites are Water, Earth, Duck, Demon, Zero Point, Aura, Grim and Llama. Gem Punk was revealed before release and then pulled, so it never shipped. Gem's class bonus is 30% reduced fall damage, and Air already negates fall damage entirely. One tracker site shows an Air row under Gem marked unreleased, which is a placeholder for a slot Epic never filled. The last content Thursday of the season is Aug 13, and no leak points at a Gem Air.</div>
+
+    <div class="note warn"><b>Throwing sprites is disabled.</b> Epic switched it off after a duplication glitch, so any guide telling you to throw an Air Sprite for an updraft field is describing the old Chapter 6 version. You can only <b>drop</b> a sprite from your inventory now. Do not throw or drop one into an extraction crate either, because a bug made them register as the wrong type. Walk up and press Extract.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sechead"><span class="secno">06</span><h2 class="sec">Keeping a sprite, which is the whole game</h2></div>
+    <p class="lede">Surviving the match does not keep a sprite. <b>Extracting</b> keeps it. Everything else this season is downstream of that one rule.</p>
+
+    <ol class="steps">
+      <li><b>Keep it in your backpack, never in your hands.</b> While you are holding a sprite you cannot use weapons at all.</li>
+      <li><b>You cannot extract early.</b> Extraction terminals stay locked until the first storm phase forms. There are 17 Extraction Sites, shown as white beams of light.</li>
+      <li><b>Interact with the terminal to call the crate</b>, wait for it to fall, then submit the sprite and wait for it to process.</li>
+      <li><b>Calling a crate alerts nearby players.</b> That cuts both ways: you can call one deliberately and back off to punish whoever comes.</li>
+      <li><b>Die before extracting and the sprite drops for whoever killed you.</b> Winning the match also banks your equipped sprite.</li>
+    </ol>
+
+    <div class="note gold"><b>The item that fixes all of this: the Portable Extractor.</b> 2,000 Sprite Dust, one per day. It banks a sprite on the spot, so you never have to walk to a beam or fight for a contested site. Buy one every single day for the rest of the season, because your Dust is about to be deleted anyway. Extraction pays 500 Dust for a Rare, 550 Epic, 750 Legendary, 650 Mythic.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sechead"><span class="secno">07</span><h2 class="sec">Farming sprites on purpose</h2></div>
+    <p class="lede">Two items make this dramatically faster than blind chest opening, and one Gem is obtainable on demand rather than by luck.</p>
+
+    <div class="grid">
+      <div class="card" style="border-top:3px solid var(--mythic)">
+        <div class="top"><h3>Lucky Locator</h3><span class="chip c-vault">Gizmo</span></div>
+        <p class="what"><b>Guarantees a chest containing a sprite you have not yet collected.</b> This is the single best collection-completion tool in the game and it comes from the Sprite Mastery track, Part 4.</p>
+        <div class="how"><b>Use them all</b>Gizmos are wiped at season end. Holding one on Aug 19 is a pure loss.</div>
+      </div>
+
+      <div class="card">
+        <div class="top"><h3>Quack Sprite</h3><span class="chip c-vault">Multiplier</span></div>
+        <p class="what">Every other sprite carried in your match inventory gains an extra 50% of your earned progress. If you are trying to fill a collection before the deadline, run this.</p>
+      </div>
+
+      <div class="card">
+        <div class="top"><h3>The one Gem you can get on demand</h3><span class="chip c-easy">Guaranteed</span></div>
+        <p class="what"><b>Gem Duck</b> is the only Gem sprite with a deterministic source. Everything else in the class is chest luck.</p>
+        <div class="how"><b>Steps</b>Find the Suspicious Duck at Cluster Coast, which has four spawn points: the outdoor pool on the western side, the indoor pool in the adjacent building, the aquarium in that same building, and the golden duck fountain in the centre of the POI. It yields a rubber duck that opens the secret duck vault, no key or keycard needed, and the vault resets every match.</div>
+      </div>
+    </div>
+
+    <p class="lede" style="margin-top:24px"><b>Vaults, all nine.</b> Six small vaults open with an ordinary Vault Key and each holds a Rare Chest, Slurp barrels and a Sprite Chest: beneath the Mile High Retreat Supply Depot southeast of Lifty Lodge; southeast of The Battlewoods; southwest of Wonkeeland; southeast of Shaken Sanctuary; the gas station northeast of Sunken Shores; and beneath the Shady Eyes building east of Heatwave Harbor. Two large Sprite Vaults need an Epic Keycard: beneath The Shape at Sinister Strip, and east of Frosted Flats. The ninth is the Cluster Coast duck vault above. Keys drop randomly from chests, with a better keycard rate from Rare Chests.</p>
+
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Route</th><th>Path</th><th>Sprite chests</th><th>Read</th></tr></thead>
+        <tbody>
+          <tr><td><b>Low traffic</b></td><td>Fresh Fish Daily Docks, Golden Grove, Shaken Sanctuary, Sinister Strip</td><td class="num">~11</td><td>Fewest fights, best with a kid, and it ends at the four-chest cluster.</td></tr>
+          <tr><td><b>Highest volume</b></td><td>Lifty Lodge, The Battlewoods, Wonkeeland</td><td class="num">~12</td><td>Uses mountain launch pads for the long hops. Wonkeeland is high ground, so it suits Air.</td></tr>
+          <tr><td><b>Air specific</b></td><td>Wonkeeland, Frosted Flats, western cliffs</td><td class="num">~9</td><td>Correct terrain for Air, and Frosted Flats holds the second Sprite Vault.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note warn"><b>Ignore every sprite drop-rate percentage, including any you see quoted elsewhere on this page.</b> Epic has never published one. The numbers circulating trace to datamines at best, and a cluster of near-identical sprite tracker sites that appeared this season at worst. They contradict each other on the same items. The only variable you control is chest volume per match, so optimise that and skip the maths.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sechead"><span class="secno">08</span><h2 class="sec">What dies on Aug 19</h2></div>
+    <p class="lede">Two different things happen at the rollover and only one of them is fine.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>What</th><th>What happens</th><th>Do this</th></tr></thead>
+        <tbody>
+          <tr><td><b>Sprites you extracted</b></td><td>Safe. They move into the <b>Sprite Garden</b>, a permanent Season 4 home for your collection.</td><td>Nothing. Extract them and they are yours.</td></tr>
+          <tr><td><b>Sprites you never collected</b></td><td>Retired. Season 3 sprites stop appearing in Season 4. Epic says past generations may return but gives no date.</td><td>Collect what you actually want this week.</td></tr>
+          <tr><td><b>Sprite Dust</b></td><td><b>Wiped.</b> Epic calls it seasonal housekeeping.</td><td>Spend all of it. See the XP trick below.</td></tr>
+          <tr><td><b>Gizmos</b></td><td><b>All wiped</b>, including Portable Extractors and Lucky Locators.</td><td>Burn every one.</td></tr>
+          <tr><td><b>Battle Pass tiers</b></td><td>Unclaimed rewards are gone.</td><td>Tap claim on everything, even what you do not want.</td></tr>
+          <tr><td><b>Every quest line</b></td><td>All expire. None have expired yet.</td><td>All 11 weeks are live right now. A backlog is a stockpile, not a loss.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note gold"><b>The best trick in the season, and it takes two minutes a day.</b> At any Extraction Site terminal you can trade <b>1,000 Sprite Dust for 20,000 XP</b>, once per day. A Battle Pass level is roughly 80,000 XP. Doing that every remaining day is about 200,000 XP, or two and a half free levels, for almost no effort. One Rare extraction pays the 1,000 Dust. Since Dust is deleted on the 19th anyway, there is no reason not to.</div>
+
+    <div class="note good"><b>If you want one thing to persist:</b> get a single sprite to <b>Mastery Level 5</b> and extract it. That permanently flags it as mastered and keeps it usable as a style on the Sprite Mastery Pod Back Bling into Season 4. Mastery Mondays give double sprite XP, and Aug 17 is the last one.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sechead"><span class="secno">09</span><h2 class="sec">Which mode to actually play</h2></div>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Mode</th><th>Sprites and Mythics</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td><b>Zero Build</b></td><td>Same island, same loot pool, same bosses, same Mythics, same sprites.</td><td><b>Best for this.</b> Extraction is a stationary commitment and nobody can box you off it.</td></tr>
+          <tr><td><b>Battle Royale (Build)</b></td><td>The full reference experience.</td><td>Fine, but you give up the Zero Build advantage at extraction sites.</td></tr>
+          <tr><td><b>Reload</b></td><td><b>Only one sprite exists in Reload.</b></td><td><b>Do not farm here.</b> This is a real change from your usual plan.</td></tr>
+          <tr><td><b>Fortnite OG</b></td><td>No sprites at all.</td><td>Different game for this purpose. Its own season runs to Sept 2.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note warn"><b>One update to your old Zero Build plan.</b> The visual sound indicator range was heavily reduced this season, so the on-screen footstep cones no longer show third parties coming the way they did. Visualize Sound Effects is still worth having on for your kid's lookout job, but you should not rely on it yourself. Headphones matter more now than they did in July.</div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sechead"><span class="secno">10</span><h2 class="sec">Before Aug 19</h2></div>
+    <p class="lede">Ticks save on this device.</p>
+    <div class="check" id="check">
+      <label><input type="checkbox" data-k="xp"><span class="txt"><b>Buy the 20,000 XP for 1,000 Dust, every day</b>Two minutes at any Extraction Site terminal. The highest return in the game.</span></label>
+      <label><input type="checkbox" data-k="dust"><span class="txt"><b>Spend the rest of your Sprite Dust</b>It is deleted on the 19th. Portable Extractors at 2,000 are the best sink.</span></label>
+      <label><input type="checkbox" data-k="gizmo"><span class="txt"><b>Burn every Gizmo</b>Lucky Locators guarantee a missing sprite. Using them is free value; holding them is zero.</span></label>
+      <label><input type="checkbox" data-k="bp"><span class="txt"><b>Claim every Battle Pass reward you have earned</b>Unclaimed tiers do not carry over.</span></label>
+      <label><input type="checkbox" data-k="quests"><span class="txt"><b>Clear backlogged weekly quests</b>All 11 weeks are still live. 12,000 XP each plus 25,000 for every four completed.</span></label>
+      <label><input type="checkbox" data-k="duck"><span class="txt"><b>Run the Duck Race every match</b>Two Mythic chances, resets each game, and it pays out even when it fails.</span></label>
+      <label><input type="checkbox" data-k="sliders"><span class="txt"><b>Do the Sinister Strip prison puzzle</b>Limitless Seven Sliders, under 90 seconds, no fight required.</span></label>
+      <label><input type="checkbox" data-k="voyager"><span class="txt"><b>Kill Voyager Unleashed at the cube</b>The easiest Mythic boss, permanently marked on the map, second circle.</span></label>
+      <label><input type="checkbox" data-k="dog"><span class="txt"><b>Pet John Wick's dog</b>Sinister Strip south building or The Battlewoods sewers. Kid job.</span></label>
+      <label><input type="checkbox" data-k="duels"><span class="txt"><b>Duel Ivy, Harley and Catwoman</b>Three Mythics. Start the duel, do not just shoot them.</span></label>
+      <label><input type="checkbox" data-k="air"><span class="txt"><b>Extract an Air Sprite</b>Rare tier, high ground, Lifty Lodge or Calamari Canyon.</span></label>
+      <label><input type="checkbox" data-k="gem"><span class="txt"><b>Get the Gem Duck from the Cluster Coast duck vault</b>The only Gem you can obtain on demand.</span></label>
+      <label><input type="checkbox" data-k="mastery"><span class="txt"><b>Take one sprite to Mastery 5 and extract it</b>Last double-XP Mastery Monday is Aug 17.</span></label>
+      <label><input type="checkbox" data-k="thu"><span class="txt"><b>Check the Aug 13 update</b>Last content Thursday of the season.</span></label>
+    </div>
+    <p class="progress" id="prog">0 of 14 done</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="sechead"><span class="secno">11</span><h2 class="sec">What I could not pin down</h2></div>
+    <p class="lede">Listed rather than papered over, because a guide that sounds certain about everything is a guide that invented some of it.</p>
+    <div class="scroll">
+      <table>
+        <thead><tr><th>Question</th><th>Where it stands</th></tr></thead>
+        <tbody>
+          <tr><td>Whether boss Mythics are guaranteed</td><td>A June datamine says yes. Guides updated after it still say random. Treated as random here, which is the safer planning assumption.</td></tr>
+          <tr><td>The end-of-season live event</td><td>An event called <b>Unstable</b> is widely reported for Sat Aug 15 at the Zero Point, but it is datamined only. Epic had not announced or dated it as of Aug 9.</td></tr>
+          <tr><td>Any sprite drop rate</td><td>Unreliable across the board. Nothing official exists.</td></tr>
+          <tr><td>Mythic Goldfish odds</td><td>0.04% per match versus roughly 1 in a million per cast. Irreconcilable.</td></tr>
+          <tr><td>Batman Grapnel hook count and NPC spot</td><td>26 or 27 hooks depending on source, and the NPC location is reported three different ways.</td></tr>
+          <tr><td>Whether the Duck Race Chaos Exploder and Voyager's Chaos Rifle are the same item</td><td>Unexamined. They may be one Mythic reachable two ways.</td></tr>
+          <tr><td>Air Sprite per-level scaling</td><td>Every source says it scales. None publishes the numbers.</td></tr>
+          <tr><td>Exact season end time</td><td>Wednesday Aug 19 is solid from the in-game timer. The clock time is single-sourced at around 7:00 PM ET, so finish by that morning.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note"><b>On sources:</b> this topic is unusually polluted with AI-generated content farms. One site widely quoted for Chapter 7 map data invents POIs that appear nowhere else, and around nine near-identical sprite tracker domains appeared this season. Everything above was cross-checked against at least two independent outlets, and anything that survived on one source is labelled as such in the text.</div>
+
+    <details class="src">
+      <summary>Sources</summary>
+      <div class="body">
+        <a href="https://gamerant.com/fortnite-runners-ch7-s3-mythic-item-weapon-locations-how-to-get-boss-fight-loot/">GameRant, all Mythic item and boss locations in Runners</a>
+        <a href="https://www.thegamer.com/fortnite-chapter-7-season-3-boss-location-mythic-weapons-how-to-beat-guide/">TheGamer, boss locations and how to beat them</a>
+        <a href="https://beebom.com/fortnite-boss-guide-chapter-7-season-3/">Beebom, boss guide and rewards</a>
+        <a href="https://beebom.com/fortnite-mythic-weapons/">Beebom, Mythic weapons list</a>
+        <a href="https://www.destructoid.com/how-to-get-and-use-the-mythic-goldfish-in-fortnite-chapter-7-season-3/">Destructoid, Mythic Goldfish</a>
+        <a href="https://beebom.com/how-to-get-mythic-goldfish-in-fortnite/">Beebom, Mythic Goldfish spawn rate</a>
+        <a href="https://gamerant.com/fortnite-runners-ch7-s3-air-sprite-how-to-get-location-effect/">GameRant, Air Sprite location and effect</a>
+        <a href="https://beebom.com/fortnite-gem-sprites-locations-powers/">Beebom, all Gem Sprites</a>
+        <a href="https://gamerant.com/fortnite-gem-sprites-effects-how-to-get/">GameRant, Gem Sprite effects</a>
+        <a href="https://insider-gaming.com/fortnite-sprites-chapter-7-season-4/">Insider Gaming, Gem Punk and Season 4 sprite status</a>
+        <a href="https://beebom.com/best-loot-path-to-farm-sprites-in-fortnite-chapter-7-season-3/">Beebom, sprite farming routes</a>
+        <a href="https://beebom.com/fortnite-sprites-trading-guide/">Beebom, sprite trading</a>
+        <a href="https://gamerant.com/fortnite-sprites-season-4-carry-over-explained/">GameRant, what happens to sprites in Season 4</a>
+        <a href="https://comicbook.com/gaming/news/fortnite-gem-hours-boosted-sprites-mythic-items-mythic-goldfish-details/">ComicBook, Gem Hours</a>
+        <a href="https://www.dexerto.com/fortnite/where-to-find-all-mythic-weapons-in-fortnite-2741234/">Dexerto, Mythic weapons and tier list</a>
+        <a href="https://communities.epicgames.com/">Epic Games Communities, official patch notes</a>
+      </div>
+    </details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Researched Aug 9, 2026 against live sources, with every claim run past a second pass built to refute it. Fortnite changes weekly, so a Thursday patch can overturn any of this.</p>
+    <p style="margin-top:10px">Companion pages: <a href="https://jcornelius.net/s/fortnite-sprites-c7s3-3e5e69f0/">the 21-sprite field manual</a> and <a href="https://jcornelius.net/s/fortnite-zb-cheatsheet-469e470a/">the Zero Build win plan</a>.</p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var target = Date.UTC(2026, 7, 19, 23, 0, 0);
+  var el = document.getElementById('clock');
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function tick(){
+    var diff = target - Date.now();
+    if (diff <= 0) { el.textContent = 'season over'; return; }
+    var s = Math.floor(diff/1000);
+    var d = Math.floor(s/86400); s -= d*86400;
+    var h = Math.floor(s/3600); s -= h*3600;
+    var m = Math.floor(s/60); s -= m*60;
+    el.textContent = d + 'd ' + pad(h) + 'h ' + pad(m) + 'm ' + pad(s) + 's';
+  }
+  tick(); setInterval(tick, 1000);
+
+  var cards = Array.prototype.slice.call(document.querySelectorAll('#mythics .card'));
+  var btns = Array.prototype.slice.call(document.querySelectorAll('#filters button'));
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var f = b.dataset.f;
+      btns.forEach(function(o){ o.setAttribute('aria-pressed', o === b ? 'true' : 'false'); });
+      cards.forEach(function(c){ c.hidden = (f !== 'all' && c.dataset.cat !== f); });
+    });
+  });
+
+  var boxes = Array.prototype.slice.call(document.querySelectorAll('#check input'));
+  var prog = document.getElementById('prog');
+  function save(){
+    var on = boxes.filter(function(b){ return b.checked; }).map(function(b){ return b.dataset.k; });
+    try { localStorage.setItem('fnc7s3', JSON.stringify(on)); } catch(e){}
+    prog.textContent = on.length + ' of ' + boxes.length + ' done';
+  }
+  try {
+    var saved = JSON.parse(localStorage.getItem('fnc7s3') || '[]');
+    boxes.forEach(function(b){ if (saved.indexOf(b.dataset.k) !== -1) b.checked = true; });
+  } catch(e){}
+  boxes.forEach(function(b){ b.addEventListener('change', save); });
+  save();
+})();
+</script>
+</body>
+</html>
