@@ -1,0 +1,419 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:,">
+<title>Minecraft school: nine lessons for a kindergartner</title>
+<style>
+:root {
+  --bg: #F3F5F3;
+  --surface: #FFFFFF;
+  --ink: #1B2420;
+  --ink-2: #54615B;
+  --ink-3: #59655F;
+  --line: #DEE4E0;
+  --accent: #1F6B4E;
+  --accent-soft: #E7F0EB;
+  --math: #2C5AA0;
+  --math-soft: #E4EBF6;
+  --read: #8A3E7A;
+  --read-soft: #F3E7F1;
+  --warn: #7A5510;
+  --warn-soft: #F5EEDD;
+  --grid-line: #C9D2CC;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #131714;
+    --surface: #1B211D;
+    --ink: #E6ECE8;
+    --ink-2: #A7B3AC;
+    --ink-3: #98A49D;
+    --line: #2A322D;
+    --accent: #54B58C;
+    --accent-soft: #20342A;
+    --math: #7FA8E0;
+    --math-soft: #1E2A3A;
+    --read: #D294C6;
+    --read-soft: #33212F;
+    --warn: #D9AE55;
+    --warn-soft: #37301D;
+    --grid-line: #3A443E;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #131714;
+  --surface: #1B211D;
+  --ink: #E6ECE8;
+  --ink-2: #A7B3AC;
+  --ink-3: #98A49D;
+  --line: #2A322D;
+  --accent: #54B58C;
+  --accent-soft: #20342A;
+  --math: #7FA8E0;
+  --math-soft: #1E2A3A;
+  --read: #D294C6;
+  --read-soft: #33212F;
+  --warn: #D9AE55;
+  --warn-soft: #37301D;
+  --grid-line: #3A443E;
+}
+* { box-sizing: border-box; margin: 0; }
+.skip-link {
+  position: fixed; z-index: 100; top: .75rem; left: .75rem;
+  transform: translateY(-180%);
+  padding: .7rem 1rem; border-radius: 8px;
+  background: var(--accent); color: var(--surface);
+  font-weight: 700; text-decoration: none;
+}
+.skip-link:focus { transform: translateY(0); }
+main:focus { outline: none; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  padding: 1.25rem 1rem 4rem;
+}
+main { max-width: 41rem; margin: 0 auto; display: flex; flex-direction: column; gap: 2.25rem; }
+h1, h2, h3 { font-family: "Avenir Next", "Helvetica Neue", -apple-system, sans-serif; text-wrap: balance; }
+h1 { font-size: 1.9rem; line-height: 1.15; font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 1.25rem; font-weight: 600; margin-bottom: .75rem; }
+h3 { font-size: 1rem; font-weight: 600; }
+p { max-width: 65ch; }
+.eyebrow {
+  font-size: .74rem; font-weight: 600; letter-spacing: .09em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: .5rem;
+}
+.lede { color: var(--ink-2); margin-top: .6rem; }
+.banner {
+  background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 10px;
+  padding: .8rem 1rem; font-size: .95rem;
+}
+.banner b { color: var(--accent); }
+section > p + p { margin-top: .7rem; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  padding: 1rem 1.1rem;
+}
+.card h3 { margin-bottom: .3rem; }
+.card p { font-size: .95rem; color: var(--ink-2); }
+.cards { display: flex; flex-direction: column; gap: .7rem; }
+.steps { list-style: none; counter-reset: step; display: flex; flex-direction: column; gap: .9rem; padding: 0; }
+.steps li { counter-increment: step; display: flex; gap: .85rem; }
+.steps li::before {
+  content: counter(step);
+  flex: 0 0 1.7rem; height: 1.7rem; border-radius: 50%;
+  background: var(--accent-soft); color: var(--accent);
+  font-weight: 700; font-size: .9rem;
+  display: flex; align-items: center; justify-content: center;
+}
+.steps b { display: block; }
+.steps p { font-size: .95rem; color: var(--ink-2); }
+.checklist { list-style: none; padding: 0; display: flex; flex-direction: column; gap: .45rem; }
+.checklist li { display: flex; gap: .6rem; align-items: baseline; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: .6rem .8rem; font-size: .93rem; }
+.checklist input { accent-color: var(--accent); transform: translateY(2px); flex: 0 0 auto; }
+.checklist label { cursor: pointer; }
+.rules { list-style: none; padding: 0; display: flex; flex-direction: column; gap: .5rem; font-size: .95rem; }
+.rules li { background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--warn); border-radius: 8px; padding: .6rem .85rem; }
+.rules b { display: block; }
+.rules span { color: var(--ink-2); font-size: .92rem; }
+.lesson {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 10px;
+  padding: .2rem 0;
+}
+.lesson + .lesson { margin-top: .7rem; }
+.lesson > summary {
+  cursor: pointer; padding: .85rem 1.1rem; font-weight: 600;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: .5rem;
+  list-style-position: outside;
+}
+.lesson > summary::marker { color: var(--ink-3); }
+.lesson[open] > summary { border-bottom: 1px solid var(--line); }
+.lesson .body { padding: .9rem 1.1rem 1.1rem; display: flex; flex-direction: column; gap: .8rem; }
+.lesson .body p { font-size: .95rem; }
+.lesson .body h4 { font-size: .76rem; text-transform: uppercase; letter-spacing: .07em; color: var(--ink-3); font-weight: 600; margin-bottom: .25rem; }
+.lesson .body .blk + .blk { margin-top: .1rem; }
+.pill { display: inline-block; font-size: .7rem; font-weight: 700; padding: .12rem .5rem; border-radius: 99px; letter-spacing: .03em; }
+.pill.math { background: var(--math-soft); color: var(--math); }
+.pill.read { background: var(--read-soft); color: var(--read); }
+.pill.time { background: var(--bg); color: var(--ink-3); border: 1px solid var(--line); font-weight: 600; }
+.say { border-left: 3px solid var(--accent); padding: .1rem 0 .1rem .8rem; color: var(--ink); font-size: .95rem; }
+.say q { font-style: normal; }
+.say q::before, .say q::after { content: '"'; }
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: .93rem; }
+th, td { text-align: left; padding: .55rem .9rem; border-top: 1px solid var(--line); vertical-align: top; }
+thead th { border-top: 0; font-size: .76rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-3); }
+td.wk { white-space: nowrap; font-weight: 600; }
+figure { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 1rem 1.1rem; }
+figure svg { display: block; width: 100%; height: auto; max-width: 30rem; margin: 0 auto; }
+figcaption { font-size: .85rem; color: var(--ink-2); margin-top: .7rem; }
+.receipt { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: .6rem .9rem; font-size: .85rem; }
+.receipt summary { cursor: pointer; color: var(--ink-2); font-weight: 600; }
+.receipt pre { overflow-x: auto; font-size: .75rem; margin-top: .5rem; color: var(--ink-2); }
+footer { font-size: .8rem; color: var(--ink-3); border-top: 1px solid var(--line); padding-top: 1rem; }
+footer p { max-width: none; }
+a { color: var(--accent); }
+input:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to the lessons</a>
+<main id="main" tabindex="-1">
+
+<header>
+  <div class="eyebrow">Kindergarten year &middot; August 12, 2026</div>
+  <h1>Minecraft school: nine lessons you can run in the realm</h1>
+  <p class="lede">He is on the Switch, you are on the Xbox, the realm already works. The only new thing is a second world slot set to Creative and Peaceful, and a rotation of short builds that happen to be the exact skills kindergarten grades him on.</p>
+</header>
+
+<section>
+  <div class="banner"><b>The habit that makes all of this work:</b> find out which letter and which number his class is on that week, then build that one in the realm. Minecraft becomes a second pass at something he already saw at school, which is where it actually sticks. The lessons below stand alone, but they land harder when they are aimed.</div>
+</section>
+
+<section>
+  <h2>Set up once, about 20 minutes, without him</h2>
+  <p>Your realm has more than one world slot, and each slot keeps its own backups. Put the school world in a spare slot so the world you two already play in never gets touched. Swapping back is a menu away.</p>
+  <ol class="steps">
+    <li><div><b>New world in a spare slot, world type Flat.</b><p>From Play, enter your realm's slots screen, pick a spare slot, and create a new world there with the world type set to Flat. Flat matters more than it sounds: a build is readable from the air, there is no terrain swallowing your shapes, and nobody falls in a ravine mid lesson.</p></div></li>
+    <li><div><b>Set the world to Creative and Peaceful.</b><p>This is the single most important choice on the page. Survival for a five year old is empty pockets, night monsters, and lost stuff. Creative is an infinite bin of blocks and the ability to fly. Every lesson below assumes it.</p></div></li>
+    <li><div><b>Flip the comfort switches in the same settings screen.</b><p>Always Day on, Keep Inventory on, Immediate Respawn on, Mob Griefing off, TNT Explodes off, Fire Spreads off, Show Coordinates on. No death screen to read, nothing he built gets blown up, and the day never ends.</p></div></li>
+    <li><div><b>Lay a build pad.</b><p>A flat square of white or light gray concrete, roughly 32 by 32. Colored wool reads against it, and numbers and letters written on it are legible when you fly up. Everything below happens on this pad.</p></div></li>
+    <li><div><b>Stock two chests next to the pad.</b><p>All 16 wool colors, a stack of signs, and a few hundred blocks of whatever else. He should never spend lesson time hunting through a creative menu he cannot read.</p></div></li>
+  </ol>
+  <p style="margin-top:1rem"><small style="color:var(--ink-3)">One caveat worth knowing: turning on coordinates or commands in a realm world switches off achievements for that world. It does not matter for a school world, and your other slot keeps its own.</small></p>
+</section>
+
+<section>
+  <h2>What a session looks like</h2>
+  <div class="cards">
+    <div class="card"><h3>First 5 minutes: his turn</h3><p>He shows you something. You do not open with the lesson. He has been told what to do all day at school and this is the room where he is in charge.</p></div>
+    <div class="card"><h3>Middle 15 minutes: one lesson</h3><p>One skill, one build. Not two. If it is going badly, abandon it and build a roller coaster instead.</p></div>
+    <div class="card"><h3>Last 5 minutes: the fly over</h3><p>You both fly up and circle what he made, then land. Same ending every time. This is the part he will remember and the reason he asks to do it again.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Rules for you, not him</h2>
+  <ul class="rules">
+    <li><b>He holds the controller the whole time.</b><span>The second you start placing his blocks for him, it stops being his build and he stops learning.</span></li>
+    <li><b>Never say wrong.</b><span>Count it out loud together instead and let the blocks answer. A tower that is supposed to be ten and is nine is not a mistake, it is a thing you two count again.</span></li>
+    <li><b>Get it wrong on purpose, often.</b><span>Put a green block in the middle of a red and blue pattern. Catching dad is the most reliable way a five year old proves to himself he knows the rule.</span></li>
+    <li><b>Stop while he still wants more.</b><span>A session that ends early gets requested tomorrow. A session that runs until he is done never does.</span></li>
+    <li><b>Never call it school or practice.</b><span>It is a build you two are doing. The learning is a side effect and it works better when he does not notice.</span></li>
+  </ul>
+</section>
+
+<section>
+  <h2>The nine lessons</h2>
+  <p style="margin-bottom:1rem">Blue is math, purple is reading. Run them in any order, repeat the ones that land, and expect each to be good for several sessions before it wears out.</p>
+
+  <details class="lesson" open>
+    <summary><span>1. Tower of Ten</span> <span class="pill math">Math</span> <span class="pill time">15 min</span></summary>
+    <div class="body">
+      <p>Every block in this game is a unit cube, which makes Minecraft the largest set of counting blocks he will ever own. This lesson is just that fact, used on purpose.</p>
+      <div class="blk"><h4>You set up</h4><p>Nothing. Stand on the build pad with wool in hand.</p></div>
+      <div class="blk"><h4>Say this</h4><div class="say"><q>Build me a tower that is exactly ten blocks tall. Count them out loud so I can hear you.</q></div></div>
+      <div class="blk"><h4>Then</h4><p>Build a second tower of five next to it. Ask which is taller and how he knows. Ask how many more blocks the short one needs to catch up, then have him add them one at a time and count.</p></div>
+      <div class="blk"><h4>The win</h4><p>He says one number per block placed, and does not skip or double up. Standard M.K.4 spells this out as pairing each object with one and only one number name. That matching is the hard part, not the reciting.</p></div>
+      <div class="blk"><h4>Stretch it</h4><p>Towers of 12, 15, 20. Knock one down and count the survivors. Ask him to build one taller than yours without telling him the number.</p></div>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary><span>2. Number Street</span> <span class="pill math">Math</span> <span class="pill time">two sessions</span></summary>
+    <div class="body">
+      <p>Ten towers in a row, one block tall through ten blocks tall, each a different color. He has now built a number line he can walk along, which beats any number line printed on a worksheet.</p>
+      <div class="blk"><h4>Say this</h4><div class="say"><q>This one is one. Put a tower of two right next to it. Now three. Keep going until we run out of room.</q></div></div>
+      <div class="blk"><h4>The second session is the good one</h4><p>Extend the street to twenty, with one rule: the bottom ten blocks of every tower past ten are white, and everything above ten is red. Thirteen becomes ten white and three red, standing right there in front of him.</p></div>
+      <div class="blk"><h4>Why that color break matters</h4><p>The teen numbers get a standard all to themselves (M.K.13) because eleven and twelve and thirteen sound nothing like what they are. Seeing thirteen as a ten plus three, at his own eye level, does more than saying it a hundred times.</p></div>
+      <figure>
+        <svg viewBox="0 0 320 200" role="img" aria-label="Two towers side by side. On the left a tower of ten white blocks labeled ten. On the right a tower of thirteen, made of the same ten white blocks with three red blocks stacked on top, labeled thirteen.">
+          <g stroke="var(--grid-line)" stroke-width="1" fill="#F2F2F2">
+            <rect x="60" y="177" width="40" height="13"/><rect x="60" y="164" width="40" height="13"/><rect x="60" y="151" width="40" height="13"/><rect x="60" y="138" width="40" height="13"/><rect x="60" y="125" width="40" height="13"/><rect x="60" y="112" width="40" height="13"/><rect x="60" y="99" width="40" height="13"/><rect x="60" y="86" width="40" height="13"/><rect x="60" y="73" width="40" height="13"/><rect x="60" y="60" width="40" height="13"/>
+            <rect x="190" y="177" width="40" height="13"/><rect x="190" y="164" width="40" height="13"/><rect x="190" y="151" width="40" height="13"/><rect x="190" y="138" width="40" height="13"/><rect x="190" y="125" width="40" height="13"/><rect x="190" y="112" width="40" height="13"/><rect x="190" y="99" width="40" height="13"/><rect x="190" y="86" width="40" height="13"/><rect x="190" y="73" width="40" height="13"/><rect x="190" y="60" width="40" height="13"/>
+          </g>
+          <g stroke="var(--grid-line)" stroke-width="1" fill="#C0392B">
+            <rect x="190" y="47" width="40" height="13"/><rect x="190" y="34" width="40" height="13"/><rect x="190" y="21" width="40" height="13"/>
+          </g>
+          <text x="80" y="50" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ink)">10</text>
+          <text x="210" y="13" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ink)">13</text>
+          <text x="240" y="39" font-size="11" font-weight="600" fill="#C0392B">3 more</text>
+          <text x="240" y="128" font-size="11" font-weight="600" fill="var(--ink-2)">a ten</text>
+        </svg>
+        <figcaption>Number Street past ten. The color break is the whole lesson: thirteen is a ten and three more, and he can walk up and touch where the ten stops.</figcaption>
+      </figure>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary><span>3. The Hundred Wall</span> <span class="pill math">Math</span> <span class="pill time">20 min</span></summary>
+    <div class="body">
+      <p>Counting to 100 by ones and by tens is the very first math standard on the kindergarten list (M.K.1), and almost nothing at home makes a hundred feel like a real quantity. A wall does.</p>
+      <div class="blk"><h4>The build</h4><p>Ten columns, each exactly ten blocks tall, standing side by side. Alternate the column colors so the tens chunk visually. He builds every column, you stay out of it.</p></div>
+      <div class="blk"><h4>Say this</h4><div class="say"><q>Touch the top of each one with me. Ten. Twenty. Thirty.</q></div></div>
+      <div class="blk"><h4>The moment</h4><p>Fly him straight up and turn around so the whole square fills the screen, then tell him he built a hundred. Land, and do not explain it further.</p></div>
+      <figure>
+        <svg viewBox="0 0 340 150" role="img" aria-label="A wall ten blocks wide and ten blocks tall, one hundred blocks in total. Columns alternate between two colors, and labels above the wall count by tens from ten across to one hundred.">
+          <g stroke="var(--grid-line)" stroke-width="0.8">
+            <g fill="#4A78B5">
+              <rect x="20" y="40" width="30" height="100"/><rect x="80" y="40" width="30" height="100"/><rect x="140" y="40" width="30" height="100"/><rect x="200" y="40" width="30" height="100"/><rect x="260" y="40" width="30" height="100"/>
+            </g>
+            <g fill="#D9C77A">
+              <rect x="50" y="40" width="30" height="100"/><rect x="110" y="40" width="30" height="100"/><rect x="170" y="40" width="30" height="100"/><rect x="230" y="40" width="30" height="100"/><rect x="290" y="40" width="30" height="100"/>
+            </g>
+          </g>
+          <g stroke="var(--grid-line)" stroke-width="0.7" fill="none" opacity="0.6">
+            <path d="M20 50h300M20 60h300M20 70h300M20 80h300M20 90h300M20 100h300M20 110h300M20 120h300M20 130h300"/>
+          </g>
+          <g font-size="10" font-weight="700" fill="var(--ink-2)" text-anchor="middle">
+            <text x="35" y="32">10</text><text x="65" y="32">20</text><text x="95" y="32">30</text><text x="125" y="32">40</text><text x="155" y="32">50</text>
+            <text x="185" y="32">60</text><text x="215" y="32">70</text><text x="245" y="32">80</text><text x="275" y="32">90</text><text x="305" y="32">100</text>
+          </g>
+        </svg>
+        <figcaption>Ten columns of ten. He counts the tops, not the blocks, which is exactly what counting by tens means.</figcaption>
+      </figure>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary><span>4. Shape Park</span> <span class="pill math">Math</span> <span class="pill time">two sessions</span></summary>
+    <div class="body">
+      <p>The geometry cluster names the shapes it wants him to know: squares, circles, triangles, rectangles, hexagons, cubes, cones, cylinders and spheres. Minecraft is made of cubes, so the solids are easy and the flat ones are drawn on the ground.</p>
+      <div class="blk"><h4>Session one, flat shapes</h4><p>Outline each shape on the build pad in a different wool color, big enough to walk inside. A hexagon is worth doing because it is named in the school list and nobody expects it.</p></div>
+      <div class="blk"><h4>Session two, solid shapes</h4><p>Stand them up next to the flat ones. A cube is three by three by three. A cylinder is a round tower. A cone is a tower that steps in as it goes up. A sphere is the hard one and the one he will be proudest of.</p></div>
+      <div class="blk"><h4>The game</h4><div class="say"><q>Fly to the hexagon. Now stand on the triangle. Now find me something in this world that is already a cylinder.</q></div></div>
+      <div class="blk"><h4>Stretch it</h4><p>Ask him to make one big square out of four small squares, then ask what two triangles pushed together make. Composing simple shapes into larger ones is its own standard (M.K.22) and he will treat it as a puzzle.</p></div>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary><span>5. Pattern Path</span> <span class="pill math">Math</span> <span class="pill time">15 min</span></summary>
+    <div class="body">
+      <p>Sixteen wool colors and a long walkway. Start a pattern, stop in the middle of it, and hand him the blocks.</p>
+      <div class="blk"><h4>Build up in this order</h4><p>Red blue red blue, then red blue blue, then red blue yellow. Each one is a step harder and he will tell you when it stops being obvious.</p></div>
+      <div class="blk"><h4>Say this</h4><div class="say"><q>What comes next? Put it down.</q></div></div>
+      <div class="blk"><h4>The real test</h4><p>Let him invent a pattern and you continue it. Then put a wrong block in on purpose and wait. Him catching your error is worth more than him finishing ten of yours correctly.</p></div>
+      <div class="blk"><h4>Stretch it</h4><p>Growing patterns instead of repeating ones: a tower of one, then two, then three, then four, side by side. Ask how tall the next one has to be.</p></div>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary><span>6. Letter Houses</span> <span class="pill read">Reading</span> <span class="pill time">one letter per session</span></summary>
+    <div class="body">
+      <p>This game is a warehouse of nouns a five year old already knows, which makes it very good for beginning sounds. One letter per session, his name's letters first.</p>
+      <div class="blk"><h4>The build</h4><p>Lay a giant letter B flat on the build pad, big enough to see from the air. Then fill it with everything you two can find that starts with that sound: bed, boat, bucket, bone, bookshelf, bell, barrel, bamboo, brick, bread, beetroot.</p></div>
+      <div class="blk"><h4>Say this</h4><div class="say"><q>Buh. Bed. Does bed go in the B house? What about torch?</q></div></div>
+      <div class="blk"><h4>Why it beats a worksheet</h4><p>He is not circling a picture of a bed, he is flying off to go get one and carrying it back. The sound and the object stay attached.</p></div>
+      <div class="blk"><h4>Then build his name</h4><p>One giant block letter per session until his whole name is written across the pad, his color choice on each. Fly over the finished thing together. Printing upper and lowercase letters is its own standard (ELA.K.III), and his name is the set he will practice most this year.</p></div>
+      <div class="blk"><h4>Stretch it</h4><p>Rhyme fetch. You say bed, he flies off and comes back with red wool. Rhyming sits under a different standard than letter sounds (ELA.K.IV, not ELA.K.II) and this is the fastest version of it.</p></div>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary><span>7. Sign Town</span> <span class="pill read">Reading</span> <span class="pill time">setup, then 10 min</span></summary>
+    <div class="body">
+      <p>The standard reads read common high frequency words by sight (ELA.K.II). These are the words he is meant to know without sounding out: the, and, I, a, see, my, go, is, can, like, we, look, you.</p>
+      <div class="blk"><h4>You set up</h4><p>Plant signs around the pad, one word each, on the second line so it sits big and centered. Signs hold four short lines, so one word per sign is the whole trick. Doing the typing on the Xbox is tedious once and then it is done forever.</p></div>
+      <div class="blk"><h4>The game</h4><div class="say"><q>Fly to the one that says see. Now the one that says my.</q></div></div>
+      <div class="blk"><h4>Make it self checking</h4><p>Put a small build next to each sign that matches the word where it can, and let him wander and ask. He should be able to be wrong without you being there to catch it.</p></div>
+      <div class="blk"><h4>The better version, if you have the patience</h4><p>Build the words out of blocks instead of writing them on signs. It takes ten times as long and he remembers them ten times better, because he built the letters in order himself.</p></div>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary><span>8. Follow My Directions</span> <span class="pill read">Listening</span> <span class="pill time">15 min</span></summary>
+    <div class="body">
+      <p>The position words in this one are a numbered standard (M.K.17): above, below, beside, in front of, behind, next to. Following the spoken direction that carries them is classroom readiness work that no worksheet reaches. It is also a game.</p>
+      <div class="blk"><h4>Say this</h4><div class="say"><q>Walk five blocks north. Now put down a red block. Now put a blue one on top of it.</q></div></div>
+      <div class="blk"><h4>Use the compass and the coordinates</h4><p>You turned coordinates on during setup. North, south, east and west stop being abstract when the numbers on screen move while he walks. Position words come free: put it above, beside, behind, underneath.</p></div>
+      <div class="blk"><h4>Then swap</h4><p>He gives you the directions and you follow them exactly, including when they do not make sense. Being the boss of dad for ten minutes is the entire draw here.</p></div>
+      <div class="blk"><h4>Stretch it</h4><p>Hide a chest and give him a three step route to find it. Put something ridiculous inside. In Creative the contents do not matter, the ceremony does.</p></div>
+    </div>
+  </details>
+
+  <details class="lesson">
+    <summary><span>9. The Sorting Barn</span> <span class="pill math">Math</span> <span class="pill time">15 min</span></summary>
+    <div class="body">
+      <p>Sorting things into groups, counting each group, and ranking the groups by count is a standard word for word (M.K.16), and also just what every Minecraft player does with their chests. You are teaching a school skill and a game habit in the same move.</p>
+      <div class="blk"><h4>You set up</h4><p>Four chests in a row, each marked with a colored block or a sign: wood things, stone things, food, plants. Dump a mixed pile into a fifth chest.</p></div>
+      <div class="blk"><h4>Say this</h4><div class="say"><q>Everything in this pile goes in one of those four. You decide which.</q></div></div>
+      <div class="blk"><h4>The second half is the math</h4><p>Count what landed in each chest, build a tower that tall in front of each one, and ask which chest won. He has just made a bar graph without either of you saying the word.</p></div>
+      <div class="blk"><h4>Watch for this</h4><p>He will invent categories you did not offer, like shiny things or things that are scary. Let him. Deciding the rule for a group is the harder half of the skill.</p></div>
+    </div>
+  </details>
+</section>
+
+<section>
+  <h2>When you want something different</h2>
+  <div class="cards">
+    <div class="card"><h3>Story Walk</h3><p>Three spots along a path: beginning, middle, end. He makes up the story out loud and you build what he says. Then he walks it and retells it. Retelling a familiar story with its key details is ELA.K.2, and he will not notice it is one.</p></div>
+    <div class="card"><h3>Measure It</h3><p>A player stands 1.8 blocks tall, which is why a two block gap is exactly enough to walk through. Build a height chart wall and mark him, a chicken, a creeper, an iron golem. Then ask how many blocks tall he thinks your actual house is, and go check it against something.</p></div>
+    <div class="card"><h3>Take five and five</h3><p>A row of ten blocks. Break it apart different ways and count both sides: five and five, six and four, nine and one. Addition inside ten, done by pulling a line of blocks apart.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>What each lesson counts as at school</h2>
+  <div class="tablewrap" tabindex="0" role="region" aria-label="Each lesson mapped to a kindergarten skill">
+    <table>
+      <thead><tr><th>Lesson</th><th>Code</th><th>The standard, in their words</th></tr></thead>
+      <tbody>
+        <tr><td class="wk">Tower of Ten</td><td class="wk">M.K.4, M.K.6</td><td>Pairing each object with one and only one number name. Identifying whether one group is greater than, less than, or equal to another.</td></tr>
+        <tr><td class="wk">Number Street</td><td class="wk">M.K.3, M.K.13</td><td>Write numbers from 0 to 20. Compose and decompose numbers from 11 to 19 into ten ones and some further ones.</td></tr>
+        <tr><td class="wk">Hundred Wall</td><td class="wk">M.K.1</td><td>Count to 100 by ones and by tens.</td></tr>
+        <tr><td class="wk">Shape Park</td><td class="wk">M.K.18, M.K.19, M.K.22</td><td>Correctly name shapes regardless of orientation or size. Identify shapes as two dimensional or three dimensional. Compose simple shapes to form larger shapes.</td></tr>
+        <tr><td class="wk">Pattern Path</td><td class="wk">none</td><td>Patterns are not a numbered kindergarten standard in West Virginia. It is readiness work that feeds M.K.20, comparing shapes and attributes, and it is the lesson he will ask for again.</td></tr>
+        <tr><td class="wk">Letter Houses</td><td class="wk">ELA.K.II, ELA.K.IV, ELA.K.V</td><td>Letter to sound correspondence for each consonant. Recognize and produce rhyming words. Recognize and name upper and lowercase letters.</td></tr>
+        <tr><td class="wk">His name in blocks</td><td class="wk">ELA.K.III</td><td>Print upper and lowercase letters.</td></tr>
+        <tr><td class="wk">Sign Town</td><td class="wk">ELA.K.II</td><td>Read common high frequency words by sight.</td></tr>
+        <tr><td class="wk">Follow My Directions</td><td class="wk">M.K.17</td><td>Describe the relative positions of objects using terms such as above, below, beside, in front of, behind and next to.</td></tr>
+        <tr><td class="wk">Sorting Barn</td><td class="wk">M.K.16</td><td>Classify objects into given categories, count the numbers of objects in each category, and sort the categories by count.</td></tr>
+        <tr><td class="wk">Measure It</td><td class="wk">M.K.14, M.K.15</td><td>Describe measurable attributes of objects. Directly compare two objects to see which has more of the attribute.</td></tr>
+        <tr><td class="wk">Take five and five</td><td class="wk">M.K.10, M.K.12</td><td>Decompose numbers less than or equal to 10 into pairs in more than one way. Fluently add and subtract within 5.</td></tr>
+        <tr><td class="wk">Story Walk</td><td class="wk">ELA.K.2</td><td>With prompting and support, retell familiar stories, including key details in literary texts.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:.8rem"><small style="color:var(--ink-3)">Codes are from the West Virginia College and Career Readiness Standards for kindergarten, the same document his school works from. Worth handing to his teacher at the fall conference, because it lets her tell you exactly which row to spend time on.</small></p>
+</section>
+
+<section>
+  <h2>A first month, if you want it decided for you</h2>
+  <div class="tablewrap" tabindex="0" role="region" aria-label="Suggested four week order">
+    <table>
+      <thead><tr><th>Week</th><th>Run this</th><th>Why here</th></tr></thead>
+      <tbody>
+        <tr><td class="wk">1</td><td>Tower of Ten, then Pattern Path</td><td>Both work the first night with zero setup. Find out how long his attention actually lasts before you build anything elaborate.</td></tr>
+        <tr><td class="wk">2</td><td>Number Street, both halves</td><td>Two sessions. The teen number half is the highest value twenty minutes on this page.</td></tr>
+        <tr><td class="wk">3</td><td>Letter Houses, starting with J</td><td>His own name first. By the end of the week the letters of his name are standing on the pad.</td></tr>
+        <tr><td class="wk">4</td><td>Hundred Wall, then Shape Park</td><td>The Hundred Wall is the one he will drag Ashley over to see, so save it until he is used to the routine.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Setup checklist</h2>
+  <ul class="checklist">
+    <li><input type="checkbox" id="c1"><label for="c1">Second world slot created, world type Flat</label></li>
+    <li><input type="checkbox" id="c2"><label for="c2">Creative and Peaceful set as the world defaults</label></li>
+    <li><input type="checkbox" id="c3"><label for="c3">Always Day, Keep Inventory, Immediate Respawn on</label></li>
+    <li><input type="checkbox" id="c4"><label for="c4">Mob Griefing, TNT and Fire Spread off</label></li>
+    <li><input type="checkbox" id="c5"><label for="c5">Show Coordinates on</label></li>
+    <li><input type="checkbox" id="c6"><label for="c6">Build pad laid, about 32 by 32, light colored</label></li>
+    <li><input type="checkbox" id="c7"><label for="c7">Two chests stocked with all 16 wool colors and signs</label></li>
+    <li><input type="checkbox" id="c8"><label for="c8">Asked his teacher which letter and number the class is on</label></li>
+  </ul>
+</section>
+
+
+<footer>
+  <p>Built for one family. Unlisted page, not indexed.</p>
+</footer>
+
+</main>
+</body>
+</html>
