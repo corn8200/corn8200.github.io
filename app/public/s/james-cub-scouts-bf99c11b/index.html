@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>James and Cub Scouts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+:root{
+  --ground:#F4F1EB; --surface:#FFFFFF; --warm:#EEE8DC; --sink:#F9F6F0;
+  --ink:#1F2A37; --ink-soft:#4A5563; --muted:#6B7280;
+  --rule:#E2DDD4; --rule-soft:#EDE7DD;
+  --rust:#9C3D1E; --rust-soft:#B8553A; --rust-wash:#F6EAE4;
+  --go:#2F6B4F; --go-wash:#E9F0EB;
+  --hold:#8A5A00; --hold-wash:#F7EFDD;
+  --display:'Lora','Palatino Linotype',Georgia,serif;
+  --body:'Source Sans 3','Source Sans Pro','Gill Sans','Trebuchet MS',sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --ground:#14181D; --surface:#1B2028; --warm:#222831; --sink:#191E25;
+    --ink:#EDE7DB; --ink-soft:#C6BFB2; --muted:#9A948A;
+    --rule:#333A44; --rule-soft:#272E37;
+    --rust:#DE8158; --rust-soft:#E8A182; --rust-wash:#2C2019;
+    --go:#7FC8A0; --go-wash:#1A2A21;
+    --hold:#E0AC52; --hold-wash:#2A2417;
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#14181D; --surface:#1B2028; --warm:#222831; --sink:#191E25;
+  --ink:#EDE7DB; --ink-soft:#C6BFB2; --muted:#9A948A;
+  --rule:#333A44; --rule-soft:#272E37;
+  --rust:#DE8158; --rust-soft:#E8A182; --rust-wash:#2C2019;
+  --go:#7FC8A0; --go-wash:#1A2A21;
+  --hold:#E0AC52; --hold-wash:#2A2417;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--ground); color:var(--ink);
+  font-family:var(--body); font-size:17px; line-height:1.62;
+  -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:44rem; margin:0 auto; padding:0 1.15rem 5rem}
+
+/* ---------- masthead ---------- */
+.mast{padding:2.6rem 0 1.5rem; border-bottom:2px solid var(--ink)}
+.kicker{
+  font-size:.7rem; letter-spacing:.17em; text-transform:uppercase;
+  color:var(--rust); font-weight:700; margin:0 0 .7rem
+}
+h1{
+  font-family:var(--display); font-weight:700; font-size:clamp(2rem,7vw,2.9rem);
+  line-height:1.1; margin:0 0 .6rem; text-wrap:balance; letter-spacing:-.01em
+}
+.standfirst{
+  font-size:1.06rem; color:var(--ink-soft); margin:0; max-width:34rem
+}
+
+/* ---------- the verdict slab ---------- */
+.verdict{
+  margin:2rem 0 0; background:var(--surface);
+  border:1px solid var(--rule); border-top:4px solid var(--rust);
+  padding:1.5rem 1.35rem
+}
+.verdict .when{
+  font-family:var(--display); font-size:1.55rem; font-weight:700;
+  line-height:1.2; margin:0 0 .15rem
+}
+.verdict .where{color:var(--ink-soft); margin:0 0 1.1rem; font-size:1rem}
+.verdict p:last-child{margin-bottom:0}
+
+.callout{
+  margin:1.1rem 0 0; padding:.9rem 1rem;
+  background:var(--hold-wash); border-left:3px solid var(--hold);
+  font-size:.96rem
+}
+.callout b{color:var(--ink)}
+
+/* ---------- step list, numbered because it IS a sequence ---------- */
+.steps{list-style:none; margin:1.4rem 0 0; padding:0; counter-reset:s}
+.steps li{
+  counter-increment:s; position:relative;
+  padding:0 0 1.15rem 2.9rem; margin:0
+}
+.steps li::before{
+  content:counter(s); position:absolute; left:0; top:.05rem;
+  width:1.9rem; height:1.9rem; border-radius:50%;
+  background:var(--rust); color:#fff;
+  font-size:.85rem; font-weight:700; font-family:var(--body);
+  display:flex; align-items:center; justify-content:center
+}
+.steps li:last-child{padding-bottom:0}
+.steps .lede{font-weight:700; display:block; margin-bottom:.1rem}
+
+/* ---------- sections ---------- */
+section{margin:3rem 0 0}
+h2{
+  font-family:var(--display); font-size:1.55rem; font-weight:700;
+  margin:0 0 .3rem; line-height:1.22; text-wrap:balance
+}
+.sub{color:var(--muted); font-size:.94rem; margin:0 0 1.15rem}
+h3{
+  font-size:.74rem; letter-spacing:.15em; text-transform:uppercase;
+  color:var(--muted); font-weight:700; margin:1.8rem 0 .6rem
+}
+p{margin:0 0 1rem}
+
+/* ---------- contact block ---------- */
+.contact{
+  background:var(--warm); border:1px solid var(--rule);
+  padding:1.15rem 1.2rem; margin:1.2rem 0
+}
+.contact .name{font-family:var(--display); font-size:1.2rem; font-weight:700; margin:0 0 .1rem}
+.contact .meta{font-size:.92rem; color:var(--ink-soft); margin:0 0 .85rem}
+.contact a{
+  display:block; margin:.3rem 0; font-weight:600;
+  color:var(--rust); word-break:break-word
+}
+.nophone{
+  display:block; margin:.5rem 0 0; font-size:.9rem;
+  color:var(--muted); font-style:italic
+}
+
+/* ---------- money ---------- */
+.money{width:100%; border-collapse:collapse; margin:.4rem 0 0; font-size:.97rem}
+.money th{
+  text-align:left; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase;
+  color:var(--muted); font-weight:700; padding:0 0 .5rem; border-bottom:1px solid var(--rule)
+}
+.money th:last-child, .money td:last-child{text-align:right; font-variant-numeric:tabular-nums; white-space:nowrap}
+.money td{padding:.6rem 0; border-bottom:1px solid var(--rule-soft); vertical-align:top}
+.money td small{display:block; color:var(--muted); font-size:.85rem; line-height:1.4}
+.money tr.sum td{border-bottom:none; border-top:2px solid var(--ink); font-weight:700; padding-top:.7rem}
+.opt{color:var(--muted); font-weight:400}
+
+/* ---------- options ---------- */
+.opts{display:flex; flex-direction:column; gap:.85rem; margin-top:1.1rem}
+.opt-card{
+  background:var(--surface); border:1px solid var(--rule);
+  border-left:3px solid var(--muted); padding:1rem 1.1rem
+}
+.opt-card.best{border-left-color:var(--go)}
+.opt-card.warn{border-left-color:var(--hold)}
+.opt-head{
+  display:flex; justify-content:space-between; align-items:baseline;
+  gap:.8rem; margin-bottom:.15rem; flex-wrap:wrap
+}
+.opt-name{font-family:var(--display); font-weight:700; font-size:1.1rem}
+.opt-dist{font-size:.85rem; color:var(--muted); font-variant-numeric:tabular-nums; white-space:nowrap}
+.opt-night{font-size:.93rem; font-weight:600; color:var(--rust); margin:0 0 .4rem}
+.opt-body{font-size:.94rem; color:var(--ink-soft); margin:0}
+.opt-body a{color:var(--rust); font-weight:600; word-break:break-word}
+
+.tag{
+  display:inline-block; font-size:.67rem; letter-spacing:.1em; text-transform:uppercase;
+  font-weight:700; padding:.16rem .5rem; border-radius:2px; vertical-align:middle
+}
+.tag.go{background:var(--go-wash); color:var(--go)}
+.tag.hold{background:var(--hold-wash); color:var(--hold)}
+
+/* ---------- buy / skip ---------- */
+.buy{display:grid; grid-template-columns:1fr; gap:1rem; margin-top:1.1rem}
+@media(min-width:34rem){.buy{grid-template-columns:1fr 1fr}}
+.buy-col{padding:1.05rem 1.1rem; border:1px solid var(--rule)}
+.buy-col.yes{background:var(--go-wash)}
+.buy-col.no{background:var(--rust-wash)}
+.buy-col h4{
+  margin:0 0 .6rem; font-size:.74rem; letter-spacing:.13em;
+  text-transform:uppercase; font-weight:700
+}
+.buy-col.yes h4{color:var(--go)}
+.buy-col.no h4{color:var(--rust)}
+.buy-col ul{margin:0; padding-left:1.1rem; font-size:.94rem}
+.buy-col li{margin-bottom:.35rem}
+.buy-col li:last-child{margin-bottom:0}
+
+/* ---------- misc ---------- */
+.note{
+  font-size:.92rem; color:var(--ink-soft); background:var(--sink);
+  border:1px solid var(--rule-soft); padding:.95rem 1.05rem; margin:1.2rem 0
+}
+ul.plain{margin:0 0 1rem; padding-left:1.2rem}
+ul.plain li{margin-bottom:.42rem}
+a{color:var(--rust)}
+a:focus-visible, .steps a:focus-visible{outline:2px solid var(--rust); outline-offset:2px}
+footer{
+  margin-top:3.5rem; padding-top:1.3rem; border-top:1px solid var(--rule);
+  font-size:.85rem; color:var(--muted)
+}
+footer p{margin:0 0 .4rem}
+@media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <p class="kicker">Cub Scouts &middot; Jefferson County</p>
+  <h1>Getting James into Cub Scouts</h1>
+  <p class="standfirst">He starts as a Lion, the kindergarten rank. One of us goes to every meeting with him. Here is the pack, the people to contact, the real cost, and what to do before the fourteenth.</p>
+</header>
+
+<div class="verdict">
+  <p class="when">Monday, September 14 &middot; 6:30 to 7:30 PM</p>
+  <p class="where">Pack 420, South Jefferson Elementary School, 4599 Summit Point Rd, Charles Town. About 24 minutes from the house.</p>
+  <p>Of every pack within reach, Pack 420 is the only one that meets on a Monday night, weekly, close to home. Two separate sources agree on the night and the address: Scouting America's live registration system and the pack's own website. It has 21 registered kids and has been chartered for 29 years.</p>
+  <div class="callout">
+    <b>Do not just drive out there.</b> Their website has not been updated since 2024 and their events page is empty, so nothing publicly confirms a meeting happens on the fourteenth. Their program year "begins in September" with no date named. Send the email first.
+  </div>
+</div>
+
+<section>
+  <h2>What to do this week</h2>
+  <p class="sub">In order. The first one is the whole ballgame.</p>
+  <ol class="steps">
+    <li>
+      <span class="lede">Email Pack 420 and ask three things.</span>
+      Is the first meeting Monday September 14 at 6:30. Can we bring a kindergartner to visit before registering. Is there a Lion den running this year. Write to <a href="mailto:CubScoutPack420.SJES@gmail.com">CubScoutPack420.SJES@gmail.com</a>.
+    </li>
+    <li>
+      <span class="lede">If nobody answers in two days, call the council.</span>
+      Shenandoah Area Council, <a href="tel:+15406622551">(540) 662-2551</a>. They can tell you whether a unit is actually meeting, which is exactly what a stale website cannot. Jefferson County is their Potomac District.
+    </li>
+    <li>
+      <span class="lede">Decide which of us is the adult partner.</span>
+      A Lion cannot be dropped off. Whoever takes him is staying for the whole hour, every time.
+    </li>
+    <li>
+      <span class="lede">Do not buy a uniform yet.</span>
+      Not until we have seen a meeting and know the den is real. The list of what he actually needs is below, and it is not what the Scout Shop bundle sells you.
+    </li>
+    <li>
+      <span class="lede">Register only after the visit.</span>
+      Nothing requires paying before you visit. The direct application link for this pack is <a href="https://beascout.scouting.org/registration?unitId=8324f64d-4713-4475-b3a0-51328ac079e0">on BeAScout</a>.
+    </li>
+  </ol>
+</section>
+
+<section>
+  <h2>Who to contact</h2>
+  <p class="sub">Every name and address here is published by the pack or by Scouting America. None of it is guessed.</p>
+
+  <div class="contact">
+    <p class="name">Thomas Brick</p>
+    <p class="meta">Cubmaster, Pack 420 &middot; chartered by the South Jefferson PTO</p>
+    <a href="mailto:CubScoutPack420.SJES@gmail.com">CubScoutPack420.SJES@gmail.com</a>
+    <span class="nophone">This pack publishes no phone number anywhere. Email is the only direct line to them.</span>
+  </div>
+
+  <div class="contact">
+    <p class="name">Shenandoah Area Council</p>
+    <p class="meta">Council 598, Potomac District &middot; 107 Youth Development Ct, Winchester VA</p>
+    <a href="tel:+15406622551">(540) 662-2551</a>
+    <a href="mailto:SAC@Scouting.org">SAC@Scouting.org</a>
+    <span class="nophone">The backup when a pack goes quiet. Also the people who can break down exactly what the registration fee covers.</span>
+  </div>
+</section>
+
+<section>
+  <h2>What it costs</h2>
+  <p class="sub">Prices read from Scouting America and the Scout Shop on September 2, 2026.</p>
+  <table class="money">
+    <thead><tr><th>Item</th><th>Cost</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Registration for the year
+          <small>National fee is $85. Our council bundles it to about $100. Ask them to itemize it.</small></td>
+        <td>~$100</td>
+      </tr>
+      <tr>
+        <td>Lion handbook
+          <small>The adult partner guide is bound into the same book, so this covers both of us.</small></td>
+        <td>$12.99</td>
+      </tr>
+      <tr>
+        <td>Uniform, the required pieces only
+          <small>T-shirt $14.99, belt $14.99, cap $22.99. That is the entire requirement for a Lion.</small></td>
+        <td>$52.97</td>
+      </tr>
+      <tr>
+        <td><span class="opt">Scout Life magazine, optional</span></td>
+        <td class="opt">$15.00</td>
+      </tr>
+      <tr>
+        <td><span class="opt">Pack dues, unknown</span>
+          <small>Set by each pack and not published by this one. Add it to the email.</small></td>
+        <td class="opt">ask</td>
+      </tr>
+      <tr class="sum"><td>Roughly, to walk in the door</td><td>$166</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    The one-time $25 joining fee no longer exists. It was dropped when the national fee went from $80 to $85. Our own council's website still says you have to pay it, and that page is out of date. If anyone asks us for it, push back.
+  </div>
+</section>
+
+<section>
+  <h2>What to buy and what to skip</h2>
+  <p class="sub">The Scout Shop sells a "Lion Kindergarten Uniform Bundle" for $101.93. It is built around next year's shirt.</p>
+  <div class="buy">
+    <div class="buy-col yes">
+      <h4>Actually required</h4>
+      <ul>
+        <li>Lion t-shirt, navy, $14.99</li>
+        <li>Cub Scout web belt, $14.99</li>
+        <li>Lion cap, $22.99</li>
+      </ul>
+    </div>
+    <div class="buy-col no">
+      <h4>Skip for now</h4>
+      <ul>
+        <li>The blue button-up shirt. That starts at Tiger, in first grade</li>
+        <li>Uniform pants and socks, optional</li>
+        <li>Neckerchief and slide, the den decides</li>
+      </ul>
+    </div>
+  </div>
+  <p class="note">The belt matters more than it looks. He earns a belt loop for each adventure he completes, and they go on that belt. There is no uniform inspection for Lions, so nobody is going to check him.</p>
+</section>
+
+<section>
+  <h2>The adult partner rule</h2>
+  <p class="sub">This is the part that changes our calendar, so it is worth being exact about.</p>
+  <p>A Lion has to have an adult partner with him at every meeting and every activity. Pack 420 states it on their own site: the adult partner has to accompany and remain with the scout at all scouting events. This is not a drop-off program for another year, until he moves up to Wolf.</p>
+  <h3>What that does not require</h3>
+  <ul class="plain">
+    <li>A parent partner does <b>not</b> have to register as a leader. The position was taken off the roster in 2023 and is now just a checkbox on his application.</li>
+    <li>Safeguarding Youth Training is <b>highly recommended, not required</b>, for a parent partner. It is free, online, about 90 minutes, and worth doing anyway.</li>
+    <li>No background check and no adult application, as long as the partner lives at the same address he does.</li>
+  </ul>
+  <h3>Where that flips</h3>
+  <p>If we ever send him with an adult who does not live here, that person needs a full adult application, the training, and a background check that asks for a Social Security number and ten years of addresses. Worth knowing before we ask a grandparent to cover a night.</p>
+  <div class="note">
+    Also worth knowing: a Lion adult partner does not count toward the two-adult minimum a den needs. So our being there does not relieve the pack of finding a second registered leader.
+  </div>
+</section>
+
+<section>
+  <h2>The honest risk</h2>
+  <p class="sub">What could make the fourteenth a wasted trip.</p>
+  <p>Pack 420's registration is genuinely current. Someone checked it live on September 2 and the online application flow is open and accepting kindergartners today. That part is solid.</p>
+  <p>Everything the pack publishes about itself is not. The website has not been meaningfully edited since April 2025. The calendar link points at May 2024. The About page has the wrong pack number on it. The only announcement is about a crossover ceremony, which is end-of-year language. Their Facebook page last posted publicly in September 2023.</p>
+  <p>And the specific thing that matters most for James: on their own leaders page, the Lion den leader is listed as <b>TBD</b>. Nobody is named. That page is stale enough that it may have been filled since, but the only published evidence says the kindergarten den has no leader. If that is still true, the practical answer may be that a parent has to run it.</p>
+</section>
+
+<section>
+  <h2>If Pack 420 falls through</h2>
+  <p class="sub">Ranked by how close they are and how alive they look.</p>
+  <div class="opts">
+
+    <div class="opt-card best">
+      <div class="opt-head"><span class="opt-name">Pack 962, Lovettsville</span><span class="opt-dist">~30 min</span></div>
+      <p class="opt-night">First Tuesday of the month, 6:30 PM &middot; <span class="tag go">clearly active</span></p>
+      <p class="opt-body">The healthiest pack found anywhere near us. They posted about their September meeting the night before it happened, they ran a kindergarten recruiting night on August 29, and they name Lion as a den. The catch is the night: they met September 1, so the next one is October 6. Meets in the Lovettsville Elementary cafeteria. <a href="tel:+15408220645">(540) 822-0645</a> or <a href="mailto:pack962committeechair@gmail.com">pack962committeechair@gmail.com</a></p>
+    </div>
+
+    <div class="opt-card">
+      <div class="opt-head"><span class="opt-name">Pack 33, Shepherdstown</span><span class="opt-dist">3.9 mi</span></div>
+      <p class="opt-night">Wednesday, monthly, 7:00 PM</p>
+      <p class="opt-body">By far the closest pack to us, and it meets in the Shepherdstown Elementary cafeteria. Small, nine kids. Their pack meeting is monthly, and whether the dens meet on another night is an open question worth one call. John Guedel, <a href="tel:+17036244722">(703) 624-4722</a> or <a href="mailto:shepherdstownpack33@gmail.com">shepherdstownpack33@gmail.com</a></p>
+    </div>
+
+    <div class="opt-card">
+      <div class="opt-head"><span class="opt-name">Pack 6, Charles Town</span><span class="opt-dist">~15 min</span></div>
+      <p class="opt-night">Thursday, 7:00 to 8:00 PM</p>
+      <p class="opt-body">Chartered by Charles Town Baptist, sixteen kids. Has an actual phone number, which most of these do not. One oddity to raise on the call: the church's own weekly schedule puts choir in that Thursday hour and never mentions scouting. Marion Schlanger, <a href="tel:+17034011918">(703) 401-1918</a> or <a href="mailto:pack6ctwv@gmail.com">pack6ctwv@gmail.com</a></p>
+    </div>
+
+    <div class="opt-card warn">
+      <div class="opt-head"><span class="opt-name">Pack 29, Pikeside</span><span class="opt-dist">~9 mi</span></div>
+      <p class="opt-night">Monday, 6:30 PM &middot; <span class="tag hold">very small</span></p>
+      <p class="opt-body">The other Monday pack, in Martinsburg. Only six registered kids across six grades, which probably means there is no separate Lion den at all. Keep it as a backup, not a first choice. Kelley King, <a href="tel:+13013051815">(301) 305-1815</a></p>
+    </div>
+
+  </div>
+
+  <h3>Not Scouting, but both meet on Mondays</h3>
+  <p>If Monday nights turn out to be the thing that matters most, Trail Life USA is the Christian alternative and both nearby troops meet Monday. It is boys only and runs about $43 a year. Troop WV-0082 at St. James the Greater in Charles Town, about 7 miles, Mondays at 7:00, open to boys age 5 and up, <a href="mailto:tlusawv82@gmail.com">tlusawv82@gmail.com</a>. Troop WV-0356 at Fellowship Bible Church in Shenandoah Junction, about 12 miles, Mondays at 6:30, <a href="tel:+13047283700">(304) 728-3700</a>.</p>
+</section>
+
+<section>
+  <h2>Two things worth knowing</h2>
+  <p><b>Jude cannot join yet.</b> Cub Scouts starts at kindergarten and there is no pre-K rank. Lion is the only one of the six ranks with no age-based alternative, so turning four in November does not help. His year is fall 2028.</p>
+  <p><b>Merit badges and Eagle are a long way off.</b> Those belong to Scouts BSA, which starts around age eleven. Cub Scouts has none of that. James works on adventures instead: six required and two electives to earn the Lion badge, starting with Bobcat. Then Tiger, Wolf, Bear, Webelos, and Arrow of Light, one per school year.</p>
+  <p>One of the Lion requirements is homework for us rather than him. Bobcat asks the parent to go through a booklet on protecting children from abuse, together, at home.</p>
+</section>
+
+<footer>
+  <p>Researched September 2, 2026 against Scouting America's live registration system, each pack's own website, and the Scout Shop.</p>
+  <p>Anything marked as an open question genuinely is one. The packs near us keep thin websites, so a phone call beats a web page almost every time.</p>
+</footer>
+
+</div>
+</body>
+</html>
